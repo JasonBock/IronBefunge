@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.Immutable;
 using System.Globalization;
 
 namespace IronBefunge.Core.InstructionHandlers
@@ -12,10 +11,10 @@ namespace IronBefunge.Core.InstructionHandlers
 		internal const char NumericInstruction = '&';
 		internal const string NumericMessage = "Please enter in a numeric value:";
 
-		internal override ReadOnlyCollection<char> GetInstructions()
+		internal override ImmutableArray<char> GetInstructions()
 		{
-			return new List<char>() { InputInstructionHandler.AsciiInstruction, 
-				InputInstructionHandler.NumericInstruction }.AsReadOnly();
+			return ImmutableArray.Create(InputInstructionHandler.AsciiInstruction, 
+				InputInstructionHandler.NumericInstruction);
 		}
 
 		private static void HandleAscii(ExecutionContext context)

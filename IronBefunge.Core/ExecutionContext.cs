@@ -80,7 +80,7 @@ namespace IronBefunge.Core
 			this.Current = next;
 		}
 
-		internal List<Cell> Cells { get; private set; }
+		internal List<Cell> Cells { get; }
 
 		internal Cell Current { get; private set; }
 
@@ -92,12 +92,12 @@ namespace IronBefunge.Core
 
 		internal Cell Previous { get; private set; }
 
-		internal SecureRandom Randomizer { get; private set; }
+		internal SecureRandom Randomizer { get; }
 
-		internal TextReader Reader { get; private set; }
+		internal TextReader Reader { get; }
 
-		internal Stack<int> Values { get; private set; }
+		internal Stack<int> Values { get; }
 
-		internal TextWriter Writer { get; private set; }
+		internal TextWriter Writer { get; }
 	}
 }

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Globalization;
 
 namespace IronBefunge.Core
 {
@@ -10,8 +9,6 @@ namespace IronBefunge.Core
 	public sealed class Cell
 		: IEquatable<Cell>
 	{
-		private const string ToStringFormat = "{0} - '{1}'";
-
 		/// <summary>
 		/// Creates a new <see cref="Cell" /> instance.
 		/// </summary>
@@ -105,18 +102,17 @@ namespace IronBefunge.Core
 		/// <returns>A string representation of the object.</returns>
 		public override string ToString()
 		{
-			return string.Format(CultureInfo.CurrentCulture, Cell.ToStringFormat,
-				this.Location, this.Value);
+			return FormattableString.Invariant($"{this.Location} - '{this.Value}'");
 		}
 
 		/// <summary>
 		/// Gets the location.
 		/// </summary>
-		public Point Location { get; private set; }
+		public Point Location { get; }
 
 		/// <summary>
 		/// Gets the value.
 		/// </summary>
-		public char Value { get; set; }
+		public char Value { get; }
 	}
 }

@@ -1,6 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+using System.Collections.Immutable;
 using System.Globalization;
 
 namespace IronBefunge.Core.InstructionHandlers
@@ -11,10 +10,10 @@ namespace IronBefunge.Core.InstructionHandlers
 		internal const char AsciiInstruction = ',';
 		internal const char NumericInstruction = '.';
 
-		internal override ReadOnlyCollection<char> GetInstructions()
+		internal override ImmutableArray<char> GetInstructions()
 		{
-			return new List<char>() { OutputInstructionHandler.AsciiInstruction, 
-				OutputInstructionHandler.NumericInstruction }.AsReadOnly();
+			return ImmutableArray.Create(OutputInstructionHandler.AsciiInstruction, 
+				OutputInstructionHandler.NumericInstruction);
 		}
 
 		internal override void OnHandle(ExecutionContext context)

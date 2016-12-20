@@ -5,23 +5,23 @@ namespace IronBefunge.Core
 {
 	public sealed class Parser
 	{
-		private const string ErrorNullLine = "The line at row {0} is null.";
+		private readonly string[] lines;
 
 		public Parser(string[] lines)
 			: base()
 		{
-			this.Lines = lines;
+			this.lines = lines;
 		}
 
 		public ReadOnlyCollection<Cell> Parse()
 		{
 			var cells = new List<Cell>();
 
-			if (this.Lines != null)
+			if (this.lines != null)
 			{
-				for (var i = 0; i < this.Lines.Length; i++)
+				for (var i = 0; i < this.lines.Length; i++)
 				{
-					var line = this.Lines[i];
+					var line = this.lines[i];
 
 					if (line != null)
 					{
@@ -49,7 +49,5 @@ namespace IronBefunge.Core
 
 			return cells.AsReadOnly();
 		}
-
-		private string[] Lines { get; set; }
 	}
 }

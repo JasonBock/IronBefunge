@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.Immutable;
 
 namespace IronBefunge.Core.InstructionHandlers
 {
@@ -10,11 +9,11 @@ namespace IronBefunge.Core.InstructionHandlers
 		internal const char PopInstruction = '$';
 		internal const char SwapInstruction = '\\';
 
-		internal override ReadOnlyCollection<char> GetInstructions()
+		internal override ImmutableArray<char> GetInstructions()
 		{
-			return new List<char>() { StackInstructionHandler.DuplicateInstruction, 
+			return ImmutableArray.Create(StackInstructionHandler.DuplicateInstruction, 
 				StackInstructionHandler.PopInstruction, 
-				StackInstructionHandler.SwapInstruction }.AsReadOnly();
+				StackInstructionHandler.SwapInstruction);
 		}
 
 		private static void HandleDuplicate(ExecutionContext context)

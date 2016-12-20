@@ -1,6 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+using System.Collections.Immutable;
 
 namespace IronBefunge.Core.InstructionHandlers
 {
@@ -10,10 +9,10 @@ namespace IronBefunge.Core.InstructionHandlers
 		internal const char GetInstruction = 'g';
 		internal const char PutInstruction = 'p';
 
-		internal override ReadOnlyCollection<char> GetInstructions()
+		internal override ImmutableArray<char> GetInstructions()
 		{
-			return new List<char>() { SpaceInstructionHandler.GetInstruction,
-				SpaceInstructionHandler.PutInstruction }.AsReadOnly();
+			return ImmutableArray.Create(SpaceInstructionHandler.GetInstruction,
+				SpaceInstructionHandler.PutInstruction);
 		}
 
 		private static void HandleGet(ExecutionContext context)
@@ -45,7 +44,7 @@ namespace IronBefunge.Core.InstructionHandlers
 
 			if (target != null)
 			{
-				target.Value = value;
+				context.Cells[context.Cells.IndexOf(target)] = new Cell(location, value);
 			}
 			else if (value != ' ')
 			{

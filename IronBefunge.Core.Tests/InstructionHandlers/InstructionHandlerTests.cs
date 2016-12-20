@@ -1,10 +1,10 @@
-﻿using System;
+﻿using IronBefunge.Core.InstructionHandlers;
+using Spackle;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
 using System.IO;
-using IronBefunge.Core.InstructionHandlers;
-using Spackle;
 using Xunit;
 
 namespace IronBefunge.Core.Tests.InstructionHandlers
@@ -60,18 +60,12 @@ namespace IronBefunge.Core.Tests.InstructionHandlers
 				{
 					var context = new ExecutionContext(cells, reader, writer, randomizer);
 
-					if (before != null)
-					{
-						before(context);
-					}
+					before?.Invoke(context);
 
 					handler.Handle(context);
 					var result = writer.GetStringBuilder().ToString();
 
-					if (after != null)
-					{
-						after(context, result);
-					}
+					after?.Invoke(context, result);
 				}
 			}
 		}
@@ -86,7 +80,7 @@ namespace IronBefunge.Core.Tests.InstructionHandlers
 
 			var expectedInstructions = this.GetExpectedHandledInstructions();
 
-			Assert.Equal(expectedInstructions.Count, handler.Instructions.Count);
+			Assert.Equal(expectedInstructions.Count, handler.Instructions.Length);
 
 			foreach (var expectedInstruction in expectedInstructions)
 			{

@@ -1,6 +1,6 @@
-﻿using System;
+﻿using IronBefunge.Core;
+using System;
 using System.IO;
-using IronBefunge.Core;
 
 namespace IronBefunge
 {
@@ -8,7 +8,11 @@ namespace IronBefunge
 	{
 		static void Main(string[] args)
 		{
-			new Interpreter(new FileInfo(args[0]), Console.In, Console.Out).Interpret();
+			using (var interpreter = new Interpreter(new FileInfo(args[0]), Console.In, Console.Out))
+			{
+				interpreter.Interpret();
+			}
+
 			Console.Out.WriteLine();
 			Console.Out.WriteLine("Press any key to continue...");
 			Console.In.ReadLine();

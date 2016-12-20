@@ -1,4 +1,4 @@
-﻿using System.Collections.ObjectModel;
+﻿using System.Collections.Immutable;
 
 namespace IronBefunge.Core.InstructionHandlers
 {
@@ -6,6 +6,6 @@ namespace IronBefunge.Core.InstructionHandlers
 	{
 		void Handle(ExecutionContext context);
 
-		ReadOnlyCollection<char> Instructions { get; }
+		ImmutableArray<char> Instructions { get; }
 	}
 }

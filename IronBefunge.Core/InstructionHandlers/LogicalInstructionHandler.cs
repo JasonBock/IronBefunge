@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.Immutable;
 
 namespace IronBefunge.Core.InstructionHandlers
 {
@@ -9,10 +8,10 @@ namespace IronBefunge.Core.InstructionHandlers
 		internal const char GreaterThanInstruction = '`';
 		internal const char NotInstruction = '!';
 
-		internal override ReadOnlyCollection<char> GetInstructions()
+		internal override ImmutableArray<char> GetInstructions()
 		{
-			return new List<char>() { LogicalInstructionHandler.NotInstruction,
-				LogicalInstructionHandler.GreaterThanInstruction }.AsReadOnly();
+			return ImmutableArray.Create(LogicalInstructionHandler.NotInstruction,
+				LogicalInstructionHandler.GreaterThanInstruction);
 		}
 
 		private static void HandleGreaterThan(ExecutionContext context)

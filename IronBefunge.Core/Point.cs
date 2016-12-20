@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Globalization;
 
 namespace IronBefunge.Core
 {
@@ -10,8 +9,6 @@ namespace IronBefunge.Core
 	public struct Point
 		: IEquatable<Point>
 	{
-		private const string ToStringFormat = "{0}, {1}";
-
 		/// <summary>
 		/// Creates a new <see cref="Point" /> instance.
 		/// </summary>
@@ -88,18 +85,17 @@ namespace IronBefunge.Core
 		/// <returns>A string representation of the object.</returns>
 		public override string ToString()
 		{
-			return string.Format(CultureInfo.CurrentCulture, Point.ToStringFormat,
-				this.X, this.Y);
+			return FormattableString.Invariant($"{this.X}, {this.Y}");
 		}
 
 		/// <summary>
 		/// Gets the x value.
 		/// </summary>
-		public int X { get; private set; }
+		public int X { get; }
 
 		/// <summary>
 		/// Gets the y value.
 		/// </summary>
-		public int Y { get; private set; }
+		public int Y { get; }
 	}
 }

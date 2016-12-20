@@ -1,17 +1,16 @@
-﻿using System;
+﻿using IronBefunge.Core.InstructionHandlers;
+using Spackle;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Diagnostics.CodeAnalysis;
 using System.IO;
-using IronBefunge.Core.InstructionHandlers;
-using Spackle;
 
 namespace IronBefunge.Core
 {
 	public sealed class Executor
 		: IDisposable
 	{
-		[SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope")]
+		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope")]
 		public Executor(ReadOnlyCollection<Cell> cells, TextReader reader, TextWriter writer)
 			: this(cells, reader, writer, new SecureRandom()) { }
 
@@ -19,22 +18,22 @@ namespace IronBefunge.Core
 		{
 			if (cells == null)
 			{
-				throw new ArgumentNullException("cells");
+				throw new ArgumentNullException(nameof(cells));
 			}
 
 			if (reader == null)
 			{
-				throw new ArgumentNullException("reader");
+				throw new ArgumentNullException(nameof(reader));
 			}
 
 			if (writer == null)
 			{
-				throw new ArgumentNullException("writer");
+				throw new ArgumentNullException(nameof(writer));
 			}
 
 			if (randomizer == null)
 			{
-				throw new ArgumentNullException("randomizer");
+				throw new ArgumentNullException(nameof(randomizer));
 			}
 
 			this.Cells = cells;
@@ -92,12 +91,12 @@ namespace IronBefunge.Core
 			}
 		}
 
-		private ReadOnlyCollection<Cell> Cells { get; set; }
+		private ReadOnlyCollection<Cell> Cells { get; }
 
-		private SecureRandom Randomizer { get; set; }
+		private SecureRandom Randomizer { get; }
 
-		private TextReader Reader { get; set; }
+		private TextReader Reader { get; }
 
-		private TextWriter Writer { get; set; }
+		private TextWriter Writer { get; }
 	}
 }

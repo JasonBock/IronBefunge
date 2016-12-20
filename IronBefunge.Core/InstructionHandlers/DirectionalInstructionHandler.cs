@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.Immutable;
 
 namespace IronBefunge.Core.InstructionHandlers
 {
@@ -13,12 +12,12 @@ namespace IronBefunge.Core.InstructionHandlers
 		internal const char TrampolineInstruction = '#';
 		internal const char UpInstruction = '^';
 
-		internal override ReadOnlyCollection<char> GetInstructions()
+		internal override ImmutableArray<char> GetInstructions()
 		{
-			return new List<char>() { DirectionalInstructionHandler.DownInstruction,
+			return ImmutableArray.Create(DirectionalInstructionHandler.DownInstruction,
 				DirectionalInstructionHandler.LeftInstruction, DirectionalInstructionHandler.RandomInstruction,
 				DirectionalInstructionHandler.RightInstruction, DirectionalInstructionHandler.TrampolineInstruction,
-				DirectionalInstructionHandler.UpInstruction }.AsReadOnly();
+				DirectionalInstructionHandler.UpInstruction);
 		}
 
 		internal override void OnHandle(ExecutionContext context)

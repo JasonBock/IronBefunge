@@ -6,14 +6,6 @@ namespace IronBefunge.Core.Tests
 	public static class CellTests
 	{
 		[Fact]
-		public static void ChangeValue()
-		{
-			var cell = new Cell(new Point(3, 2), '&');
-			cell.Value = '#';
-			Assert.Equal('#', cell.Value);
-		}
-
-		[Fact]
 		public static void CheckForEquality()
 		{
 			var c1 = new Cell(new Point(1, 1), 'c');

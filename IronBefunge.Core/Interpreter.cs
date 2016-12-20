@@ -5,18 +5,21 @@ using Spackle;
 namespace IronBefunge.Core
 {
 	public sealed class Interpreter
+		: IDisposable
 	{
+		private readonly Executor executor;
+
 		public Interpreter(string[] lines, TextReader reader, TextWriter writer)
 			: base()
 		{
-			this.Executor = new Executor(
+			this.executor = new Executor(
 				new Parser(lines).Parse(), reader, writer);
 		}
 
 		public Interpreter(string[] lines, TextReader reader, TextWriter writer, SecureRandom randomizer)
 			: base()
 		{
-			this.Executor = new Executor(
+			this.executor = new Executor(
 				new Parser(lines).Parse(), reader, writer, randomizer);
 		}
 
@@ -25,10 +28,10 @@ namespace IronBefunge.Core
 		{
 			if (file == null)
 			{
-				throw new ArgumentNullException("file");
+				throw new ArgumentNullException(nameof(file));
 			}
 
-			this.Executor = new Executor(
+			this.executor = new Executor(
 				new Parser(File.ReadAllLines(file.FullName)).Parse(), reader, writer);
 		}
 
@@ -37,18 +40,21 @@ namespace IronBefunge.Core
 		{
 			if (file == null)
 			{
-				throw new ArgumentNullException("file");
+				throw new ArgumentNullException(nameof(file));
 			}
 
-			this.Executor = new Executor(
+			this.executor = new Executor(
 				new Parser(File.ReadAllLines(file.FullName)).Parse(), reader, writer, randomizer);
+		}
+
+		public void Dispose()
+		{
+			this.executor.Dispose();
 		}
 
 		public void Interpret()
 		{
-			this.Executor.Execute();
+			this.executor.Execute();
 		}
-
-		private Executor Executor { get; set; }
 	}
 }

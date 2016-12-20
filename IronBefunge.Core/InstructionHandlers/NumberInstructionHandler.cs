@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.Immutable;
 using System.Globalization;
 
 namespace IronBefunge.Core.InstructionHandlers
@@ -18,14 +17,14 @@ namespace IronBefunge.Core.InstructionHandlers
 		internal const char EightInstruction = '8';
 		internal const char NineInstruction = '9';
 
-		internal override ReadOnlyCollection<char> GetInstructions()
+		internal override ImmutableArray<char> GetInstructions()
 		{
-			return new List<char>() { NumberInstructionHandler.ZeroInstruction, 
+			return ImmutableArray.Create(NumberInstructionHandler.ZeroInstruction, 
 				NumberInstructionHandler.OneInstruction, NumberInstructionHandler.TwoInstruction,
 				NumberInstructionHandler.ThreeInstruction, NumberInstructionHandler.FourInstruction,
 				NumberInstructionHandler.FiveInstruction, NumberInstructionHandler.SixInstruction,
 				NumberInstructionHandler.SevenInstruction, NumberInstructionHandler.EightInstruction,
-				NumberInstructionHandler.NineInstruction }.AsReadOnly();
+				NumberInstructionHandler.NineInstruction);
 		}
 
 		internal override void OnHandle(ExecutionContext context)

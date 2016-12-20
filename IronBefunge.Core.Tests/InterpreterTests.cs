@@ -21,7 +21,10 @@ namespace IronBefunge.Core.Tests
 			{
 				using (var reader = new StringReader(string.Empty))
 				{
-					new Interpreter(lines, reader, writer).Interpret();
+					using (var interpreter = new Interpreter(lines, reader, writer))
+					{
+						interpreter.Interpret();
+					}
 				}
 			}
 
@@ -45,7 +48,10 @@ namespace IronBefunge.Core.Tests
 			{
 				using (var reader = new StringReader(string.Empty))
 				{
-					new Interpreter(lines, reader, writer).Interpret();
+					using (var interpreter = new Interpreter(lines, reader, writer))
+					{
+						interpreter.Interpret();
+					}
 				}
 			}
 

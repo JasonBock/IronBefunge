@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.Immutable;
 
 namespace IronBefunge.Core.InstructionHandlers
 {
@@ -12,11 +11,11 @@ namespace IronBefunge.Core.InstructionHandlers
 		internal const char MultiplyInstruction = '*';
 		internal const char SubtractInstruction = '-';
 
-		internal override ReadOnlyCollection<char> GetInstructions()
+		internal override ImmutableArray<char> GetInstructions()
 		{
-			return new List<char>() { MathInstructionHandler.AddInstruction, 
+			return ImmutableArray.Create(MathInstructionHandler.AddInstruction,
 				MathInstructionHandler.DivideInstruction, MathInstructionHandler.ModInstruction,
-				MathInstructionHandler.MultiplyInstruction, MathInstructionHandler.SubtractInstruction }.AsReadOnly();
+				MathInstructionHandler.MultiplyInstruction, MathInstructionHandler.SubtractInstruction);
 		}
 
 		private static void HandleAddition(ExecutionContext context)
