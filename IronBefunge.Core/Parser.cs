@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
+using System.Collections.Immutable;
 
 namespace IronBefunge.Core
 {
@@ -13,7 +13,7 @@ namespace IronBefunge.Core
 			this.lines = lines;
 		}
 
-		public ReadOnlyCollection<Cell> Parse()
+		public ImmutableArray<Cell> Parse()
 		{
 			var cells = new List<Cell>();
 
@@ -30,10 +30,10 @@ namespace IronBefunge.Core
 				}
 			}
 
-			return cells.AsReadOnly();
+			return cells.ToImmutableArray();
 		}
 
-		private static ReadOnlyCollection<Cell> ProcessLine(string line, int x)
+		private static ImmutableArray<Cell> ProcessLine(string line, int x)
 		{
 			var cells = new List<Cell>();
 
@@ -47,7 +47,7 @@ namespace IronBefunge.Core
 				}
 			}
 
-			return cells.AsReadOnly();
+			return cells.ToImmutableArray();
 		}
 	}
 }

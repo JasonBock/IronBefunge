@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Collections.ObjectModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
@@ -12,19 +13,6 @@ namespace IronBefunge.Core.Tests
 	{
 		[Fact]
 		[SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope")]
-		public static void CreateWithNullCellList()
-		{
-			using (var reader = new StringReader(string.Empty))
-			{
-				using (var writer = new StringWriter(CultureInfo.CurrentCulture))
-				{
-					Assert.Throws<ArgumentNullException>(() => new Executor(null, reader, writer));
-				}
-			}
-		}
-
-		[Fact]
-		[SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope")]
 		public static void CreateWithNullRandomizer()
 		{
 			using (var reader = new StringReader(string.Empty))
@@ -32,7 +20,7 @@ namespace IronBefunge.Core.Tests
 				using (var writer = new StringWriter(CultureInfo.CurrentCulture))
 				{
 					Assert.Throws<ArgumentNullException>(() =>
-						new Executor(new ReadOnlyCollection<Cell>(new List<Cell>()), reader, writer, null));
+						new Executor(ImmutableArray.Create<Cell>(), reader, writer, null));
 				}
 			}
 		}
@@ -44,7 +32,7 @@ namespace IronBefunge.Core.Tests
 			using (var writer = new StringWriter(CultureInfo.CurrentCulture))
 			{
 				Assert.Throws<ArgumentNullException>(() =>
-					new Executor(new ReadOnlyCollection<Cell>(new List<Cell>()), null, writer));
+					new Executor(ImmutableArray.Create<Cell>(), null, writer));
 			}
 		}
 
@@ -55,7 +43,7 @@ namespace IronBefunge.Core.Tests
 			using (var reader = new StringReader(string.Empty))
 			{
 				Assert.Throws<ArgumentNullException>(() =>
-					new Executor(new ReadOnlyCollection<Cell>(new List<Cell>()), reader, null));
+					new Executor(ImmutableArray.Create<Cell>(), reader, null));
 			}
 		}
 	}

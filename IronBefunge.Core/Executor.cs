@@ -2,7 +2,7 @@
 using Spackle;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
+using System.Collections.Immutable;
 using System.IO;
 
 namespace IronBefunge.Core
@@ -10,17 +10,17 @@ namespace IronBefunge.Core
 	public sealed class Executor
 		: IDisposable
 	{
+		private readonly ImmutableArray<Cell> cells;
+		private readonly SecureRandom randomizer;
+		private readonly TextReader reader;
+		private readonly TextWriter writer;
+
 		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope")]
-		public Executor(ReadOnlyCollection<Cell> cells, TextReader reader, TextWriter writer)
+		public Executor(ImmutableArray<Cell> cells, TextReader reader, TextWriter writer)
 			: this(cells, reader, writer, new SecureRandom()) { }
 
-		public Executor(ReadOnlyCollection<Cell> cells, TextReader reader, TextWriter writer, SecureRandom randomizer)
+		public Executor(ImmutableArray<Cell> cells, TextReader reader, TextWriter writer, SecureRandom randomizer)
 		{
-			if (cells == null)
-			{
-				throw new ArgumentNullException(nameof(cells));
-			}
-
 			if (reader == null)
 			{
 				throw new ArgumentNullException(nameof(reader));
@@ -36,10 +36,10 @@ namespace IronBefunge.Core
 				throw new ArgumentNullException(nameof(randomizer));
 			}
 
-			this.Cells = cells;
-			this.Reader = reader;
-			this.Writer = writer;
-			this.Randomizer = randomizer;
+			this.cells = cells;
+			this.reader = reader;
+			this.writer = writer;
+			this.randomizer = randomizer;
 		}
 
 		private static bool ContainsWhitespace(Cell current, Cell previous)
@@ -51,15 +51,15 @@ namespace IronBefunge.Core
 
 		public void Dispose()
 		{
-			this.Randomizer.Dispose();
+			this.randomizer.Dispose();
 		}
 
 		public void Execute()
 		{
-			if (this.Cells.Count > 0)
+			if (this.cells.Length > 0)
 			{
 				var context = new ExecutionContext(
-					new List<Cell>(this.Cells), this.Reader, this.Writer, this.Randomizer);
+					new List<Cell>(this.cells), this.reader, this.writer, this.randomizer);
 				var mappings = new InstructionMapper();
 
 				while (context.Current.Value != '@')
@@ -90,13 +90,5 @@ namespace IronBefunge.Core
 				}
 			}
 		}
-
-		private ReadOnlyCollection<Cell> Cells { get; }
-
-		private SecureRandom Randomizer { get; }
-
-		private TextReader Reader { get; }
-
-		private TextWriter Writer { get; }
 	}
 }

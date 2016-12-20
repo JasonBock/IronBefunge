@@ -2,7 +2,7 @@
 using Spackle;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
+using System.Collections.Immutable;
 using System.Globalization;
 using System.IO;
 using Xunit;
@@ -11,7 +11,7 @@ namespace IronBefunge.Core.Tests.InstructionHandlers
 {
 	public abstract class InstructionHandlerTests
 	{
-		internal abstract ReadOnlyCollection<char> GetExpectedHandledInstructions();
+		internal abstract ImmutableArray<char> GetExpectedHandledInstructions();
 
 		internal abstract Type GetHandlerType();
 
@@ -80,7 +80,7 @@ namespace IronBefunge.Core.Tests.InstructionHandlers
 
 			var expectedInstructions = this.GetExpectedHandledInstructions();
 
-			Assert.Equal(expectedInstructions.Count, handler.Instructions.Length);
+			Assert.Equal(expectedInstructions.Length, handler.Instructions.Length);
 
 			foreach (var expectedInstruction in expectedInstructions)
 			{

@@ -1,8 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using IronBefunge.Core.InstructionHandlers;
+﻿using IronBefunge.Core.InstructionHandlers;
 using IronBefunge.Core.Tests.Mocks;
+using System;
+using System.Collections.Generic;
+using System.Collections.Immutable;
 using Xunit;
 
 namespace IronBefunge.Core.Tests.InstructionHandlers
@@ -105,12 +105,12 @@ namespace IronBefunge.Core.Tests.InstructionHandlers
 			}
 		}
 
-		internal override ReadOnlyCollection<char> GetExpectedHandledInstructions()
+		internal override ImmutableArray<char> GetExpectedHandledInstructions()
 		{
-			return new List<char>() { DirectionalInstructionHandler.DownInstruction,
+			return ImmutableArray.Create(DirectionalInstructionHandler.DownInstruction,
 				DirectionalInstructionHandler.LeftInstruction, DirectionalInstructionHandler.RandomInstruction,
 				DirectionalInstructionHandler.RightInstruction, DirectionalInstructionHandler.TrampolineInstruction,
-				DirectionalInstructionHandler.UpInstruction }.AsReadOnly();
+				DirectionalInstructionHandler.UpInstruction);
 		}
 
 		internal override Type GetHandlerType()

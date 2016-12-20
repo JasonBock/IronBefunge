@@ -1,7 +1,7 @@
-﻿using System;
+﻿using IronBefunge.Core.InstructionHandlers;
+using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using IronBefunge.Core.InstructionHandlers;
+using System.Collections.Immutable;
 using Xunit;
 
 namespace IronBefunge.Core.Tests.InstructionHandlers
@@ -9,11 +9,11 @@ namespace IronBefunge.Core.Tests.InstructionHandlers
 	public sealed class MathInstructionHandlerTests
 		: InstructionHandlerTests
 	{
-		internal override ReadOnlyCollection<char> GetExpectedHandledInstructions()
+		internal override ImmutableArray<char> GetExpectedHandledInstructions()
 		{
-			return new List<char>() { MathInstructionHandler.AddInstruction,
+			return ImmutableArray.Create(MathInstructionHandler.AddInstruction,
 				MathInstructionHandler.DivideInstruction, MathInstructionHandler.ModInstruction,
-				MathInstructionHandler.MultiplyInstruction, MathInstructionHandler.SubtractInstruction }.AsReadOnly();
+				MathInstructionHandler.MultiplyInstruction, MathInstructionHandler.SubtractInstruction);
 		}
 
 		internal override Type GetHandlerType()

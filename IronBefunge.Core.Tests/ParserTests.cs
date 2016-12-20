@@ -9,7 +9,7 @@ namespace IronBefunge.Core.Tests
 		{
 			var lines = new string[] { "    ", string.Empty, "                   " };
 			var cells = new Parser(lines).Parse();
-			Assert.Equal(0, cells.Count);
+			Assert.Equal(0, cells.Length);
 		}
 
 		[Fact]
@@ -17,7 +17,7 @@ namespace IronBefunge.Core.Tests
 		{
 			var lines = new string[] { "   <   ^#:  9              ", " ^ < ", " 3 5 :" };
 			var cells = new Parser(lines).Parse();
-			Assert.Equal(10, cells.Count);
+			Assert.Equal(10, cells.Length);
 			Assert.True(cells.Contains(new Cell(new Point(0, 3), '<')));
 			Assert.True(cells.Contains(new Cell(new Point(0, 7), '^')));
 			Assert.True(cells.Contains(new Cell(new Point(0, 8), '#')));
@@ -35,7 +35,7 @@ namespace IronBefunge.Core.Tests
 		{
 			var lines = new string[] { "    " };
 			var cells = new Parser(lines).Parse();
-			Assert.Equal(0, cells.Count);
+			Assert.Equal(0, cells.Length);
 		}
 
 		[Fact]
@@ -43,7 +43,7 @@ namespace IronBefunge.Core.Tests
 		{
 			var lines = new string[] { "   <   ^#:  9              " };
 			var cells = new Parser(lines).Parse();
-			Assert.Equal(5, cells.Count);
+			Assert.Equal(5, cells.Length);
 			Assert.True(cells.Contains(new Cell(new Point(0, 3), '<')));
 			Assert.True(cells.Contains(new Cell(new Point(0, 7), '^')));
 			Assert.True(cells.Contains(new Cell(new Point(0, 8), '#')));
@@ -55,14 +55,14 @@ namespace IronBefunge.Core.Tests
 		public static void ParseWithNullArray()
 		{
 			var cells = new Parser(null).Parse();
-			Assert.Equal(0, cells.Count);
+			Assert.Equal(0, cells.Length);
 		}
 
 		[Fact]
 		public static void ParseWithNullLine()
 		{
 			var cells = new Parser(new string[] { " ^ < ", null, " 3 5 :" }).Parse();
-			Assert.Equal(5, cells.Count);
+			Assert.Equal(5, cells.Length);
 		}
 	}
 }
