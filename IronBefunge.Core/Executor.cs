@@ -10,6 +10,10 @@ namespace IronBefunge.Core
 	public sealed class Executor
 		: IDisposable
 	{
+		internal const char EndProgramInstruction = '@';
+		internal const char NopInstruction = ' ';
+		internal const char StringModeInstruction = '"';
+
 		private readonly ImmutableArray<Cell> cells;
 		private readonly SecureRandom randomizer;
 		private readonly TextReader reader;
@@ -62,9 +66,9 @@ namespace IronBefunge.Core
 					new List<Cell>(this.cells), this.reader, this.writer, this.randomizer);
 				var mappings = new InstructionMapper();
 
-				while (context.Current.Value != '@')
+				while (!(context.Current.Value == Executor.EndProgramInstruction && !context.InStringMode))
 				{
-					if (context.Current.Value == '"')
+					if (context.Current.Value == Executor.StringModeInstruction)
 					{
 						context.InStringMode = !context.InStringMode;
 					}
@@ -74,7 +78,7 @@ namespace IronBefunge.Core
 						{
 							if (Executor.ContainsWhitespace(context.Current, context.Previous))
 							{
-								context.Values.Push(' ');
+								context.Values.Push(Executor.NopInstruction);
 							}
 
 							context.Values.Push(context.Current.Value);

@@ -98,11 +98,17 @@
     </CodeAnalysisDictionary>
   </ItemGroup>
   <ItemGroup>
+    <None Include="100DigitsOfPi.bf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="99Bottles.bf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="app.config" />
     <None Include="Factorial.bf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Gasket.bf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="HelloWithRandom.bf">

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using Spackle;
+using System.Linq;
 
 namespace IronBefunge.Core
 {
@@ -42,23 +43,30 @@ namespace IronBefunge.Core
 
 		internal void Move()
 		{
+			// TODO: I should consider doing this calcuation in the constructor and then only if
+			// a cell was added. Unfortunately the context doesn't get to know that right now, so
+			// I have to add then. Until then, this is the "safest" (though not performant) way
+			// to get the max values.
+			var maxX = this.Cells.Max(_ => _.Location.X);
+			var maxY = this.Cells.Max(_ => _.Location.Y);
+
 			switch (this.Direction)
 			{
 				case Direction.Down:
 					this.CurrentPosition = new Point(
-						(this.CurrentPosition.X == int.MaxValue ? 0 : this.CurrentPosition.X + 1), this.CurrentPosition.Y);
+						(this.CurrentPosition.X == maxX ? 0 : this.CurrentPosition.X + 1), this.CurrentPosition.Y);
 					break;
 				case Direction.Up:
 					this.CurrentPosition = new Point(
-						(this.CurrentPosition.X == 0 ? int.MaxValue : this.CurrentPosition.X - 1), this.CurrentPosition.Y);
+						(this.CurrentPosition.X == 0 ? maxX : this.CurrentPosition.X - 1), this.CurrentPosition.Y);
 					break;
 				case Direction.Left:
 					this.CurrentPosition = new Point(
-						this.CurrentPosition.X, (this.CurrentPosition.Y == 0 ? int.MaxValue : this.CurrentPosition.Y - 1));
+						this.CurrentPosition.X, (this.CurrentPosition.Y == 0 ? maxY : this.CurrentPosition.Y - 1));
 					break;
 				case Direction.Right:
 					this.CurrentPosition = new Point(
-						this.CurrentPosition.X, (this.CurrentPosition.Y == int.MaxValue ? 0 : this.CurrentPosition.Y + 1));
+						this.CurrentPosition.X, (this.CurrentPosition.Y == maxY ? 0 : this.CurrentPosition.Y + 1));
 					break;
 				default:
 					throw new NotSupportedException();
