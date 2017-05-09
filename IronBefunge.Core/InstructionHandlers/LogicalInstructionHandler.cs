@@ -8,11 +8,9 @@ namespace IronBefunge.Core.InstructionHandlers
 		internal const char GreaterThanInstruction = '`';
 		internal const char NotInstruction = '!';
 
-		internal override ImmutableArray<char> GetInstructions()
-		{
-			return ImmutableArray.Create(LogicalInstructionHandler.NotInstruction,
+		internal override ImmutableArray<char> GetInstructions() =>
+			ImmutableArray.Create(LogicalInstructionHandler.NotInstruction,
 				LogicalInstructionHandler.GreaterThanInstruction);
-		}
 
 		private static void HandleGreaterThan(ExecutionContext context)
 		{

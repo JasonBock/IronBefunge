@@ -25,38 +25,18 @@ namespace IronBefunge.Core
 
 		public Executor(ImmutableArray<Cell> cells, TextReader reader, TextWriter writer, SecureRandom randomizer)
 		{
-			if (reader == null)
-			{
-				throw new ArgumentNullException(nameof(reader));
-			}
-
-			if (writer == null)
-			{
-				throw new ArgumentNullException(nameof(writer));
-			}
-
-			if (randomizer == null)
-			{
-				throw new ArgumentNullException(nameof(randomizer));
-			}
-
+			this.reader = reader ?? throw new ArgumentNullException(nameof(reader));
+			this.writer = writer ?? throw new ArgumentNullException(nameof(writer));
+			this.randomizer = randomizer ?? throw new ArgumentNullException(nameof(randomizer));
 			this.cells = cells;
-			this.reader = reader;
-			this.writer = writer;
-			this.randomizer = randomizer;
 		}
 
-		private static bool ContainsWhitespace(Cell current, Cell previous)
-		{
-			return (current.Location.X == previous.Location.X ?
+		private static bool ContainsWhitespace(Cell current, Cell previous) =>
+			(current.Location.X == previous.Location.X ?
 				Math.Abs(current.Location.Y - previous.Location.Y) > 1 :
 				Math.Abs(current.Location.X - previous.Location.X) > 1);
-		}
 
-		public void Dispose()
-		{
-			this.randomizer.Dispose();
-		}
+		public void Dispose() => this.randomizer.Dispose();
 
 		public void Execute()
 		{

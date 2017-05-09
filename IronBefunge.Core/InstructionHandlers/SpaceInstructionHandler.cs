@@ -9,11 +9,9 @@ namespace IronBefunge.Core.InstructionHandlers
 		internal const char GetInstruction = 'g';
 		internal const char PutInstruction = 'p';
 
-		internal override ImmutableArray<char> GetInstructions()
-		{
-			return ImmutableArray.Create(SpaceInstructionHandler.GetInstruction,
+		internal override ImmutableArray<char> GetInstructions() =>
+			ImmutableArray.Create(SpaceInstructionHandler.GetInstruction,
 				SpaceInstructionHandler.PutInstruction);
-		}
 
 		private static void HandleGet(ExecutionContext context)
 		{

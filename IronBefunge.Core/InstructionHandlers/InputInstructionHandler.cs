@@ -11,11 +11,9 @@ namespace IronBefunge.Core.InstructionHandlers
 		internal const char NumericInstruction = '&';
 		internal const string NumericMessage = "Please enter in a numeric value:";
 
-		internal override ImmutableArray<char> GetInstructions()
-		{
-			return ImmutableArray.Create(InputInstructionHandler.AsciiInstruction, 
+		internal override ImmutableArray<char> GetInstructions() =>
+			ImmutableArray.Create(InputInstructionHandler.AsciiInstruction, 
 				InputInstructionHandler.NumericInstruction);
-		}
 
 		private static void HandleAscii(ExecutionContext context)
 		{
@@ -35,9 +33,7 @@ namespace IronBefunge.Core.InstructionHandlers
 
 			var result = context.Reader.ReadLine();
 
-			var value = 0;
-
-			if (int.TryParse(result, NumberStyles.Integer, CultureInfo.CurrentCulture, out value))
+			if (int.TryParse(result, NumberStyles.Integer, CultureInfo.CurrentCulture, out var value))
 			{
 				context.Values.Push(value);
 			}

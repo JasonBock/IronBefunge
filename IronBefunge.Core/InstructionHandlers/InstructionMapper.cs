@@ -1,21 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 
 namespace IronBefunge.Core.InstructionHandlers
 {
 	internal sealed class InstructionMapper
 	{
 		internal InstructionMapper()
-			: base()
-		{
+			: base() =>
 			this.InitializeMappings();
-		}
 
-		internal void Handle(ExecutionContext context)
-		{
+		internal void Handle(ExecutionContext context) =>
 			this.Mappings[context.Current.Value].Handle(context);
-		}
 
 		private void InitializeMappings()
 		{
@@ -23,7 +20,7 @@ namespace IronBefunge.Core.InstructionHandlers
 
 			var baseHandlerType = typeof(InstructionHandler);
 
-			var handlerTypes = from type in baseHandlerType.Assembly.GetTypes()
+			var handlerTypes = from type in baseHandlerType.GetTypeInfo().Assembly.GetTypes()
 									 where type.Namespace == this.GetType().Namespace
 									 where baseHandlerType.IsAssignableFrom(type)
 									 where type != baseHandlerType

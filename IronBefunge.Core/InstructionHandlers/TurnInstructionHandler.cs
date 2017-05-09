@@ -8,11 +8,9 @@ namespace IronBefunge.Core.InstructionHandlers
 		internal const char LeftRightInstruction = '_';
 		internal const char UpDownInstruction = '|';
 
-		internal override ImmutableArray<char> GetInstructions()
-		{
-			return ImmutableArray.Create(TurnInstructionHandler.LeftRightInstruction,
+		internal override ImmutableArray<char> GetInstructions() =>
+			ImmutableArray.Create(TurnInstructionHandler.LeftRightInstruction,
 				TurnInstructionHandler.UpDownInstruction);
-		}
 
 		internal override void OnHandle(ExecutionContext context)
 		{

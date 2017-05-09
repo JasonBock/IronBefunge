@@ -11,17 +11,13 @@ namespace IronBefunge.Core.InstructionHandlers
 		internal const char MultiplyInstruction = '*';
 		internal const char SubtractInstruction = '-';
 
-		internal override ImmutableArray<char> GetInstructions()
-		{
-			return ImmutableArray.Create(MathInstructionHandler.AddInstruction,
+		internal override ImmutableArray<char> GetInstructions() =>
+			ImmutableArray.Create(MathInstructionHandler.AddInstruction,
 				MathInstructionHandler.DivideInstruction, MathInstructionHandler.ModInstruction,
 				MathInstructionHandler.MultiplyInstruction, MathInstructionHandler.SubtractInstruction);
-		}
 
-		private static void HandleAddition(ExecutionContext context)
-		{
+		private static void HandleAddition(ExecutionContext context) =>
 			context.Values.Push(context.Values.Pop() + context.Values.Pop());
-		}
 
 		private static void HandleDivision(ExecutionContext context)
 		{
@@ -38,10 +34,8 @@ namespace IronBefunge.Core.InstructionHandlers
 			context.Values.Push(a == 0 ? 0 : b % a);
 		}
 
-		private static void HandleMultiplication(ExecutionContext context)
-		{
+		private static void HandleMultiplication(ExecutionContext context) =>
 			context.Values.Push(context.Values.Pop() * context.Values.Pop());
-		}
 
 		private static void HandleSubtraction(ExecutionContext context)
 		{

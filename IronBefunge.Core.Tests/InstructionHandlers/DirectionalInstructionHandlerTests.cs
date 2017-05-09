@@ -26,55 +26,42 @@ namespace IronBefunge.Core.Tests.InstructionHandlers
 		}
 
 		[Fact]
-		public static void HandleDown()
-		{
+		public static void HandleDown() =>
 			DirectionalInstructionHandlerTests.Handle(
 				DirectionalInstructionHandler.DownInstruction, Direction.Down);
-		}
 
 		[Fact]
-		public static void HandleLeft()
-		{
+		public static void HandleLeft() =>
 			DirectionalInstructionHandlerTests.Handle(
 				DirectionalInstructionHandler.LeftInstruction, Direction.Left);
-		}
 
 		[Fact]
-		public static void HandleRandomDown()
-		{
+		public static void HandleRandomDown() =>
 			DirectionalInstructionHandlerTests.Randomizer(Direction.Down);
-		}
 
 		[Fact]
-		public static void HandleRandomLeft()
-		{
+		public static void HandleRandomLeft() =>
 			DirectionalInstructionHandlerTests.Randomizer(Direction.Left);
-		}
 
 		[Fact]
-		public static void HandleRandomRight()
-		{
+		public static void HandleRandomRight() =>
 			DirectionalInstructionHandlerTests.Randomizer(Direction.Right);
-		}
 
 		[Fact]
-		public static void HandleRandomUp()
-		{
+		public static void HandleRandomUp() =>
 			DirectionalInstructionHandlerTests.Randomizer(Direction.Up);
-		}
 
 		[Fact]
-		public static void HandleRight()
-		{
+		public static void HandleRight() =>
 			DirectionalInstructionHandlerTests.Handle(
 				DirectionalInstructionHandler.RightInstruction, Direction.Right);
-		}
 
 		[Fact]
 		public static void HandleTrampoline()
 		{
 			var cells = new List<Cell>() { new Cell(
-				new Point(0, 0), DirectionalInstructionHandler.TrampolineInstruction) };
+				new Point(0, 0), DirectionalInstructionHandler.TrampolineInstruction),
+				new Cell(new Point(0, 1), '3')};
 
 			InstructionHandlerTests.Run(new DirectionalInstructionHandler(), cells, null,
 				(context, result) =>
@@ -84,11 +71,9 @@ namespace IronBefunge.Core.Tests.InstructionHandlers
 		}
 
 		[Fact]
-		public static void HandleUp()
-		{
+		public static void HandleUp() =>
 			DirectionalInstructionHandlerTests.Handle(
 				DirectionalInstructionHandler.UpInstruction, Direction.Up);
-		}
 
 		private static void Randomizer(Direction direction)
 		{
@@ -105,17 +90,12 @@ namespace IronBefunge.Core.Tests.InstructionHandlers
 			}
 		}
 
-		internal override ImmutableArray<char> GetExpectedHandledInstructions()
-		{
-			return ImmutableArray.Create(DirectionalInstructionHandler.DownInstruction,
+		internal override ImmutableArray<char> GetExpectedHandledInstructions() =>
+			ImmutableArray.Create(DirectionalInstructionHandler.DownInstruction,
 				DirectionalInstructionHandler.LeftInstruction, DirectionalInstructionHandler.RandomInstruction,
 				DirectionalInstructionHandler.RightInstruction, DirectionalInstructionHandler.TrampolineInstruction,
 				DirectionalInstructionHandler.UpInstruction);
-		}
 
-		internal override Type GetHandlerType()
-		{
-			return typeof(DirectionalInstructionHandler);
-		}
+		internal override Type GetHandlerType() => typeof(DirectionalInstructionHandler);
 	}
 }

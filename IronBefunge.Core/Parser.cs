@@ -8,10 +8,7 @@ namespace IronBefunge.Core
 		private readonly string[] lines;
 
 		public Parser(string[] lines)
-			: base()
-		{
-			this.lines = lines;
-		}
+			: base() => this.lines = lines;
 
 		public ImmutableArray<Cell> Parse()
 		{

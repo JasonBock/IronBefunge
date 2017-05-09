@@ -36,10 +36,8 @@ namespace IronBefunge.Core
 			}
 		}
 
-		internal Cell Find(Point position)
-		{
-			return this.Cells.Find((cell) => cell.Location == position);
-		}
+		internal Cell Find(Point position) =>
+			this.Cells.Find((cell) => cell.Location == position);
 
 		internal void Move()
 		{

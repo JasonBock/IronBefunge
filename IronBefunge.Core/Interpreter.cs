@@ -10,18 +10,12 @@ namespace IronBefunge.Core
 		private readonly Executor executor;
 
 		public Interpreter(string[] lines, TextReader reader, TextWriter writer)
-			: base()
-		{
-			this.executor = new Executor(
-				new Parser(lines).Parse(), reader, writer);
-		}
+			: base() =>
+			this.executor = new Executor(new Parser(lines).Parse(), reader, writer);
 
 		public Interpreter(string[] lines, TextReader reader, TextWriter writer, SecureRandom randomizer)
-			: base()
-		{
-			this.executor = new Executor(
-				new Parser(lines).Parse(), reader, writer, randomizer);
-		}
+			: base() =>
+			this.executor = new Executor(new Parser(lines).Parse(), reader, writer, randomizer);
 
 		public Interpreter(FileInfo file, TextReader reader, TextWriter writer)
 			: base()
@@ -47,14 +41,8 @@ namespace IronBefunge.Core
 				new Parser(File.ReadAllLines(file.FullName)).Parse(), reader, writer, randomizer);
 		}
 
-		public void Dispose()
-		{
-			this.executor.Dispose();
-		}
+		public void Dispose() => this.executor.Dispose();
 
-		public void Interpret()
-		{
-			this.executor.Execute();
-		}
+		public void Interpret() => this.executor.Execute();
 	}
 }

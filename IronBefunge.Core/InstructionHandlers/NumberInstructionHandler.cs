@@ -17,15 +17,13 @@ namespace IronBefunge.Core.InstructionHandlers
 		internal const char EightInstruction = '8';
 		internal const char NineInstruction = '9';
 
-		internal override ImmutableArray<char> GetInstructions()
-		{
-			return ImmutableArray.Create(NumberInstructionHandler.ZeroInstruction, 
+		internal override ImmutableArray<char> GetInstructions() =>
+			ImmutableArray.Create(NumberInstructionHandler.ZeroInstruction, 
 				NumberInstructionHandler.OneInstruction, NumberInstructionHandler.TwoInstruction,
 				NumberInstructionHandler.ThreeInstruction, NumberInstructionHandler.FourInstruction,
 				NumberInstructionHandler.FiveInstruction, NumberInstructionHandler.SixInstruction,
 				NumberInstructionHandler.SevenInstruction, NumberInstructionHandler.EightInstruction,
 				NumberInstructionHandler.NineInstruction);
-		}
 
 		internal override void OnHandle(ExecutionContext context)
 		{

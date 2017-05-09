@@ -12,13 +12,11 @@ namespace IronBefunge.Core.InstructionHandlers
 		internal const char TrampolineInstruction = '#';
 		internal const char UpInstruction = '^';
 
-		internal override ImmutableArray<char> GetInstructions()
-		{
-			return ImmutableArray.Create(DirectionalInstructionHandler.DownInstruction,
+		internal override ImmutableArray<char> GetInstructions() =>
+			ImmutableArray.Create(DirectionalInstructionHandler.DownInstruction,
 				DirectionalInstructionHandler.LeftInstruction, DirectionalInstructionHandler.RandomInstruction,
 				DirectionalInstructionHandler.RightInstruction, DirectionalInstructionHandler.TrampolineInstruction,
 				DirectionalInstructionHandler.UpInstruction);
-		}
 
 		internal override void OnHandle(ExecutionContext context)
 		{

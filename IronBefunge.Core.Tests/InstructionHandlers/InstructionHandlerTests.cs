@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Globalization;
 using System.IO;
+using System.Reflection;
 using Xunit;
 
 namespace IronBefunge.Core.Tests.InstructionHandlers
@@ -76,7 +77,7 @@ namespace IronBefunge.Core.Tests.InstructionHandlers
 			var handlerType = this.GetHandlerType();
 			var handler = Activator.CreateInstance(handlerType) as InstructionHandler;
 
-			Assert.True(handlerType.IsAssignableFrom(handler.GetType()));
+			Assert.True(handlerType.GetTypeInfo().IsAssignableFrom(handler.GetType()));
 
 			var expectedInstructions = this.GetExpectedHandledInstructions();
 

@@ -10,11 +10,9 @@ namespace IronBefunge.Core.InstructionHandlers
 		internal const char AsciiInstruction = ',';
 		internal const char NumericInstruction = '.';
 
-		internal override ImmutableArray<char> GetInstructions()
-		{
-			return ImmutableArray.Create(OutputInstructionHandler.AsciiInstruction, 
+		internal override ImmutableArray<char> GetInstructions() =>
+			ImmutableArray.Create(OutputInstructionHandler.AsciiInstruction, 
 				OutputInstructionHandler.NumericInstruction);
-		}
 
 		internal override void OnHandle(ExecutionContext context)
 		{

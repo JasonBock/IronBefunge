@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "IronBefunge": {
+      "commandName": "Project",
+      "commandLineArgs": "\"..\\BF Files\\100DigitsOfPi.bf\""
+    }
+  }
+}

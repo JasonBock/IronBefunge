@@ -9,12 +9,10 @@ namespace IronBefunge.Core.InstructionHandlers
 		internal const char PopInstruction = '$';
 		internal const char SwapInstruction = '\\';
 
-		internal override ImmutableArray<char> GetInstructions()
-		{
-			return ImmutableArray.Create(StackInstructionHandler.DuplicateInstruction, 
+		internal override ImmutableArray<char> GetInstructions() =>
+			ImmutableArray.Create(StackInstructionHandler.DuplicateInstruction, 
 				StackInstructionHandler.PopInstruction, 
 				StackInstructionHandler.SwapInstruction);
-		}
 
 		private static void HandleDuplicate(ExecutionContext context)
 		{

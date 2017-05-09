@@ -5,7 +5,9 @@ namespace IronBefunge.Core
 	/// <summary>
 	/// Defines the X and Y positions of a value in FungeSpace.
 	/// </summary>
+#if NET462
 	[Serializable]
+#endif
 	public sealed class Cell
 		: IEquatable<Cell>
 	{
@@ -29,7 +31,7 @@ namespace IronBefunge.Core
 		/// <returns><b>true</b> if the value of <paramref name="a"/> is the same as the value of <paramref name="b"/>; otherwise, <b>false</b>. </returns>
 		public static bool operator ==(Cell a, Cell b)
 		{
-			bool equal = false;
+			var equal = false;
 
 			if (object.ReferenceEquals(a, b))
 			{
@@ -53,10 +55,7 @@ namespace IronBefunge.Core
 		/// <param name="a">A <see cref="Cell" /> or a null reference.</param>
 		/// <param name="b">A <see cref="Cell" /> or a null reference.</param>
 		/// <returns><b>true</b> if the value of <paramref name="a"/> is different from the value of <paramref name="b"/>; otherwise, <b>false</b>. </returns>
-		public static bool operator !=(Cell a, Cell b)
-		{
-			return !(a == b);
-		}
+		public static bool operator !=(Cell a, Cell b) => !(a == b);
 
 		/// <summary>
 		/// Checks to see if the given object is equal to the current <see cref="Cell" /> instance.
@@ -66,9 +65,8 @@ namespace IronBefunge.Core
 		public override bool Equals(object obj)
 		{
 			var areEqual = false;
-			var target = obj as Cell;
 
-			if (target != null)
+			if (obj is Cell target)
 			{
 				areEqual = this.Equals(target);
 			}
@@ -81,29 +79,22 @@ namespace IronBefunge.Core
 		/// </summary>
 		/// <param name="other">The object to check for equality.</param>
 		/// <returns>Returns <c>true</c> if the objects are equals; otherwise, <c>false</c>.</returns>
-		public bool Equals(Cell other)
-		{
-			return other != null && this.Location == other.Location &&
+		public bool Equals(Cell other) =>
+			other != null && this.Location == other.Location &&
 				this.Value == other.Value;
-		}
 
 		/// <summary>
 		/// Gets a hash code based on the 
 		/// </summary>
 		/// <returns></returns>
-		public override int GetHashCode()
-		{
-			return this.Location.GetHashCode() ^ this.Value.GetHashCode();
-		}
+		public override int GetHashCode() =>
+			this.Location.GetHashCode() ^ this.Value.GetHashCode();
 
 		/// <summary>
 		/// Returns a meaningful string representation of the current <see cref="Cell" /> instance.
 		/// </summary>
 		/// <returns>A string representation of the object.</returns>
-		public override string ToString()
-		{
-			return FormattableString.Invariant($"{this.Location} - '{this.Value}'");
-		}
+		public override string ToString() => $"{this.Location} - '{this.Value}'";
 
 		/// <summary>
 		/// Gets the location.

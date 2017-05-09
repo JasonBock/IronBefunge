@@ -8,10 +8,8 @@ namespace IronBefunge.Core.InstructionHandlers
 	{
 		private readonly Lazy<ImmutableArray<char>> instructions; 
 
-		internal InstructionHandler()
-		{
+		internal InstructionHandler() =>
 			this.instructions = new Lazy<ImmutableArray<char>>(() => this.GetInstructions());
-		}
 
 		internal abstract ImmutableArray<char> GetInstructions();
 
@@ -21,10 +19,7 @@ namespace IronBefunge.Core.InstructionHandlers
 
 		public ImmutableArray<char> Instructions
 		{
-			get
-			{
-				return this.instructions.Value;
-			}
+			get => this.instructions.Value;
 		}
 	}
 }
