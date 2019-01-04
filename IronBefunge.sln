@@ -3,13 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26403.7
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IronBefunge", "IronBefunge\IronBefunge.csproj", "{D5BF2B16-B170-45E4-8D4A-5AA7D6ACBAB0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IronBefunge", "IronBefunge\IronBefunge.csproj", "{D5BF2B16-B170-45E4-8D4A-5AA7D6ACBAB0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IronBefunge.Tests", "IronBefunge.Tests\IronBefunge.Tests.csproj", "{10921143-1848-46B5-BADE-0BC2C9D041FA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IronBefunge.Tests", "IronBefunge.Tests\IronBefunge.Tests.csproj", "{10921143-1848-46B5-BADE-0BC2C9D041FA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IronBefunge.Host.NETCore", "IronBefunge.Host.NETCore\IronBefunge.Host.NETCore.csproj", "{8FD4B80C-07A3-4310-8484-F550F3AC9FBD}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IronBefunge.Host.NETFramework", "IronBefunge.Host.NETFramework\IronBefunge.Host.NETFramework.csproj", "{16AF7694-E1D8-41DB-ABCA-8BDC12F3F349}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IronBefunge.Host", "IronBefunge.Host\IronBefunge.Host.csproj", "{8FD4B80C-07A3-4310-8484-F550F3AC9FBD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,12 +27,11 @@ Global
 		{8FD4B80C-07A3-4310-8484-F550F3AC9FBD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8FD4B80C-07A3-4310-8484-F550F3AC9FBD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8FD4B80C-07A3-4310-8484-F550F3AC9FBD}.Release|Any CPU.Build.0 = Release|Any CPU
-		{16AF7694-E1D8-41DB-ABCA-8BDC12F3F349}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{16AF7694-E1D8-41DB-ABCA-8BDC12F3F349}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{16AF7694-E1D8-41DB-ABCA-8BDC12F3F349}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{16AF7694-E1D8-41DB-ABCA-8BDC12F3F349}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {29BC4604-8DE6-4C66-A631-D08F81B9A0F7}
 	EndGlobalSection
 EndGlobal

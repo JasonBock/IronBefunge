@@ -5,7 +5,7 @@ namespace IronBefunge.Tests.Mocks
 	internal sealed class MockSecureRandom
 		: SecureRandom
 	{
-		private int value;
+		private readonly int value;
 
 		public MockSecureRandom(Direction hardCoded)
 			: base() => this.value = (int)hardCoded;

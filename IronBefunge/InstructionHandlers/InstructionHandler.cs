@@ -17,9 +17,6 @@ namespace IronBefunge.InstructionHandlers
 
 		internal abstract void OnHandle(ExecutionContext context);
 
-		public ImmutableArray<char> Instructions
-		{
-			get => this.instructions.Value;
-		}
+		public ImmutableArray<char> Instructions => this.instructions.Value;
 	}
 }

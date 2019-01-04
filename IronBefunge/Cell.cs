@@ -37,7 +37,7 @@ namespace IronBefunge
 			{
 				equal = true;
 			}
-			else if (((object)a == null) || ((object)b == null))
+			else if ((a is null) || (b is null))
 			{
 				equal = false;
 			}

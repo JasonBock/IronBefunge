@@ -1,5 +1,4 @@
-﻿using IronBefunge;
-using System;
+﻿using System;
 using System.IO;
 
 namespace IronBefunge.Host
