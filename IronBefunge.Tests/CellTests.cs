@@ -54,9 +54,9 @@ namespace IronBefunge.Tests
 			const char value = '^';
 
 			var cell = new Cell(new Point(x, y), value);
-			Assert.That(x, Is.EqualTo(cell.Location.X), nameof(Point.X));
-			Assert.That(y, Is.EqualTo(cell.Location.Y), nameof(Point.Y));
-			Assert.That(value, Is.EqualTo(cell.Value), nameof(Cell.Value));
+			Assert.That(cell.Location.X, Is.EqualTo(x), nameof(Point.X));
+			Assert.That(cell.Location.Y, Is.EqualTo(y), nameof(Point.Y));
+			Assert.That(cell.Value, Is.EqualTo(value), nameof(Cell.Value));
 		}
 	}
 }

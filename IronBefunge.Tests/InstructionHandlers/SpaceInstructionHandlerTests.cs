@@ -31,8 +31,8 @@ namespace IronBefunge.Tests.InstructionHandlers
 					stackCount = context.Values.Count;
 				}, (context, result) =>
 				{
-					Assert.That(stackCount - 1, Is.EqualTo(context.Values.Count), nameof(context.Values.Count));
-					Assert.That((int)'w', Is.EqualTo(context.Values.Pop()), nameof(context.Values.Pop));
+					Assert.That(context.Values.Count, Is.EqualTo(stackCount - 1), nameof(context.Values.Count));
+					Assert.That(context.Values.Pop(), Is.EqualTo((int)'w'), nameof(context.Values.Pop));
 				});
 		}
 
@@ -51,8 +51,8 @@ namespace IronBefunge.Tests.InstructionHandlers
 					stackCount = context.Values.Count;
 				}, (context, result) =>
 				{
-					Assert.That(stackCount - 1, Is.EqualTo(context.Values.Count), nameof(context.Values.Count));
-					Assert.That((int)' ', Is.EqualTo(context.Values.Pop()), nameof(context.Values.Pop));
+					Assert.That(context.Values.Count, Is.EqualTo(stackCount - 1), nameof(context.Values.Count));
+					Assert.That(context.Values.Pop(), Is.EqualTo((int)' '), nameof(context.Values.Pop));
 				});
 		}
 
@@ -71,8 +71,8 @@ namespace IronBefunge.Tests.InstructionHandlers
 					stackCount = context.Values.Count;
 				}, (context, result) =>
 				{
-					Assert.That(stackCount, Is.EqualTo(context.Values.Count), nameof(context.Values.Count));
-					Assert.That((int)'w', Is.EqualTo(context.Values.Pop()), nameof(context.Values.Pop));
+					Assert.That(context.Values.Count, Is.EqualTo(stackCount), nameof(context.Values.Count));
+					Assert.That(context.Values.Pop(), Is.EqualTo((int)'w'), nameof(context.Values.Pop));
 				});
 		}
 
@@ -90,8 +90,8 @@ namespace IronBefunge.Tests.InstructionHandlers
 					stackCount = context.Values.Count;
 				}, (context, result) =>
 				{
-					Assert.That(stackCount + 1, Is.EqualTo(context.Values.Count), nameof(context.Values.Count));
-					Assert.That((int)SpaceInstructionHandler.GetInstruction, Is.EqualTo(context.Values.Pop()), nameof(context.Values.Pop));
+					Assert.That(context.Values.Count, Is.EqualTo(stackCount + 1), nameof(context.Values.Count));
+					Assert.That(context.Values.Pop(), Is.EqualTo((int)SpaceInstructionHandler.GetInstruction), nameof(context.Values.Pop));
 				});
 		}
 
@@ -112,9 +112,9 @@ namespace IronBefunge.Tests.InstructionHandlers
 					stackCount = context.Values.Count;
 				}, (context, result) =>
 				{
-					Assert.That(stackCount - 3, Is.EqualTo(context.Values.Count), nameof(context.Values.Count));
-					Assert.That(cellCount, Is.EqualTo(context.Cells.Count), nameof(context.Cells.Count));
-					Assert.That('X', Is.EqualTo(context.Find(new Point(2, 3)).Value), nameof(Cell.Value));
+					Assert.That(context.Values.Count, Is.EqualTo(stackCount - 3), nameof(context.Values.Count));
+					Assert.That(context.Cells.Count, Is.EqualTo(cellCount), nameof(context.Cells.Count));
+					Assert.That(context.Find(new Point(2, 3)).Value, Is.EqualTo('X'), nameof(Cell.Value));
 				});
 		}
 
@@ -134,9 +134,9 @@ namespace IronBefunge.Tests.InstructionHandlers
 					stackCount = context.Values.Count;
 				}, (context, result) =>
 				{
-					Assert.That(stackCount - 3, Is.EqualTo(context.Values.Count), nameof(context.Values.Count));
-					Assert.That(cellCount + 1, Is.EqualTo(context.Cells.Count), nameof(context.Cells.Count));
-					Assert.That('X', Is.EqualTo(context.Find(new Point(2, 3)).Value), nameof(Cell.Value));
+					Assert.That(context.Values.Count, Is.EqualTo(stackCount - 3), nameof(context.Values.Count));
+					Assert.That(context.Cells.Count, Is.EqualTo(cellCount + 1), nameof(context.Cells.Count));
+					Assert.That(context.Find(new Point(2, 3)).Value, Is.EqualTo('X'), nameof(Cell.Value));
 				});
 		}
 
@@ -156,9 +156,9 @@ namespace IronBefunge.Tests.InstructionHandlers
 					stackCount = context.Values.Count;
 				}, (context, result) =>
 				{
-					Assert.That(stackCount - 2, Is.EqualTo(context.Values.Count), nameof(context.Values.Count));
-					Assert.That(cellCount, Is.EqualTo(context.Cells.Count), nameof(context.Cells.Count));
-					Assert.That('X', Is.EqualTo(context.Find(new Point(2, 0)).Value), nameof(Cell.Value));
+					Assert.That(context.Values.Count, Is.EqualTo(stackCount - 2), nameof(context.Values.Count));
+					Assert.That(context.Cells.Count, Is.EqualTo(cellCount), nameof(context.Cells.Count));
+					Assert.That(context.Find(new Point(2, 0)).Value, Is.EqualTo('X'), nameof(Cell.Value));
 				});
 		}
 
@@ -176,9 +176,9 @@ namespace IronBefunge.Tests.InstructionHandlers
 					stackCount = context.Values.Count;
 				}, (context, result) =>
 				{
-					Assert.That(stackCount - 1, Is.EqualTo(context.Values.Count), nameof(context.Values.Count));
-					Assert.That(cellCount, Is.EqualTo(context.Cells.Count), nameof(context.Cells.Count));
-					Assert.That('X', Is.EqualTo(context.Find(new Point(0, 0)).Value), nameof(Cell.Value));
+					Assert.That(context.Values.Count, Is.EqualTo(stackCount - 1), nameof(context.Values.Count));
+					Assert.That(context.Cells.Count, Is.EqualTo(cellCount), nameof(context.Cells.Count));
+					Assert.That(context.Find(new Point(0, 0)).Value, Is.EqualTo('X'), nameof(Cell.Value));
 				});
 		}
 
@@ -195,9 +195,9 @@ namespace IronBefunge.Tests.InstructionHandlers
 					stackCount = context.Values.Count;
 				}, (context, result) =>
 				{
-					Assert.That(stackCount, Is.EqualTo(context.Values.Count), nameof(context.Values.Count));
-					Assert.That(cellCount, Is.EqualTo(context.Cells.Count), nameof(context.Cells.Count));
-					Assert.That('\0', Is.EqualTo(context.Find(new Point(0, 0)).Value), nameof(Cell.Value));
+					Assert.That(context.Values.Count, Is.EqualTo(stackCount), nameof(context.Values.Count));
+					Assert.That(context.Cells.Count, Is.EqualTo(cellCount), nameof(context.Cells.Count));
+					Assert.That(context.Find(new Point(0, 0)).Value, Is.EqualTo('\0'), nameof(Cell.Value));
 				});
 		}
 	}

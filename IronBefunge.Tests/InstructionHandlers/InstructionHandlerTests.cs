@@ -79,7 +79,7 @@ namespace IronBefunge.Tests.InstructionHandlers
 			var expectedInstructions = this.GetExpectedHandledInstructions();
 
 			Assert.That(handlerType.GetTypeInfo().IsAssignableFrom(handler.GetType()), Is.True, nameof(handlerType));
-			Assert.That(expectedInstructions.Length, Is.EqualTo(handler.Instructions.Length), nameof(handler.Instructions.Length));
+			Assert.That(handler.Instructions.Length, Is.EqualTo(expectedInstructions.Length), nameof(handler.Instructions.Length));
 
 			foreach (var expectedInstruction in expectedInstructions)
 			{

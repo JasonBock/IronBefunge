@@ -30,7 +30,7 @@ namespace IronBefunge.Tests
 
 			var result = builder.ToString();
 
-			Assert.That("Behold, IronBefunge!", Is.EqualTo(result), nameof(result));
+			Assert.That(result, Is.EqualTo("Behold, IronBefunge!"), nameof(result));
 		}
 
 		[Test]
@@ -57,7 +57,7 @@ namespace IronBefunge.Tests
 
 			var result = builder.ToString();
 
-			Assert.That("Hello world!" + new string('\n', 1), Is.EqualTo(result), nameof(result));
+			Assert.That(result, Is.EqualTo($"Hello world!{new string('\n', 1)}"), nameof(result));
 		}
 
 		[Test]
@@ -98,7 +98,7 @@ namespace IronBefunge.Tests
 
 			var result = builder.ToString();
 
-			Assert.That(expected, Is.EqualTo(result), nameof(result));
+			Assert.That(result, Is.EqualTo(expected), nameof(result));
 		}
 	}
 }

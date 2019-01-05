@@ -29,8 +29,8 @@ namespace IronBefunge.Tests.InstructionHandlers
 					stackCount = context.Values.Count;
 				}, (context, result) =>
 				{
-					Assert.That(stackCount - 1, Is.EqualTo(context.Values.Count), nameof(context.Values.Count));
-					Assert.That(Direction.Down, Is.EqualTo(context.Direction), nameof(context.Direction));
+					Assert.That(context.Values.Count, Is.EqualTo(stackCount - 1), nameof(context.Values.Count));
+					Assert.That(context.Direction, Is.EqualTo(Direction.Down), nameof(context.Direction));
 				});
 		}
 
@@ -47,8 +47,8 @@ namespace IronBefunge.Tests.InstructionHandlers
 					stackCount = context.Values.Count;
 				}, (context, result) =>
 				{
-					Assert.That(stackCount, Is.EqualTo(context.Values.Count), nameof(context.Values.Count));
-					Assert.That(Direction.Down, Is.EqualTo(context.Direction), nameof(context.Direction));
+					Assert.That(context.Values.Count, Is.EqualTo(stackCount), nameof(context.Values.Count));
+					Assert.That(context.Direction, Is.EqualTo(Direction.Down), nameof(context.Direction));
 				});
 		}
 
@@ -66,8 +66,8 @@ namespace IronBefunge.Tests.InstructionHandlers
 					stackCount = context.Values.Count;
 				}, (context, result) =>
 				{
-					Assert.That(stackCount - 1, Is.EqualTo(context.Values.Count), nameof(context.Values.Count));
-					Assert.That(Direction.Left, Is.EqualTo(context.Direction), nameof(context.Direction));
+					Assert.That(context.Values.Count, Is.EqualTo(stackCount - 1), nameof(context.Values.Count));
+					Assert.That(context.Direction, Is.EqualTo(Direction.Left), nameof(context.Direction));
 				});
 		}
 
@@ -84,8 +84,8 @@ namespace IronBefunge.Tests.InstructionHandlers
 					stackCount = context.Values.Count;
 				}, (context, result) =>
 				{
-					Assert.That(stackCount, Is.EqualTo(context.Values.Count), nameof(context.Values.Count));
-					Assert.That(Direction.Right, Is.EqualTo(context.Direction), nameof(context.Direction));
+					Assert.That(context.Values.Count, Is.EqualTo(stackCount), nameof(context.Values.Count));
+					Assert.That(context.Direction, Is.EqualTo(Direction.Right), nameof(context.Direction));
 				});
 		}
 
@@ -103,8 +103,8 @@ namespace IronBefunge.Tests.InstructionHandlers
 					stackCount = context.Values.Count;
 				}, (context, result) =>
 				{
-					Assert.That(stackCount - 1, Is.EqualTo(context.Values.Count), nameof(context.Values.Count));
-					Assert.That(Direction.Right, Is.EqualTo(context.Direction), nameof(context.Direction));
+					Assert.That(context.Values.Count, Is.EqualTo(stackCount - 1), nameof(context.Values.Count));
+					Assert.That(context.Direction, Is.EqualTo(Direction.Right), nameof(context.Direction));
 				});
 		}
 
@@ -122,8 +122,8 @@ namespace IronBefunge.Tests.InstructionHandlers
 					stackCount = context.Values.Count;
 				}, (context, result) =>
 				{
-					Assert.That(stackCount - 1, Is.EqualTo(context.Values.Count), nameof(context.Values.Count));
-					Assert.That(Direction.Up, Is.EqualTo(context.Direction), nameof(context.Direction));
+					Assert.That(context.Values.Count, Is.EqualTo(stackCount - 1), nameof(context.Values.Count));
+					Assert.That(context.Direction, Is.EqualTo(Direction.Up), nameof(context.Direction));
 				});
 		}
 	}

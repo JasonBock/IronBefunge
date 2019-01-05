@@ -31,8 +31,8 @@ namespace IronBefunge.Tests.InstructionHandlers
 					stackCount = context.Values.Count;
 				}, (context, result) =>
 				{
-					Assert.That(stackCount + 1, Is.EqualTo(context.Values.Count), nameof(context.Values.Count));
-					Assert.That(2, Is.EqualTo(context.Values.Peek()), nameof(context.Values.Peek));
+					Assert.That(context.Values.Count, Is.EqualTo(stackCount + 1), nameof(context.Values.Count));
+					Assert.That(context.Values.Peek(), Is.EqualTo(2), nameof(context.Values.Peek));
 				});
 		}
 	}

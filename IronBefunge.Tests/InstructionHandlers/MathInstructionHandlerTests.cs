@@ -30,8 +30,8 @@ namespace IronBefunge.Tests.InstructionHandlers
 					stackCount = context.Values.Count;
 				}, (context, result) =>
 				{
-					Assert.That(stackCount - 1, Is.EqualTo(context.Values.Count), nameof(context.Values.Count));
-					Assert.That(10, Is.EqualTo(context.Values.Peek()), nameof(context.Values.Peek));
+					Assert.That(context.Values.Count, Is.EqualTo(stackCount - 1), nameof(context.Values.Count));
+					Assert.That(context.Values.Peek(), Is.EqualTo(10), nameof(context.Values.Peek));
 				});
 		}
 
@@ -48,8 +48,8 @@ namespace IronBefunge.Tests.InstructionHandlers
 					stackCount = context.Values.Count;
 				}, (context, result) =>
 				{
-					Assert.That(stackCount, Is.EqualTo(context.Values.Count), nameof(context.Values.Count));
-					Assert.That(3, Is.EqualTo(context.Values.Peek()), nameof(context.Values.Peek));
+					Assert.That(context.Values.Count, Is.EqualTo(stackCount), nameof(context.Values.Count));
+					Assert.That(context.Values.Peek(), Is.EqualTo(3), nameof(context.Values.Peek));
 				});
 		}
 
@@ -65,8 +65,8 @@ namespace IronBefunge.Tests.InstructionHandlers
 					stackCount = context.Values.Count;
 				}, (context, result) =>
 				{
-					Assert.That(stackCount + 1, Is.EqualTo(context.Values.Count), nameof(context.Values.Count));
-					Assert.That(0, Is.EqualTo(context.Values.Peek()), nameof(context.Values.Peek));
+					Assert.That(context.Values.Count, Is.EqualTo(stackCount + 1), nameof(context.Values.Count));
+					Assert.That(context.Values.Peek(), Is.EqualTo(0), nameof(context.Values.Peek));
 				});
 		}
 
@@ -84,8 +84,8 @@ namespace IronBefunge.Tests.InstructionHandlers
 				stackCount = context.Values.Count;
 			}, (context, result) =>
 			{
-				Assert.That(stackCount - 1, Is.EqualTo(context.Values.Count), nameof(context.Values.Count));
-				Assert.That(2, Is.EqualTo(context.Values.Peek()), nameof(context.Values.Peek));
+				Assert.That(context.Values.Count, Is.EqualTo(stackCount - 1), nameof(context.Values.Count));
+				Assert.That(context.Values.Peek(), Is.EqualTo(2), nameof(context.Values.Peek));
 			});
 		}
 
@@ -102,8 +102,8 @@ namespace IronBefunge.Tests.InstructionHandlers
 				stackCount = context.Values.Count;
 			}, (context, result) =>
 			{
-				Assert.That(stackCount, Is.EqualTo(context.Values.Count), nameof(context.Values.Count));
-				Assert.That(0, Is.EqualTo(context.Values.Peek()), nameof(context.Values.Peek));
+				Assert.That(context.Values.Count, Is.EqualTo(stackCount), nameof(context.Values.Count));
+				Assert.That(context.Values.Peek(), Is.EqualTo(0), nameof(context.Values.Peek));
 			});
 		}
 
@@ -119,8 +119,8 @@ namespace IronBefunge.Tests.InstructionHandlers
 				stackCount = context.Values.Count;
 			}, (context, result) =>
 			{
-				Assert.That(stackCount + 1, Is.EqualTo(context.Values.Count), nameof(context.Values.Count));
-				Assert.That(0, Is.EqualTo(context.Values.Peek()), nameof(context.Values.Peek));
+				Assert.That(context.Values.Count, Is.EqualTo(stackCount + 1), nameof(context.Values.Count));
+				Assert.That(context.Values.Peek(), Is.EqualTo(0), nameof(context.Values.Peek));
 			});
 		}
 
@@ -138,8 +138,8 @@ namespace IronBefunge.Tests.InstructionHandlers
 				stackCount = context.Values.Count;
 			}, (context, result) =>
 			{
-				Assert.That(stackCount - 1, Is.EqualTo(context.Values.Count), nameof(context.Values.Count));
-				Assert.That(1, Is.EqualTo(context.Values.Peek()), nameof(context.Values.Peek));
+				Assert.That(context.Values.Count, Is.EqualTo(stackCount - 1), nameof(context.Values.Count));
+				Assert.That(context.Values.Peek(), Is.EqualTo(1), nameof(context.Values.Peek));
 			});
 		}
 
@@ -156,8 +156,8 @@ namespace IronBefunge.Tests.InstructionHandlers
 				stackCount = context.Values.Count;
 			}, (context, result) =>
 			{
-				Assert.That(stackCount, Is.EqualTo(context.Values.Count), nameof(context.Values.Count));
-				Assert.That(0, Is.EqualTo(context.Values.Peek()), nameof(context.Values.Peek));
+				Assert.That(context.Values.Count, Is.EqualTo(stackCount), nameof(context.Values.Count));
+				Assert.That(context.Values.Peek(), Is.EqualTo(0), nameof(context.Values.Peek));
 			});
 		}
 
@@ -173,8 +173,8 @@ namespace IronBefunge.Tests.InstructionHandlers
 				stackCount = context.Values.Count;
 			}, (context, result) =>
 			{
-				Assert.That(stackCount + 1, Is.EqualTo(context.Values.Count), nameof(context.Values.Count));
-				Assert.That(0, Is.EqualTo(context.Values.Peek()), nameof(context.Values.Peek));
+				Assert.That(context.Values.Count, Is.EqualTo(stackCount + 1), nameof(context.Values.Count));
+				Assert.That(context.Values.Peek(), Is.EqualTo(0), nameof(context.Values.Peek));
 			});
 		}
 
@@ -192,8 +192,8 @@ namespace IronBefunge.Tests.InstructionHandlers
 					stackCount = context.Values.Count;
 				}, (context, result) =>
 				{
-					Assert.That(stackCount - 1, Is.EqualTo(context.Values.Count), nameof(context.Values.Count));
-					Assert.That(21, Is.EqualTo(context.Values.Peek()), nameof(context.Values.Peek));
+					Assert.That(context.Values.Count, Is.EqualTo(stackCount - 1), nameof(context.Values.Count));
+					Assert.That(context.Values.Peek(), Is.EqualTo(21), nameof(context.Values.Peek));
 				});
 		}
 
@@ -210,8 +210,8 @@ namespace IronBefunge.Tests.InstructionHandlers
 					stackCount = context.Values.Count;
 				}, (context, result) =>
 				{
-					Assert.That(stackCount, Is.EqualTo(context.Values.Count), nameof(context.Values.Count));
-					Assert.That(0, Is.EqualTo(context.Values.Peek()), nameof(context.Values.Peek));
+					Assert.That(context.Values.Count, Is.EqualTo(stackCount), nameof(context.Values.Count));
+					Assert.That(context.Values.Peek(), Is.EqualTo(0), nameof(context.Values.Peek));
 				});
 		}
 
@@ -227,8 +227,8 @@ namespace IronBefunge.Tests.InstructionHandlers
 					stackCount = context.Values.Count;
 				}, (context, result) =>
 				{
-					Assert.That(stackCount + 1, Is.EqualTo(context.Values.Count), nameof(context.Values.Count));
-					Assert.That(0, Is.EqualTo(context.Values.Peek()), nameof(context.Values.Peek));
+					Assert.That(context.Values.Count, Is.EqualTo(stackCount + 1), nameof(context.Values.Count));
+					Assert.That(context.Values.Peek(), Is.EqualTo(0), nameof(context.Values.Peek));
 				});
 		}
 
@@ -246,8 +246,8 @@ namespace IronBefunge.Tests.InstructionHandlers
 					stackCount = context.Values.Count;
 				}, (context, result) =>
 				{
-					Assert.That(stackCount - 1, Is.EqualTo(context.Values.Count), nameof(context.Values.Count));
-					Assert.That(-4, Is.EqualTo(context.Values.Peek()), nameof(context.Values.Peek));
+					Assert.That(context.Values.Count, Is.EqualTo(stackCount - 1), nameof(context.Values.Count));
+					Assert.That(context.Values.Peek(), Is.EqualTo(-4), nameof(context.Values.Peek));
 				});
 		}
 
@@ -264,8 +264,8 @@ namespace IronBefunge.Tests.InstructionHandlers
 					stackCount = context.Values.Count;
 				}, (context, result) =>
 				{
-					Assert.That(stackCount, Is.EqualTo(context.Values.Count), nameof(context.Values.Count));
-					Assert.That(3, Is.EqualTo(context.Values.Peek()), nameof(context.Values.Peek));
+					Assert.That(context.Values.Count, Is.EqualTo(stackCount), nameof(context.Values.Count));
+					Assert.That(context.Values.Peek(), Is.EqualTo(3), nameof(context.Values.Peek));
 				});
 		}
 
@@ -281,8 +281,8 @@ namespace IronBefunge.Tests.InstructionHandlers
 					stackCount = context.Values.Count;
 				}, (context, result) =>
 				{
-					Assert.That(stackCount + 1, Is.EqualTo(context.Values.Count), nameof(context.Values.Count));
-					Assert.That(0, Is.EqualTo(context.Values.Peek()), nameof(context.Values.Peek));
+					Assert.That(context.Values.Count, Is.EqualTo(stackCount + 1), nameof(context.Values.Count));
+					Assert.That(context.Values.Peek(), Is.EqualTo(0), nameof(context.Values.Peek));
 				});
 		}
 	}

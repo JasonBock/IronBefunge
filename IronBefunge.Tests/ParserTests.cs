@@ -17,7 +17,7 @@ namespace IronBefunge.Tests
 		{
 			var lines = new string[] { "   <   ^#:  9              ", " ^ < ", " 3 5 :" };
 			var cells = new Parser(lines).Parse();
-			Assert.That(10, Is.EqualTo(cells.Length), nameof(cells.Length));
+			Assert.That(cells.Length, Is.EqualTo(10), nameof(cells.Length));
 			Assert.That(cells.Contains(new Cell(new Point(0, 3), '<')), Is.True, "<");
 			Assert.That(cells.Contains(new Cell(new Point(0, 7), '^')), Is.True, "^");
 			Assert.That(cells.Contains(new Cell(new Point(0, 8), '#')), Is.True, "#");
