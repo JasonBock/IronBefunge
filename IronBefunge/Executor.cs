@@ -19,7 +19,6 @@ namespace IronBefunge
 		private readonly TextReader reader;
 		private readonly TextWriter writer;
 
-		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope")]
 		public Executor(ImmutableArray<Cell> cells, TextReader reader, TextWriter writer)
 			: this(cells, reader, writer, new SecureRandom()) { }
 
@@ -32,9 +31,9 @@ namespace IronBefunge
 		}
 
 		private static bool ContainsWhitespace(Cell current, Cell previous) =>
-			(current.Location.X == previous.Location.X ?
+			current.Location.X == previous.Location.X ?
 				Math.Abs(current.Location.Y - previous.Location.Y) > 1 :
-				Math.Abs(current.Location.X - previous.Location.X) > 1);
+				Math.Abs(current.Location.X - previous.Location.X) > 1;
 
 		public void Dispose() => this.randomizer.Dispose();
 

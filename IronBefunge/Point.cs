@@ -5,9 +5,6 @@ namespace IronBefunge
 	/// <summary>
 	/// Defines the X and Y positions of a value in FungeSpace.
 	/// </summary>
-#if NET462
-	[Serializable]
-#endif
 	public struct Point
 		: IEquatable<Point>
 	{
@@ -17,11 +14,7 @@ namespace IronBefunge
 		/// <param name="x">The x value.</param>
 		/// <param name="y">The y value.</param>
 		public Point(int x, int y)
-			: this()
-		{
-			this.X = x;
-			this.Y = y;
-		}
+			: this() => (this.X, this.Y) = (x, y);
 
 		/// <summary>
 		/// Determines whether two specified <see cref="Point" /> objects have the same value. 
@@ -65,11 +58,10 @@ namespace IronBefunge
 			this.X == other.X && this.Y == other.Y;
 
 		/// <summary>
-		/// Gets a hash code based on the 
+		/// Gets a hash code based on the <see cref="X"/> and <see cref="Y"/> values.
 		/// </summary>
-		/// <returns></returns>
-		public override int GetHashCode() =>
-			this.X.GetHashCode() ^ this.Y.GetHashCode();
+		/// <returns>A hash code.</returns>
+		public override int GetHashCode() => HashCode.Combine(this.X, this.Y);
 
 		/// <summary>
 		/// Returns a meaningful string representation of the current <see cref="Point" /> instance.

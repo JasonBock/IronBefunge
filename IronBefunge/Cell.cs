@@ -5,9 +5,6 @@ namespace IronBefunge
 	/// <summary>
 	/// Defines the X and Y positions of a value in FungeSpace.
 	/// </summary>
-#if NET462
-	[Serializable]
-#endif
 	public sealed class Cell
 		: IEquatable<Cell>
 	{
@@ -17,11 +14,7 @@ namespace IronBefunge
 		/// <param name="x">The x value.</param>
 		/// <param name="y">The y value.</param>
 		public Cell(Point location, char value)
-			: base()
-		{
-			this.Location = location;
-			this.Value = value;
-		}
+			: base() => (this.Location, this.Value) = (location, value);
 
 		/// <summary>
 		/// Determines whether two specified <see cref="Cell" /> objects have the same value. 
@@ -84,11 +77,10 @@ namespace IronBefunge
 				this.Value == other.Value;
 
 		/// <summary>
-		/// Gets a hash code based on the 
+		/// Gets a hash code based on the <see cref="Location" and <see cref="Value"/> values./>
 		/// </summary>
-		/// <returns></returns>
-		public override int GetHashCode() =>
-			this.Location.GetHashCode() ^ this.Value.GetHashCode();
+		/// <returns>A hash code.</returns>
+		public override int GetHashCode() => HashCode.Combine(this.Location, this.Value);
 
 		/// <summary>
 		/// Returns a meaningful string representation of the current <see cref="Cell" /> instance.
