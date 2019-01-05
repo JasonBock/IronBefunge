@@ -1,11 +1,11 @@
 ﻿using System;
-using Xunit;
+using NUnit.Framework;
 
 namespace IronBefunge.Tests
 {
 	public static class CellTests
 	{
-		[Fact]
+		[Test]
 		public static void CheckForEquality()
 		{
 			var c1 = new Cell(new Point(1, 1), 'c');
@@ -13,15 +13,15 @@ namespace IronBefunge.Tests
 			var c3 = new Cell(new Point(1, 1), 'd');
 			var c4 = new Cell(new Point(1, 1), 'c');
 
-			Assert.NotEqual<Cell>(c1, c2);
-			Assert.NotEqual<Cell>(c1, c3);
-			Assert.Equal<Cell>(c1, c4);
-			Assert.NotEqual<Cell>(c2, c3);
-			Assert.NotEqual<Cell>(c2, c4);
-			Assert.NotEqual<Cell>(c3, c4);
+			Assert.That(c1, Is.Not.EqualTo(c2), "!c1.Equals(c2)");
+			Assert.That(c1, Is.Not.EqualTo(c3), "!c1.Equals(c3)");
+			Assert.That(c1, Is.EqualTo(c4), "c1.Equals(c4)");
+			Assert.That(c2, Is.Not.EqualTo(c3), "!c2.Equals(c3)");
+			Assert.That(c2, Is.Not.EqualTo(c4), "!c2.Equals(c4)");
+			Assert.That(c3, Is.Not.EqualTo(c4), "!c3.Equals(c4)");
 		}
 
-		[Fact]
+		[Test]
 		public static void CheckForEqualityViaOperators()
 		{
 			var c1 = new Cell(new Point(1, 1), 'c');
@@ -30,23 +30,23 @@ namespace IronBefunge.Tests
 			var c4 = new Cell(new Point(1, 1), 'c');
 
 #pragma warning disable 1718
-			Assert.True(c1 == c1);
+			Assert.That(c1 == c1, Is.True, "c1 == c1");
 #pragma warning restore 1718
-			Assert.True(c1 != c2);
-			Assert.True(c1 != c3);
-			Assert.True(c1 == c4);
+			Assert.That(c1 != c2, Is.True, "c1 != c2");
+			Assert.That(c1 != c3, Is.True, "c1 != c3");
+			Assert.That(c1 == c4, Is.True, "c1 == c4");
 		}
 
-		[Fact]
+		[Test]
 		public static void CheckForEqualityWithIncompatibleTypes()
 		{
 			var c = new Cell(new Point(1, 1), 'c');
 			var g = Guid.NewGuid();
 
-			Assert.NotEqual<object>(c, g);
+			Assert.That(c, Is.Not.EqualTo(g));
 		}
 
-		[Fact]
+		[Test]
 		public static void Create()
 		{
 			const int x = 3;
@@ -54,9 +54,9 @@ namespace IronBefunge.Tests
 			const char value = '^';
 
 			var cell = new Cell(new Point(x, y), value);
-			Assert.Equal(x, cell.Location.X);
-			Assert.Equal(y, cell.Location.Y);
-			Assert.Equal(value, cell.Value);
+			Assert.That(x, Is.EqualTo(cell.Location.X), nameof(Point.X));
+			Assert.That(y, Is.EqualTo(cell.Location.Y), nameof(Point.Y));
+			Assert.That(value, Is.EqualTo(cell.Value), nameof(Cell.Value));
 		}
 	}
 }

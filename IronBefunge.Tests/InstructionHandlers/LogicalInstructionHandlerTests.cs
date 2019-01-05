@@ -1,8 +1,8 @@
 ﻿using IronBefunge.InstructionHandlers;
+using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
-using Xunit;
 
 namespace IronBefunge.Tests.InstructionHandlers
 {
@@ -15,7 +15,7 @@ namespace IronBefunge.Tests.InstructionHandlers
 
 		internal override Type GetHandlerType() => typeof(LogicalInstructionHandler);
 
-		[Fact]
+		[Test]
 		public static void HandleGreaterThanWithAGreaterThanB()
 		{
 			var cells = new List<Cell>() { new Cell(
@@ -30,12 +30,12 @@ namespace IronBefunge.Tests.InstructionHandlers
 				stackCount = context.Values.Count;
 			}, (context, result) =>
 			{
-				Assert.Equal(stackCount - 1, context.Values.Count);
-				Assert.Equal(0, context.Values.Pop());
+				Assert.That(stackCount - 1, Is.EqualTo(context.Values.Count), nameof(context.Values.Count));
+				Assert.That(0, Is.EqualTo(context.Values.Pop()), nameof(context.Values.Pop));
 			});
 		}
 
-		[Fact]
+		[Test]
 		public static void HandleGreaterThanWithBGreaterThanA()
 		{
 			var cells = new List<Cell>() { new Cell(
@@ -50,12 +50,12 @@ namespace IronBefunge.Tests.InstructionHandlers
 				stackCount = context.Values.Count;
 			}, (context, result) =>
 			{
-				Assert.Equal(stackCount - 1, context.Values.Count);
-				Assert.Equal(1, context.Values.Pop());
+				Assert.That(stackCount - 1, Is.EqualTo(context.Values.Count));
+				Assert.That(1, Is.EqualTo(context.Values.Pop()), nameof(context.Values.Pop));
 			});
 		}
 
-		[Fact]
+		[Test]
 		public static void HandleGreaterThanWithOnlyOneValueOnTheStack()
 		{
 			var cells = new List<Cell>() { new Cell(
@@ -69,12 +69,12 @@ namespace IronBefunge.Tests.InstructionHandlers
 				stackCount = context.Values.Count;
 			}, (context, result) =>
 			{
-				Assert.Equal(stackCount, context.Values.Count);
-				Assert.Equal(1, context.Values.Pop());
+				Assert.That(stackCount, Is.EqualTo(context.Values.Count), nameof(context.Values.Count));
+				Assert.That(1, Is.EqualTo(context.Values.Pop()), nameof(context.Values.Pop));
 			});
 		}
 
-		[Fact]
+		[Test]
 		public static void HandleGreaterThanWithEmptyStack()
 		{
 			var cells = new List<Cell>() { new Cell(
@@ -87,12 +87,12 @@ namespace IronBefunge.Tests.InstructionHandlers
 				stackCount = context.Values.Count;
 			}, (context, result) =>
 			{
-				Assert.Equal(stackCount + 1, context.Values.Count);
-				Assert.Equal(0, context.Values.Pop());
+				Assert.That(stackCount + 1, Is.EqualTo(context.Values.Count), nameof(context.Values.Count));
+				Assert.That(0, Is.EqualTo(context.Values.Pop()), nameof(context.Values.Pop));
 			});
 		}
 
-		[Fact]
+		[Test]
 		public static void HandleNotWithEmptyStack()
 		{
 			var cells = new List<Cell>() { new Cell(
@@ -105,12 +105,12 @@ namespace IronBefunge.Tests.InstructionHandlers
 					stackCount = context.Values.Count;
 				}, (context, result) =>
 				{
-					Assert.Equal(stackCount + 1, context.Values.Count);
-					Assert.Equal(1, context.Values.Pop());
+					Assert.That(stackCount + 1, Is.EqualTo(context.Values.Count), nameof(context.Values.Count));
+					Assert.That(1, Is.EqualTo(context.Values.Pop()), nameof(context.Values.Pop));
 				});
 		}
 
-		[Fact]
+		[Test]
 		public static void HandleNotWithNonzeroOnTheStack()
 		{
 			var cells = new List<Cell>() { new Cell(
@@ -124,12 +124,12 @@ namespace IronBefunge.Tests.InstructionHandlers
 					stackCount = context.Values.Count;
 				}, (context, result) =>
 				{
-					Assert.Equal(stackCount, context.Values.Count);
-					Assert.Equal(0, context.Values.Pop());
+					Assert.That(stackCount, Is.EqualTo(context.Values.Count), nameof(context.Values.Count));
+					Assert.That(0, Is.EqualTo(context.Values.Pop()), nameof(context.Values.Pop));
 				});
 		}
 
-		[Fact]
+		[Test]
 		public static void HandleNotWithZeroOnTheStack()
 		{
 			var cells = new List<Cell>() { new Cell(
@@ -143,8 +143,8 @@ namespace IronBefunge.Tests.InstructionHandlers
 					stackCount = context.Values.Count;
 				}, (context, result) =>
 				{
-					Assert.Equal(stackCount, context.Values.Count);
-					Assert.Equal(1, context.Values.Pop());
+					Assert.That(stackCount, Is.EqualTo(context.Values.Count), nameof(context.Values.Count));
+					Assert.That(1, Is.EqualTo(context.Values.Pop()), nameof(context.Values.Pop));
 				});
 		}
 	}

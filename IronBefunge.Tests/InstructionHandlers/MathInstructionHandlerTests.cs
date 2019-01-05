@@ -1,8 +1,8 @@
 ﻿using IronBefunge.InstructionHandlers;
+using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
-using Xunit;
 
 namespace IronBefunge.Tests.InstructionHandlers
 {
@@ -16,7 +16,7 @@ namespace IronBefunge.Tests.InstructionHandlers
 
 		internal override Type GetHandlerType() => typeof(MathInstructionHandler);
 
-		[Fact]
+		[Test]
 		public static void HandleAdd()
 		{
 			var cells = new List<Cell>() { new Cell(
@@ -30,12 +30,12 @@ namespace IronBefunge.Tests.InstructionHandlers
 					stackCount = context.Values.Count;
 				}, (context, result) =>
 				{
-					Assert.Equal(stackCount - 1, context.Values.Count);
-					Assert.Equal(10, context.Values.Peek());
+					Assert.That(stackCount - 1, Is.EqualTo(context.Values.Count), nameof(context.Values.Count));
+					Assert.That(10, Is.EqualTo(context.Values.Peek()), nameof(context.Values.Peek));
 				});
 		}
 
-		[Fact]
+		[Test]
 		public static void HandleAddWithOnlyOneValueOnTheStack()
 		{
 			var cells = new List<Cell>() { new Cell(
@@ -48,12 +48,12 @@ namespace IronBefunge.Tests.InstructionHandlers
 					stackCount = context.Values.Count;
 				}, (context, result) =>
 				{
-					Assert.Equal(stackCount, context.Values.Count);
-					Assert.Equal(3, context.Values.Peek());
+					Assert.That(stackCount, Is.EqualTo(context.Values.Count), nameof(context.Values.Count));
+					Assert.That(3, Is.EqualTo(context.Values.Peek()), nameof(context.Values.Peek));
 				});
 		}
 
-		[Fact]
+		[Test]
 		public static void HandleAddWithEmptyStack()
 		{
 			var cells = new List<Cell>() { new Cell(
@@ -65,12 +65,12 @@ namespace IronBefunge.Tests.InstructionHandlers
 					stackCount = context.Values.Count;
 				}, (context, result) =>
 				{
-					Assert.Equal(stackCount + 1, context.Values.Count);
-					Assert.Equal(0, context.Values.Peek());
+					Assert.That(stackCount + 1, Is.EqualTo(context.Values.Count), nameof(context.Values.Count));
+					Assert.That(0, Is.EqualTo(context.Values.Peek()), nameof(context.Values.Peek));
 				});
 		}
 
-		[Fact]
+		[Test]
 		public static void HandleDivide()
 		{
 			var cells = new List<Cell>() { new Cell(
@@ -84,12 +84,12 @@ namespace IronBefunge.Tests.InstructionHandlers
 				stackCount = context.Values.Count;
 			}, (context, result) =>
 			{
-				Assert.Equal(stackCount - 1, context.Values.Count);
-				Assert.Equal(2, context.Values.Peek());
+				Assert.That(stackCount - 1, Is.EqualTo(context.Values.Count), nameof(context.Values.Count));
+				Assert.That(2, Is.EqualTo(context.Values.Peek()), nameof(context.Values.Peek));
 			});
 		}
 
-		[Fact]
+		[Test]
 		public static void HandleDivideWithOnlyOneValueOnTheStack()
 		{
 			var cells = new List<Cell>() { new Cell(
@@ -102,12 +102,12 @@ namespace IronBefunge.Tests.InstructionHandlers
 				stackCount = context.Values.Count;
 			}, (context, result) =>
 			{
-				Assert.Equal(stackCount, context.Values.Count);
-				Assert.Equal(0, context.Values.Peek());
+				Assert.That(stackCount, Is.EqualTo(context.Values.Count), nameof(context.Values.Count));
+				Assert.That(0, Is.EqualTo(context.Values.Peek()), nameof(context.Values.Peek));
 			});
 		}
 
-		[Fact]
+		[Test]
 		public static void HandleDivideWithEmptyStack()
 		{
 			var cells = new List<Cell>() { new Cell(
@@ -119,12 +119,12 @@ namespace IronBefunge.Tests.InstructionHandlers
 				stackCount = context.Values.Count;
 			}, (context, result) =>
 			{
-				Assert.Equal(stackCount + 1, context.Values.Count);
-				Assert.Equal(0, context.Values.Peek());
+				Assert.That(stackCount + 1, Is.EqualTo(context.Values.Count), nameof(context.Values.Count));
+				Assert.That(0, Is.EqualTo(context.Values.Peek()), nameof(context.Values.Peek));
 			});
 		}
 
-		[Fact]
+		[Test]
 		public static void HandleMod()
 		{
 			var cells = new List<Cell>() { new Cell(
@@ -138,12 +138,12 @@ namespace IronBefunge.Tests.InstructionHandlers
 				stackCount = context.Values.Count;
 			}, (context, result) =>
 			{
-				Assert.Equal(stackCount - 1, context.Values.Count);
-				Assert.Equal(1, context.Values.Peek());
+				Assert.That(stackCount - 1, Is.EqualTo(context.Values.Count), nameof(context.Values.Count));
+				Assert.That(1, Is.EqualTo(context.Values.Peek()), nameof(context.Values.Peek));
 			});
 		}
 
-		[Fact]
+		[Test]
 		public static void HandleModWithOnlyOneValueOnTheStack()
 		{
 			var cells = new List<Cell>() { new Cell(
@@ -156,12 +156,12 @@ namespace IronBefunge.Tests.InstructionHandlers
 				stackCount = context.Values.Count;
 			}, (context, result) =>
 			{
-				Assert.Equal(stackCount, context.Values.Count);
-				Assert.Equal(0, context.Values.Peek());
+				Assert.That(stackCount, Is.EqualTo(context.Values.Count), nameof(context.Values.Count));
+				Assert.That(0, Is.EqualTo(context.Values.Peek()), nameof(context.Values.Peek));
 			});
 		}
 
-		[Fact]
+		[Test]
 		public static void HandleModWithEmptyStack()
 		{
 			var cells = new List<Cell>() { new Cell(
@@ -173,12 +173,12 @@ namespace IronBefunge.Tests.InstructionHandlers
 				stackCount = context.Values.Count;
 			}, (context, result) =>
 			{
-				Assert.Equal(stackCount + 1, context.Values.Count);
-				Assert.Equal(0, context.Values.Peek());
+				Assert.That(stackCount + 1, Is.EqualTo(context.Values.Count), nameof(context.Values.Count));
+				Assert.That(0, Is.EqualTo(context.Values.Peek()), nameof(context.Values.Peek));
 			});
 		}
 
-		[Fact]
+		[Test]
 		public static void HandleMultiply()
 		{
 			var cells = new List<Cell>() { new Cell(
@@ -192,12 +192,12 @@ namespace IronBefunge.Tests.InstructionHandlers
 					stackCount = context.Values.Count;
 				}, (context, result) =>
 				{
-					Assert.Equal(stackCount - 1, context.Values.Count);
-					Assert.Equal(21, context.Values.Peek());
+					Assert.That(stackCount - 1, Is.EqualTo(context.Values.Count), nameof(context.Values.Count));
+					Assert.That(21, Is.EqualTo(context.Values.Peek()), nameof(context.Values.Peek));
 				});
 		}
 
-		[Fact]
+		[Test]
 		public static void HandleMultiplyWithOnlyOneValueOnTheStack()
 		{
 			var cells = new List<Cell>() { new Cell(
@@ -210,12 +210,12 @@ namespace IronBefunge.Tests.InstructionHandlers
 					stackCount = context.Values.Count;
 				}, (context, result) =>
 				{
-					Assert.Equal(stackCount, context.Values.Count);
-					Assert.Equal(0, context.Values.Peek());
+					Assert.That(stackCount, Is.EqualTo(context.Values.Count), nameof(context.Values.Count));
+					Assert.That(0, Is.EqualTo(context.Values.Peek()), nameof(context.Values.Peek));
 				});
 		}
 
-		[Fact]
+		[Test]
 		public static void HandleMultiplyWithEmptyStack()
 		{
 			var cells = new List<Cell>() { new Cell(
@@ -227,12 +227,12 @@ namespace IronBefunge.Tests.InstructionHandlers
 					stackCount = context.Values.Count;
 				}, (context, result) =>
 				{
-					Assert.Equal(stackCount + 1, context.Values.Count);
-					Assert.Equal(0, context.Values.Peek());
+					Assert.That(stackCount + 1, Is.EqualTo(context.Values.Count), nameof(context.Values.Count));
+					Assert.That(0, Is.EqualTo(context.Values.Peek()), nameof(context.Values.Peek));
 				});
 		}
 
-		[Fact]
+		[Test]
 		public static void HandleSubtract()
 		{
 			var cells = new List<Cell>() { new Cell(
@@ -246,12 +246,12 @@ namespace IronBefunge.Tests.InstructionHandlers
 					stackCount = context.Values.Count;
 				}, (context, result) =>
 				{
-					Assert.Equal(stackCount - 1, context.Values.Count);
-					Assert.Equal(-4, context.Values.Peek());
+					Assert.That(stackCount - 1, Is.EqualTo(context.Values.Count), nameof(context.Values.Count));
+					Assert.That(-4, Is.EqualTo(context.Values.Peek()), nameof(context.Values.Peek));
 				});
 		}
 
-		[Fact]
+		[Test]
 		public static void HandleSubtractWithOnlyOneValueOnTheStack()
 		{
 			var cells = new List<Cell>() { new Cell(
@@ -264,12 +264,12 @@ namespace IronBefunge.Tests.InstructionHandlers
 					stackCount = context.Values.Count;
 				}, (context, result) =>
 				{
-					Assert.Equal(stackCount, context.Values.Count);
-					Assert.Equal(3, context.Values.Peek());
+					Assert.That(stackCount, Is.EqualTo(context.Values.Count), nameof(context.Values.Count));
+					Assert.That(3, Is.EqualTo(context.Values.Peek()), nameof(context.Values.Peek));
 				});
 		}
 
-		[Fact]
+		[Test]
 		public static void HandleSubtractWithEmptyStack()
 		{
 			var cells = new List<Cell>() { new Cell(
@@ -281,8 +281,8 @@ namespace IronBefunge.Tests.InstructionHandlers
 					stackCount = context.Values.Count;
 				}, (context, result) =>
 				{
-					Assert.Equal(stackCount + 1, context.Values.Count);
-					Assert.Equal(0, context.Values.Peek());
+					Assert.That(stackCount + 1, Is.EqualTo(context.Values.Count), nameof(context.Values.Count));
+					Assert.That(0, Is.EqualTo(context.Values.Peek()), nameof(context.Values.Peek));
 				});
 		}
 	}

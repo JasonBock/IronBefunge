@@ -10,6 +10,6 @@ namespace IronBefunge.Tests.Mocks
 
 		public override string ReadLine() => this.Value;
 
-		private string Value { get; set; }
+		private string Value { get; }
 	}
 }

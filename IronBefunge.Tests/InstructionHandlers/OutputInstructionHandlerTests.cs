@@ -1,8 +1,8 @@
 ﻿using IronBefunge.InstructionHandlers;
+using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
-using Xunit;
 
 namespace IronBefunge.Tests.InstructionHandlers
 {
@@ -15,7 +15,7 @@ namespace IronBefunge.Tests.InstructionHandlers
 
 		internal override Type GetHandlerType() => typeof(OutputInstructionHandler);
 
-		[Fact]
+		[Test]
 		public static void HandleAscii()
 		{
 			var cells = new List<Cell>() { new Cell(
@@ -29,12 +29,12 @@ namespace IronBefunge.Tests.InstructionHandlers
 					stackCount = context.Values.Count;
 				}, (context, result) =>
 				{
-					Assert.Equal(stackCount - 1, context.Values.Count);
-					Assert.Equal("W", result);
+					Assert.That(stackCount - 1, Is.EqualTo(context.Values.Count), nameof(context.Values.Count));
+					Assert.That("W", Is.EqualTo(result), nameof(result));
 				});
 		}
 
-		[Fact]
+		[Test]
 		public static void HandleAsciiWithEmptyStack()
 		{
 			var cells = new List<Cell>() { new Cell(
@@ -47,12 +47,12 @@ namespace IronBefunge.Tests.InstructionHandlers
 				stackCount = context.Values.Count;
 			}, (context, result) =>
 			{
-				Assert.Equal(stackCount, context.Values.Count);
-				Assert.Equal("\0", result);
+				Assert.That(stackCount, Is.EqualTo(context.Values.Count), nameof(context.Values.Count));
+				Assert.That("\0", Is.EqualTo(result), nameof(result));
 			});
 		}
 
-		[Fact]
+		[Test]
 		public static void HandleInteger()
 		{
 			var cells = new List<Cell>() { new Cell(
@@ -66,12 +66,12 @@ namespace IronBefunge.Tests.InstructionHandlers
 				stackCount = context.Values.Count;
 			}, (context, result) =>
 			{
-				Assert.Equal(stackCount - 1, context.Values.Count);
-				Assert.Equal("87", result);
+				Assert.That(stackCount - 1, Is.EqualTo(context.Values.Count), nameof(context.Values.Count));
+				Assert.That("87", Is.EqualTo(result), nameof(result));
 			});
 		}
 
-		[Fact]
+		[Test]
 		public static void HandleIntegerWithEmptyStack()
 		{
 			var cells = new List<Cell>() { new Cell(
@@ -84,8 +84,8 @@ namespace IronBefunge.Tests.InstructionHandlers
 				stackCount = context.Values.Count;
 			}, (context, result) =>
 			{
-				Assert.Equal(stackCount, context.Values.Count);
-				Assert.Equal("0", result);
+				Assert.That(stackCount, Is.EqualTo(context.Values.Count), nameof(context.Values.Count));
+				Assert.That("0", Is.EqualTo(result), nameof(result));
 			});
 		}
 	}

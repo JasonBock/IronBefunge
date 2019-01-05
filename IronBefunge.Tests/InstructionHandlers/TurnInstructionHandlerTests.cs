@@ -1,8 +1,8 @@
 ﻿using IronBefunge.InstructionHandlers;
+using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
-using Xunit;
 
 namespace IronBefunge.Tests.InstructionHandlers
 {
@@ -15,7 +15,7 @@ namespace IronBefunge.Tests.InstructionHandlers
 
 		internal override Type GetHandlerType() => typeof(TurnInstructionHandler);
 
-		[Fact]
+		[Test]
 		public static void HandleGoingDown()
 		{
 			var cells = new List<Cell>() { new Cell(
@@ -29,12 +29,12 @@ namespace IronBefunge.Tests.InstructionHandlers
 					stackCount = context.Values.Count;
 				}, (context, result) =>
 				{
-					Assert.Equal(stackCount - 1, context.Values.Count);
-					Assert.Equal(Direction.Down, context.Direction);
+					Assert.That(stackCount - 1, Is.EqualTo(context.Values.Count), nameof(context.Values.Count));
+					Assert.That(Direction.Down, Is.EqualTo(context.Direction), nameof(context.Direction));
 				});
 		}
 
-		[Fact]
+		[Test]
 		public static void HandleGoingDownOrUpWithEmptyStack()
 		{
 			var cells = new List<Cell>() { new Cell(
@@ -47,12 +47,12 @@ namespace IronBefunge.Tests.InstructionHandlers
 					stackCount = context.Values.Count;
 				}, (context, result) =>
 				{
-					Assert.Equal(stackCount, context.Values.Count);
-					Assert.Equal(Direction.Down, context.Direction);
+					Assert.That(stackCount, Is.EqualTo(context.Values.Count), nameof(context.Values.Count));
+					Assert.That(Direction.Down, Is.EqualTo(context.Direction), nameof(context.Direction));
 				});
 		}
 
-		[Fact]
+		[Test]
 		public static void HandleGoingLeft()
 		{
 			var cells = new List<Cell>() { new Cell(
@@ -66,12 +66,12 @@ namespace IronBefunge.Tests.InstructionHandlers
 					stackCount = context.Values.Count;
 				}, (context, result) =>
 				{
-					Assert.Equal(stackCount - 1, context.Values.Count);
-					Assert.Equal(Direction.Left, context.Direction);
+					Assert.That(stackCount - 1, Is.EqualTo(context.Values.Count), nameof(context.Values.Count));
+					Assert.That(Direction.Left, Is.EqualTo(context.Direction), nameof(context.Direction));
 				});
 		}
 
-		[Fact]
+		[Test]
 		public static void HandleGoingLeftOrRightWithEmptyStack()
 		{
 			var cells = new List<Cell>() { new Cell(
@@ -84,12 +84,12 @@ namespace IronBefunge.Tests.InstructionHandlers
 					stackCount = context.Values.Count;
 				}, (context, result) =>
 				{
-					Assert.Equal(stackCount, context.Values.Count);
-					Assert.Equal(Direction.Right, context.Direction);
+					Assert.That(stackCount, Is.EqualTo(context.Values.Count), nameof(context.Values.Count));
+					Assert.That(Direction.Right, Is.EqualTo(context.Direction), nameof(context.Direction));
 				});
 		}
 
-		[Fact]
+		[Test]
 		public static void HandleGoingRight()
 		{
 			var cells = new List<Cell>() { new Cell(
@@ -103,12 +103,12 @@ namespace IronBefunge.Tests.InstructionHandlers
 					stackCount = context.Values.Count;
 				}, (context, result) =>
 				{
-					Assert.Equal(stackCount - 1, context.Values.Count);
-					Assert.Equal(Direction.Right, context.Direction);
+					Assert.That(stackCount - 1, Is.EqualTo(context.Values.Count), nameof(context.Values.Count));
+					Assert.That(Direction.Right, Is.EqualTo(context.Direction), nameof(context.Direction));
 				});
 		}
 
-		[Fact]
+		[Test]
 		public static void HandleGoingUp()
 		{
 			var cells = new List<Cell>() { new Cell(
@@ -122,8 +122,8 @@ namespace IronBefunge.Tests.InstructionHandlers
 					stackCount = context.Values.Count;
 				}, (context, result) =>
 				{
-					Assert.Equal(stackCount - 1, context.Values.Count);
-					Assert.Equal(Direction.Up, context.Direction);
+					Assert.That(stackCount - 1, Is.EqualTo(context.Values.Count), nameof(context.Values.Count));
+					Assert.That(Direction.Up, Is.EqualTo(context.Direction), nameof(context.Direction));
 				});
 		}
 	}

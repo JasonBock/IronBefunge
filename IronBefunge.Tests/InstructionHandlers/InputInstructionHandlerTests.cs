@@ -1,9 +1,9 @@
 ﻿using IronBefunge.InstructionHandlers;
 using IronBefunge.Tests.Mocks;
+using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
-using Xunit;
 
 namespace IronBefunge.Tests.InstructionHandlers
 {
@@ -16,7 +16,7 @@ namespace IronBefunge.Tests.InstructionHandlers
 
 		internal override Type GetHandlerType() => typeof(InputInstructionHandler);
 
-		[Fact]
+		[Test]
 		public static void HandleAscii()
 		{
 			var cells = new List<Cell>() { new Cell(
@@ -29,13 +29,13 @@ namespace IronBefunge.Tests.InstructionHandlers
 				InstructionHandlerTests.Run(new InputInstructionHandler(), cells, null,
 					(context, result) =>
 					{
-						Assert.Equal(stackCount + 1, context.Values.Count);
-						Assert.Equal(88, context.Values.Peek());
+						Assert.That(stackCount + 1, Is.EqualTo(context.Values.Count), nameof(context.Values.Count));
+						Assert.That(88, Is.EqualTo(context.Values.Peek()), nameof(context.Values.Peek));
 					}, reader);
 			}
 		}
 
-		[Fact]
+		[Test]
 		public static void HandleNumeric()
 		{
 			var cells = new List<Cell>() { new Cell(
@@ -48,13 +48,13 @@ namespace IronBefunge.Tests.InstructionHandlers
 				InstructionHandlerTests.Run(new InputInstructionHandler(), cells, null,
 					(context, result) =>
 					{
-						Assert.Equal(stackCount + 1, context.Values.Count);
-						Assert.Equal(123456, context.Values.Peek());
+						Assert.That(stackCount + 1, Is.EqualTo(context.Values.Count), nameof(context.Values.Count));
+						Assert.That(123456, Is.EqualTo(context.Values.Peek()), nameof(context.Values.Peek));
 					}, reader);
 			}
 		}
 
-		[Fact]
+		[Test]
 		public static void HandleNumericWithInvalidData()
 		{
 			var cells = new List<Cell>() { new Cell(
@@ -67,7 +67,7 @@ namespace IronBefunge.Tests.InstructionHandlers
 				InstructionHandlerTests.Run(new InputInstructionHandler(), cells, null,
 					(context, result) =>
 					{
-						Assert.Equal(stackCount, context.Values.Count);
+						Assert.That(stackCount, Is.EqualTo(context.Values.Count), nameof(context.Values.Count));
 					}, reader);
 			}
 		}

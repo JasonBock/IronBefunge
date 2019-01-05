@@ -1,4 +1,5 @@
 ﻿using IronBefunge.InstructionHandlers;
+using NUnit.Framework;
 using Spackle;
 using System;
 using System.Collections.Generic;
@@ -6,7 +7,6 @@ using System.Collections.Immutable;
 using System.Globalization;
 using System.IO;
 using System.Reflection;
-using Xunit;
 
 namespace IronBefunge.Tests.InstructionHandlers
 {
@@ -71,21 +71,19 @@ namespace IronBefunge.Tests.InstructionHandlers
 			}
 		}
 
-		[Fact]
+		[Test]
 		public void VerifyInstructions()
 		{
 			var handlerType = this.GetHandlerType();
 			var handler = Activator.CreateInstance(handlerType) as InstructionHandler;
-
-			Assert.True(handlerType.GetTypeInfo().IsAssignableFrom(handler.GetType()));
-
 			var expectedInstructions = this.GetExpectedHandledInstructions();
 
-			Assert.Equal(expectedInstructions.Length, handler.Instructions.Length);
+			Assert.That(handlerType.GetTypeInfo().IsAssignableFrom(handler.GetType()), Is.True, nameof(handlerType));
+			Assert.That(expectedInstructions.Length, Is.EqualTo(handler.Instructions.Length), nameof(handler.Instructions.Length));
 
 			foreach (var expectedInstruction in expectedInstructions)
 			{
-				Assert.Contains(expectedInstruction, handler.Instructions);
+				Assert.That(handler.Instructions.Contains(expectedInstruction), Is.True, expectedInstruction.ToString());
 			}
 		}
 	}

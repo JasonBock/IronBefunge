@@ -1,15 +1,15 @@
 ﻿using IronBefunge.Tests.Mocks;
+using NUnit.Framework;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.IO;
 using System.Text;
-using Xunit;
 
 namespace IronBefunge.Tests
 {
 	public static class InterpreterTests
 	{
-		[Fact]
+		[Test]
 		public static void InterpretPrintBeholdIronBefungeProgram()
 		{
 			var lines = new string[] { 
@@ -30,10 +30,10 @@ namespace IronBefunge.Tests
 
 			var result = builder.ToString();
 
-			Assert.Equal("Behold, IronBefunge!", result);
+			Assert.That("Behold, IronBefunge!", Is.EqualTo(result), nameof(result));
 		}
 
-		[Fact]
+		[Test]
 		public static void InterpretHelloWorldProgram()
 		{
 			var lines = new string[] { 
@@ -57,22 +57,22 @@ namespace IronBefunge.Tests
 
 			var result = builder.ToString();
 
-			Assert.Equal("Hello world!" + new string('\n', 1), result);
+			Assert.That("Hello world!" + new string('\n', 1), Is.EqualTo(result), nameof(result));
 		}
 
-		[Fact]
+		[Test]
 		public static void InterpretRandomizerGoingDownProgram() =>
 			InterpreterTests.Randomizer(Direction.Down, "2");
 
-		[Fact]
+		[Test]
 		public static void InterpretRandomizerGoingLeftProgram() =>
 			InterpreterTests.Randomizer(Direction.Left, "1");
 
-		[Fact]
+		[Test]
 		public static void InterpretRandomizerGoingRightProgram() =>
 			InterpreterTests.Randomizer(Direction.Right, "4");
 
-		[Fact]
+		[Test]
 		public static void InterpretRandomizerGoingUpProgram() =>
 			InterpreterTests.Randomizer(Direction.Up, "3");
 
@@ -98,7 +98,7 @@ namespace IronBefunge.Tests
 
 			var result = builder.ToString();
 
-			Assert.Equal(expected, result);
+			Assert.That(expected, Is.EqualTo(result), nameof(result));
 		}
 	}
 }

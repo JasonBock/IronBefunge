@@ -1,8 +1,8 @@
 ﻿using IronBefunge.InstructionHandlers;
+using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
-using Xunit;
 
 namespace IronBefunge.Tests.InstructionHandlers
 {
@@ -15,7 +15,7 @@ namespace IronBefunge.Tests.InstructionHandlers
 
 		internal override Type GetHandlerType() => typeof(SpaceInstructionHandler);
 
-		[Fact]
+		[Test]
 		public static void HandleGet()
 		{
 			var cells = new List<Cell>() { 
@@ -31,12 +31,12 @@ namespace IronBefunge.Tests.InstructionHandlers
 					stackCount = context.Values.Count;
 				}, (context, result) =>
 				{
-					Assert.Equal(stackCount - 1, context.Values.Count);
-					Assert.Equal((int)'w', context.Values.Pop());
+					Assert.That(stackCount - 1, Is.EqualTo(context.Values.Count), nameof(context.Values.Count));
+					Assert.That((int)'w', Is.EqualTo(context.Values.Pop()), nameof(context.Values.Pop));
 				});
 		}
 
-		[Fact]
+		[Test]
 		public static void HandleGetWhenCellDoesNotExist()
 		{
 			var cells = new List<Cell>() { new Cell(
@@ -51,12 +51,12 @@ namespace IronBefunge.Tests.InstructionHandlers
 					stackCount = context.Values.Count;
 				}, (context, result) =>
 				{
-					Assert.Equal(stackCount - 1, context.Values.Count);
-					Assert.Equal((int)' ', context.Values.Pop());
+					Assert.That(stackCount - 1, Is.EqualTo(context.Values.Count), nameof(context.Values.Count));
+					Assert.That((int)' ', Is.EqualTo(context.Values.Pop()), nameof(context.Values.Pop));
 				});
 		}
 
-		[Fact]
+		[Test]
 		public static void HandleGetWithOnlyOneValueOnTheStack()
 		{
 			var cells = new List<Cell>() { 
@@ -71,12 +71,12 @@ namespace IronBefunge.Tests.InstructionHandlers
 					stackCount = context.Values.Count;
 				}, (context, result) =>
 				{
-					Assert.Equal(stackCount, context.Values.Count);
-					Assert.Equal((int)'w', context.Values.Pop());
+					Assert.That(stackCount, Is.EqualTo(context.Values.Count), nameof(context.Values.Count));
+					Assert.That((int)'w', Is.EqualTo(context.Values.Pop()), nameof(context.Values.Pop));
 				});
 		}
 
-		[Fact]
+		[Test]
 		public static void HandleGetWithEmptyStack()
 		{
 			var cells = new List<Cell>() { 
@@ -90,12 +90,12 @@ namespace IronBefunge.Tests.InstructionHandlers
 					stackCount = context.Values.Count;
 				}, (context, result) =>
 				{
-					Assert.Equal(stackCount + 1, context.Values.Count);
-					Assert.Equal((int)SpaceInstructionHandler.GetInstruction, context.Values.Pop());
+					Assert.That(stackCount + 1, Is.EqualTo(context.Values.Count), nameof(context.Values.Count));
+					Assert.That((int)SpaceInstructionHandler.GetInstruction, Is.EqualTo(context.Values.Pop()), nameof(context.Values.Pop));
 				});
 		}
 
-		[Fact]
+		[Test]
 		public static void HandlePut()
 		{
 			var cells = new List<Cell>() { 
@@ -112,13 +112,13 @@ namespace IronBefunge.Tests.InstructionHandlers
 					stackCount = context.Values.Count;
 				}, (context, result) =>
 				{
-					Assert.Equal(stackCount - 3, context.Values.Count);
-					Assert.Equal(cellCount, context.Cells.Count);
-					Assert.Equal('X', context.Find(new Point(2, 3)).Value);
+					Assert.That(stackCount - 3, Is.EqualTo(context.Values.Count), nameof(context.Values.Count));
+					Assert.That(cellCount, Is.EqualTo(context.Cells.Count), nameof(context.Cells.Count));
+					Assert.That('X', Is.EqualTo(context.Find(new Point(2, 3)).Value), nameof(Cell.Value));
 				});
 		}
 
-		[Fact]
+		[Test]
 		public static void HandlePutWhenCellDoesNotExist()
 		{
 			var cells = new List<Cell>() { new Cell(
@@ -134,13 +134,13 @@ namespace IronBefunge.Tests.InstructionHandlers
 					stackCount = context.Values.Count;
 				}, (context, result) =>
 				{
-					Assert.Equal(stackCount - 3, context.Values.Count);
-					Assert.Equal(cellCount + 1, context.Cells.Count);
-					Assert.Equal('X', context.Find(new Point(2, 3)).Value);
+					Assert.That(stackCount - 3, Is.EqualTo(context.Values.Count), nameof(context.Values.Count));
+					Assert.That(cellCount + 1, Is.EqualTo(context.Cells.Count), nameof(context.Cells.Count));
+					Assert.That('X', Is.EqualTo(context.Find(new Point(2, 3)).Value), nameof(Cell.Value));
 				});
 		}
 
-		[Fact]
+		[Test]
 		public static void HandlePutWithOnlyTwoValuesOnTheStack()
 		{
 			var cells = new List<Cell>() { 
@@ -156,13 +156,13 @@ namespace IronBefunge.Tests.InstructionHandlers
 					stackCount = context.Values.Count;
 				}, (context, result) =>
 				{
-					Assert.Equal(stackCount - 2, context.Values.Count);
-					Assert.Equal(cellCount, context.Cells.Count);
-					Assert.Equal('X', context.Find(new Point(2, 0)).Value);
+					Assert.That(stackCount - 2, Is.EqualTo(context.Values.Count), nameof(context.Values.Count));
+					Assert.That(cellCount, Is.EqualTo(context.Cells.Count), nameof(context.Cells.Count));
+					Assert.That('X', Is.EqualTo(context.Find(new Point(2, 0)).Value), nameof(Cell.Value));
 				});
 		}
 
-		[Fact]
+		[Test]
 		public static void HandlePutWithOnlyOneValueOnTheStack()
 		{
 			var cells = new List<Cell>() { new Cell(
@@ -176,13 +176,13 @@ namespace IronBefunge.Tests.InstructionHandlers
 					stackCount = context.Values.Count;
 				}, (context, result) =>
 				{
-					Assert.Equal(stackCount - 1, context.Values.Count);
-					Assert.Equal(cellCount, context.Cells.Count);
-					Assert.Equal('X', context.Find(new Point(0, 0)).Value);
+					Assert.That(stackCount - 1, Is.EqualTo(context.Values.Count), nameof(context.Values.Count));
+					Assert.That(cellCount, Is.EqualTo(context.Cells.Count), nameof(context.Cells.Count));
+					Assert.That('X', Is.EqualTo(context.Find(new Point(0, 0)).Value), nameof(Cell.Value));
 				});
 		}
 
-		[Fact]
+		[Test]
 		public static void HandlePutWithEmptyStack()
 		{
 			var cells = new List<Cell>() { new Cell(
@@ -195,9 +195,9 @@ namespace IronBefunge.Tests.InstructionHandlers
 					stackCount = context.Values.Count;
 				}, (context, result) =>
 				{
-					Assert.Equal(stackCount, context.Values.Count);
-					Assert.Equal(cellCount, context.Cells.Count);
-					Assert.Equal('\0', context.Find(new Point(0, 0)).Value);
+					Assert.That(stackCount, Is.EqualTo(context.Values.Count), nameof(context.Values.Count));
+					Assert.That(cellCount, Is.EqualTo(context.Cells.Count), nameof(context.Cells.Count));
+					Assert.That('\0', Is.EqualTo(context.Find(new Point(0, 0)).Value), nameof(Cell.Value));
 				});
 		}
 	}

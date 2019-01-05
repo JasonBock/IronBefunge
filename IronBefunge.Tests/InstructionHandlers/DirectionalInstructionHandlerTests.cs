@@ -1,9 +1,9 @@
 ﻿using IronBefunge.InstructionHandlers;
 using IronBefunge.Tests.Mocks;
+using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
-using Xunit;
 
 namespace IronBefunge.Tests.InstructionHandlers
 {
@@ -20,43 +20,43 @@ namespace IronBefunge.Tests.InstructionHandlers
 				stackCount = context.Values.Count;
 			}, (context, result) =>
 			{
-				Assert.Equal(stackCount, context.Values.Count);
-				Assert.Equal(direction, context.Direction);
+				Assert.That(stackCount, Is.EqualTo(context.Values.Count), nameof(context.Values.Count));
+				Assert.That(direction, Is.EqualTo(context.Direction), nameof(context.Direction));
 			});
 		}
 
-		[Fact]
+		[Test]
 		public static void HandleDown() =>
 			DirectionalInstructionHandlerTests.Handle(
 				DirectionalInstructionHandler.DownInstruction, Direction.Down);
 
-		[Fact]
+		[Test]
 		public static void HandleLeft() =>
 			DirectionalInstructionHandlerTests.Handle(
 				DirectionalInstructionHandler.LeftInstruction, Direction.Left);
 
-		[Fact]
+		[Test]
 		public static void HandleRandomDown() =>
 			DirectionalInstructionHandlerTests.Randomizer(Direction.Down);
 
-		[Fact]
+		[Test]
 		public static void HandleRandomLeft() =>
 			DirectionalInstructionHandlerTests.Randomizer(Direction.Left);
 
-		[Fact]
+		[Test]
 		public static void HandleRandomRight() =>
 			DirectionalInstructionHandlerTests.Randomizer(Direction.Right);
 
-		[Fact]
+		[Test]
 		public static void HandleRandomUp() =>
 			DirectionalInstructionHandlerTests.Randomizer(Direction.Up);
 
-		[Fact]
+		[Test]
 		public static void HandleRight() =>
 			DirectionalInstructionHandlerTests.Handle(
 				DirectionalInstructionHandler.RightInstruction, Direction.Right);
 
-		[Fact]
+		[Test]
 		public static void HandleTrampoline()
 		{
 			var cells = new List<Cell>() { new Cell(
@@ -66,11 +66,11 @@ namespace IronBefunge.Tests.InstructionHandlers
 			InstructionHandlerTests.Run(new DirectionalInstructionHandler(), cells, null,
 				(context, result) =>
 				{
-					Assert.Equal(new Point(0, 1), context.CurrentPosition);
+					Assert.That(new Point(0, 1), Is.EqualTo(context.CurrentPosition), nameof(context.CurrentPosition));
 				});
 		}
 
-		[Fact]
+		[Test]
 		public static void HandleUp() =>
 			DirectionalInstructionHandlerTests.Handle(
 				DirectionalInstructionHandler.UpInstruction, Direction.Up);
@@ -85,7 +85,7 @@ namespace IronBefunge.Tests.InstructionHandlers
 				InstructionHandlerTests.Run(new DirectionalInstructionHandler(), cells, null,
 					(context, result) =>
 					{
-						Assert.Equal(direction, context.Direction);
+						Assert.That(direction, Is.EqualTo(context.Direction), nameof(context.Direction));
 					}, random);
 			}
 		}
