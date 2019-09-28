@@ -5,9 +5,11 @@ namespace IronBefunge.Host
 {
 	class Program
 	{
-		static void Main(string[] args)
+		static void Main(FileInfo codeFile)
 		{
-			using (var interpreter = new Interpreter(new FileInfo(args[0]), Console.In, Console.Out))
+			codeFile ??= new FileInfo("HelloWithRandom.bf");
+
+			using (var interpreter = new Interpreter(codeFile, Console.In, Console.Out))
 			{
 				interpreter.Interpret();
 			}
