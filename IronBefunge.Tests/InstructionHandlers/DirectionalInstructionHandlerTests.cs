@@ -80,14 +80,12 @@ namespace IronBefunge.Tests.InstructionHandlers
 			var cells = new List<Cell>() { new Cell(
 				new Point(0, 0), DirectionalInstructionHandler.RandomInstruction) };
 
-			using (var random = new MockSecureRandom(direction))
-			{
-				InstructionHandlerTests.Run(new DirectionalInstructionHandler(), cells, null,
-					(context, result) =>
-					{
-						Assert.That(context.Direction, Is.EqualTo(direction), nameof(context.Direction));
-					}, random);
-			}
+			using var random = new MockSecureRandom(direction);
+			InstructionHandlerTests.Run(new DirectionalInstructionHandler(), cells, null,
+				(context, result) =>
+				{
+					Assert.That(context.Direction, Is.EqualTo(direction), nameof(context.Direction));
+				}, random);
 		}
 
 		internal override ImmutableArray<char> GetExpectedHandledInstructions() =>

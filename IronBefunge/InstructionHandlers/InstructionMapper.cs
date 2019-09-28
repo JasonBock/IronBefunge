@@ -7,17 +7,12 @@ namespace IronBefunge.InstructionHandlers
 {
 	internal sealed class InstructionMapper
 	{
+		private readonly Dictionary<char, IInstructionHandler> mappings =
+			new Dictionary<char, IInstructionHandler>();
+
 		internal InstructionMapper()
-			: base() =>
-			this.InitializeMappings();
-
-		internal void Handle(ExecutionContext context) =>
-			this.Mappings[context.Current.Value].Handle(context);
-
-		private void InitializeMappings()
+			: base()
 		{
-			this.Mappings = new Dictionary<char, IInstructionHandler>();
-
 			var baseHandlerType = typeof(InstructionHandler);
 
 			var handlerTypes = from type in baseHandlerType.GetTypeInfo().Assembly.GetTypes()
@@ -28,15 +23,16 @@ namespace IronBefunge.InstructionHandlers
 
 			foreach (var handlerType in handlerTypes)
 			{
-				var handler = Activator.CreateInstance(handlerType) as InstructionHandler;
+				var handler = (InstructionHandler)Activator.CreateInstance(handlerType);
 
 				foreach (var instruction in handler.Instructions)
 				{
-					this.Mappings.Add(instruction, handler);
+					this.mappings.Add(instruction, handler);
 				}
 			}
 		}
 
-		private Dictionary<char, IInstructionHandler> Mappings { get; set; }
+		internal void Handle(ExecutionContext context) =>
+			this.mappings[context.Current.Value].Handle(context);
 	}
 }

@@ -20,7 +20,7 @@ namespace IronBefunge.InstructionHandlers
 			var x = context.Values.Pop();
 			var target = context.Find(new Point(x, y));
 
-			if (target != null)
+			if (target is { })
 			{
 				context.Values.Push(target.Value);
 			}
@@ -40,7 +40,7 @@ namespace IronBefunge.InstructionHandlers
 			var location = new Point(x, y);
 			var target = context.Find(location);
 
-			if (target != null)
+			if (target is { })
 			{
 				context.Cells[context.Cells.IndexOf(target)] = new Cell(location, value);
 			}

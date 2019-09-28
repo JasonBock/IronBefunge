@@ -22,17 +22,15 @@ namespace IronBefunge.Tests.InstructionHandlers
 			var cells = new List<Cell>() { new Cell(
 				new Point(0, 0), InputInstructionHandler.AsciiInstruction) };
 
-			using(var reader = new MockAsciiTextReader(88))
-			{
-				var stackCount = 0;
+			using var reader = new MockAsciiTextReader(88);
+			var stackCount = 0;
 
-				InstructionHandlerTests.Run(new InputInstructionHandler(), cells, null,
-					(context, result) =>
-					{
-						Assert.That(context.Values.Count, Is.EqualTo(stackCount + 1), nameof(context.Values.Count));
-						Assert.That(context.Values.Peek(), Is.EqualTo(88), nameof(context.Values.Peek));
-					}, reader);
-			}
+			InstructionHandlerTests.Run(new InputInstructionHandler(), cells, null,
+				(context, result) =>
+				{
+					Assert.That(context.Values.Count, Is.EqualTo(stackCount + 1), nameof(context.Values.Count));
+					Assert.That(context.Values.Peek(), Is.EqualTo(88), nameof(context.Values.Peek));
+				}, reader);
 		}
 
 		[Test]
@@ -41,17 +39,15 @@ namespace IronBefunge.Tests.InstructionHandlers
 			var cells = new List<Cell>() { new Cell(
 				new Point(0, 0), InputInstructionHandler.NumericInstruction) };
 
-			using(var reader = new MockNumericTextReader("123456"))
-			{
-				var stackCount = 0;
+			using var reader = new MockNumericTextReader("123456");
+			var stackCount = 0;
 
-				InstructionHandlerTests.Run(new InputInstructionHandler(), cells, null,
-					(context, result) =>
-					{
-						Assert.That(context.Values.Count, Is.EqualTo(stackCount + 1), nameof(context.Values.Count));
-						Assert.That(context.Values.Peek(), Is.EqualTo(123456), nameof(context.Values.Peek));
-					}, reader);
-			}
+			InstructionHandlerTests.Run(new InputInstructionHandler(), cells, null,
+				(context, result) =>
+				{
+					Assert.That(context.Values.Count, Is.EqualTo(stackCount + 1), nameof(context.Values.Count));
+					Assert.That(context.Values.Peek(), Is.EqualTo(123456), nameof(context.Values.Peek));
+				}, reader);
 		}
 
 		[Test]
@@ -60,16 +56,14 @@ namespace IronBefunge.Tests.InstructionHandlers
 			var cells = new List<Cell>() { new Cell(
 				new Point(0, 0), InputInstructionHandler.NumericInstruction) };
 
-			using(var reader = new MockNumericTextReader("quux"))
-			{
-				var stackCount = 0;
+			using var reader = new MockNumericTextReader("quux");
+			var stackCount = 0;
 
-				InstructionHandlerTests.Run(new InputInstructionHandler(), cells, null,
-					(context, result) =>
-					{
-						Assert.That(context.Values.Count, Is.EqualTo(stackCount), nameof(context.Values.Count));
-					}, reader);
-			}
+			InstructionHandlerTests.Run(new InputInstructionHandler(), cells, null,
+				(context, result) =>
+				{
+					Assert.That(context.Values.Count, Is.EqualTo(stackCount), nameof(context.Values.Count));
+				}, reader);
 		}
 	}
 }

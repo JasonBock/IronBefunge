@@ -8,6 +8,10 @@ namespace IronBefunge
 {
 	internal sealed class ExecutionContext
 	{
+		// The reason this is disabled around the constructor is the compiler isn't 
+		// "smart enough" to realize Current is assigned in the constructor through Next()
+		// and will "never" be null
+#nullable disable
 		internal ExecutionContext(List<Cell> cells, TextReader reader, TextWriter writer, SecureRandom randomizer)
 			: base()
 		{
@@ -22,6 +26,7 @@ namespace IronBefunge
 
 			this.Next();
 		}
+#nullable enable
 
 		internal void EnsureStack(int count)
 		{
@@ -48,27 +53,18 @@ namespace IronBefunge
 			var maxX = this.Cells.Max(_ => _.Location.X);
 			var maxY = this.Cells.Max(_ => _.Location.Y);
 
-			switch (this.Direction)
+			this.CurrentPosition = this.Direction switch
 			{
-				case Direction.Down:
-					this.CurrentPosition = new Point(
-						(this.CurrentPosition.X == maxX ? 0 : this.CurrentPosition.X + 1), this.CurrentPosition.Y);
-					break;
-				case Direction.Up:
-					this.CurrentPosition = new Point(
-						(this.CurrentPosition.X == 0 ? maxX : this.CurrentPosition.X - 1), this.CurrentPosition.Y);
-					break;
-				case Direction.Left:
-					this.CurrentPosition = new Point(
-						this.CurrentPosition.X, (this.CurrentPosition.Y == 0 ? maxY : this.CurrentPosition.Y - 1));
-					break;
-				case Direction.Right:
-					this.CurrentPosition = new Point(
-						this.CurrentPosition.X, (this.CurrentPosition.Y == maxY ? 0 : this.CurrentPosition.Y + 1));
-					break;
-				default:
-					throw new NotSupportedException();
-			}
+				Direction.Down => new Point(
+					this.CurrentPosition.X == maxX ? 0 : this.CurrentPosition.X + 1, this.CurrentPosition.Y),
+				Direction.Up => new Point(
+					this.CurrentPosition.X == 0 ? maxX : this.CurrentPosition.X - 1, this.CurrentPosition.Y),
+				Direction.Left => new Point(
+					this.CurrentPosition.X, this.CurrentPosition.Y == 0 ? maxY : this.CurrentPosition.Y - 1),
+				Direction.Right => new Point(
+					this.CurrentPosition.X, this.CurrentPosition.Y == maxY ? 0 : this.CurrentPosition.Y + 1),
+				_ => throw new NotSupportedException(),
+			};
 		}
 
 		internal void Next()
@@ -77,7 +73,7 @@ namespace IronBefunge
 
 			var next = this.Find(this.CurrentPosition);
 
-			while (next == null)
+			while (next is null)
 			{
 				this.Move();
 				next = this.Find(this.CurrentPosition);

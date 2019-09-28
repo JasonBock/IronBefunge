@@ -19,55 +19,45 @@ namespace IronBefunge.Tests.InstructionHandlers
 		internal static void Run(IInstructionHandler handler, List<Cell> cells,
 			Action<ExecutionContext> before, Action<ExecutionContext, string> after)
 		{
-			using (var reader = new StringReader(string.Empty))
-			{
-				using (var random = new SecureRandom())
-				{
-					InstructionHandlerTests.Run(handler, cells, before, after,
-						random, reader);
-				}
-			}
+			using var reader = new StringReader(string.Empty);
+			using var random = new SecureRandom();
+			InstructionHandlerTests.Run(handler, cells, before, after,
+				random, reader);
 		}
 
 		internal static void Run(IInstructionHandler handler, List<Cell> cells,
 			Action<ExecutionContext> before, Action<ExecutionContext, string> after,
 			TextReader reader)
 		{
-			using (var random = new SecureRandom())
-			{
-				InstructionHandlerTests.Run(handler, cells, before, after,
-					random, reader);
-			}
+			using var random = new SecureRandom();
+			InstructionHandlerTests.Run(handler, cells, before, after,
+				random, reader);
 		}
 
 		internal static void Run(IInstructionHandler handler, List<Cell> cells,
 			Action<ExecutionContext> before, Action<ExecutionContext, string> after,
 			SecureRandom randomizer)
 		{
-			using (var reader = new StringReader(string.Empty))
-			{
-				InstructionHandlerTests.Run(handler, cells, before, after,
-					randomizer, reader);
-			}
+			using var reader = new StringReader(string.Empty);
+			InstructionHandlerTests.Run(handler, cells, before, after,
+				randomizer, reader);
 		}
 
 		private static void Run(IInstructionHandler handler, List<Cell> cells,
 			Action<ExecutionContext> before, Action<ExecutionContext, string> after,
 			SecureRandom randomizer, TextReader reader)
 		{
-			using (var writer = new StringWriter(CultureInfo.CurrentCulture))
+			using var writer = new StringWriter(CultureInfo.CurrentCulture);
+			using (reader)
 			{
-				using (reader)
-				{
-					var context = new ExecutionContext(cells, reader, writer, randomizer);
+				var context = new ExecutionContext(cells, reader, writer, randomizer);
 
-					before?.Invoke(context);
+				before?.Invoke(context);
 
-					handler.Handle(context);
-					var result = writer.GetStringBuilder().ToString();
+				handler.Handle(context);
+				var result = writer.GetStringBuilder().ToString();
 
-					after?.Invoke(context, result);
-				}
+				after?.Invoke(context, result);
 			}
 		}
 

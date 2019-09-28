@@ -24,7 +24,7 @@ namespace IronBefunge
 		/// <returns><b>true</b> if the value of <paramref name="a"/> is the same as the value of <paramref name="b"/>; otherwise, <b>false</b>. </returns>
 		public static bool operator ==(Cell a, Cell b)
 		{
-			var equal = false;
+			bool equal;
 
 			if (object.ReferenceEquals(a, b))
 			{
@@ -73,7 +73,7 @@ namespace IronBefunge
 		/// <param name="other">The object to check for equality.</param>
 		/// <returns>Returns <c>true</c> if the objects are equals; otherwise, <c>false</c>.</returns>
 		public bool Equals(Cell other) =>
-			other != null && this.Location == other.Location &&
+			other is { } && this.Location == other.Location &&
 				this.Value == other.Value;
 
 		/// <summary>

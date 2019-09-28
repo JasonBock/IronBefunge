@@ -19,13 +19,9 @@ namespace IronBefunge.Tests
 
 			using (var writer = new StringWriter(builder, CultureInfo.CurrentCulture))
 			{
-				using (var reader = new StringReader(string.Empty))
-				{
-					using (var interpreter = new Interpreter(lines, reader, writer))
-					{
-						interpreter.Interpret();
-					}
-				}
+				using var reader = new StringReader(string.Empty);
+				using var interpreter = new Interpreter(lines, reader, writer);
+				interpreter.Interpret();
 			}
 
 			var result = builder.ToString();
@@ -46,13 +42,9 @@ namespace IronBefunge.Tests
 
 			using (var writer = new StringWriter(builder, CultureInfo.CurrentCulture))
 			{
-				using (var reader = new StringReader(string.Empty))
-				{
-					using (var interpreter = new Interpreter(lines, reader, writer))
-					{
-						interpreter.Interpret();
-					}
-				}
+				using var reader = new StringReader(string.Empty);
+				using var interpreter = new Interpreter(lines, reader, writer);
+				interpreter.Interpret();
 			}
 
 			var result = builder.ToString();
@@ -90,10 +82,8 @@ namespace IronBefunge.Tests
 
 			using (var writer = new StringWriter(builder, CultureInfo.CurrentCulture))
 			{
-				using (var reader = new StringReader(string.Empty))
-				{
-					new Interpreter(lines, reader, writer, new MockSecureRandom(direction)).Interpret();
-				}
+				using var reader = new StringReader(string.Empty);
+				new Interpreter(lines, reader, writer, new MockSecureRandom(direction)).Interpret();
 			}
 
 			var result = builder.ToString();

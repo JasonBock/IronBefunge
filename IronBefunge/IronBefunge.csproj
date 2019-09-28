@@ -1,17 +1,18 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.2</TargetFramework>
-    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <Authors>Jason Bock</Authors>
-    <Company>Jason Bock</Company>
-    <Product>IronBefunge</Product>
-    <PackageId>IronBefunge</PackageId>
-    <Description>IronBefunge is an interpreter (written in .NET) for Befunge programs.</Description>
     <Copyright>Copyright © 2019</Copyright>
+    <Description>IronBefunge is an interpreter (written in .NET) for Befunge programs.</Description>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
+    <PackageId>IronBefunge</PackageId>
+    <PackageVersion>2.0.0</PackageVersion>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Spackle" Version="8.3.0" />
-    <PackageReference Include="System.Collections.Immutable" Version="1.5.0" />
+    <PackageReference Include="System.Collections.Immutable" Version="1.6.0" />
   </ItemGroup>
 </Project>
