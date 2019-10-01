@@ -7,6 +7,8 @@ namespace IronBefunge
 	public sealed class Interpreter
 		: IDisposable
 	{
+		public const string FileExtension = ".b98";
+
 		private readonly Executor executor;
 
 		public Interpreter(string[] lines, TextReader reader, TextWriter writer)
@@ -20,9 +22,14 @@ namespace IronBefunge
 		public Interpreter(FileInfo file, TextReader reader, TextWriter writer)
 			: base()
 		{
-			if (file == null)
+			if (file is null)
 			{
 				throw new ArgumentNullException(nameof(file));
+			}
+
+			if(file.Extension != Interpreter.FileExtension)
+			{
+				throw new ArgumentException($"The file extension should be {Interpreter.FileExtension}; it is {file.Extension}", nameof(file));
 			}
 
 			this.executor = new Executor(
@@ -32,9 +39,14 @@ namespace IronBefunge
 		public Interpreter(FileInfo file, TextReader reader, TextWriter writer, SecureRandom randomizer)
 			: base()
 		{
-			if (file == null)
+			if (file is null)
 			{
 				throw new ArgumentNullException(nameof(file));
+			}
+
+			if (file.Extension != Interpreter.FileExtension)
+			{
+				throw new ArgumentException($"The file extension should be {Interpreter.FileExtension}; it is {file.Extension}", nameof(file));
 			}
 
 			this.executor = new Executor(

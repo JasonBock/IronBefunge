@@ -1,14 +1,58 @@
 ﻿using IronBefunge.Tests.Mocks;
 using NUnit.Framework;
+using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.IO;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace IronBefunge.Tests
 {
 	public static class InterpreterTests
 	{
+		[Test]
+		public static async Task InterpretProgramFromFileWithCorrectFileExtension()
+		{
+			var fileName = $"{Guid.NewGuid().ToString("N")}{Interpreter.FileExtension}";
+			await File.WriteAllLinesAsync(fileName, new string[] { "@" });
+
+			try
+			{
+				var builder = new StringBuilder();
+
+				using var writer = new StringWriter(builder, CultureInfo.CurrentCulture);
+				using var reader = new StringReader(string.Empty);
+				using var interpreter = new Interpreter(new FileInfo(fileName), reader, writer);
+			}
+			finally
+			{
+				File.Delete(fileName);
+			}
+		}
+
+		[Test]
+		public static async Task InterpretProgramFromFileWithIncorrectFileExtension()
+		{
+			var fileName = $"{Guid.NewGuid().ToString("N")}.bf";
+			await File.WriteAllLinesAsync(fileName, new string[] { "@" });
+
+			try
+			{
+				var builder = new StringBuilder();
+
+				using var writer = new StringWriter(builder, CultureInfo.CurrentCulture);
+				using var reader = new StringReader(string.Empty);
+				Assert.That(() => { using var interpreter = new Interpreter(new FileInfo(fileName), reader, writer); }, 
+					Throws.TypeOf<ArgumentException>());
+
+			}
+			finally
+			{
+				File.Delete(fileName);
+			}
+		}
+
 		[Test]
 		public static void InterpretPrintBeholdIronBefungeProgram()
 		{

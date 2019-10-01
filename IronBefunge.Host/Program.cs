@@ -7,7 +7,7 @@ namespace IronBefunge.Host
 	{
 		static void Main(FileInfo codeFile)
 		{
-			codeFile ??= new FileInfo("HelloWithRandom.bf");
+			codeFile ??= new FileInfo("HelloWithRandom.b98");
 
 			using (var interpreter = new Interpreter(codeFile, Console.In, Console.Out))
 			{

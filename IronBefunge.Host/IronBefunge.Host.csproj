@@ -15,7 +15,7 @@
     <ProjectReference Include="..\IronBefunge\IronBefunge.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <None Update="*.bf">
+    <None Update="*.b98">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
