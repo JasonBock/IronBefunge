@@ -10,10 +10,28 @@ namespace IronBefunge.Tests.InstructionHandlers
 		: InstructionHandlerTests
 	{
 		internal override ImmutableArray<char> GetExpectedHandledInstructions() =>
-			ImmutableArray.Create(StackInstructionHandler.DuplicateInstruction,
-				StackInstructionHandler.PopInstruction, StackInstructionHandler.SwapInstruction);
+			ImmutableArray.Create(StackInstructionHandler.ClearInstruction,
+				StackInstructionHandler.DuplicateInstruction,
+				StackInstructionHandler.PopInstruction, 
+				StackInstructionHandler.SwapInstruction);
 
 		internal override Type GetHandlerType() => typeof(StackInstructionHandler);
+
+		[Test]
+		public static void HandleClear()
+		{
+			var cells = new List<Cell>() { new Cell(
+				new Point(0, 0), StackInstructionHandler.ClearInstruction) };
+
+			InstructionHandlerTests.Run(new StackInstructionHandler(), cells, (context) =>
+			{
+				context.Values.Push(33);
+				context.Values.Push(33);
+			}, (context, result) =>
+			{
+				Assert.That(context.Values.Count, Is.EqualTo(0), nameof(context.Values.Count));
+			});
+		}
 
 		[Test]
 		public static void HandleDuplicate()

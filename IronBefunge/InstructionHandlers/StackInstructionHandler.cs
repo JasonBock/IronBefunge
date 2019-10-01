@@ -5,14 +5,18 @@ namespace IronBefunge.InstructionHandlers
 	internal sealed class StackInstructionHandler
 		: InstructionHandler
 	{
+		internal const char ClearInstruction = 'n';
 		internal const char DuplicateInstruction = ':';
 		internal const char PopInstruction = '$';
 		internal const char SwapInstruction = '\\';
 
 		internal override ImmutableArray<char> GetInstructions() =>
-			ImmutableArray.Create(StackInstructionHandler.DuplicateInstruction, 
-				StackInstructionHandler.PopInstruction, 
+			ImmutableArray.Create(StackInstructionHandler.ClearInstruction,
+				StackInstructionHandler.DuplicateInstruction,
+				StackInstructionHandler.PopInstruction,
 				StackInstructionHandler.SwapInstruction);
+
+		private static void HandleClear(ExecutionContext context) => context.Values.Clear();
 
 		private static void HandleDuplicate(ExecutionContext context)
 		{
@@ -43,6 +47,9 @@ namespace IronBefunge.InstructionHandlers
 		{
 			switch (context.Current.Value)
 			{
+				case StackInstructionHandler.ClearInstruction:
+					StackInstructionHandler.HandleClear(context);
+					break;
 				case StackInstructionHandler.DuplicateInstruction:
 					StackInstructionHandler.HandleDuplicate(context);
 					break;
