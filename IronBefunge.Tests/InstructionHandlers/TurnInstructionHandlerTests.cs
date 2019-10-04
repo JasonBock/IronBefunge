@@ -10,11 +10,31 @@ namespace IronBefunge.Tests.InstructionHandlers
 		: InstructionHandlerTests
 	{
 		internal override ImmutableArray<char> GetExpectedHandledInstructions() =>
-			ImmutableArray.Create(TurnInstructionHandler.LeftRightInstruction,
+			ImmutableArray.Create(TurnInstructionHandler.LeftRightInstruction, TurnInstructionHandler.ReverseInstruction,
 				TurnInstructionHandler.TurnLeftInstruction, TurnInstructionHandler.TurnRightInstruction,
 				TurnInstructionHandler.UpDownInstruction);
 
 		internal override Type GetHandlerType() => typeof(TurnInstructionHandler);
+
+		[TestCase(TurnInstructionHandler.ReverseInstruction, Direction.Right, Direction.Left)]
+		[TestCase(TurnInstructionHandler.ReverseInstruction, Direction.Down, Direction.Up)]
+		[TestCase(TurnInstructionHandler.ReverseInstruction, Direction.Left, Direction.Right)]
+		[TestCase(TurnInstructionHandler.ReverseInstruction, Direction.Up, Direction.Down)]
+		public static void HandleReverse(char instruction, Direction currentDiection, Direction expectedDirection)
+		{
+			var cells = new List<Cell>() { new Cell(new Point(0, 0), instruction) };
+			var stackCount = 0;
+
+			InstructionHandlerTests.Run(new TurnInstructionHandler(), cells, (context) =>
+			{
+				context.Direction = currentDiection;
+				stackCount = context.Values.Count;
+			}, (context, result) =>
+			{
+				Assert.That(context.Values.Count, Is.EqualTo(stackCount), nameof(context.Values.Count));
+				Assert.That(context.Direction, Is.EqualTo(expectedDirection), nameof(context.Direction));
+			});
+		}
 
 		[TestCase(TurnInstructionHandler.TurnRightInstruction, Direction.Right, Direction.Down)]
 		[TestCase(TurnInstructionHandler.TurnRightInstruction, Direction.Down, Direction.Left)]

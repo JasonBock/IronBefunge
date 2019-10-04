@@ -6,12 +6,13 @@ namespace IronBefunge.InstructionHandlers
 		: InstructionHandler
 	{
 		internal const char LeftRightInstruction = '_';
+		internal const char ReverseInstruction = 'r';
 		internal const char TurnLeftInstruction = '[';
 		internal const char TurnRightInstruction = ']';
 		internal const char UpDownInstruction = '|';
 
 		internal override ImmutableArray<char> GetInstructions() =>
-			ImmutableArray.Create(TurnInstructionHandler.LeftRightInstruction,
+			ImmutableArray.Create(TurnInstructionHandler.LeftRightInstruction, TurnInstructionHandler.ReverseInstruction,
 				TurnInstructionHandler.TurnLeftInstruction, TurnInstructionHandler.TurnRightInstruction,
 				TurnInstructionHandler.UpDownInstruction);
 
@@ -22,6 +23,11 @@ namespace IronBefunge.InstructionHandlers
 				case TurnInstructionHandler.LeftRightInstruction:
 					context.EnsureStack(1);
 					context.Direction = context.Values.Pop() == 0 ? Direction.Right : Direction.Left;
+					break;
+				case TurnInstructionHandler.ReverseInstruction:
+					context.Direction = context.Direction == Direction.Right ? Direction.Left :
+						context.Direction == Direction.Down ? Direction.Up :
+						context.Direction == Direction.Left ? Direction.Right : Direction.Down;
 					break;
 				case TurnInstructionHandler.TurnRightInstruction:
 					context.Direction = context.Direction == Direction.Right ? Direction.Down :
