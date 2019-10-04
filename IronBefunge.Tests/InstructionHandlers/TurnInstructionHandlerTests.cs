@@ -10,11 +10,61 @@ namespace IronBefunge.Tests.InstructionHandlers
 		: InstructionHandlerTests
 	{
 		internal override ImmutableArray<char> GetExpectedHandledInstructions() =>
-			ImmutableArray.Create(TurnInstructionHandler.LeftRightInstruction, TurnInstructionHandler.ReverseInstruction,
-				TurnInstructionHandler.TurnLeftInstruction, TurnInstructionHandler.TurnRightInstruction,
-				TurnInstructionHandler.UpDownInstruction);
+			ImmutableArray.Create(TurnInstructionHandler.CompareInstruction, TurnInstructionHandler.LeftRightInstruction, 
+				TurnInstructionHandler.ReverseInstruction, TurnInstructionHandler.TurnLeftInstruction, 
+				TurnInstructionHandler.TurnRightInstruction, TurnInstructionHandler.UpDownInstruction);
 
 		internal override Type GetHandlerType() => typeof(TurnInstructionHandler);
+
+		[TestCase(0, 1, Direction.Right, Direction.Up)]
+		[TestCase(0, 1, Direction.Up, Direction.Left)]
+		[TestCase(0, 1, Direction.Left, Direction.Down)]
+		[TestCase(0, 1, Direction.Down, Direction.Right)]
+		[TestCase(1, 0, Direction.Right, Direction.Down)]
+		[TestCase(1, 0, Direction.Down, Direction.Left)]
+		[TestCase(1, 0, Direction.Left, Direction.Up)]
+		[TestCase(1, 0, Direction.Up, Direction.Right)]
+		[TestCase(0, 0, Direction.Right, Direction.Right)]
+		[TestCase(0, 0, Direction.Down, Direction.Down)]
+		[TestCase(0, 0, Direction.Left, Direction.Left)]
+		[TestCase(0, 0, Direction.Up, Direction.Up)]
+		public static void HandleCompare(int a, int b, Direction currentDiection, Direction expectedDirection)
+		{
+			var cells = new List<Cell>() { new Cell(new Point(0, 0), TurnInstructionHandler.CompareInstruction) };
+			var stackCount = 0;
+
+			InstructionHandlerTests.Run(new TurnInstructionHandler(), cells, (context) =>
+			{
+				context.Values.Push(a);
+				context.Values.Push(b);
+				context.Direction = currentDiection;
+				stackCount = context.Values.Count;
+			}, (context, result) =>
+			{
+				Assert.That(context.Values.Count, Is.EqualTo(stackCount - 2), nameof(context.Values.Count));
+				Assert.That(context.Direction, Is.EqualTo(expectedDirection), nameof(context.Direction));
+			});
+		}
+
+		[TestCase(Direction.Right, Direction.Right)]
+		[TestCase(Direction.Down, Direction.Down)]
+		[TestCase(Direction.Left, Direction.Left)]
+		[TestCase(Direction.Up, Direction.Up)]
+		public static void HandleCompareWithEmptyStack(Direction currentDiection, Direction expectedDirection)
+		{
+			var cells = new List<Cell>() { new Cell(new Point(0, 0), TurnInstructionHandler.CompareInstruction) };
+			var stackCount = 0;
+
+			InstructionHandlerTests.Run(new TurnInstructionHandler(), cells, (context) =>
+			{
+				context.Direction = currentDiection;
+				stackCount = context.Values.Count;
+			}, (context, result) =>
+			{
+				Assert.That(context.Values.Count, Is.EqualTo(stackCount), nameof(context.Values.Count));
+				Assert.That(context.Direction, Is.EqualTo(expectedDirection), nameof(context.Direction));
+			});
+		}
 
 		[TestCase(TurnInstructionHandler.ReverseInstruction, Direction.Right, Direction.Left)]
 		[TestCase(TurnInstructionHandler.ReverseInstruction, Direction.Down, Direction.Up)]
