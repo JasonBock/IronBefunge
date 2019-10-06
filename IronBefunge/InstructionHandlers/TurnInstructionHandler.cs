@@ -20,14 +20,22 @@ namespace IronBefunge.InstructionHandlers
 		internal override void OnHandle(ExecutionContext context)
 		{
 			static Direction TurnLeft(Direction currentDirection) =>
-				currentDirection == Direction.Right ? Direction.Up :
-					currentDirection == Direction.Up ? Direction.Left :
-					currentDirection == Direction.Left ? Direction.Down : Direction.Right;
+				currentDirection switch
+				{
+					Direction.Right => Direction.Up,
+					Direction.Up => Direction.Left,
+					Direction.Left => Direction.Down,
+					_ => Direction.Right
+				};
 
 			static Direction TurnRight(Direction currentDirection) =>
-				currentDirection == Direction.Right ? Direction.Down :
-					currentDirection == Direction.Down ? Direction.Left :
-					currentDirection == Direction.Left ? Direction.Up : Direction.Right;
+				currentDirection switch
+				{
+					Direction.Right => Direction.Down,
+					Direction.Down => Direction.Left,
+					Direction.Left => Direction.Up,
+					_ => Direction.Right
+				};
 
 			switch (context.Current.Value)
 			{
@@ -36,17 +44,27 @@ namespace IronBefunge.InstructionHandlers
 					var b = context.Values.Pop();
 					var a = context.Values.Pop();
 					var compare = a.CompareTo(b);
-					context.Direction = compare < 0 ? TurnLeft(context.Direction) :
-						compare > 0 ? TurnRight(context.Direction) : context.Direction;
+
+					context.Direction = compare switch
+					{
+						_ when compare < 0 => TurnLeft(context.Direction),
+						_ when compare > 0 => TurnRight(context.Direction),
+						_ => context.Direction
+					};
+
 					break;
 				case TurnInstructionHandler.LeftRightInstruction:
 					context.EnsureStack(1);
 					context.Direction = context.Values.Pop() == 0 ? Direction.Right : Direction.Left;
 					break;
 				case TurnInstructionHandler.ReverseInstruction:
-					context.Direction = context.Direction == Direction.Right ? Direction.Left :
-						context.Direction == Direction.Down ? Direction.Up :
-						context.Direction == Direction.Left ? Direction.Right : Direction.Down;
+					context.Direction = context.Direction switch
+					{
+						Direction.Right => Direction.Left,
+						Direction.Down => Direction.Up,
+						Direction.Left => Direction.Right,
+						_ => Direction.Down
+					};
 					break;
 				case TurnInstructionHandler.TurnRightInstruction:
 					context.Direction = TurnRight(context.Direction);

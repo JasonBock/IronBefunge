@@ -56,7 +56,7 @@ namespace IronBefunge
 
 				while (!(context.Current.Value == Executor.EndProgramInstruction && !context.InStringMode))
 				{
-					context.RunTrace();
+					context.RunTrace("Before Move");
 
 					if (context.Current.Value == Executor.StringModeInstruction)
 					{
@@ -81,6 +81,8 @@ namespace IronBefunge
 
 					context.Move();
 					context.Next();
+
+					context.RunTrace("After Move");
 				}
 			}
 		}

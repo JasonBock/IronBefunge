@@ -32,7 +32,16 @@ namespace IronBefunge.InstructionHandlers
 			}
 		}
 
-		internal void Handle(ExecutionContext context) =>
-			this.mappings[context.Current.Value].Handle(context);
+		internal void Handle(ExecutionContext context)
+		{
+			if(this.mappings.ContainsKey(context.Current.Value))
+			{
+				this.mappings[context.Current.Value].Handle(context);
+			}
+			else
+			{
+				context.RunTrace($"Warning: Instruction \"{context.Current}\" is not understood.");
+			}
+		}
 	}
 }

@@ -5,7 +5,7 @@ namespace IronBefunge.Host
 {
 	class Program
 	{
-		static void Main(FileInfo codeFile, bool doTrace)
+		static void Main(FileInfo codeFile, bool doTrace = true)
 		{
 			codeFile ??= new FileInfo("HelloWithRandom.b98");
 

@@ -83,10 +83,11 @@ namespace IronBefunge
 			this.Current = next;
 		}
 
-		internal void RunTrace()
+		internal void RunTrace(string message)
 		{
 			if (this.Trace is { })
 			{
+				this.Trace.WriteLine($"{nameof(message)} = {message}");
 				this.Trace.WriteLine($"{nameof(this.Current)} = {this.Current}");
 				this.Trace.WriteLine($"{nameof(this.Direction)} = {this.Direction}");
 				this.Trace.WriteLine($"{nameof(this.InStringMode)} = {this.InStringMode}");
