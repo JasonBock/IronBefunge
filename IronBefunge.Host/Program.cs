@@ -5,11 +5,13 @@ namespace IronBefunge.Host
 {
 	class Program
 	{
-		static void Main(FileInfo codeFile)
+		static void Main(FileInfo codeFile, bool doTrace)
 		{
 			codeFile ??= new FileInfo("HelloWithRandom.b98");
 
-			using (var interpreter = new Interpreter(codeFile, Console.In, Console.Out))
+			using (var interpreter = doTrace ?
+				new Interpreter(codeFile, Console.In, Console.Out, Console.Error) :
+				new Interpreter(codeFile, Console.In, Console.Out))
 			{
 				interpreter.Interpret();
 			}

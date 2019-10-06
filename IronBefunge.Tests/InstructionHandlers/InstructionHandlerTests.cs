@@ -50,7 +50,7 @@ namespace IronBefunge.Tests.InstructionHandlers
 			using var writer = new StringWriter(CultureInfo.CurrentCulture);
 			using (reader)
 			{
-				var context = new ExecutionContext(cells, reader, writer, randomizer);
+				var context = new ExecutionContext(cells, reader, writer, null!, randomizer);
 
 				before?.Invoke(context);
 

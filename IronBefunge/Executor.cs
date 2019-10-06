@@ -17,10 +17,15 @@ namespace IronBefunge
 		private readonly ImmutableArray<Cell> cells;
 		private readonly SecureRandom randomizer;
 		private readonly TextReader reader;
+		private readonly TextWriter? trace;
 		private readonly TextWriter writer;
 
 		public Executor(ImmutableArray<Cell> cells, TextReader reader, TextWriter writer)
 			: this(cells, reader, writer, new SecureRandom()) { }
+
+		public Executor(ImmutableArray<Cell> cells, TextReader reader, TextWriter writer, TextWriter trace)
+			: this(cells, reader, writer, new SecureRandom()) =>
+				this.trace = trace ?? throw new ArgumentNullException(nameof(trace));
 
 		public Executor(ImmutableArray<Cell> cells, TextReader reader, TextWriter writer, SecureRandom randomizer)
 		{
@@ -29,6 +34,10 @@ namespace IronBefunge
 			this.randomizer = randomizer ?? throw new ArgumentNullException(nameof(randomizer));
 			this.cells = cells;
 		}
+
+		public Executor(ImmutableArray<Cell> cells, TextReader reader, TextWriter writer, TextWriter trace, SecureRandom randomizer)
+			: this(cells, reader, writer, randomizer) =>
+				this.trace = trace ?? throw new ArgumentNullException(nameof(trace));
 
 		private static bool ContainsWhitespace(Cell current, Cell previous) =>
 			current.Location.X == previous.Location.X ?
@@ -42,11 +51,13 @@ namespace IronBefunge
 			if (this.cells.Length > 0)
 			{
 				var context = new ExecutionContext(
-					new List<Cell>(this.cells), this.reader, this.writer, this.randomizer);
+					new List<Cell>(this.cells), this.reader, this.writer, this.trace, this.randomizer);
 				var mappings = new InstructionMapper();
 
 				while (!(context.Current.Value == Executor.EndProgramInstruction && !context.InStringMode))
 				{
+					context.RunTrace();
+
 					if (context.Current.Value == Executor.StringModeInstruction)
 					{
 						context.InStringMode = !context.InStringMode;

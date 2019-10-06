@@ -12,7 +12,7 @@ namespace IronBefunge
 		// "smart enough" to realize Current is assigned in the constructor through Next()
 		// and will "never" be null
 #nullable disable
-		internal ExecutionContext(List<Cell> cells, TextReader reader, TextWriter writer, SecureRandom randomizer)
+		internal ExecutionContext(List<Cell> cells, TextReader reader, TextWriter writer, TextWriter trace, SecureRandom randomizer)
 			: base()
 		{
 			this.Cells = cells;
@@ -23,6 +23,7 @@ namespace IronBefunge
 			this.Values = new Stack<int>();
 			this.Reader = reader;
 			this.Writer = writer;
+			this.Trace = trace;
 
 			this.Next();
 		}
@@ -82,6 +83,17 @@ namespace IronBefunge
 			this.Current = next;
 		}
 
+		internal void RunTrace()
+		{
+			if (this.Trace is { })
+			{
+				this.Trace.WriteLine($"{nameof(this.Current)} = {this.Current}");
+				this.Trace.WriteLine($"{nameof(this.Direction)} = {this.Direction}");
+				this.Trace.WriteLine($"{nameof(this.InStringMode)} = {this.InStringMode}");
+				this.Trace.WriteLine($"\t{nameof(this.Values)} = {string.Join(", ", this.Values)}");
+			}
+		}
+
 		internal List<Cell> Cells { get; }
 
 		internal Cell Current { get; private set; }
@@ -97,6 +109,8 @@ namespace IronBefunge
 		internal SecureRandom Randomizer { get; }
 
 		internal TextReader Reader { get; }
+
+		internal TextWriter Trace { get; }
 
 		internal Stack<int> Values { get; }
 
