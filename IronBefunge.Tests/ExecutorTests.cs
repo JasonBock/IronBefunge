@@ -41,5 +41,16 @@ namespace IronBefunge.Tests
 			Assert.That(() => new Executor(ImmutableArray.Create<Cell>(), reader, null, null as TextWriter),
 				Throws.TypeOf<ArgumentNullException>());
 		}
+
+		[Test]
+		public static void Execute()
+		{
+			using var reader = new StringReader(string.Empty);
+			using var writer = new StringWriter();
+			var executor = new Executor(
+				new Parser(new[] { ">  @" }).Parse(), 
+				reader, writer, writer);
+			Assert.That(() => executor.Execute(), Throws.Nothing);
+		}
 	}
 }

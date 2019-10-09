@@ -5,9 +5,9 @@ namespace IronBefunge.Host
 {
 	class Program
 	{
-		static void Main(FileInfo codeFile, bool doTrace = true)
+		static void Main(FileInfo codeFile, bool doTrace = false)
 		{
-			codeFile ??= new FileInfo("HelloWithRandom.b98");
+			codeFile ??= new FileInfo("100DigitsOfPi.b98");
 
 			using (var interpreter = doTrace ?
 				new Interpreter(codeFile, Console.In, Console.Out, Console.Error) :
