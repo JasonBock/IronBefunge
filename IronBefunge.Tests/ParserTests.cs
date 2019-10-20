@@ -61,7 +61,7 @@ namespace IronBefunge.Tests
 		[Test]
 		public static void ParseWithNullLine()
 		{
-			var cells = new Parser(new string[] { " ^ < ", null, " 3 5 :" }).Parse();
+			var cells = new Parser(new string?[] { " ^ < ", null, " 3 5 :" }).Parse();
 			Assert.That(cells.Length, Is.EqualTo(5));
 		}
 	}

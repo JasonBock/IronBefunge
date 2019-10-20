@@ -17,7 +17,7 @@ namespace IronBefunge.Tests.InstructionHandlers
 		internal abstract Type GetHandlerType();
 
 		internal static void Run(IInstructionHandler handler, List<Cell> cells,
-			Action<ExecutionContext> before, Action<ExecutionContext, string> after)
+			Action<ExecutionContext>? before, Action<ExecutionContext, string>? after)
 		{
 			using var reader = new StringReader(string.Empty);
 			using var random = new SecureRandom();
@@ -26,7 +26,7 @@ namespace IronBefunge.Tests.InstructionHandlers
 		}
 
 		internal static void Run(IInstructionHandler handler, List<Cell> cells,
-			Action<ExecutionContext> before, Action<ExecutionContext, string> after,
+			Action<ExecutionContext>? before, Action<ExecutionContext, string>? after,
 			TextReader reader)
 		{
 			using var random = new SecureRandom();
@@ -35,7 +35,7 @@ namespace IronBefunge.Tests.InstructionHandlers
 		}
 
 		internal static void Run(IInstructionHandler handler, List<Cell> cells,
-			Action<ExecutionContext> before, Action<ExecutionContext, string> after,
+			Action<ExecutionContext>? before, Action<ExecutionContext, string>? after,
 			SecureRandom randomizer)
 		{
 			using var reader = new StringReader(string.Empty);
@@ -44,7 +44,7 @@ namespace IronBefunge.Tests.InstructionHandlers
 		}
 
 		private static void Run(IInstructionHandler handler, List<Cell> cells,
-			Action<ExecutionContext> before, Action<ExecutionContext, string> after,
+			Action<ExecutionContext>? before, Action<ExecutionContext, string>? after,
 			SecureRandom randomizer, TextReader reader)
 		{
 			using var writer = new StringWriter(CultureInfo.CurrentCulture);
@@ -65,7 +65,7 @@ namespace IronBefunge.Tests.InstructionHandlers
 		public void VerifyInstructions()
 		{
 			var handlerType = this.GetHandlerType();
-			var handler = Activator.CreateInstance(handlerType) as InstructionHandler;
+			var handler = (Activator.CreateInstance(handlerType) as InstructionHandler)!;
 			var expectedInstructions = this.GetExpectedHandledInstructions();
 
 			Assert.That(handlerType.GetTypeInfo().IsAssignableFrom(handler.GetType()), Is.True, nameof(handlerType));

@@ -5,9 +5,9 @@ namespace IronBefunge
 {
 	public sealed class Parser
 	{
-		private readonly string[] lines;
+		private readonly string?[]? lines;
 
-		public Parser(string[] lines)
+		public Parser(string?[]? lines)
 			: base() => this.lines = lines;
 
 		public ImmutableArray<Cell> Parse()
