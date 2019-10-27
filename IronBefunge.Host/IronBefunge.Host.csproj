@@ -2,7 +2,6 @@
   <PropertyGroup>
     <AssemblyName>IronBefunge.Host</AssemblyName>
     <LangVersion>latest</LangVersion>
-    <LangVersion>latest</LangVersion>
     <Nullable>enable</Nullable>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.0</TargetFramework>
