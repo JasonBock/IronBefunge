@@ -1,13 +1,18 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26403.7
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29411.108
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IronBefunge", "IronBefunge\IronBefunge.csproj", "{D5BF2B16-B170-45E4-8D4A-5AA7D6ACBAB0}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IronBefunge.Tests", "IronBefunge.Tests\IronBefunge.Tests.csproj", "{10921143-1848-46B5-BADE-0BC2C9D041FA}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IronBefunge.Host", "IronBefunge.Host\IronBefunge.Host.csproj", "{8FD4B80C-07A3-4310-8484-F550F3AC9FBD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B46F8E2B-3269-4F9F-AC26-5FBEFEBE70FB}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
