@@ -1,9 +1,10 @@
-﻿using NUnit.Framework;
+﻿using IronBefunge.InstructionHandlers;
+using NUnit.Framework;
 using Spackle;
 using System.Collections.Generic;
 using System.IO;
 
-namespace IronBefunge.InstructionHandlers
+namespace IronBefunge.Tests.InstructionHandlers
 {
 	public static class InstructionMapperTests
 	{
