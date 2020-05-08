@@ -3,9 +3,9 @@ using System.IO;
 
 namespace IronBefunge.Host
 {
-	class Program
+	public static class Program
 	{
-		static void Main(FileInfo codeFile, bool doTrace = false)
+		public static void Main(FileInfo codeFile, bool doTrace = false)
 		{
 			codeFile ??= new FileInfo("100DigitsOfPi.b98");
 

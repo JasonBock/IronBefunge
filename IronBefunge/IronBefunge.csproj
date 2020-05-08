@@ -1,18 +1,23 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Authors>Jason Bock</Authors>
-    <Copyright>Copyright © 2019</Copyright>
+    <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
     <Description>IronBefunge is an interpreter (written in .NET) for Befunge programs.</Description>
-    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <LangVersion>latest</LangVersion>
-    <Nullable>enable</Nullable>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <IncludeSymbols>true</IncludeSymbols>
     <PackageId>IronBefunge</PackageId>
-    <PackageVersion>2.1.0</PackageVersion>
+    <PackageLicenseUrl>https://github.com/jasonbock/ironbefunge/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/jasonbock/ironbefunge</PackageProjectUrl>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <PackageVersion>$(Version)</PackageVersion>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <RepositoryUrl>https://github.com/jasonbock/ironbefunge</RepositoryUrl>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
     <TargetFramework>netstandard2.1</TargetFramework>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Spackle" Version="9.1.2" />
     <PackageReference Include="System.Collections.Immutable" Version="1.7.0" />
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All"/>
   </ItemGroup>
 </Project>

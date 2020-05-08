@@ -17,11 +17,16 @@ namespace IronBefunge.Tests.InstructionHandlers
 
 			Assert.That(trace.GetStringBuilder().ToString().Length, Is.EqualTo(0));
 
-			var context = new ExecutionContext(new List<Cell> { new Cell(new Point(0, 0), '>') }, 
-				reader, writer, trace, new SecureRandom());
+			using (var randomizer = new SecureRandom())
+			{
+				var context = new ExecutionContext(new List<Cell> 
+				{ 
+					new Cell(new Point(0, 0), '>') 
+				}, reader, writer, trace, randomizer);
 
-			var mapper = new InstructionMapper();
-			mapper.Handle(context);
+				var mapper = new InstructionMapper();
+				mapper.Handle(context);
+			}
 
 			Assert.That(trace.GetStringBuilder().ToString().Length, Is.EqualTo(0));
 		}
@@ -35,11 +40,16 @@ namespace IronBefunge.Tests.InstructionHandlers
 
 			Assert.That(trace.GetStringBuilder().ToString().Length, Is.EqualTo(0));
 
-			var context = new ExecutionContext(new List<Cell> { new Cell(new Point(0, 0), 'M') },
-				reader, writer, trace, new SecureRandom());
+			using (var randomizer = new SecureRandom())
+			{
+				var context = new ExecutionContext(new List<Cell> 
+				{ 
+					new Cell(new Point(0, 0), 'M') 
+				}, reader, writer, trace, randomizer);
 
-			var mapper = new InstructionMapper();
-			mapper.Handle(context);
+				var mapper = new InstructionMapper();
+				mapper.Handle(context);
+			}
 
 			Assert.That(trace.GetStringBuilder().ToString().Length, Is.GreaterThan(0));
 		}

@@ -27,6 +27,7 @@ namespace IronBefunge
 			: base() =>
 			this.executor = new Executor(new Parser(lines).Parse(), reader, writer, trace, randomizer);
 
+#pragma warning disable CA1062 // Validate arguments of public methods
 		public Interpreter(FileInfo file, TextReader reader, TextWriter writer)
 			: base()
 		{
@@ -58,6 +59,7 @@ namespace IronBefunge
 			this.executor = new Executor(
 				new Parser(File.ReadAllLines(file.FullName)).Parse(), reader, writer, trace, randomizer);
 		}
+#pragma warning restore CA1062 // Validate arguments of public methods
 
 		private static void VerifyFile(FileInfo file)
 		{

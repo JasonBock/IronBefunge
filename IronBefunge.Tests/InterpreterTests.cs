@@ -13,8 +13,8 @@ namespace IronBefunge.Tests
 		[Test]
 		public static async Task InterpretProgramFromFileWithCorrectFileExtension()
 		{
-			var fileName = $"{Guid.NewGuid().ToString("N")}{Interpreter.FileExtension}";
-			await File.WriteAllLinesAsync(fileName, new string[] { "@" });
+			var fileName = $"{Guid.NewGuid():N}{Interpreter.FileExtension}";
+			await File.WriteAllLinesAsync(fileName, new string[] { "@" }).ConfigureAwait(false);
 
 			try
 			{
@@ -33,8 +33,8 @@ namespace IronBefunge.Tests
 		[Test]
 		public static async Task InterpretProgramFromFileWithIncorrectFileExtension()
 		{
-			var fileName = $"{Guid.NewGuid().ToString("N")}.bf";
-			await File.WriteAllLinesAsync(fileName, new string[] { "@" });
+			var fileName = $"{Guid.NewGuid():N}.bf";
+			await File.WriteAllLinesAsync(fileName, new string[] { "@" }).ConfigureAwait(false);
 
 			try
 			{
@@ -125,7 +125,9 @@ namespace IronBefunge.Tests
 			using (var writer = new StringWriter(builder, CultureInfo.CurrentCulture))
 			{
 				using var reader = new StringReader(string.Empty);
-				new Interpreter(lines, reader, writer, new MockSecureRandom(direction)).Interpret();
+				using var randomizer = new MockSecureRandom(direction);
+				using var interpreter = new Interpreter(lines, reader, writer, randomizer);
+				interpreter.Interpret();
 			}
 
 			var result = builder.ToString();

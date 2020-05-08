@@ -72,8 +72,10 @@ namespace IronBefunge
 		/// </summary>
 		/// <param name="other">The object to check for equality.</param>
 		/// <returns>Returns <c>true</c> if the objects are equals; otherwise, <c>false</c>.</returns>
-		public bool Equals(Cell other) =>
+		public bool Equals(Cell? other) =>
+#pragma warning disable CA1062 // Validate arguments of public methods
 			other is { } && this.Location == other.Location &&
+#pragma warning restore CA1062 // Validate arguments of public methods
 				this.Value == other.Value;
 
 		/// <summary>
