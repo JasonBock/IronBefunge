@@ -62,11 +62,9 @@ namespace IronBefunge
 					}
 
 					context.RunTrace("Before Move");
-
 					mappings.Handle(context);
 					context.Move();
 					context.Next();
-
 					context.RunTrace("After Move");
 				}
 			}
