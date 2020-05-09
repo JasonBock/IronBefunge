@@ -20,8 +20,11 @@ namespace IronBefunge.Tests.InstructionHandlers
 				stackCount = context.Values.Count;
 			}, (context, result) =>
 			{
-				Assert.That(context.Values.Count, Is.EqualTo(stackCount), nameof(context.Values.Count));
-				Assert.That(context.Direction, Is.EqualTo(direction), nameof(context.Direction));
+				Assert.Multiple(() =>
+				{
+					Assert.That(context.Values.Count, Is.EqualTo(stackCount), nameof(context.Values.Count));
+					Assert.That(context.Direction, Is.EqualTo(direction), nameof(context.Direction));
+				});
 			});
 		}
 

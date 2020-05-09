@@ -24,15 +24,18 @@ namespace IronBefunge.Tests.InstructionHandlers
 			var stackCount = 0;
 
 			InstructionHandlerTests.Run(new MathInstructionHandler(), cells, (context) =>
-				{
-					context.Values.Push(3);
-					context.Values.Push(7);
-					stackCount = context.Values.Count;
-				}, (context, result) =>
+			{
+				context.Values.Push(3);
+				context.Values.Push(7);
+				stackCount = context.Values.Count;
+			}, (context, result) =>
+			{
+				Assert.Multiple(() =>
 				{
 					Assert.That(context.Values.Count, Is.EqualTo(stackCount - 1), nameof(context.Values.Count));
 					Assert.That(context.Values.Peek(), Is.EqualTo(10), nameof(context.Values.Peek));
 				});
+			});
 		}
 
 		[Test]
@@ -43,14 +46,17 @@ namespace IronBefunge.Tests.InstructionHandlers
 			var stackCount = 0;
 
 			InstructionHandlerTests.Run(new MathInstructionHandler(), cells, (context) =>
-				{
-					context.Values.Push(3);
-					stackCount = context.Values.Count;
-				}, (context, result) =>
+			{
+				context.Values.Push(3);
+				stackCount = context.Values.Count;
+			}, (context, result) =>
+			{
+				Assert.Multiple(() =>
 				{
 					Assert.That(context.Values.Count, Is.EqualTo(stackCount), nameof(context.Values.Count));
 					Assert.That(context.Values.Peek(), Is.EqualTo(3), nameof(context.Values.Peek));
 				});
+			});
 		}
 
 		[Test]
@@ -61,13 +67,16 @@ namespace IronBefunge.Tests.InstructionHandlers
 			var stackCount = 0;
 
 			InstructionHandlerTests.Run(new MathInstructionHandler(), cells, (context) =>
-				{
-					stackCount = context.Values.Count;
-				}, (context, result) =>
+			{
+				stackCount = context.Values.Count;
+			}, (context, result) =>
+			{
+				Assert.Multiple(() =>
 				{
 					Assert.That(context.Values.Count, Is.EqualTo(stackCount + 1), nameof(context.Values.Count));
 					Assert.That(context.Values.Peek(), Is.EqualTo(0), nameof(context.Values.Peek));
 				});
+			});
 		}
 
 		[Test]
@@ -84,8 +93,11 @@ namespace IronBefunge.Tests.InstructionHandlers
 				stackCount = context.Values.Count;
 			}, (context, result) =>
 			{
-				Assert.That(context.Values.Count, Is.EqualTo(stackCount - 1), nameof(context.Values.Count));
-				Assert.That(context.Values.Peek(), Is.EqualTo(2), nameof(context.Values.Peek));
+				Assert.Multiple(() =>
+				{
+					Assert.That(context.Values.Count, Is.EqualTo(stackCount - 1), nameof(context.Values.Count));
+					Assert.That(context.Values.Peek(), Is.EqualTo(2), nameof(context.Values.Peek));
+				});
 			});
 		}
 
@@ -102,8 +114,11 @@ namespace IronBefunge.Tests.InstructionHandlers
 				stackCount = context.Values.Count;
 			}, (context, result) =>
 			{
-				Assert.That(context.Values.Count, Is.EqualTo(stackCount), nameof(context.Values.Count));
-				Assert.That(context.Values.Peek(), Is.EqualTo(0), nameof(context.Values.Peek));
+				Assert.Multiple(() =>
+				{
+					Assert.That(context.Values.Count, Is.EqualTo(stackCount), nameof(context.Values.Count));
+					Assert.That(context.Values.Peek(), Is.EqualTo(0), nameof(context.Values.Peek));
+				});
 			});
 		}
 
@@ -119,8 +134,11 @@ namespace IronBefunge.Tests.InstructionHandlers
 				stackCount = context.Values.Count;
 			}, (context, result) =>
 			{
-				Assert.That(context.Values.Count, Is.EqualTo(stackCount + 1), nameof(context.Values.Count));
-				Assert.That(context.Values.Peek(), Is.EqualTo(0), nameof(context.Values.Peek));
+				Assert.Multiple(() =>
+				{
+					Assert.That(context.Values.Count, Is.EqualTo(stackCount + 1), nameof(context.Values.Count));
+					Assert.That(context.Values.Peek(), Is.EqualTo(0), nameof(context.Values.Peek));
+				});
 			});
 		}
 
@@ -138,8 +156,11 @@ namespace IronBefunge.Tests.InstructionHandlers
 				stackCount = context.Values.Count;
 			}, (context, result) =>
 			{
-				Assert.That(context.Values.Count, Is.EqualTo(stackCount - 1), nameof(context.Values.Count));
-				Assert.That(context.Values.Peek(), Is.EqualTo(1), nameof(context.Values.Peek));
+				Assert.Multiple(() =>
+				{
+					Assert.That(context.Values.Count, Is.EqualTo(stackCount - 1), nameof(context.Values.Count));
+					Assert.That(context.Values.Peek(), Is.EqualTo(1), nameof(context.Values.Peek));
+				});
 			});
 		}
 
@@ -156,8 +177,11 @@ namespace IronBefunge.Tests.InstructionHandlers
 				stackCount = context.Values.Count;
 			}, (context, result) =>
 			{
-				Assert.That(context.Values.Count, Is.EqualTo(stackCount), nameof(context.Values.Count));
-				Assert.That(context.Values.Peek(), Is.EqualTo(0), nameof(context.Values.Peek));
+				Assert.Multiple(() =>
+				{
+					Assert.That(context.Values.Count, Is.EqualTo(stackCount), nameof(context.Values.Count));
+					Assert.That(context.Values.Peek(), Is.EqualTo(0), nameof(context.Values.Peek));
+				});
 			});
 		}
 
@@ -173,8 +197,11 @@ namespace IronBefunge.Tests.InstructionHandlers
 				stackCount = context.Values.Count;
 			}, (context, result) =>
 			{
-				Assert.That(context.Values.Count, Is.EqualTo(stackCount + 1), nameof(context.Values.Count));
-				Assert.That(context.Values.Peek(), Is.EqualTo(0), nameof(context.Values.Peek));
+				Assert.Multiple(() =>
+				{
+					Assert.That(context.Values.Count, Is.EqualTo(stackCount + 1), nameof(context.Values.Count));
+					Assert.That(context.Values.Peek(), Is.EqualTo(0), nameof(context.Values.Peek));
+				});
 			});
 		}
 
@@ -186,15 +213,18 @@ namespace IronBefunge.Tests.InstructionHandlers
 			var stackCount = 0;
 
 			InstructionHandlerTests.Run(new MathInstructionHandler(), cells, (context) =>
-				{
-					context.Values.Push(3);
-					context.Values.Push(7);
-					stackCount = context.Values.Count;
-				}, (context, result) =>
+			{
+				context.Values.Push(3);
+				context.Values.Push(7);
+				stackCount = context.Values.Count;
+			}, (context, result) =>
+			{
+				Assert.Multiple(() =>
 				{
 					Assert.That(context.Values.Count, Is.EqualTo(stackCount - 1), nameof(context.Values.Count));
 					Assert.That(context.Values.Peek(), Is.EqualTo(21), nameof(context.Values.Peek));
 				});
+			});
 		}
 
 		[Test]
@@ -205,14 +235,17 @@ namespace IronBefunge.Tests.InstructionHandlers
 			var stackCount = 0;
 
 			InstructionHandlerTests.Run(new MathInstructionHandler(), cells, (context) =>
-				{
-					context.Values.Push(3);
-					stackCount = context.Values.Count;
-				}, (context, result) =>
+			{
+				context.Values.Push(3);
+				stackCount = context.Values.Count;
+			}, (context, result) =>
+			{
+				Assert.Multiple(() =>
 				{
 					Assert.That(context.Values.Count, Is.EqualTo(stackCount), nameof(context.Values.Count));
 					Assert.That(context.Values.Peek(), Is.EqualTo(0), nameof(context.Values.Peek));
 				});
+			});
 		}
 
 		[Test]
@@ -223,13 +256,16 @@ namespace IronBefunge.Tests.InstructionHandlers
 			var stackCount = 0;
 
 			InstructionHandlerTests.Run(new MathInstructionHandler(), cells, (context) =>
-				{
-					stackCount = context.Values.Count;
-				}, (context, result) =>
+			{
+				stackCount = context.Values.Count;
+			}, (context, result) =>
+			{
+				Assert.Multiple(() =>
 				{
 					Assert.That(context.Values.Count, Is.EqualTo(stackCount + 1), nameof(context.Values.Count));
 					Assert.That(context.Values.Peek(), Is.EqualTo(0), nameof(context.Values.Peek));
 				});
+			});
 		}
 
 		[Test]
@@ -240,15 +276,18 @@ namespace IronBefunge.Tests.InstructionHandlers
 			var stackCount = 0;
 
 			InstructionHandlerTests.Run(new MathInstructionHandler(), cells, (context) =>
-				{
-					context.Values.Push(3);
-					context.Values.Push(7);
-					stackCount = context.Values.Count;
-				}, (context, result) =>
+			{
+				context.Values.Push(3);
+				context.Values.Push(7);
+				stackCount = context.Values.Count;
+			}, (context, result) =>
+			{
+				Assert.Multiple(() =>
 				{
 					Assert.That(context.Values.Count, Is.EqualTo(stackCount - 1), nameof(context.Values.Count));
 					Assert.That(context.Values.Peek(), Is.EqualTo(-4), nameof(context.Values.Peek));
 				});
+			});
 		}
 
 		[Test]
@@ -259,14 +298,17 @@ namespace IronBefunge.Tests.InstructionHandlers
 			var stackCount = 0;
 
 			InstructionHandlerTests.Run(new MathInstructionHandler(), cells, (context) =>
-				{
-					context.Values.Push(3);
-					stackCount = context.Values.Count;
-				}, (context, result) =>
+			{
+				context.Values.Push(3);
+				stackCount = context.Values.Count;
+			}, (context, result) =>
+			{
+				Assert.Multiple(() =>
 				{
 					Assert.That(context.Values.Count, Is.EqualTo(stackCount), nameof(context.Values.Count));
 					Assert.That(context.Values.Peek(), Is.EqualTo(3), nameof(context.Values.Peek));
 				});
+			});
 		}
 
 		[Test]
@@ -277,13 +319,16 @@ namespace IronBefunge.Tests.InstructionHandlers
 			var stackCount = 0;
 
 			InstructionHandlerTests.Run(new MathInstructionHandler(), cells, (context) =>
-				{
-					stackCount = context.Values.Count;
-				}, (context, result) =>
+			{
+				stackCount = context.Values.Count;
+			}, (context, result) =>
+			{
+				Assert.Multiple(() =>
 				{
 					Assert.That(context.Values.Count, Is.EqualTo(stackCount + 1), nameof(context.Values.Count));
 					Assert.That(context.Values.Peek(), Is.EqualTo(0), nameof(context.Values.Peek));
 				});
+			});
 		}
 	}
 }

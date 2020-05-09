@@ -24,14 +24,17 @@ namespace IronBefunge.Tests.InstructionHandlers
 			var stackCount = 0;
 
 			InstructionHandlerTests.Run(new OutputInstructionHandler(), cells, (context) =>
-				{
-					context.Values.Push(87);
-					stackCount = context.Values.Count;
-				}, (context, result) =>
+			{
+				context.Values.Push(87);
+				stackCount = context.Values.Count;
+			}, (context, result) =>
+			{
+				Assert.Multiple(() =>
 				{
 					Assert.That(context.Values.Count, Is.EqualTo(stackCount - 1), nameof(context.Values.Count));
 					Assert.That(result, Is.EqualTo("W"), nameof(result));
 				});
+			});
 		}
 
 		[Test]
@@ -47,8 +50,11 @@ namespace IronBefunge.Tests.InstructionHandlers
 				stackCount = context.Values.Count;
 			}, (context, result) =>
 			{
-				Assert.That(context.Values.Count, Is.EqualTo(stackCount), nameof(context.Values.Count));
-				Assert.That(result, Is.EqualTo("\0"), nameof(result));
+				Assert.Multiple(() =>
+				{
+					Assert.That(context.Values.Count, Is.EqualTo(stackCount), nameof(context.Values.Count));
+					Assert.That(result, Is.EqualTo("\0"), nameof(result));
+				});
 			});
 		}
 
@@ -66,8 +72,11 @@ namespace IronBefunge.Tests.InstructionHandlers
 				stackCount = context.Values.Count;
 			}, (context, result) =>
 			{
-				Assert.That(context.Values.Count, Is.EqualTo(stackCount - 1), nameof(context.Values.Count));
-				Assert.That(result, Is.EqualTo("87"), nameof(result));
+				Assert.Multiple(() =>
+				{
+					Assert.That(context.Values.Count, Is.EqualTo(stackCount - 1), nameof(context.Values.Count));
+					Assert.That(result, Is.EqualTo("87"), nameof(result));
+				});
 			});
 		}
 
@@ -84,8 +93,11 @@ namespace IronBefunge.Tests.InstructionHandlers
 				stackCount = context.Values.Count;
 			}, (context, result) =>
 			{
-				Assert.That(context.Values.Count, Is.EqualTo(stackCount), nameof(context.Values.Count));
-				Assert.That(result, Is.EqualTo("0"), nameof(result));
+				Assert.Multiple(() =>
+				{
+					Assert.That(context.Values.Count, Is.EqualTo(stackCount), nameof(context.Values.Count));
+					Assert.That(result, Is.EqualTo("0"), nameof(result));
+				});
 			});
 		}
 	}

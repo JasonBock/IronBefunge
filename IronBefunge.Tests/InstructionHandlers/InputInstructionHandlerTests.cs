@@ -28,8 +28,11 @@ namespace IronBefunge.Tests.InstructionHandlers
 			InstructionHandlerTests.Run(new InputInstructionHandler(), cells, null,
 				(context, result) =>
 				{
-					Assert.That(context.Values.Count, Is.EqualTo(stackCount + 1), nameof(context.Values.Count));
-					Assert.That(context.Values.Peek(), Is.EqualTo(88), nameof(context.Values.Peek));
+					Assert.Multiple(() =>
+					{
+						Assert.That(context.Values.Count, Is.EqualTo(stackCount + 1), nameof(context.Values.Count));
+						Assert.That(context.Values.Peek(), Is.EqualTo(88), nameof(context.Values.Peek));
+					});
 				}, reader);
 		}
 
@@ -45,8 +48,11 @@ namespace IronBefunge.Tests.InstructionHandlers
 			InstructionHandlerTests.Run(new InputInstructionHandler(), cells, null,
 				(context, result) =>
 				{
-					Assert.That(context.Values.Count, Is.EqualTo(stackCount + 1), nameof(context.Values.Count));
-					Assert.That(context.Values.Peek(), Is.EqualTo(123456), nameof(context.Values.Peek));
+					Assert.Multiple(() =>
+					{
+						Assert.That(context.Values.Count, Is.EqualTo(stackCount + 1), nameof(context.Values.Count));
+						Assert.That(context.Values.Peek(), Is.EqualTo(123456), nameof(context.Values.Peek));
+					});
 				}, reader);
 		}
 

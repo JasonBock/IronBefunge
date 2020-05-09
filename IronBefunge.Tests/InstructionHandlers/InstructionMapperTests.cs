@@ -15,20 +15,23 @@ namespace IronBefunge.Tests.InstructionHandlers
 			using var writer = new StringWriter();
 			using var trace = new StringWriter();
 
-			Assert.That(trace.GetStringBuilder().ToString().Length, Is.EqualTo(0));
-
-			using (var randomizer = new SecureRandom())
+			Assert.Multiple(() =>
 			{
-				var context = new ExecutionContext(new List<Cell> 
-				{ 
-					new Cell(new Point(0, 0), '>') 
+				Assert.That(trace.GetStringBuilder().ToString().Length, Is.EqualTo(0));
+
+				using (var randomizer = new SecureRandom())
+				{
+					var context = new ExecutionContext(new List<Cell>
+				{
+					new Cell(new Point(0, 0), '>')
 				}, reader, writer, trace, randomizer);
 
-				var mapper = new InstructionMapper();
-				mapper.Handle(context);
-			}
+					var mapper = new InstructionMapper();
+					mapper.Handle(context);
+				}
 
-			Assert.That(trace.GetStringBuilder().ToString().Length, Is.EqualTo(0));
+				Assert.That(trace.GetStringBuilder().ToString().Length, Is.EqualTo(0));
+			});
 		}
 
 		[Test]
@@ -38,20 +41,23 @@ namespace IronBefunge.Tests.InstructionHandlers
 			using var writer = new StringWriter();
 			using var trace = new StringWriter();
 
-			Assert.That(trace.GetStringBuilder().ToString().Length, Is.EqualTo(0));
-
-			using (var randomizer = new SecureRandom())
+			Assert.Multiple(() =>
 			{
-				var context = new ExecutionContext(new List<Cell> 
-				{ 
-					new Cell(new Point(0, 0), 'M') 
+				Assert.That(trace.GetStringBuilder().ToString().Length, Is.EqualTo(0));
+
+				using (var randomizer = new SecureRandom())
+				{
+					var context = new ExecutionContext(new List<Cell>
+				{
+					new Cell(new Point(0, 0), 'M')
 				}, reader, writer, trace, randomizer);
 
-				var mapper = new InstructionMapper();
-				mapper.Handle(context);
-			}
+					var mapper = new InstructionMapper();
+					mapper.Handle(context);
+				}
 
-			Assert.That(trace.GetStringBuilder().ToString().Length, Is.GreaterThan(0));
+				Assert.That(trace.GetStringBuilder().ToString().Length, Is.GreaterThan(0));
+			});
 		}
 	}
 }

@@ -27,13 +27,16 @@ namespace IronBefunge.Tests.InstructionHandlers
 			var stackCount = 0;
 
 			InstructionHandlerTests.Run(new NumberInstructionHandler(), cells, (context) =>
-				{
-					stackCount = context.Values.Count;
-				}, (context, result) =>
+			{
+				stackCount = context.Values.Count;
+			}, (context, result) =>
+			{
+				Assert.Multiple(() =>
 				{
 					Assert.That(context.Values.Count, Is.EqualTo(stackCount + 1), nameof(context.Values.Count));
 					Assert.That(context.Values.Peek(), Is.EqualTo(2), nameof(context.Values.Peek));
 				});
+			});
 		}
 	}
 }

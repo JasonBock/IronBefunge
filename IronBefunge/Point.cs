@@ -5,7 +5,7 @@ namespace IronBefunge
 	/// <summary>
 	/// Defines the X and Y positions of a value in FungeSpace.
 	/// </summary>
-	public struct Point
+	public readonly struct Point
 		: IEquatable<Point>
 	{
 		/// <summary>
@@ -41,9 +41,9 @@ namespace IronBefunge
 		{
 			var areEqual = false;
 
-			if (obj is Point)
+			if (obj is Point point)
 			{
-				areEqual = this.Equals((Point)obj);
+				areEqual = this.Equals(point);
 			}
 
 			return areEqual;

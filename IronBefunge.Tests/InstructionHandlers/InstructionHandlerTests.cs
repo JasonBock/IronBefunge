@@ -68,13 +68,16 @@ namespace IronBefunge.Tests.InstructionHandlers
 			var handler = (Activator.CreateInstance(handlerType) as InstructionHandler)!;
 			var expectedInstructions = this.GetExpectedHandledInstructions();
 
-			Assert.That(handlerType.GetTypeInfo().IsAssignableFrom(handler.GetType()), Is.True, nameof(handlerType));
-			Assert.That(handler.Instructions.Length, Is.EqualTo(expectedInstructions.Length), nameof(handler.Instructions.Length));
-
-			foreach (var expectedInstruction in expectedInstructions)
+			Assert.Multiple(() =>
 			{
-				Assert.That(handler.Instructions.Contains(expectedInstruction), Is.True, expectedInstruction.ToString());
-			}
+				Assert.That(handlerType.GetTypeInfo().IsAssignableFrom(handler.GetType()), Is.True, nameof(handlerType));
+				Assert.That(handler.Instructions.Length, Is.EqualTo(expectedInstructions.Length), nameof(handler.Instructions.Length));
+
+				foreach (var expectedInstruction in expectedInstructions)
+				{
+					Assert.That(handler.Instructions.Contains(expectedInstruction), Is.True, expectedInstruction.ToString());
+				}
+			});
 		}
 	}
 }
