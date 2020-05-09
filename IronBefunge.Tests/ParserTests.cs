@@ -21,16 +21,16 @@ namespace IronBefunge.Tests
 			Assert.Multiple(() =>
 			{
 				Assert.That(cells.Length, Is.EqualTo(10), nameof(cells.Length));
-				Assert.That(cells.Contains(new Cell(new Point(0, 3), '<')), Is.True, "<");
-				Assert.That(cells.Contains(new Cell(new Point(0, 7), '^')), Is.True, "^");
-				Assert.That(cells.Contains(new Cell(new Point(0, 8), '#')), Is.True, "#");
-				Assert.That(cells.Contains(new Cell(new Point(0, 9), ':')), Is.True, ":");
-				Assert.That(cells.Contains(new Cell(new Point(0, 12), '9')), Is.True, "9");
+				Assert.That(cells.Contains(new Cell(new Point(3, 0), '<')), Is.True, "<");
+				Assert.That(cells.Contains(new Cell(new Point(7, 0), '^')), Is.True, "^");
+				Assert.That(cells.Contains(new Cell(new Point(8, 0), '#')), Is.True, "#");
+				Assert.That(cells.Contains(new Cell(new Point(9, 0), ':')), Is.True, ":");
+				Assert.That(cells.Contains(new Cell(new Point(12, 0), '9')), Is.True, "9");
 				Assert.That(cells.Contains(new Cell(new Point(1, 1), '^')), Is.True, "^");
-				Assert.That(cells.Contains(new Cell(new Point(1, 3), '<')), Is.True, "<");
-				Assert.That(cells.Contains(new Cell(new Point(2, 1), '3')), Is.True, "3");
-				Assert.That(cells.Contains(new Cell(new Point(2, 3), '5')), Is.True, "5");
-				Assert.That(cells.Contains(new Cell(new Point(2, 5), ':')), Is.True, ":");
+				Assert.That(cells.Contains(new Cell(new Point(3, 1), '<')), Is.True, "<");
+				Assert.That(cells.Contains(new Cell(new Point(1, 2), '3')), Is.True, "3");
+				Assert.That(cells.Contains(new Cell(new Point(3, 2), '5')), Is.True, "5");
+				Assert.That(cells.Contains(new Cell(new Point(5, 2), ':')), Is.True, ":");
 			});
 		}
 
@@ -51,11 +51,11 @@ namespace IronBefunge.Tests
 			Assert.Multiple(() =>
 			{
 				Assert.That(cells.Length, Is.EqualTo(5));
-				Assert.That(cells.Contains(new Cell(new Point(0, 3), '<')), Is.True, "<");
-				Assert.That(cells.Contains(new Cell(new Point(0, 7), '^')), Is.True, "^");
-				Assert.That(cells.Contains(new Cell(new Point(0, 8), '#')), Is.True, "#");
-				Assert.That(cells.Contains(new Cell(new Point(0, 9), ':')), Is.True, ":");
-				Assert.That(cells.Contains(new Cell(new Point(0, 12), '9')), Is.True, "9");
+				Assert.That(cells.Contains(new Cell(new Point(3, 0), '<')), Is.True, "<");
+				Assert.That(cells.Contains(new Cell(new Point(7, 0), '^')), Is.True, "^");
+				Assert.That(cells.Contains(new Cell(new Point(8, 0), '#')), Is.True, "#");
+				Assert.That(cells.Contains(new Cell(new Point(9, 0), ':')), Is.True, ":");
+				Assert.That(cells.Contains(new Cell(new Point(12, 0), '9')), Is.True, "9");
 			});
 		}
 

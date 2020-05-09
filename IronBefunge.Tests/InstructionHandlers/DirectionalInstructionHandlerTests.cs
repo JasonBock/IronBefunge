@@ -62,14 +62,16 @@ namespace IronBefunge.Tests.InstructionHandlers
 		[Test]
 		public static void HandleTrampoline()
 		{
-			var cells = new List<Cell>() { new Cell(
-				new Point(0, 0), DirectionalInstructionHandler.TrampolineInstruction),
-				new Cell(new Point(0, 1), '3')};
+			var cells = new List<Cell>() 
+			{ 
+				new Cell(new Point(0, 0), DirectionalInstructionHandler.TrampolineInstruction),
+				new Cell(new Point(1, 0), '3')
+			};
 
 			InstructionHandlerTests.Run(new DirectionalInstructionHandler(), cells, null,
 				(context, result) =>
 				{
-					Assert.That(context.CurrentPosition, Is.EqualTo(new Point(0, 1)), nameof(context.CurrentPosition));
+					Assert.That(context.CurrentPosition, Is.EqualTo(new Point(1, 0)), nameof(context.CurrentPosition));
 				});
 		}
 

@@ -30,13 +30,13 @@ namespace IronBefunge
 			return cells.ToImmutableArray();
 		}
 
-		private static ImmutableArray<Cell> ProcessLine(string line, int x)
+		private static ImmutableArray<Cell> ProcessLine(string line, int y)
 		{
 			var cells = new List<Cell>();
 
-			for (var y = 0; y < line.Length; y++)
+			for (var x = 0; x < line.Length; x++)
 			{
-				var value = line[y];
+				var value = line[x];
 
 				if (value != ' ')
 				{

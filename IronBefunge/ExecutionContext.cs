@@ -47,23 +47,19 @@ namespace IronBefunge
 
 		internal void Move()
 		{
-			// TODO: I should consider doing this calcuation in the constructor and then only if
-			// a cell was added. Unfortunately the context doesn't get to know that right now, so
-			// I have to add then. Until then, this is the "safest" (though not performant) way
-			// to get the max values.
 			var maxX = this.Cells.Max(_ => _.Location.X);
 			var maxY = this.Cells.Max(_ => _.Location.Y);
 
 			this.CurrentPosition = this.Direction switch
 			{
 				Direction.Down => new Point(
-					this.CurrentPosition.X == maxX ? 0 : this.CurrentPosition.X + 1, this.CurrentPosition.Y),
-				Direction.Up => new Point(
-					this.CurrentPosition.X == 0 ? maxX : this.CurrentPosition.X - 1, this.CurrentPosition.Y),
-				Direction.Left => new Point(
-					this.CurrentPosition.X, this.CurrentPosition.Y == 0 ? maxY : this.CurrentPosition.Y - 1),
-				Direction.Right => new Point(
 					this.CurrentPosition.X, this.CurrentPosition.Y == maxY ? 0 : this.CurrentPosition.Y + 1),
+				Direction.Up => new Point(
+					this.CurrentPosition.X, this.CurrentPosition.Y == 0 ? maxY : this.CurrentPosition.Y - 1),
+				Direction.Left => new Point(
+					this.CurrentPosition.X == 0 ? maxX : this.CurrentPosition.X - 1, this.CurrentPosition.Y),
+				Direction.Right => new Point(
+					this.CurrentPosition.X == maxX ? 0 : this.CurrentPosition.X + 1, this.CurrentPosition.Y),
 				_ => throw new NotSupportedException(),
 			};
 		}
