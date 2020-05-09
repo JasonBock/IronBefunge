@@ -8,6 +8,7 @@ namespace IronBefunge.InstructionHandlers
 	{
 		internal const char FetchCharacterInstruction = '\'';
 		internal const char StringModeInstruction = '"';
+		internal const char StoreCharacterInstruction = 's';
 
 		internal override ImmutableArray<char> GetInstructions() =>
 			ImmutableArray.Create(StringInstructionHandler.FetchCharacterInstruction,
@@ -44,6 +45,13 @@ namespace IronBefunge.InstructionHandlers
 					context.Move();
 					context.Next();
 					context.Values.Push(context.Current.Value);
+					break;
+				case StringInstructionHandler.StoreCharacterInstruction:
+					context.EnsureStack(1);
+					var value = Convert.ToChar(context.Values.Pop());
+					context.Move();
+					context.Next();
+					context.Cells[context.Cells.IndexOf(context.Current)] = new Cell(context.Current.Location, value);
 					break;
 			}
 		}

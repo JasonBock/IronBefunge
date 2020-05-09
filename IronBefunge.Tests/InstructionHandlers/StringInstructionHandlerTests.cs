@@ -90,7 +90,7 @@ namespace IronBefunge.Tests.InstructionHandlers
 		[Test]
 		public static void HandleFetchCharacterInstruction()
 		{
-			//"'Q,"
+			//'Q,
 			var cells = new List<Cell>()
 			{
 				new Cell(new Point(0, 0), StringInstructionHandler.FetchCharacterInstruction),
@@ -108,6 +108,33 @@ namespace IronBefunge.Tests.InstructionHandlers
 						Assert.That(count, Is.EqualTo(1), nameof(context.Values.Count));
 						var character = Convert.ToChar(context.Values.Pop());
 						Assert.That(character, Is.EqualTo('Q'), nameof(character));
+					});
+				});
+		}
+
+		[Test]
+		public static void HandleStoreCharacterInstruction()
+		{
+			//Qs,
+			var cells = new List<Cell>()
+			{
+				new Cell(new Point(0, 0), 'Q'),
+				new Cell(new Point(1, 0), StringInstructionHandler.StoreCharacterInstruction),
+				new Cell(new Point(2, 0), ','),
+			};
+
+			InstructionHandlerTests.Run(new StringInstructionHandler(), cells, (context) =>
+				{
+					context.Values.Push(Convert.ToInt32('Q'));
+					context.Move();
+					context.Next();
+				}, (context, result) =>
+				{
+					Assert.Multiple(() =>
+					{
+						Assert.That(context.Cells[2].Value, Is.EqualTo('Q'));
+						var count = context.Values.Count;
+						Assert.That(count, Is.EqualTo(0), nameof(context.Values.Count));
 					});
 				});
 		}
