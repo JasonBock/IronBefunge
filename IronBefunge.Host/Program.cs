@@ -5,20 +5,14 @@ namespace IronBefunge.Host
 {
 	public static class Program
 	{
-		public static void Main(FileInfo codeFile, bool doTrace = false)
+		public static int Main(FileInfo codeFile, bool doTrace = false)
 		{
 			codeFile ??= new FileInfo("100DigitsOfPi.b98");
 
-			using (var interpreter = doTrace ?
+			using var interpreter = doTrace ?
 				new Interpreter(codeFile, Console.In, Console.Out, Console.Error) :
-				new Interpreter(codeFile, Console.In, Console.Out))
-			{
-				interpreter.Interpret();
-			}
-
-			Console.Out.WriteLine();
-			Console.Out.WriteLine("Press any key to continue...");
-			Console.In.ReadLine();
+				new Interpreter(codeFile, Console.In, Console.Out);
+			return interpreter.Interpret();
 		}
 	}
 }

@@ -78,7 +78,7 @@ namespace IronBefunge
 
 			this.Current = next;
 		}
-
+		
 		internal void RunTrace(string message)
 		{
 			if (this.Trace is { })

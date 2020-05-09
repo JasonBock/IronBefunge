@@ -33,7 +33,7 @@ namespace IronBefunge.Tests
 				using var writer = new StringWriter(builder);
 				using var reader = new StringReader(string.Empty);
 				using var interpreter = new Interpreter(new FileInfo(fileName), reader, writer);
-				Assert.That(() => interpreter.Interpret(), Throws.Nothing);
+				Assert.That(() => interpreter.Interpret(), Is.EqualTo(0));
 			}
 			finally
 			{
@@ -54,7 +54,7 @@ namespace IronBefunge.Tests
 				using var reader = new StringReader(string.Empty);
 				using var random = new SecureRandom();
 				using var interpreter = new Interpreter(new FileInfo(fileName), reader, writer, random);
-				Assert.That(() => interpreter.Interpret(), Throws.Nothing);
+				Assert.That(() => interpreter.Interpret(), Is.EqualTo(0));
 			}
 			finally
 			{
@@ -79,7 +79,7 @@ namespace IronBefunge.Tests
 					using (var trace = new StringWriter(traceBuilder))
 					{
 						using var interpreter = new Interpreter(new FileInfo(fileName), reader, writer, trace);
-						Assert.That(() => interpreter.Interpret(), Throws.Nothing);
+						Assert.That(() => interpreter.Interpret(), Is.EqualTo(0));
 					}
 					Assert.That(traceBuilder.ToString(), Is.Not.EqualTo(string.Empty));
 				});
@@ -102,7 +102,7 @@ namespace IronBefunge.Tests
 				using (var trace = new StringWriter(traceBuilder))
 				{
 					using var interpreter = new Interpreter(new string[] { "> @" }, reader, writer, trace, random);
-					Assert.That(() => interpreter.Interpret(), Throws.Nothing);
+					Assert.That(() => interpreter.Interpret(), Is.EqualTo(0));
 				}
 				Assert.That(traceBuilder.ToString(), Is.Not.EqualTo(string.Empty));
 			});
@@ -125,7 +125,7 @@ namespace IronBefunge.Tests
 					using (var trace = new StringWriter(traceBuilder))
 					{
 						using var interpreter = new Interpreter(new FileInfo(fileName), reader, writer, trace, random);
-						Assert.That(() => interpreter.Interpret(), Throws.Nothing);
+						Assert.That(() => interpreter.Interpret(), Is.EqualTo(0));
 					}
 					Assert.That(traceBuilder.ToString(), Is.Not.EqualTo(string.Empty));
 				});

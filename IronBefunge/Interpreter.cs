@@ -76,6 +76,6 @@ namespace IronBefunge
 
 		public void Dispose() => this.executor.Dispose();
 
-		public void Interpret() => this.executor.Execute();
+		public int Interpret() => this.executor.Execute();
 	}
 }

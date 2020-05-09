@@ -10,7 +10,8 @@ namespace IronBefunge
 	public sealed class Executor
 		: IDisposable
 	{
-		internal const char EndProgramInstruction = '@';
+		internal const char EndInstruction = '@';
+		internal const char QuitInstruction = 'q';
 		internal const char NopInstruction = ' ';
 		internal const char StringModeInstruction = '"';
 
@@ -46,7 +47,7 @@ namespace IronBefunge
 
 		public void Dispose() => this.randomizer.Dispose();
 
-		public void Execute()
+		public int Execute()
 		{
 			if (this.cells.Length > 0)
 			{
@@ -54,8 +55,18 @@ namespace IronBefunge
 					new List<Cell>(this.cells), this.reader, this.writer, this.trace, this.randomizer);
 				var mappings = new InstructionMapper();
 
-				while (!(context.Current.Value == Executor.EndProgramInstruction && !context.InStringMode))
+				while (true)
 				{
+					if (context.Current.Value == Executor.EndInstruction && !context.InStringMode)
+					{
+						break;
+					}
+					else if(context.Current.Value == Executor.QuitInstruction && !context.InStringMode)
+					{
+						context.EnsureStack(1);
+						return context.Values.Pop();
+					}
+
 					context.RunTrace("Before Move");
 
 					if (context.Current.Value == Executor.StringModeInstruction)
@@ -85,6 +96,8 @@ namespace IronBefunge
 					context.RunTrace("After Move");
 				}
 			}
+
+			return 0;
 		}
 	}
 }

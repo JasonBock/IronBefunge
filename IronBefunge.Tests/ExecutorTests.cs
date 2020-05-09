@@ -50,7 +50,7 @@ namespace IronBefunge.Tests
 			using var executor = new Executor(
 				new Parser(new[] { ">  @" }).Parse(),
 				reader, writer);
-			Assert.That(() => executor.Execute(), Throws.Nothing);
+			Assert.That(() => executor.Execute(), Is.EqualTo(0));
 		}
 
 		[Test]
@@ -62,7 +62,7 @@ namespace IronBefunge.Tests
 			using var executor = new Executor(
 				new Parser(new[] { ">  @" }).Parse(),
 				reader, writer, trace);
-			Assert.That(() => executor.Execute(), Throws.Nothing);
+			Assert.That(() => executor.Execute(), Is.EqualTo(0));
 		}
 
 		[Test]
@@ -84,7 +84,7 @@ namespace IronBefunge.Tests
 			using var executor = new Executor(
 				new Parser(new[] { ">  @" }).Parse(),
 				reader, writer, random);
-			Assert.That(() => executor.Execute(), Throws.Nothing);
+			Assert.That(() => executor.Execute(), Is.EqualTo(0));
 		}
 
 		[Test]
@@ -107,7 +107,7 @@ namespace IronBefunge.Tests
 			using var executor = new Executor(
 				new Parser(new[] { ">  @" }).Parse(),
 				reader, writer, trace, random);
-			Assert.That(() => executor.Execute(), Throws.Nothing);
+			Assert.That(() => executor.Execute(), Is.EqualTo(0));
 		}
 
 		[Test]
@@ -129,7 +129,29 @@ namespace IronBefunge.Tests
 			using var executor = new Executor(
 				new Parser(new[] { "> \" \" @" }).Parse(),
 				reader, writer, writer);
-			Assert.That(() => executor.Execute(), Throws.Nothing);
+			Assert.That(() => executor.Execute(), Is.EqualTo(0));
+		}
+
+		[Test]
+		public static void ExecuteWithQuitInstruction()
+		{
+			using var reader = new StringReader(string.Empty);
+			using var writer = new StringWriter();
+			using var executor = new Executor(
+				new Parser(new[] { ">9q" }).Parse(),
+				reader, writer, writer);
+			Assert.That(() => executor.Execute(), Is.EqualTo(9));
+		}
+
+		[Test]
+		public static void ExecuteWithQuitInstructionAndNothingOnTheStack()
+		{
+			using var reader = new StringReader(string.Empty);
+			using var writer = new StringWriter();
+			using var executor = new Executor(
+				new Parser(new[] { ">q" }).Parse(),
+				reader, writer, writer);
+			Assert.That(() => executor.Execute(), Is.EqualTo(0));
 		}
 	}
 }
