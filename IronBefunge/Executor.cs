@@ -13,7 +13,6 @@ namespace IronBefunge
 		internal const char EndInstruction = '@';
 		internal const char QuitInstruction = 'q';
 		internal const char NopInstruction = ' ';
-		internal const char StringModeInstruction = '"';
 
 		private readonly ImmutableArray<Cell> cells;
 		private readonly SecureRandom randomizer;
@@ -40,11 +39,6 @@ namespace IronBefunge
 			: this(cells, reader, writer, randomizer) =>
 				this.trace = trace ?? throw new ArgumentNullException(nameof(trace));
 
-		private static bool ContainsWhitespace(Cell current, Cell previous) =>
-			current.Location.X == previous.Location.X ?
-				Math.Abs(current.Location.Y - previous.Location.Y) > 1 :
-				Math.Abs(current.Location.X - previous.Location.X) > 1;
-
 		public void Dispose() => this.randomizer.Dispose();
 
 		public int Execute()
@@ -69,27 +63,7 @@ namespace IronBefunge
 
 					context.RunTrace("Before Move");
 
-					if (context.Current.Value == Executor.StringModeInstruction)
-					{
-						context.InStringMode = !context.InStringMode;
-					}
-					else
-					{
-						if (context.InStringMode)
-						{
-							if (Executor.ContainsWhitespace(context.Current, context.Previous))
-							{
-								context.Values.Push(Executor.NopInstruction);
-							}
-
-							context.Values.Push(context.Current.Value);
-						}
-						else
-						{
-							mappings.Handle(context);
-						}
-					}
-
+					mappings.Handle(context);
 					context.Move();
 					context.Next();
 
