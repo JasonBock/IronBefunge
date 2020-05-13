@@ -16,22 +16,27 @@ namespace IronBefunge.InstructionHandlers
 		internal const char SevenInstruction = '7';
 		internal const char EightInstruction = '8';
 		internal const char NineInstruction = '9';
+		internal const char TenInstruction = 'a';
+		internal const char ElevenInstruction = 'b';
+		internal const char TwelveInstruction = 'c';
+		internal const char ThirteenInstruction = 'd';
+		internal const char FourteenInstruction = 'e';
+		internal const char FifteenInstruction = 'f';
+
 
 		internal override ImmutableArray<char> GetInstructions() =>
-			ImmutableArray.Create(NumberInstructionHandler.ZeroInstruction, 
+			ImmutableArray.Create(NumberInstructionHandler.ZeroInstruction,
 				NumberInstructionHandler.OneInstruction, NumberInstructionHandler.TwoInstruction,
 				NumberInstructionHandler.ThreeInstruction, NumberInstructionHandler.FourInstruction,
 				NumberInstructionHandler.FiveInstruction, NumberInstructionHandler.SixInstruction,
 				NumberInstructionHandler.SevenInstruction, NumberInstructionHandler.EightInstruction,
-				NumberInstructionHandler.NineInstruction);
+				NumberInstructionHandler.NineInstruction, NumberInstructionHandler.TenInstruction,
+				NumberInstructionHandler.ElevenInstruction, NumberInstructionHandler.TwelveInstruction,
+				NumberInstructionHandler.ThirteenInstruction, NumberInstructionHandler.FourteenInstruction,
+				NumberInstructionHandler.FifteenInstruction);
 
-		internal override void OnHandle(ExecutionContext context)
-		{
-			if (this.Instructions.Contains(context.Current.Value))
-			{
-				context.Values.Push(int.Parse(
-					new string(context.Current.Value, 1), CultureInfo.CurrentCulture));
-			}
-		}
+		internal override void OnHandle(ExecutionContext context) => 
+			context.Values.Push(int.Parse(
+				new string(context.Current.Value, 1), NumberStyles.HexNumber, CultureInfo.CurrentCulture));
 	}
 }
