@@ -2,11 +2,8 @@
   <PropertyGroup>
     <AssemblyName>IronBefunge.Host</AssemblyName>
     <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
-  <ItemGroup>
-    <None Remove="Program.cs~RF3841d301.TMP" />
-  </ItemGroup>
   <ItemGroup>
     <PackageReference Include="System.CommandLine.DragonFruit" Version="0.3.0-alpha.20253.1" />
   </ItemGroup>
