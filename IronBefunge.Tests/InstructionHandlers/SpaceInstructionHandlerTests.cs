@@ -19,8 +19,8 @@ namespace IronBefunge.Tests.InstructionHandlers
 		public static void HandleGet()
 		{
 			var cells = new List<Cell>() { 
-				new Cell(new Point(0, 0), SpaceInstructionHandler.GetInstruction),
-				new Cell(new Point(2, 3), 'w') };
+				new Cell(new(0, 0), SpaceInstructionHandler.GetInstruction),
+				new Cell(new(2, 3), 'w') };
 
 			var stackCount = 0;
 
@@ -66,8 +66,8 @@ namespace IronBefunge.Tests.InstructionHandlers
 		public static void HandleGetWithOnlyOneValueOnTheStack()
 		{
 			var cells = new List<Cell>() { 
-				new Cell(new Point(0, 0), SpaceInstructionHandler.GetInstruction),
-				new Cell(new Point(2, 0), 'w') };
+				new Cell(new(0, 0), SpaceInstructionHandler.GetInstruction),
+				new Cell(new(2, 0), 'w') };
 
 			var stackCount = 0;
 
@@ -89,8 +89,8 @@ namespace IronBefunge.Tests.InstructionHandlers
 		public static void HandleGetWithEmptyStack()
 		{
 			var cells = new List<Cell>() { 
-				new Cell(new Point(0, 0), SpaceInstructionHandler.GetInstruction),
-				new Cell(new Point(2, 2), 'w') };
+				new Cell(new(0, 0), SpaceInstructionHandler.GetInstruction),
+				new Cell(new(2, 2), 'w') };
 
 			var stackCount = 0;
 
@@ -111,8 +111,8 @@ namespace IronBefunge.Tests.InstructionHandlers
 		public static void HandlePut()
 		{
 			var cells = new List<Cell>() { 
-				new Cell(new Point(0, 0), SpaceInstructionHandler.PutInstruction),
-				new Cell(new Point(2, 3), 'w') };
+				new Cell(new(0, 0), SpaceInstructionHandler.PutInstruction),
+				new Cell(new(2, 3), 'w') };
 			var cellCount = cells.Count;
 			var stackCount = 0;
 
@@ -162,8 +162,8 @@ namespace IronBefunge.Tests.InstructionHandlers
 		public static void HandlePutWithOnlyTwoValuesOnTheStack()
 		{
 			var cells = new List<Cell>() { 
-				new Cell(new Point(0, 0), SpaceInstructionHandler.PutInstruction),
-				new Cell(new Point(2, 0), 'w') };
+				new Cell(new(0, 0), SpaceInstructionHandler.PutInstruction),
+				new Cell(new(2, 0), 'w') };
 			var cellCount = cells.Count;
 			var stackCount = 0;
 

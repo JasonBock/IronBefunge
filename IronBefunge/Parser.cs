@@ -40,7 +40,7 @@ namespace IronBefunge
 
 				if (value != ' ')
 				{
-					cells.Add(new Cell(new Point(x, y), value));
+					cells.Add(new(new(x, y), value));
 				}
 			}
 

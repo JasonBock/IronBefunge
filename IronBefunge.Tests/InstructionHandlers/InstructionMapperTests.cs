@@ -23,7 +23,7 @@ namespace IronBefunge.Tests.InstructionHandlers
 				{
 					var context = new ExecutionContext(new List<Cell>
 				{
-					new Cell(new Point(0, 0), '>')
+					new Cell(new(0, 0), '>')
 				}, reader, writer, trace, randomizer);
 
 					var mapper = new InstructionMapper();
@@ -49,7 +49,7 @@ namespace IronBefunge.Tests.InstructionHandlers
 				{
 					var context = new ExecutionContext(new List<Cell>
 				{
-					new Cell(new Point(0, 0), 'M')
+					new Cell(new(0, 0), 'M')
 				}, reader, writer, trace, randomizer);
 
 					var mapper = new InstructionMapper();

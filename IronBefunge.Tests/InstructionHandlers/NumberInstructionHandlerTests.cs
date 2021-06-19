@@ -42,7 +42,7 @@ namespace IronBefunge.Tests.InstructionHandlers
 		{
 			var cells = new List<Cell>() 
 			{ 
-				new Cell(new Point(0, 0), instruction) 
+				new Cell(new(0, 0), instruction) 
 			};
 			var stackCount = 0;
 

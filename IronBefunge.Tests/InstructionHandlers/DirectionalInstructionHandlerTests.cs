@@ -12,7 +12,7 @@ namespace IronBefunge.Tests.InstructionHandlers
 	{
 		private static void Handle(char instruction, Direction direction)
 		{
-			var cells = new List<Cell>() { new Cell(new Point(0, 0), instruction) };
+			var cells = new List<Cell>() { new Cell(new(0, 0), instruction) };
 			var stackCount = 0;
 
 			InstructionHandlerTests.Run(new DirectionalInstructionHandler(), cells, (context) =>
@@ -64,8 +64,8 @@ namespace IronBefunge.Tests.InstructionHandlers
 		{
 			var cells = new List<Cell>() 
 			{ 
-				new Cell(new Point(0, 0), DirectionalInstructionHandler.TrampolineInstruction),
-				new Cell(new Point(1, 0), '3')
+				new Cell(new(0, 0), DirectionalInstructionHandler.TrampolineInstruction),
+				new Cell(new(1, 0), '3')
 			};
 
 			InstructionHandlerTests.Run(new DirectionalInstructionHandler(), cells, null,

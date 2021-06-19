@@ -19,7 +19,7 @@ namespace IronBefunge.Tests.InstructionHandlers
 		{
 			var cells = new List<Cell>() 
 			{ 
-				new Cell(new Point(0, 0), NopInstructionHandler.NopInstruction)
+				new Cell(new(0, 0), NopInstructionHandler.NopInstruction)
 			};
 
 			var stackCount = 0;

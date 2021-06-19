@@ -30,7 +30,7 @@ namespace IronBefunge.Tests.InstructionHandlers
 		[TestCase(0, 0, Direction.Up, Direction.Up)]
 		public static void HandleCompare(int a, int b, Direction currentDiection, Direction expectedDirection)
 		{
-			var cells = new List<Cell>() { new Cell(new Point(0, 0), TurnInstructionHandler.CompareInstruction) };
+			var cells = new List<Cell>() { new Cell(new(0, 0), TurnInstructionHandler.CompareInstruction) };
 			var stackCount = 0;
 
 			InstructionHandlerTests.Run(new TurnInstructionHandler(), cells, (context) =>
@@ -55,7 +55,7 @@ namespace IronBefunge.Tests.InstructionHandlers
 		[TestCase(Direction.Up, Direction.Up)]
 		public static void HandleCompareWithEmptyStack(Direction currentDiection, Direction expectedDirection)
 		{
-			var cells = new List<Cell>() { new Cell(new Point(0, 0), TurnInstructionHandler.CompareInstruction) };
+			var cells = new List<Cell>() { new Cell(new(0, 0), TurnInstructionHandler.CompareInstruction) };
 			var stackCount = 0;
 
 			InstructionHandlerTests.Run(new TurnInstructionHandler(), cells, (context) =>
@@ -78,7 +78,7 @@ namespace IronBefunge.Tests.InstructionHandlers
 		[TestCase(TurnInstructionHandler.ReverseInstruction, Direction.Up, Direction.Down)]
 		public static void HandleReverse(char instruction, Direction currentDiection, Direction expectedDirection)
 		{
-			var cells = new List<Cell>() { new Cell(new Point(0, 0), instruction) };
+			var cells = new List<Cell>() { new Cell(new(0, 0), instruction) };
 			var stackCount = 0;
 
 			InstructionHandlerTests.Run(new TurnInstructionHandler(), cells, (context) =>
@@ -105,7 +105,7 @@ namespace IronBefunge.Tests.InstructionHandlers
 		[TestCase(TurnInstructionHandler.TurnLeftInstruction, Direction.Down, Direction.Right)]
 		public static void HandleTurnRightAndLeft(char instruction, Direction currentDiection, Direction expectedDirection)
 		{
-			var cells = new List<Cell>() { new Cell(new Point(0, 0), instruction) };
+			var cells = new List<Cell>() { new Cell(new(0, 0), instruction) };
 			var stackCount = 0;
 
 			InstructionHandlerTests.Run(new TurnInstructionHandler(), cells, (context) =>

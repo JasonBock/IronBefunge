@@ -14,10 +14,10 @@ namespace IronBefunge.Tests.InstructionHandlers
 			//"   Hi  "
 			var cells = new List<Cell>() 
 			{
-				new Cell(new Point(0, 0), StringInstructionHandler.StringModeInstruction),
-				new Cell(new Point(4, 0), 'H'),
-				new Cell(new Point(5, 0), 'i'),
-				new Cell(new Point(8, 0), StringInstructionHandler.StringModeInstruction),
+				new Cell(new(0, 0), StringInstructionHandler.StringModeInstruction),
+				new Cell(new(4, 0), 'H'),
+				new Cell(new(5, 0), 'i'),
+				new Cell(new(8, 0), StringInstructionHandler.StringModeInstruction),
 			};
 
 			InstructionHandlerTests.Run(new StringInstructionHandler(), cells, null, 
@@ -56,10 +56,10 @@ namespace IronBefunge.Tests.InstructionHandlers
 			//"Hi"
 			var cells = new List<Cell>()
 			{
-				new Cell(new Point(0, 0), StringInstructionHandler.StringModeInstruction),
-				new Cell(new Point(1, 0), 'H'),
-				new Cell(new Point(2, 0), 'i'),
-				new Cell(new Point(3, 0), StringInstructionHandler.StringModeInstruction),
+				new Cell(new(0, 0), StringInstructionHandler.StringModeInstruction),
+				new Cell(new(1, 0), 'H'),
+				new Cell(new(2, 0), 'i'),
+				new Cell(new(3, 0), StringInstructionHandler.StringModeInstruction),
 			};
 
 			InstructionHandlerTests.Run(new StringInstructionHandler(), cells, null,
@@ -93,9 +93,9 @@ namespace IronBefunge.Tests.InstructionHandlers
 			//'Q,
 			var cells = new List<Cell>()
 			{
-				new Cell(new Point(0, 0), StringInstructionHandler.FetchCharacterInstruction),
-				new Cell(new Point(1, 0), 'Q'),
-				new Cell(new Point(2, 0), ','),
+				new Cell(new(0, 0), StringInstructionHandler.FetchCharacterInstruction),
+				new Cell(new(1, 0), 'Q'),
+				new Cell(new(2, 0), ','),
 			};
 
 			InstructionHandlerTests.Run(new StringInstructionHandler(), cells, null,
@@ -118,9 +118,9 @@ namespace IronBefunge.Tests.InstructionHandlers
 			//Qs,
 			var cells = new List<Cell>()
 			{
-				new Cell(new Point(0, 0), 'Q'),
-				new Cell(new Point(1, 0), StringInstructionHandler.StoreCharacterInstruction),
-				new Cell(new Point(2, 0), ','),
+				new Cell(new(0, 0), 'Q'),
+				new Cell(new(1, 0), StringInstructionHandler.StoreCharacterInstruction),
+				new Cell(new(2, 0), ','),
 			};
 
 			InstructionHandlerTests.Run(new StringInstructionHandler(), cells, (context) =>

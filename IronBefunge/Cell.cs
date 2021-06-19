@@ -55,7 +55,7 @@ namespace IronBefunge
 		/// </summary>
 		/// <param name="obj">The object to check for equality.</param>
 		/// <returns>Returns <c>true</c> if the objects are equals; otherwise, <c>false</c>.</returns>
-		public override bool Equals(object obj)
+		public override bool Equals(object? obj)
 		{
 			var areEqual = false;
 
@@ -73,9 +73,7 @@ namespace IronBefunge
 		/// <param name="other">The object to check for equality.</param>
 		/// <returns>Returns <c>true</c> if the objects are equals; otherwise, <c>false</c>.</returns>
 		public bool Equals(Cell? other) =>
-#pragma warning disable CA1062 // Validate arguments of public methods
-			other is { } && this.Location == other.Location &&
-#pragma warning restore CA1062 // Validate arguments of public methods
+			other is not null && this.Location == other.Location &&
 				this.Value == other.Value;
 
 		/// <summary>

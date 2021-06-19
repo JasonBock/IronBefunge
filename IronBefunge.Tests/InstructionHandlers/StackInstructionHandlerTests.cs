@@ -20,8 +20,7 @@ namespace IronBefunge.Tests.InstructionHandlers
 		[Test]
 		public static void HandleClear()
 		{
-			var cells = new List<Cell>() { new Cell(
-				new Point(0, 0), StackInstructionHandler.ClearInstruction) };
+			var cells = new List<Cell>() { new(new(0, 0), StackInstructionHandler.ClearInstruction) };
 
 			InstructionHandlerTests.Run(new StackInstructionHandler(), cells, (context) =>
 			{
@@ -36,8 +35,7 @@ namespace IronBefunge.Tests.InstructionHandlers
 		[Test]
 		public static void HandleDuplicate()
 		{
-			var cells = new List<Cell>() { new Cell(
-				new Point(0, 0), StackInstructionHandler.DuplicateInstruction) };
+			var cells = new List<Cell>() { new(new(0, 0), StackInstructionHandler.DuplicateInstruction) };
 
 			var stackCount = 0;
 
@@ -59,8 +57,7 @@ namespace IronBefunge.Tests.InstructionHandlers
 		[Test]
 		public static void HandleDuplicateWithEmptyStack()
 		{
-			var cells = new List<Cell>() { new Cell(
-				new Point(0, 0), StackInstructionHandler.DuplicateInstruction) };
+			var cells = new List<Cell>() { new(new(0, 0), StackInstructionHandler.DuplicateInstruction) };
 
 			var stackCount = 0;
 
@@ -81,8 +78,7 @@ namespace IronBefunge.Tests.InstructionHandlers
 		[Test]
 		public static void HandlePop()
 		{
-			var cells = new List<Cell>() { new Cell(
-				new Point(0, 0), StackInstructionHandler.PopInstruction) };
+			var cells = new List<Cell>() { new(new(0, 0), StackInstructionHandler.PopInstruction) };
 
 			var stackCount = 0;
 
@@ -99,8 +95,7 @@ namespace IronBefunge.Tests.InstructionHandlers
 		[Test]
 		public static void HandlePopWithEmptyStack()
 		{
-			var cells = new List<Cell>() { new Cell(
-				new Point(0, 0), StackInstructionHandler.PopInstruction) };
+			var cells = new List<Cell>() { new(new(0, 0), StackInstructionHandler.PopInstruction) };
 
 			var stackCount = 0;
 
@@ -116,8 +111,7 @@ namespace IronBefunge.Tests.InstructionHandlers
 		[Test]
 		public static void HandleSwap()
 		{
-			var cells = new List<Cell>() { new Cell(
-				new Point(0, 0), StackInstructionHandler.SwapInstruction) };
+			var cells = new List<Cell>() { new(new(0, 0), StackInstructionHandler.SwapInstruction) };
 
 			var stackCount = 0;
 
@@ -140,8 +134,7 @@ namespace IronBefunge.Tests.InstructionHandlers
 		[Test]
 		public static void HandleSwapWithOnlyOneValueOnTheStack()
 		{
-			var cells = new List<Cell>() { new Cell(
-				new Point(0, 0), StackInstructionHandler.SwapInstruction) };
+			var cells = new List<Cell>() { new(new(0, 0), StackInstructionHandler.SwapInstruction) };
 
 			var stackCount = 0;
 
@@ -163,8 +156,7 @@ namespace IronBefunge.Tests.InstructionHandlers
 		[Test]
 		public static void HandleSwapWithEmptyStack()
 		{
-			var cells = new List<Cell>() { new Cell(
-				new Point(0, 0), StackInstructionHandler.SwapInstruction) };
+			var cells = new List<Cell>() { new(new(0, 0), StackInstructionHandler.SwapInstruction) };
 
 			var stackCount = 0;
 

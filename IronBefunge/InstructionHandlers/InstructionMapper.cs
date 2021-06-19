@@ -7,8 +7,7 @@ namespace IronBefunge.InstructionHandlers
 {
 	internal sealed class InstructionMapper
 	{
-		private readonly Dictionary<char, IInstructionHandler> mappings =
-			new Dictionary<char, IInstructionHandler>();
+		private readonly Dictionary<char, IInstructionHandler> mappings = new();
 
 		internal InstructionMapper()
 			: base()
@@ -23,7 +22,7 @@ namespace IronBefunge.InstructionHandlers
 
 			foreach (var handlerType in handlerTypes)
 			{
-				var handler = (InstructionHandler)Activator.CreateInstance(handlerType);
+				var handler = (InstructionHandler)Activator.CreateInstance(handlerType)!;
 
 				foreach (var instruction in handler.Instructions)
 				{

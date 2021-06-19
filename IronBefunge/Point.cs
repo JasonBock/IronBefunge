@@ -37,7 +37,7 @@ namespace IronBefunge
 		/// </summary>
 		/// <param name="obj">The object to check for equality.</param>
 		/// <returns>Returns <c>true</c> if the objects are equals; otherwise, <c>false</c>.</returns>
-		public override bool Equals(object obj)
+		public override bool Equals(object? obj)
 		{
 			var areEqual = false;
 

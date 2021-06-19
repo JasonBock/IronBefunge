@@ -14,9 +14,9 @@ namespace IronBefunge.Tests
 
 			Assert.Multiple(() =>
 			{
-				Assert.That(c1.Equals(c2), Is.False, "!c1.Equals(c2)");
-				Assert.That(c1.Equals(c3), Is.True, "c1.Equals(c3)");
-				Assert.That(c2.Equals(c3), Is.False, "!c2.Equals(c3)");
+				Assert.That(c1, Is.Not.EqualTo(c2), "!c1.Equals(c2)");
+				Assert.That(c1, Is.EqualTo(c3), "c1.Equals(c3)");
+				Assert.That(c2, Is.Not.EqualTo(c3), "!c2.Equals(c3)");
 			});
 		}
 
@@ -26,7 +26,7 @@ namespace IronBefunge.Tests
 			var c1 = new Point(1, 2);
 			var c2 = new Point(1, 2);
 
-			Assert.That(c1.Equals((object)c2), Is.True, "c1.Equals(c3)");
+			Assert.That(c1, Is.EqualTo((object)c2), "c1.Equals(c3)");
 		}
 
 		[Test]
@@ -38,22 +38,10 @@ namespace IronBefunge.Tests
 
 			Assert.Multiple(() =>
 			{
-#pragma warning disable 1718
-				Assert.That(c1 == c1, Is.True, "c1 == c1");
-#pragma warning restore 1718
-				Assert.That(c1 != c2, Is.True, "c1 != c2");
-				Assert.That(c1 == c3, Is.True, "c1 == c3");
-				Assert.That(c2 != c3, Is.True, "c2 != c3");
+				Assert.That(c1, Is.Not.EqualTo(c2), "c1 != c2");
+				Assert.That(c1, Is.EqualTo(c3), "c1 == c3");
+				Assert.That(c2, Is.Not.EqualTo(c3), "c2 != c3");
 			});
-		}
-
-		[Test]
-		public static void CheckForEqualityWithIncompatibleTypes()
-		{
-			var c = new Point(1, 2);
-			var g = Guid.NewGuid();
-
-			Assert.That(c, Is.Not.EqualTo(g), "!c.Equals(g)");
 		}
 
 		[Test]

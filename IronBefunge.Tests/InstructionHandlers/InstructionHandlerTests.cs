@@ -75,7 +75,7 @@ namespace IronBefunge.Tests.InstructionHandlers
 
 				foreach (var expectedInstruction in expectedInstructions)
 				{
-					Assert.That(handler.Instructions.Contains(expectedInstruction), Is.True, expectedInstruction.ToString());
+					Assert.That(handler.Instructions, Does.Contain(expectedInstruction), expectedInstruction.ToString());
 				}
 			});
 		}

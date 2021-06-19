@@ -18,9 +18,9 @@ namespace IronBefunge.InstructionHandlers
 			context.EnsureStack(2);
 			var y = context.Values.Pop();
 			var x = context.Values.Pop();
-			var target = context.Find(new Point(x, y));
+			var target = context.Find(new(x, y));
 
-			if (target is { })
+			if (target is not null)
 			{
 				context.Values.Push(target.Value);
 			}
@@ -40,7 +40,7 @@ namespace IronBefunge.InstructionHandlers
 			var location = new Point(x, y);
 			var target = context.Find(location);
 
-			if (target is { })
+			if (target is not null)
 			{
 				context.Cells[context.Cells.IndexOf(target)] = new Cell(location, value);
 			}

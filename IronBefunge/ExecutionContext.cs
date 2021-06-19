@@ -43,7 +43,7 @@ namespace IronBefunge
 		}
 
 		internal Cell Find(Point position) =>
-			this.Cells.Find((cell) => cell.Location == position);
+			this.Cells.Find((cell) => cell.Location == position)!;
 
 		internal void Move()
 		{
@@ -52,14 +52,10 @@ namespace IronBefunge
 
 			this.CurrentPosition = this.Direction switch
 			{
-				Direction.Down => new Point(
-					this.CurrentPosition.X, this.CurrentPosition.Y == maxY ? 0 : this.CurrentPosition.Y + 1),
-				Direction.Up => new Point(
-					this.CurrentPosition.X, this.CurrentPosition.Y == 0 ? maxY : this.CurrentPosition.Y - 1),
-				Direction.Left => new Point(
-					this.CurrentPosition.X == 0 ? maxX : this.CurrentPosition.X - 1, this.CurrentPosition.Y),
-				Direction.Right => new Point(
-					this.CurrentPosition.X == maxX ? 0 : this.CurrentPosition.X + 1, this.CurrentPosition.Y),
+				Direction.Down => new(this.CurrentPosition.X, this.CurrentPosition.Y == maxY ? 0 : this.CurrentPosition.Y + 1),
+				Direction.Up => new(this.CurrentPosition.X, this.CurrentPosition.Y == 0 ? maxY : this.CurrentPosition.Y - 1),
+				Direction.Left => new(this.CurrentPosition.X == 0 ? maxX : this.CurrentPosition.X - 1, this.CurrentPosition.Y),
+				Direction.Right => new(this.CurrentPosition.X == maxX ? 0 : this.CurrentPosition.X + 1, this.CurrentPosition.Y),
 				_ => throw new NotSupportedException(),
 			};
 		}
@@ -81,7 +77,7 @@ namespace IronBefunge
 		
 		internal void RunTrace(string message)
 		{
-			if (this.Trace is { })
+			if (this.Trace is not null)
 			{
 				this.Trace.WriteLine($"{nameof(message)} = {message}");
 				this.Trace.WriteLine($"{nameof(this.Current)} = {this.Current}");
