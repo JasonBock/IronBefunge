@@ -30,7 +30,7 @@ namespace IronBefunge
 			{
 				equal = true;
 			}
-			else if ((a is null) || (b is null))
+			else if (a is null || b is null)
 			{
 				equal = false;
 			}

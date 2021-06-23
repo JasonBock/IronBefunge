@@ -149,8 +149,8 @@ namespace IronBefunge.Tests
 				using var writer = new StringWriter(builder);
 				using var reader = new StringReader(string.Empty);
 				Assert.That(() => { using var interpreter = new Interpreter(new FileInfo(fileName), reader, writer); },
-					Throws.TypeOf<ArgumentException>());
-
+					Throws.TypeOf<ArgumentException>()
+						.And.Message.EqualTo($"The file extension should be .b98; it is .bf (Parameter 'file')"));
 			}
 			finally
 			{
