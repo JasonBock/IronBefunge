@@ -16,8 +16,8 @@
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Spackle" Version="9.1.2" />
-    <PackageReference Include="System.Collections.Immutable" Version="1.7.0" />
+    <PackageReference Include="Spackle" Version="10.0.0" />
+    <PackageReference Include="System.Collections.Immutable" Version="5.0.0" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
   </ItemGroup>
   <ItemGroup>
