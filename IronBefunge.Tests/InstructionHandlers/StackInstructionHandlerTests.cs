@@ -1,12 +1,10 @@
 ﻿using IronBefunge.InstructionHandlers;
 using NUnit.Framework;
-using System;
-using System.Collections.Generic;
 using System.Collections.Immutable;
 
 namespace IronBefunge.Tests.InstructionHandlers
 {
-	public sealed class StackInstructionHandlerTests
+   public sealed class StackInstructionHandlerTests
 		: InstructionHandlerTests
 	{
 		internal override ImmutableArray<char> GetExpectedHandledInstructions() =>

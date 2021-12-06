@@ -1,18 +1,17 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <AssemblyName>IronBefunge.Host</AssemblyName>
-    <OutputType>Exe</OutputType>
-    <TargetFramework>net5.0</TargetFramework>
-  </PropertyGroup>
-  <ItemGroup>
-    <PackageReference Include="System.CommandLine.DragonFruit" Version="0.3.0-alpha.20253.1" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\IronBefunge\IronBefunge.csproj" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Update="*.b98">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
+	<PropertyGroup>
+		<AssemblyName>IronBefunge.Host</AssemblyName>
+		<OutputType>Exe</OutputType>
+	</PropertyGroup>
+	<ItemGroup>
+		<PackageReference Include="System.CommandLine.DragonFruit" Version="0.3.0-alpha.20253.1" />
+	</ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\IronBefunge\IronBefunge.csproj" />
+	</ItemGroup>
+	<ItemGroup>
+		<None Update="*.b98">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+	</ItemGroup>
 </Project>

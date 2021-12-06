@@ -1,11 +1,10 @@
 ﻿using System.Collections.Immutable;
 
-namespace IronBefunge.InstructionHandlers
-{
-	internal interface IInstructionHandler
-	{
-		void Handle(ExecutionContext context);
+namespace IronBefunge.InstructionHandlers;
 
-		ImmutableArray<char> Instructions { get; }
-	}
+internal interface IInstructionHandler
+{
+	void Handle(ExecutionContext context);
+
+	ImmutableArray<char> Instructions { get; }
 }

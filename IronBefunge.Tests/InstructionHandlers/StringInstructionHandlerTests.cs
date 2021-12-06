@@ -1,12 +1,10 @@
 ﻿using IronBefunge.InstructionHandlers;
 using NUnit.Framework;
-using System;
-using System.Collections.Generic;
 using System.Globalization;
 
 namespace IronBefunge.Tests.InstructionHandlers
 {
-	public static class StringInstructionHandlerTests
+   public static class StringInstructionHandlerTests
 	{
 		[Test]
 		public static void HandleInStringMode()

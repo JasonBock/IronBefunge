@@ -71,5 +71,8 @@ dotnet_diagnostic.NUnit2039.severity=error
 dotnet_diagnostic.NUnit2042.severity=error
 dotnet_diagnostic.NUnit2043.severity=error
 
+# CA1014: Mark assemblies with CLSCompliant
+dotnet_diagnostic.CA1014.severity = none
+
 [*.xml]
 indent_style = tab

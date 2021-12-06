@@ -1,15 +1,12 @@
-﻿using System.IO;
+﻿namespace IronBefunge.Tests.Mocks;
 
-namespace IronBefunge.Tests.Mocks
+internal sealed class MockNumericTextReader
+	: TextReader
 {
-	internal sealed class MockNumericTextReader
-		: TextReader
-	{
-		internal MockNumericTextReader(string value)
-			: base() => this.Value = value;
+	internal MockNumericTextReader(string value)
+		: base() => this.Value = value;
 
-		public override string ReadLine() => this.Value;
+	public override string ReadLine() => this.Value;
 
-		private string Value { get; }
-	}
+	private string Value { get; }
 }
