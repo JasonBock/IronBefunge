@@ -56,15 +56,15 @@ public static class InstructionMapperTests
 
 			var traceContent = trace.GetStringBuilder().ToString();
 			Assert.That(traceContent,
-					 Contains.Substring("message = Warning: Instruction \"0, 0 - 'M'\" is not understood."), "Message");
+				Contains.Substring("message = Warning: Instruction \"Cell { Location = Point { X = 0, Y = 0 }, Value = M }\" is not understood."), "Message");
 			Assert.That(traceContent,
-					 Contains.Substring("Current = 0, 0 - 'M'"), "Current");
+				Contains.Substring("Cell { Location = Point { X = 0, Y = 0 }, Value = M }"), "Current");
 			Assert.That(traceContent,
-					 Contains.Substring("Direction = Right"), "Direction");
+				Contains.Substring("Direction = Right"), "Direction");
 			Assert.That(traceContent,
-					 Contains.Substring("InStringMode = False"), "InStringMode");
+				Contains.Substring("InStringMode = False"), "InStringMode");
 			Assert.That(traceContent,
-					 Contains.Substring("Values = "), "Values");
+				Contains.Substring("Values = "), "Values");
 		});
 	}
 }

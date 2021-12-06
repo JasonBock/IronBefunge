@@ -15,7 +15,7 @@ public static class CellTests
 		Assert.Multiple(() =>
 		{
 #pragma warning disable NUnit2010 // Use EqualConstraint for better assertion messages in case of failure
-		  Assert.That(c1 == c2, Is.False, "c1 == c2");
+			Assert.That(c1 == c2, Is.False, "c1 == c2");
 			Assert.That(c1 != c2, Is.True, "c1 != c2");
 
 			Assert.That(c1 == c3, Is.False, "c1 == c3");
@@ -40,7 +40,7 @@ public static class CellTests
 			Assert.That(c2, Is.Not.EqualTo(c4), "!c2.Equals(c4)");
 			Assert.That(c3, Is.Not.EqualTo(c4), "!c3.Equals(c4)");
 #pragma warning restore NUnit2010 // Use EqualConstraint for better assertion messages in case of failure
-	  });
+		});
 	}
 
 	[Test]
@@ -51,14 +51,14 @@ public static class CellTests
 		Assert.Multiple(() =>
 		{
 #pragma warning disable NUnit2010 // Use EqualConstraint for better assertion messages in case of failure
-		  Assert.That(cell == (null as Cell)!, Is.False, "cell == null");
+			Assert.That(cell == (null as Cell)!, Is.False, "cell == null");
 			Assert.That(cell != (null as Cell)!, Is.True, "cell != null");
 			Assert.That((null as Cell)! == cell, Is.False, "null == cell");
 			Assert.That((null as Cell)! != cell, Is.True, "null != cell");
 			Assert.That((null as Cell)! == (null as Cell)!, Is.True, "null == null");
 			Assert.That((null as Cell)! != (null as Cell)!, Is.False, "null != null");
 #pragma warning restore NUnit2010 // Use EqualConstraint for better assertion messages in case of failure
-	  });
+		});
 	}
 
 	[Test]
@@ -111,6 +111,6 @@ public static class CellTests
 		const char value = '^';
 
 		var cell = new Cell(new(x, y), value);
-		Assert.That(cell.ToString(), Is.EqualTo("3, 20 - '^'"));
+		Assert.That(cell.ToString(), Is.EqualTo("Cell { Location = Point { X = 3, Y = 20 }, Value = ^ }"));
 	}
 }

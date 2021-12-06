@@ -97,6 +97,6 @@ public static class PointTests
 
 		var point = new Point(x, y);
 
-		Assert.That(point.ToString(), Is.EqualTo("3, 20"));
+		Assert.That(point.ToString(), Is.EqualTo("Point { X = 3, Y = 20 }"));
 	}
 }
