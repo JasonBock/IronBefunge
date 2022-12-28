@@ -30,6 +30,7 @@ dotnet_style_qualification_for_event = true:error
 dotnet_style_qualification_for_field = true:error
 dotnet_style_qualification_for_method = true:error
 dotnet_style_qualification_for_property = true:error
+csharp_style_namespace_declarations = file_scoped:error
 
 # CA1303: Do not pass literals as localized parameters
 dotnet_diagnostic.CA1303.severity = none
