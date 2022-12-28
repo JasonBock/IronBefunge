@@ -1,0 +1,7 @@
+﻿>                               v /* Print out the title */
+>v "Collatz Sequence Generator"0<
+,:
+^_25*,&                         v /* Ask for the initial value */
+>v               "You entered "0<
+,:
+^_$.q
