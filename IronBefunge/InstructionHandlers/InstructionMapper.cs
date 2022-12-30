@@ -30,9 +30,9 @@ internal sealed class InstructionMapper
 
 	internal void Handle(ExecutionContext context)
 	{
-		if (this.mappings.ContainsKey(context.Current.Value))
+		if (this.mappings.TryGetValue(context.Current.Value, out var value))
 		{
-			this.mappings[context.Current.Value].Handle(context);
+			value.Handle(context);
 		}
 		else
 		{

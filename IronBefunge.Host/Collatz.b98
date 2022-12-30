@@ -3,7 +3,7 @@
 >                               v /* Print out the title */
 >v "Collatz Sequence Generator"0<
 ,:
-^_25*,&v                          /* Ask for the initial value (I'm assuming it's greater than 0) */
+^_d,a,&v                          /* Ask for the initial value (I'm assuming it's greater than 0) */
                              
 v      <
                                   /* 
@@ -18,9 +18,9 @@ v                          <
 
    v   +1*3_2/   v
 
-   >             >:.25*, v
+   >             >:.d,a,  v
 
-v                        <
+v                         <
                                   /* If the current value - 1 is 0, we're done. */
 >:1-   v
       v_q

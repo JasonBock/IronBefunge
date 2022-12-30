@@ -2,174 +2,173 @@
 using NUnit.Framework;
 using System.Collections.Immutable;
 
-namespace IronBefunge.Tests.InstructionHandlers
+namespace IronBefunge.Tests.InstructionHandlers;
+
+public sealed class StackInstructionHandlerTests
+	: InstructionHandlerTests
 {
-   public sealed class StackInstructionHandlerTests
-		: InstructionHandlerTests
+	internal override ImmutableArray<char> GetExpectedHandledInstructions() =>
+		ImmutableArray.Create(StackInstructionHandler.ClearInstruction,
+			StackInstructionHandler.DuplicateInstruction,
+			StackInstructionHandler.PopInstruction,
+			StackInstructionHandler.SwapInstruction);
+
+	internal override Type GetHandlerType() => typeof(StackInstructionHandler);
+
+	[Test]
+	public static void HandleClear()
 	{
-		internal override ImmutableArray<char> GetExpectedHandledInstructions() =>
-			ImmutableArray.Create(StackInstructionHandler.ClearInstruction,
-				StackInstructionHandler.DuplicateInstruction,
-				StackInstructionHandler.PopInstruction, 
-				StackInstructionHandler.SwapInstruction);
+		var cells = new List<Cell>() { new(new(0, 0), StackInstructionHandler.ClearInstruction) };
 
-		internal override Type GetHandlerType() => typeof(StackInstructionHandler);
-
-		[Test]
-		public static void HandleClear()
+		InstructionHandlerTests.Run(new StackInstructionHandler(), cells, (context) =>
 		{
-			var cells = new List<Cell>() { new(new(0, 0), StackInstructionHandler.ClearInstruction) };
+			context.Values.Push(33);
+			context.Values.Push(33);
+		}, (context, result) =>
+		{
+			Assert.That(context.Values.Count, Is.EqualTo(0), nameof(context.Values.Count));
+		});
+	}
 
-			InstructionHandlerTests.Run(new StackInstructionHandler(), cells, (context) =>
+	[Test]
+	public static void HandleDuplicate()
+	{
+		var cells = new List<Cell>() { new(new(0, 0), StackInstructionHandler.DuplicateInstruction) };
+
+		var stackCount = 0;
+
+		InstructionHandlerTests.Run(new StackInstructionHandler(), cells, (context) =>
+		{
+			context.Values.Push(33);
+			stackCount = context.Values.Count;
+		}, (context, result) =>
+		{
+			Assert.Multiple(() =>
 			{
-				context.Values.Push(33);
-				context.Values.Push(33);
-			}, (context, result) =>
-			{
-				Assert.That(context.Values.Count, Is.EqualTo(0), nameof(context.Values.Count));
+				Assert.That(context.Values.Count, Is.EqualTo(stackCount + 1), nameof(context.Values.Count));
+				Assert.That(context.Values.Pop(), Is.EqualTo(33), nameof(context.Values.Pop));
+				Assert.That(context.Values.Pop(), Is.EqualTo(33), nameof(context.Values.Pop));
 			});
-		}
+		});
+	}
 
-		[Test]
-		public static void HandleDuplicate()
+	[Test]
+	public static void HandleDuplicateWithEmptyStack()
+	{
+		var cells = new List<Cell>() { new(new(0, 0), StackInstructionHandler.DuplicateInstruction) };
+
+		var stackCount = 0;
+
+		InstructionHandlerTests.Run(new StackInstructionHandler(), cells, (context) =>
 		{
-			var cells = new List<Cell>() { new(new(0, 0), StackInstructionHandler.DuplicateInstruction) };
-
-			var stackCount = 0;
-
-			InstructionHandlerTests.Run(new StackInstructionHandler(), cells, (context) =>
+			stackCount = context.Values.Count;
+		}, (context, result) =>
+		{
+			Assert.Multiple(() =>
 			{
-				context.Values.Push(33);
-				stackCount = context.Values.Count;
-			}, (context, result) =>
-			{
-				Assert.Multiple(() =>
-				{
-					Assert.That(context.Values.Count, Is.EqualTo(stackCount + 1), nameof(context.Values.Count));
-					Assert.That(context.Values.Pop(), Is.EqualTo(33), nameof(context.Values.Pop));
-					Assert.That(context.Values.Pop(), Is.EqualTo(33), nameof(context.Values.Pop));
-				});
+				Assert.That(context.Values.Count, Is.EqualTo(stackCount + 2), nameof(context.Values.Count));
+				Assert.That(context.Values.Pop(), Is.EqualTo(0), nameof(context.Values.Pop));
+				Assert.That(context.Values.Pop(), Is.EqualTo(0), nameof(context.Values.Pop));
 			});
-		}
+		});
+	}
 
-		[Test]
-		public static void HandleDuplicateWithEmptyStack()
+	[Test]
+	public static void HandlePop()
+	{
+		var cells = new List<Cell>() { new(new(0, 0), StackInstructionHandler.PopInstruction) };
+
+		var stackCount = 0;
+
+		InstructionHandlerTests.Run(new StackInstructionHandler(), cells, (context) =>
 		{
-			var cells = new List<Cell>() { new(new(0, 0), StackInstructionHandler.DuplicateInstruction) };
-
-			var stackCount = 0;
-
-			InstructionHandlerTests.Run(new StackInstructionHandler(), cells, (context) =>
-			{
-				stackCount = context.Values.Count;
-			}, (context, result) =>
-			{
-				Assert.Multiple(() =>
-				{
-					Assert.That(context.Values.Count, Is.EqualTo(stackCount + 2), nameof(context.Values.Count));
-					Assert.That(context.Values.Pop(), Is.EqualTo(0), nameof(context.Values.Pop));
-					Assert.That(context.Values.Pop(), Is.EqualTo(0), nameof(context.Values.Pop));
-				});
-			});
-		}
-
-		[Test]
-		public static void HandlePop()
+			context.Values.Push(87);
+			stackCount = context.Values.Count;
+		}, (context, result) =>
 		{
-			var cells = new List<Cell>() { new(new(0, 0), StackInstructionHandler.PopInstruction) };
+			Assert.That(context.Values.Count, Is.EqualTo(stackCount - 1), nameof(context.Values.Count));
+		});
+	}
 
-			var stackCount = 0;
+	[Test]
+	public static void HandlePopWithEmptyStack()
+	{
+		var cells = new List<Cell>() { new(new(0, 0), StackInstructionHandler.PopInstruction) };
 
-			InstructionHandlerTests.Run(new StackInstructionHandler(), cells, (context) =>
-			{
-				context.Values.Push(87);
-				stackCount = context.Values.Count;
-			}, (context, result) =>
-			{
-				Assert.That(context.Values.Count, Is.EqualTo(stackCount - 1), nameof(context.Values.Count));
-			});
-		}
+		var stackCount = 0;
 
-		[Test]
-		public static void HandlePopWithEmptyStack()
+		InstructionHandlerTests.Run(new StackInstructionHandler(), cells, (context) =>
 		{
-			var cells = new List<Cell>() { new(new(0, 0), StackInstructionHandler.PopInstruction) };
+			stackCount = context.Values.Count;
+		}, (context, result) =>
+		{
+			Assert.That(context.Values.Count, Is.EqualTo(stackCount), nameof(context.Values.Count));
+		});
+	}
 
-			var stackCount = 0;
+	[Test]
+	public static void HandleSwap()
+	{
+		var cells = new List<Cell>() { new(new(0, 0), StackInstructionHandler.SwapInstruction) };
 
-			InstructionHandlerTests.Run(new StackInstructionHandler(), cells, (context) =>
-			{
-				stackCount = context.Values.Count;
-			}, (context, result) =>
+		var stackCount = 0;
+
+		InstructionHandlerTests.Run(new StackInstructionHandler(), cells, (context) =>
+		{
+			context.Values.Push(87);
+			context.Values.Push(78);
+			stackCount = context.Values.Count;
+		}, (context, result) =>
+		{
+			Assert.Multiple(() =>
 			{
 				Assert.That(context.Values.Count, Is.EqualTo(stackCount), nameof(context.Values.Count));
+				Assert.That(context.Values.Pop(), Is.EqualTo(87), nameof(context.Values.Pop));
+				Assert.That(context.Values.Pop(), Is.EqualTo(78), nameof(context.Values.Pop));
 			});
-		}
+		});
+	}
 
-		[Test]
-		public static void HandleSwap()
+	[Test]
+	public static void HandleSwapWithOnlyOneValueOnTheStack()
+	{
+		var cells = new List<Cell>() { new(new(0, 0), StackInstructionHandler.SwapInstruction) };
+
+		var stackCount = 0;
+
+		InstructionHandlerTests.Run(new StackInstructionHandler(), cells, (context) =>
 		{
-			var cells = new List<Cell>() { new(new(0, 0), StackInstructionHandler.SwapInstruction) };
-
-			var stackCount = 0;
-
-			InstructionHandlerTests.Run(new StackInstructionHandler(), cells, (context) =>
-			{
-				context.Values.Push(87);
-				context.Values.Push(78);
-				stackCount = context.Values.Count;
-			}, (context, result) =>
-			{
-				Assert.Multiple(() =>
-				{
-					Assert.That(context.Values.Count, Is.EqualTo(stackCount), nameof(context.Values.Count));
-					Assert.That(context.Values.Pop(), Is.EqualTo(87), nameof(context.Values.Pop));
-					Assert.That(context.Values.Pop(), Is.EqualTo(78), nameof(context.Values.Pop));
-				});
-			});
-		}
-
-		[Test]
-		public static void HandleSwapWithOnlyOneValueOnTheStack()
+			context.Values.Push(78);
+			stackCount = context.Values.Count;
+		}, (context, result) =>
 		{
-			var cells = new List<Cell>() { new(new(0, 0), StackInstructionHandler.SwapInstruction) };
-
-			var stackCount = 0;
-
-			InstructionHandlerTests.Run(new StackInstructionHandler(), cells, (context) =>
+			Assert.Multiple(() =>
 			{
-				context.Values.Push(78);
-				stackCount = context.Values.Count;
-			}, (context, result) =>
-			{
-				Assert.Multiple(() =>
-				{
-					Assert.That(context.Values.Count, Is.EqualTo(stackCount + 1), nameof(context.Values.Count));
-					Assert.That(context.Values.Pop(), Is.EqualTo(78), nameof(context.Values.Pop));
-					Assert.That(context.Values.Pop(), Is.EqualTo(0), nameof(context.Values.Pop));
-				});
+				Assert.That(context.Values.Count, Is.EqualTo(stackCount + 1), nameof(context.Values.Count));
+				Assert.That(context.Values.Pop(), Is.EqualTo(78), nameof(context.Values.Pop));
+				Assert.That(context.Values.Pop(), Is.EqualTo(0), nameof(context.Values.Pop));
 			});
-		}
+		});
+	}
 
-		[Test]
-		public static void HandleSwapWithEmptyStack()
+	[Test]
+	public static void HandleSwapWithEmptyStack()
+	{
+		var cells = new List<Cell>() { new(new(0, 0), StackInstructionHandler.SwapInstruction) };
+
+		var stackCount = 0;
+
+		InstructionHandlerTests.Run(new StackInstructionHandler(), cells, (context) =>
 		{
-			var cells = new List<Cell>() { new(new(0, 0), StackInstructionHandler.SwapInstruction) };
-
-			var stackCount = 0;
-
-			InstructionHandlerTests.Run(new StackInstructionHandler(), cells, (context) =>
+			stackCount = context.Values.Count;
+		}, (context, result) =>
+		{
+			Assert.Multiple(() =>
 			{
-				stackCount = context.Values.Count;
-			}, (context, result) =>
-			{
-				Assert.Multiple(() =>
-				{
-					Assert.That(context.Values.Count, Is.EqualTo(stackCount + 2), nameof(context.Values.Count));
-					Assert.That(context.Values.Pop(), Is.EqualTo(0), nameof(context.Values.Pop));
-					Assert.That(context.Values.Pop(), Is.EqualTo(0), nameof(context.Values.Pop));
-				});
+				Assert.That(context.Values.Count, Is.EqualTo(stackCount + 2), nameof(context.Values.Count));
+				Assert.That(context.Values.Pop(), Is.EqualTo(0), nameof(context.Values.Pop));
+				Assert.That(context.Values.Pop(), Is.EqualTo(0), nameof(context.Values.Pop));
 			});
-		}
+		});
 	}
 }

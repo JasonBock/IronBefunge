@@ -15,8 +15,8 @@
 		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
 	</PropertyGroup>
 	<ItemGroup>
-		<PackageReference Include="Spackle" Version="10.0.0" />
-		<PackageReference Include="System.Collections.Immutable" Version="6.0.0" />
+		<PackageReference Include="Spackle" Version="11.0.0" />
+		<PackageReference Include="System.Collections.Immutable" Version="7.0.0" />
 		<PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="All" />
 	</ItemGroup>
 	<ItemGroup>
