@@ -20,7 +20,7 @@ public static class ParserTests
 
 		Assert.Multiple(() =>
 		{
-			Assert.That(cells.Length, Is.EqualTo(10), nameof(cells.Length));
+			Assert.That(cells, Has.Length.EqualTo(10), nameof(cells.Length));
 			Assert.That(cells, Does.Contain(new Cell(new(3, 0), '<')), "<");
 			Assert.That(cells, Does.Contain(new Cell(new(7, 0), '^')), "^");
 			Assert.That(cells, Does.Contain(new Cell(new(8, 0), '#')), "#");
@@ -50,7 +50,7 @@ public static class ParserTests
 
 		Assert.Multiple(() =>
 		{
-			Assert.That(cells.Length, Is.EqualTo(5));
+			Assert.That(cells, Has.Length.EqualTo(5));
 			Assert.That(cells, Does.Contain(new Cell(new(3, 0), '<')), "<");
 			Assert.That(cells, Does.Contain(new Cell(new(7, 0), '^')), "^");
 			Assert.That(cells, Does.Contain(new Cell(new(8, 0), '#')), "#");
@@ -70,6 +70,6 @@ public static class ParserTests
 	public static void ParseWithNullLine()
 	{
 		var cells = new Parser(new string?[] { " ^ < ", null, " 3 5 :" }).Parse();
-		Assert.That(cells.Length, Is.EqualTo(5));
+		Assert.That(cells, Has.Length.EqualTo(5));
 	}
 }

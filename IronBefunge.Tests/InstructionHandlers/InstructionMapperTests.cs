@@ -15,7 +15,7 @@ public static class InstructionMapperTests
 
 		Assert.Multiple(() =>
 		{
-			Assert.That(trace.GetStringBuilder().ToString().Length, Is.EqualTo(0));
+			Assert.That(trace.GetStringBuilder().ToString(), Is.Empty);
 
 			using (var randomizer = new SecureRandom())
 			{
@@ -28,7 +28,7 @@ public static class InstructionMapperTests
 				mapper.Handle(context);
 			}
 
-			Assert.That(trace.GetStringBuilder().ToString().Length, Is.EqualTo(0));
+			Assert.That(trace.GetStringBuilder().ToString(), Is.Empty);
 		});
 	}
 

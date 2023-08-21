@@ -7,12 +7,12 @@ namespace IronBefunge.Tests.InstructionHandlers;
 public sealed class TurnInstructionHandlerTests
 	: InstructionHandlerTests
 {
-	internal override ImmutableArray<char> GetExpectedHandledInstructions() =>
+	protected override ImmutableArray<char> GetExpectedHandledInstructions() =>
 		ImmutableArray.Create(TurnInstructionHandler.CompareInstruction, TurnInstructionHandler.LeftRightInstruction,
 			TurnInstructionHandler.ReverseInstruction, TurnInstructionHandler.TurnLeftInstruction,
 			TurnInstructionHandler.TurnRightInstruction, TurnInstructionHandler.UpDownInstruction);
 
-	internal override Type GetHandlerType() => typeof(TurnInstructionHandler);
+	protected override Type GetHandlerType() => typeof(TurnInstructionHandler);
 
 	[TestCase(0, 1, Direction.Right, Direction.Up)]
 	[TestCase(0, 1, Direction.Up, Direction.Left)]
@@ -31,7 +31,7 @@ public sealed class TurnInstructionHandlerTests
 		var cells = new List<Cell>() { new Cell(new(0, 0), TurnInstructionHandler.CompareInstruction) };
 		var stackCount = 0;
 
-		InstructionHandlerTests.Run(new TurnInstructionHandler(), cells, (context) =>
+		InstructionHandlerRunner.Run(new TurnInstructionHandler(), cells, (context) =>
 		{
 			context.Values.Push(a);
 			context.Values.Push(b);
@@ -41,7 +41,7 @@ public sealed class TurnInstructionHandlerTests
 		{
 			Assert.Multiple(() =>
 				 {
-					 Assert.That(context.Values.Count, Is.EqualTo(stackCount - 2), nameof(context.Values.Count));
+					 Assert.That(context.Values, Has.Count.EqualTo(stackCount - 2), nameof(context.Values.Count));
 					 Assert.That(context.Direction, Is.EqualTo(expectedDirection), nameof(context.Direction));
 				 });
 		});
@@ -56,7 +56,7 @@ public sealed class TurnInstructionHandlerTests
 		var cells = new List<Cell>() { new Cell(new(0, 0), TurnInstructionHandler.CompareInstruction) };
 		var stackCount = 0;
 
-		InstructionHandlerTests.Run(new TurnInstructionHandler(), cells, (context) =>
+		InstructionHandlerRunner.Run(new TurnInstructionHandler(), cells, (context) =>
 		{
 			context.Direction = currentDiection;
 			stackCount = context.Values.Count;
@@ -64,7 +64,7 @@ public sealed class TurnInstructionHandlerTests
 		{
 			Assert.Multiple(() =>
 				 {
-					 Assert.That(context.Values.Count, Is.EqualTo(stackCount), nameof(context.Values.Count));
+					 Assert.That(context.Values, Has.Count.EqualTo(stackCount), nameof(context.Values.Count));
 					 Assert.That(context.Direction, Is.EqualTo(expectedDirection), nameof(context.Direction));
 				 });
 		});
@@ -79,7 +79,7 @@ public sealed class TurnInstructionHandlerTests
 		var cells = new List<Cell>() { new Cell(new(0, 0), instruction) };
 		var stackCount = 0;
 
-		InstructionHandlerTests.Run(new TurnInstructionHandler(), cells, (context) =>
+		InstructionHandlerRunner.Run(new TurnInstructionHandler(), cells, (context) =>
 		{
 			context.Direction = currentDiection;
 			stackCount = context.Values.Count;
@@ -87,7 +87,7 @@ public sealed class TurnInstructionHandlerTests
 		{
 			Assert.Multiple(() =>
 				 {
-					 Assert.That(context.Values.Count, Is.EqualTo(stackCount), nameof(context.Values.Count));
+					 Assert.That(context.Values, Has.Count.EqualTo(stackCount), nameof(context.Values.Count));
 					 Assert.That(context.Direction, Is.EqualTo(expectedDirection), nameof(context.Direction));
 				 });
 		});
@@ -106,7 +106,7 @@ public sealed class TurnInstructionHandlerTests
 		var cells = new List<Cell>() { new Cell(new(0, 0), instruction) };
 		var stackCount = 0;
 
-		InstructionHandlerTests.Run(new TurnInstructionHandler(), cells, (context) =>
+		InstructionHandlerRunner.Run(new TurnInstructionHandler(), cells, (context) =>
 		{
 			context.Direction = currentDiection;
 			stackCount = context.Values.Count;
@@ -114,7 +114,7 @@ public sealed class TurnInstructionHandlerTests
 		{
 			Assert.Multiple(() =>
 				 {
-					 Assert.That(context.Values.Count, Is.EqualTo(stackCount), nameof(context.Values.Count));
+					 Assert.That(context.Values, Has.Count.EqualTo(stackCount), nameof(context.Values.Count));
 					 Assert.That(context.Direction, Is.EqualTo(expectedDirection), nameof(context.Direction));
 				 });
 		});
@@ -128,7 +128,7 @@ public sealed class TurnInstructionHandlerTests
 
 		var stackCount = 0;
 
-		InstructionHandlerTests.Run(new TurnInstructionHandler(), cells, (context) =>
+		InstructionHandlerRunner.Run(new TurnInstructionHandler(), cells, (context) =>
 		{
 			context.Values.Push(0);
 			stackCount = context.Values.Count;
@@ -136,7 +136,7 @@ public sealed class TurnInstructionHandlerTests
 		{
 			Assert.Multiple(() =>
 				 {
-					 Assert.That(context.Values.Count, Is.EqualTo(stackCount - 1), nameof(context.Values.Count));
+					 Assert.That(context.Values, Has.Count.EqualTo(stackCount - 1), nameof(context.Values.Count));
 					 Assert.That(context.Direction, Is.EqualTo(Direction.Down), nameof(context.Direction));
 				 });
 		});
@@ -150,14 +150,14 @@ public sealed class TurnInstructionHandlerTests
 
 		var stackCount = 0;
 
-		InstructionHandlerTests.Run(new TurnInstructionHandler(), cells, (context) =>
+		InstructionHandlerRunner.Run(new TurnInstructionHandler(), cells, (context) =>
 		{
 			stackCount = context.Values.Count;
 		}, (context, result) =>
 		{
 			Assert.Multiple(() =>
 				 {
-					 Assert.That(context.Values.Count, Is.EqualTo(stackCount), nameof(context.Values.Count));
+					 Assert.That(context.Values, Has.Count.EqualTo(stackCount), nameof(context.Values.Count));
 					 Assert.That(context.Direction, Is.EqualTo(Direction.Down), nameof(context.Direction));
 				 });
 		});
@@ -171,7 +171,7 @@ public sealed class TurnInstructionHandlerTests
 
 		var stackCount = 0;
 
-		InstructionHandlerTests.Run(new TurnInstructionHandler(), cells, (context) =>
+		InstructionHandlerRunner.Run(new TurnInstructionHandler(), cells, (context) =>
 		{
 			context.Values.Push(3);
 			stackCount = context.Values.Count;
@@ -179,7 +179,7 @@ public sealed class TurnInstructionHandlerTests
 		{
 			Assert.Multiple(() =>
 				 {
-					 Assert.That(context.Values.Count, Is.EqualTo(stackCount - 1), nameof(context.Values.Count));
+					 Assert.That(context.Values, Has.Count.EqualTo(stackCount - 1), nameof(context.Values.Count));
 					 Assert.That(context.Direction, Is.EqualTo(Direction.Left), nameof(context.Direction));
 				 });
 		});
@@ -193,14 +193,14 @@ public sealed class TurnInstructionHandlerTests
 
 		var stackCount = 0;
 
-		InstructionHandlerTests.Run(new TurnInstructionHandler(), cells, (context) =>
+		InstructionHandlerRunner.Run(new TurnInstructionHandler(), cells, (context) =>
 		{
 			stackCount = context.Values.Count;
 		}, (context, result) =>
 		{
 			Assert.Multiple(() =>
 				 {
-					 Assert.That(context.Values.Count, Is.EqualTo(stackCount), nameof(context.Values.Count));
+					 Assert.That(context.Values, Has.Count.EqualTo(stackCount), nameof(context.Values.Count));
 					 Assert.That(context.Direction, Is.EqualTo(Direction.Right), nameof(context.Direction));
 				 });
 		});
@@ -214,7 +214,7 @@ public sealed class TurnInstructionHandlerTests
 
 		var stackCount = 0;
 
-		InstructionHandlerTests.Run(new TurnInstructionHandler(), cells, (context) =>
+		InstructionHandlerRunner.Run(new TurnInstructionHandler(), cells, (context) =>
 		{
 			context.Values.Push(0);
 			stackCount = context.Values.Count;
@@ -222,7 +222,7 @@ public sealed class TurnInstructionHandlerTests
 		{
 			Assert.Multiple(() =>
 				 {
-					 Assert.That(context.Values.Count, Is.EqualTo(stackCount - 1), nameof(context.Values.Count));
+					 Assert.That(context.Values, Has.Count.EqualTo(stackCount - 1), nameof(context.Values.Count));
 					 Assert.That(context.Direction, Is.EqualTo(Direction.Right), nameof(context.Direction));
 				 });
 		});
@@ -236,7 +236,7 @@ public sealed class TurnInstructionHandlerTests
 
 		var stackCount = 0;
 
-		InstructionHandlerTests.Run(new TurnInstructionHandler(), cells, (context) =>
+		InstructionHandlerRunner.Run(new TurnInstructionHandler(), cells, (context) =>
 		{
 			context.Values.Push(3);
 			stackCount = context.Values.Count;
@@ -244,7 +244,7 @@ public sealed class TurnInstructionHandlerTests
 		{
 			Assert.Multiple(() =>
 				 {
-					 Assert.That(context.Values.Count, Is.EqualTo(stackCount - 1), nameof(context.Values.Count));
+					 Assert.That(context.Values, Has.Count.EqualTo(stackCount - 1), nameof(context.Values.Count));
 					 Assert.That(context.Direction, Is.EqualTo(Direction.Up), nameof(context.Direction));
 				 });
 		});

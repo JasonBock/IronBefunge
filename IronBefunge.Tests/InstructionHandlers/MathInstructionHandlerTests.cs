@@ -7,12 +7,12 @@ namespace IronBefunge.Tests.InstructionHandlers;
 public sealed class MathInstructionHandlerTests
 	: InstructionHandlerTests
 {
-	internal override ImmutableArray<char> GetExpectedHandledInstructions() =>
+	protected override ImmutableArray<char> GetExpectedHandledInstructions() =>
 		ImmutableArray.Create(MathInstructionHandler.AddInstruction,
 			MathInstructionHandler.DivideInstruction, MathInstructionHandler.ModInstruction,
 			MathInstructionHandler.MultiplyInstruction, MathInstructionHandler.SubtractInstruction);
 
-	internal override Type GetHandlerType() => typeof(MathInstructionHandler);
+	protected override Type GetHandlerType() => typeof(MathInstructionHandler);
 
 	[Test]
 	public static void HandleAdd()
@@ -21,7 +21,7 @@ public sealed class MathInstructionHandlerTests
 				new Point(0, 0), MathInstructionHandler.AddInstruction) };
 		var stackCount = 0;
 
-		InstructionHandlerTests.Run(new MathInstructionHandler(), cells, (context) =>
+		InstructionHandlerRunner.Run(new MathInstructionHandler(), cells, (context) =>
 		{
 			context.Values.Push(3);
 			context.Values.Push(7);
@@ -30,7 +30,7 @@ public sealed class MathInstructionHandlerTests
 		{
 			Assert.Multiple(() =>
 				 {
-					 Assert.That(context.Values.Count, Is.EqualTo(stackCount - 1), nameof(context.Values.Count));
+					 Assert.That(context.Values, Has.Count.EqualTo(stackCount - 1), nameof(context.Values.Count));
 					 Assert.That(context.Values.Peek(), Is.EqualTo(10), nameof(context.Values.Peek));
 				 });
 		});
@@ -43,7 +43,7 @@ public sealed class MathInstructionHandlerTests
 				new Point(0, 0), MathInstructionHandler.AddInstruction) };
 		var stackCount = 0;
 
-		InstructionHandlerTests.Run(new MathInstructionHandler(), cells, (context) =>
+		InstructionHandlerRunner.Run(new MathInstructionHandler(), cells, (context) =>
 		{
 			context.Values.Push(3);
 			stackCount = context.Values.Count;
@@ -51,7 +51,7 @@ public sealed class MathInstructionHandlerTests
 		{
 			Assert.Multiple(() =>
 				 {
-					 Assert.That(context.Values.Count, Is.EqualTo(stackCount), nameof(context.Values.Count));
+					 Assert.That(context.Values, Has.Count.EqualTo(stackCount), nameof(context.Values.Count));
 					 Assert.That(context.Values.Peek(), Is.EqualTo(3), nameof(context.Values.Peek));
 				 });
 		});
@@ -64,14 +64,14 @@ public sealed class MathInstructionHandlerTests
 				new Point(0, 0), MathInstructionHandler.AddInstruction) };
 		var stackCount = 0;
 
-		InstructionHandlerTests.Run(new MathInstructionHandler(), cells, (context) =>
+		InstructionHandlerRunner.Run(new MathInstructionHandler(), cells, (context) =>
 		{
 			stackCount = context.Values.Count;
 		}, (context, result) =>
 		{
 			Assert.Multiple(() =>
 				 {
-					 Assert.That(context.Values.Count, Is.EqualTo(stackCount + 1), nameof(context.Values.Count));
+					 Assert.That(context.Values, Has.Count.EqualTo(stackCount + 1), nameof(context.Values.Count));
 					 Assert.That(context.Values.Peek(), Is.EqualTo(0), nameof(context.Values.Peek));
 				 });
 		});
@@ -84,7 +84,7 @@ public sealed class MathInstructionHandlerTests
 				new Point(0, 0), MathInstructionHandler.DivideInstruction) };
 		var stackCount = 0;
 
-		InstructionHandlerTests.Run(new MathInstructionHandler(), cells, (context) =>
+		InstructionHandlerRunner.Run(new MathInstructionHandler(), cells, (context) =>
 		{
 			context.Values.Push(7);
 			context.Values.Push(3);
@@ -93,7 +93,7 @@ public sealed class MathInstructionHandlerTests
 		{
 			Assert.Multiple(() =>
 				 {
-					 Assert.That(context.Values.Count, Is.EqualTo(stackCount - 1), nameof(context.Values.Count));
+					 Assert.That(context.Values, Has.Count.EqualTo(stackCount - 1), nameof(context.Values.Count));
 					 Assert.That(context.Values.Peek(), Is.EqualTo(2), nameof(context.Values.Peek));
 				 });
 		});
@@ -106,7 +106,7 @@ public sealed class MathInstructionHandlerTests
 				new Point(0, 0), MathInstructionHandler.DivideInstruction) };
 		var stackCount = 0;
 
-		InstructionHandlerTests.Run(new MathInstructionHandler(), cells, (context) =>
+		InstructionHandlerRunner.Run(new MathInstructionHandler(), cells, (context) =>
 		{
 			context.Values.Push(3);
 			stackCount = context.Values.Count;
@@ -114,7 +114,7 @@ public sealed class MathInstructionHandlerTests
 		{
 			Assert.Multiple(() =>
 				 {
-					 Assert.That(context.Values.Count, Is.EqualTo(stackCount), nameof(context.Values.Count));
+					 Assert.That(context.Values, Has.Count.EqualTo(stackCount), nameof(context.Values.Count));
 					 Assert.That(context.Values.Peek(), Is.EqualTo(0), nameof(context.Values.Peek));
 				 });
 		});
@@ -127,14 +127,14 @@ public sealed class MathInstructionHandlerTests
 				new Point(0, 0), MathInstructionHandler.DivideInstruction) };
 		var stackCount = 0;
 
-		InstructionHandlerTests.Run(new MathInstructionHandler(), cells, (context) =>
+		InstructionHandlerRunner.Run(new MathInstructionHandler(), cells, (context) =>
 		{
 			stackCount = context.Values.Count;
 		}, (context, result) =>
 		{
 			Assert.Multiple(() =>
 				 {
-					 Assert.That(context.Values.Count, Is.EqualTo(stackCount + 1), nameof(context.Values.Count));
+					 Assert.That(context.Values, Has.Count.EqualTo(stackCount + 1), nameof(context.Values.Count));
 					 Assert.That(context.Values.Peek(), Is.EqualTo(0), nameof(context.Values.Peek));
 				 });
 		});
@@ -147,7 +147,7 @@ public sealed class MathInstructionHandlerTests
 				new Point(0, 0), MathInstructionHandler.ModInstruction) };
 		var stackCount = 0;
 
-		InstructionHandlerTests.Run(new MathInstructionHandler(), cells, (context) =>
+		InstructionHandlerRunner.Run(new MathInstructionHandler(), cells, (context) =>
 		{
 			context.Values.Push(7);
 			context.Values.Push(3);
@@ -156,7 +156,7 @@ public sealed class MathInstructionHandlerTests
 		{
 			Assert.Multiple(() =>
 				 {
-					 Assert.That(context.Values.Count, Is.EqualTo(stackCount - 1), nameof(context.Values.Count));
+					 Assert.That(context.Values, Has.Count.EqualTo(stackCount - 1), nameof(context.Values.Count));
 					 Assert.That(context.Values.Peek(), Is.EqualTo(1), nameof(context.Values.Peek));
 				 });
 		});
@@ -169,7 +169,7 @@ public sealed class MathInstructionHandlerTests
 				new Point(0, 0), MathInstructionHandler.ModInstruction) };
 		var stackCount = 0;
 
-		InstructionHandlerTests.Run(new MathInstructionHandler(), cells, (context) =>
+		InstructionHandlerRunner.Run(new MathInstructionHandler(), cells, (context) =>
 		{
 			context.Values.Push(3);
 			stackCount = context.Values.Count;
@@ -177,7 +177,7 @@ public sealed class MathInstructionHandlerTests
 		{
 			Assert.Multiple(() =>
 				 {
-					 Assert.That(context.Values.Count, Is.EqualTo(stackCount), nameof(context.Values.Count));
+					 Assert.That(context.Values, Has.Count.EqualTo(stackCount), nameof(context.Values.Count));
 					 Assert.That(context.Values.Peek(), Is.EqualTo(0), nameof(context.Values.Peek));
 				 });
 		});
@@ -190,14 +190,14 @@ public sealed class MathInstructionHandlerTests
 				new Point(0, 0), MathInstructionHandler.ModInstruction) };
 		var stackCount = 0;
 
-		InstructionHandlerTests.Run(new MathInstructionHandler(), cells, (context) =>
+		InstructionHandlerRunner.Run(new MathInstructionHandler(), cells, (context) =>
 		{
 			stackCount = context.Values.Count;
 		}, (context, result) =>
 		{
 			Assert.Multiple(() =>
 				 {
-					 Assert.That(context.Values.Count, Is.EqualTo(stackCount + 1), nameof(context.Values.Count));
+					 Assert.That(context.Values, Has.Count.EqualTo(stackCount + 1), nameof(context.Values.Count));
 					 Assert.That(context.Values.Peek(), Is.EqualTo(0), nameof(context.Values.Peek));
 				 });
 		});
@@ -210,7 +210,7 @@ public sealed class MathInstructionHandlerTests
 				new Point(0, 0), MathInstructionHandler.MultiplyInstruction) };
 		var stackCount = 0;
 
-		InstructionHandlerTests.Run(new MathInstructionHandler(), cells, (context) =>
+		InstructionHandlerRunner.Run(new MathInstructionHandler(), cells, (context) =>
 		{
 			context.Values.Push(3);
 			context.Values.Push(7);
@@ -219,7 +219,7 @@ public sealed class MathInstructionHandlerTests
 		{
 			Assert.Multiple(() =>
 				 {
-					 Assert.That(context.Values.Count, Is.EqualTo(stackCount - 1), nameof(context.Values.Count));
+					 Assert.That(context.Values, Has.Count.EqualTo(stackCount - 1), nameof(context.Values.Count));
 					 Assert.That(context.Values.Peek(), Is.EqualTo(21), nameof(context.Values.Peek));
 				 });
 		});
@@ -232,7 +232,7 @@ public sealed class MathInstructionHandlerTests
 				new Point(0, 0), MathInstructionHandler.MultiplyInstruction) };
 		var stackCount = 0;
 
-		InstructionHandlerTests.Run(new MathInstructionHandler(), cells, (context) =>
+		InstructionHandlerRunner.Run(new MathInstructionHandler(), cells, (context) =>
 		{
 			context.Values.Push(3);
 			stackCount = context.Values.Count;
@@ -240,7 +240,7 @@ public sealed class MathInstructionHandlerTests
 		{
 			Assert.Multiple(() =>
 				 {
-					 Assert.That(context.Values.Count, Is.EqualTo(stackCount), nameof(context.Values.Count));
+					 Assert.That(context.Values, Has.Count.EqualTo(stackCount), nameof(context.Values.Count));
 					 Assert.That(context.Values.Peek(), Is.EqualTo(0), nameof(context.Values.Peek));
 				 });
 		});
@@ -253,14 +253,14 @@ public sealed class MathInstructionHandlerTests
 				new Point(0, 0), MathInstructionHandler.MultiplyInstruction) };
 		var stackCount = 0;
 
-		InstructionHandlerTests.Run(new MathInstructionHandler(), cells, (context) =>
+		InstructionHandlerRunner.Run(new MathInstructionHandler(), cells, (context) =>
 		{
 			stackCount = context.Values.Count;
 		}, (context, result) =>
 		{
 			Assert.Multiple(() =>
 				 {
-					 Assert.That(context.Values.Count, Is.EqualTo(stackCount + 1), nameof(context.Values.Count));
+					 Assert.That(context.Values, Has.Count.EqualTo(stackCount + 1), nameof(context.Values.Count));
 					 Assert.That(context.Values.Peek(), Is.EqualTo(0), nameof(context.Values.Peek));
 				 });
 		});
@@ -273,7 +273,7 @@ public sealed class MathInstructionHandlerTests
 				new Point(0, 0), MathInstructionHandler.SubtractInstruction) };
 		var stackCount = 0;
 
-		InstructionHandlerTests.Run(new MathInstructionHandler(), cells, (context) =>
+		InstructionHandlerRunner.Run(new MathInstructionHandler(), cells, (context) =>
 		{
 			context.Values.Push(3);
 			context.Values.Push(7);
@@ -282,7 +282,7 @@ public sealed class MathInstructionHandlerTests
 		{
 			Assert.Multiple(() =>
 				 {
-					 Assert.That(context.Values.Count, Is.EqualTo(stackCount - 1), nameof(context.Values.Count));
+					 Assert.That(context.Values, Has.Count.EqualTo(stackCount - 1), nameof(context.Values.Count));
 					 Assert.That(context.Values.Peek(), Is.EqualTo(-4), nameof(context.Values.Peek));
 				 });
 		});
@@ -295,7 +295,7 @@ public sealed class MathInstructionHandlerTests
 				new Point(0, 0), MathInstructionHandler.SubtractInstruction) };
 		var stackCount = 0;
 
-		InstructionHandlerTests.Run(new MathInstructionHandler(), cells, (context) =>
+		InstructionHandlerRunner.Run(new MathInstructionHandler(), cells, (context) =>
 		{
 			context.Values.Push(3);
 			stackCount = context.Values.Count;
@@ -303,7 +303,7 @@ public sealed class MathInstructionHandlerTests
 		{
 			Assert.Multiple(() =>
 				 {
-					 Assert.That(context.Values.Count, Is.EqualTo(stackCount), nameof(context.Values.Count));
+					 Assert.That(context.Values, Has.Count.EqualTo(stackCount), nameof(context.Values.Count));
 					 Assert.That(context.Values.Peek(), Is.EqualTo(3), nameof(context.Values.Peek));
 				 });
 		});
@@ -316,14 +316,14 @@ public sealed class MathInstructionHandlerTests
 				new Point(0, 0), MathInstructionHandler.SubtractInstruction) };
 		var stackCount = 0;
 
-		InstructionHandlerTests.Run(new MathInstructionHandler(), cells, (context) =>
+		InstructionHandlerRunner.Run(new MathInstructionHandler(), cells, (context) =>
 		{
 			stackCount = context.Values.Count;
 		}, (context, result) =>
 		{
 			Assert.Multiple(() =>
 				 {
-					 Assert.That(context.Values.Count, Is.EqualTo(stackCount + 1), nameof(context.Values.Count));
+					 Assert.That(context.Values, Has.Count.EqualTo(stackCount + 1), nameof(context.Values.Count));
 					 Assert.That(context.Values.Peek(), Is.EqualTo(0), nameof(context.Values.Peek));
 				 });
 		});

@@ -18,7 +18,7 @@ namespace IronBefunge.Tests.InstructionHandlers;
 			new Cell(new(8, 0), StringInstructionHandler.StringModeInstruction),
 		};
 
-		InstructionHandlerTests.Run(new StringInstructionHandler(), cells, null, 
+		InstructionHandlerRunner.Run(new StringInstructionHandler(), cells, null, 
 			(context, result) =>
 			{
 				Assert.Multiple(() =>
@@ -60,7 +60,7 @@ namespace IronBefunge.Tests.InstructionHandlers;
 			new Cell(new(3, 0), StringInstructionHandler.StringModeInstruction),
 		};
 
-		InstructionHandlerTests.Run(new StringInstructionHandler(), cells, null,
+		InstructionHandlerRunner.Run(new StringInstructionHandler(), cells, null,
 			(context, result) =>
 			{
 				Assert.Multiple(() =>
@@ -96,7 +96,7 @@ namespace IronBefunge.Tests.InstructionHandlers;
 			new Cell(new(2, 0), ','),
 		};
 
-		InstructionHandlerTests.Run(new StringInstructionHandler(), cells, null,
+		InstructionHandlerRunner.Run(new StringInstructionHandler(), cells, null,
 			(context, result) =>
 			{
 				Assert.Multiple(() =>
@@ -121,7 +121,7 @@ namespace IronBefunge.Tests.InstructionHandlers;
 			new Cell(new(2, 0), ','),
 		};
 
-		InstructionHandlerTests.Run(new StringInstructionHandler(), cells, (context) =>
+		InstructionHandlerRunner.Run(new StringInstructionHandler(), cells, (context) =>
 			{
 				context.Values.Push(Convert.ToInt32('Q'));
 				context.Move();

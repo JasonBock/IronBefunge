@@ -8,11 +8,11 @@ namespace IronBefunge.Tests.InstructionHandlers;
 public sealed class InputInstructionHandlerTests
 	: InstructionHandlerTests
 {
-	internal override ImmutableArray<char> GetExpectedHandledInstructions() =>
+	protected override ImmutableArray<char> GetExpectedHandledInstructions() =>
 		ImmutableArray.Create(InputInstructionHandler.AsciiInstruction,
 			InputInstructionHandler.NumericInstruction);
 
-	internal override Type GetHandlerType() => typeof(InputInstructionHandler);
+	protected override Type GetHandlerType() => typeof(InputInstructionHandler);
 
 	[Test]
 	public static void HandleAscii()
@@ -23,12 +23,12 @@ public sealed class InputInstructionHandlerTests
 		using var reader = new MockAsciiTextReader(88);
 		var stackCount = 0;
 
-		InstructionHandlerTests.Run(new InputInstructionHandler(), cells, null,
+		InstructionHandlerRunner.Run(new InputInstructionHandler(), cells, null,
 			(context, result) =>
 			{
 				Assert.Multiple(() =>
 					 {
-						 Assert.That(context.Values.Count, Is.EqualTo(stackCount + 1), nameof(context.Values.Count));
+						 Assert.That(context.Values, Has.Count.EqualTo(stackCount + 1), nameof(context.Values.Count));
 						 Assert.That(context.Values.Peek(), Is.EqualTo(88), nameof(context.Values.Peek));
 					 });
 			}, reader);
@@ -43,12 +43,12 @@ public sealed class InputInstructionHandlerTests
 		using var reader = new MockNumericTextReader("123456");
 		var stackCount = 0;
 
-		InstructionHandlerTests.Run(new InputInstructionHandler(), cells, null,
+		InstructionHandlerRunner.Run(new InputInstructionHandler(), cells, null,
 			(context, result) =>
 			{
 				Assert.Multiple(() =>
 					 {
-						 Assert.That(context.Values.Count, Is.EqualTo(stackCount + 1), nameof(context.Values.Count));
+						 Assert.That(context.Values, Has.Count.EqualTo(stackCount + 1), nameof(context.Values.Count));
 						 Assert.That(context.Values.Peek(), Is.EqualTo(123456), nameof(context.Values.Peek));
 					 });
 			}, reader);
@@ -63,10 +63,10 @@ public sealed class InputInstructionHandlerTests
 		using var reader = new MockNumericTextReader("quux");
 		var stackCount = 0;
 
-		InstructionHandlerTests.Run(new InputInstructionHandler(), cells, null,
+		InstructionHandlerRunner.Run(new InputInstructionHandler(), cells, null,
 			(context, result) =>
 			{
-				Assert.That(context.Values.Count, Is.EqualTo(stackCount), nameof(context.Values.Count));
+				Assert.That(context.Values, Has.Count.EqualTo(stackCount), nameof(context.Values.Count));
 			}, reader);
 	}
 }

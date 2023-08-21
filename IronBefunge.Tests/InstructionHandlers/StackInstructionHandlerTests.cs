@@ -7,26 +7,26 @@ namespace IronBefunge.Tests.InstructionHandlers;
 public sealed class StackInstructionHandlerTests
 	: InstructionHandlerTests
 {
-	internal override ImmutableArray<char> GetExpectedHandledInstructions() =>
+	protected override ImmutableArray<char> GetExpectedHandledInstructions() =>
 		ImmutableArray.Create(StackInstructionHandler.ClearInstruction,
 			StackInstructionHandler.DuplicateInstruction,
 			StackInstructionHandler.PopInstruction,
 			StackInstructionHandler.SwapInstruction);
 
-	internal override Type GetHandlerType() => typeof(StackInstructionHandler);
+	protected override Type GetHandlerType() => typeof(StackInstructionHandler);
 
 	[Test]
 	public static void HandleClear()
 	{
 		var cells = new List<Cell>() { new(new(0, 0), StackInstructionHandler.ClearInstruction) };
 
-		InstructionHandlerTests.Run(new StackInstructionHandler(), cells, (context) =>
+		InstructionHandlerRunner.Run(new StackInstructionHandler(), cells, (context) =>
 		{
 			context.Values.Push(33);
 			context.Values.Push(33);
 		}, (context, result) =>
 		{
-			Assert.That(context.Values.Count, Is.EqualTo(0), nameof(context.Values.Count));
+			Assert.That(context.Values, Is.Empty, nameof(context.Values.Count));
 		});
 	}
 
@@ -37,7 +37,7 @@ public sealed class StackInstructionHandlerTests
 
 		var stackCount = 0;
 
-		InstructionHandlerTests.Run(new StackInstructionHandler(), cells, (context) =>
+		InstructionHandlerRunner.Run(new StackInstructionHandler(), cells, (context) =>
 		{
 			context.Values.Push(33);
 			stackCount = context.Values.Count;
@@ -45,7 +45,7 @@ public sealed class StackInstructionHandlerTests
 		{
 			Assert.Multiple(() =>
 			{
-				Assert.That(context.Values.Count, Is.EqualTo(stackCount + 1), nameof(context.Values.Count));
+				Assert.That(context.Values, Has.Count.EqualTo(stackCount + 1), nameof(context.Values.Count));
 				Assert.That(context.Values.Pop(), Is.EqualTo(33), nameof(context.Values.Pop));
 				Assert.That(context.Values.Pop(), Is.EqualTo(33), nameof(context.Values.Pop));
 			});
@@ -59,14 +59,14 @@ public sealed class StackInstructionHandlerTests
 
 		var stackCount = 0;
 
-		InstructionHandlerTests.Run(new StackInstructionHandler(), cells, (context) =>
+		InstructionHandlerRunner.Run(new StackInstructionHandler(), cells, (context) =>
 		{
 			stackCount = context.Values.Count;
 		}, (context, result) =>
 		{
 			Assert.Multiple(() =>
 			{
-				Assert.That(context.Values.Count, Is.EqualTo(stackCount + 2), nameof(context.Values.Count));
+				Assert.That(context.Values, Has.Count.EqualTo(stackCount + 2), nameof(context.Values.Count));
 				Assert.That(context.Values.Pop(), Is.EqualTo(0), nameof(context.Values.Pop));
 				Assert.That(context.Values.Pop(), Is.EqualTo(0), nameof(context.Values.Pop));
 			});
@@ -80,13 +80,13 @@ public sealed class StackInstructionHandlerTests
 
 		var stackCount = 0;
 
-		InstructionHandlerTests.Run(new StackInstructionHandler(), cells, (context) =>
+		InstructionHandlerRunner.Run(new StackInstructionHandler(), cells, (context) =>
 		{
 			context.Values.Push(87);
 			stackCount = context.Values.Count;
 		}, (context, result) =>
 		{
-			Assert.That(context.Values.Count, Is.EqualTo(stackCount - 1), nameof(context.Values.Count));
+			Assert.That(context.Values, Has.Count.EqualTo(stackCount - 1), nameof(context.Values.Count));
 		});
 	}
 
@@ -97,12 +97,12 @@ public sealed class StackInstructionHandlerTests
 
 		var stackCount = 0;
 
-		InstructionHandlerTests.Run(new StackInstructionHandler(), cells, (context) =>
+		InstructionHandlerRunner.Run(new StackInstructionHandler(), cells, (context) =>
 		{
 			stackCount = context.Values.Count;
 		}, (context, result) =>
 		{
-			Assert.That(context.Values.Count, Is.EqualTo(stackCount), nameof(context.Values.Count));
+			Assert.That(context.Values, Has.Count.EqualTo(stackCount), nameof(context.Values.Count));
 		});
 	}
 
@@ -113,7 +113,7 @@ public sealed class StackInstructionHandlerTests
 
 		var stackCount = 0;
 
-		InstructionHandlerTests.Run(new StackInstructionHandler(), cells, (context) =>
+		InstructionHandlerRunner.Run(new StackInstructionHandler(), cells, (context) =>
 		{
 			context.Values.Push(87);
 			context.Values.Push(78);
@@ -122,7 +122,7 @@ public sealed class StackInstructionHandlerTests
 		{
 			Assert.Multiple(() =>
 			{
-				Assert.That(context.Values.Count, Is.EqualTo(stackCount), nameof(context.Values.Count));
+				Assert.That(context.Values, Has.Count.EqualTo(stackCount), nameof(context.Values.Count));
 				Assert.That(context.Values.Pop(), Is.EqualTo(87), nameof(context.Values.Pop));
 				Assert.That(context.Values.Pop(), Is.EqualTo(78), nameof(context.Values.Pop));
 			});
@@ -136,7 +136,7 @@ public sealed class StackInstructionHandlerTests
 
 		var stackCount = 0;
 
-		InstructionHandlerTests.Run(new StackInstructionHandler(), cells, (context) =>
+		InstructionHandlerRunner.Run(new StackInstructionHandler(), cells, (context) =>
 		{
 			context.Values.Push(78);
 			stackCount = context.Values.Count;
@@ -144,7 +144,7 @@ public sealed class StackInstructionHandlerTests
 		{
 			Assert.Multiple(() =>
 			{
-				Assert.That(context.Values.Count, Is.EqualTo(stackCount + 1), nameof(context.Values.Count));
+				Assert.That(context.Values, Has.Count.EqualTo(stackCount + 1), nameof(context.Values.Count));
 				Assert.That(context.Values.Pop(), Is.EqualTo(78), nameof(context.Values.Pop));
 				Assert.That(context.Values.Pop(), Is.EqualTo(0), nameof(context.Values.Pop));
 			});
@@ -158,14 +158,14 @@ public sealed class StackInstructionHandlerTests
 
 		var stackCount = 0;
 
-		InstructionHandlerTests.Run(new StackInstructionHandler(), cells, (context) =>
+		InstructionHandlerRunner.Run(new StackInstructionHandler(), cells, (context) =>
 		{
 			stackCount = context.Values.Count;
 		}, (context, result) =>
 		{
 			Assert.Multiple(() =>
 			{
-				Assert.That(context.Values.Count, Is.EqualTo(stackCount + 2), nameof(context.Values.Count));
+				Assert.That(context.Values, Has.Count.EqualTo(stackCount + 2), nameof(context.Values.Count));
 				Assert.That(context.Values.Pop(), Is.EqualTo(0), nameof(context.Values.Pop));
 				Assert.That(context.Values.Pop(), Is.EqualTo(0), nameof(context.Values.Pop));
 			});

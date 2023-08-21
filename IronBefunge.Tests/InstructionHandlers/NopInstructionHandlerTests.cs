@@ -7,10 +7,10 @@ namespace IronBefunge.Tests.InstructionHandlers;
 public sealed class NopInstructionHandlerTests
 	: InstructionHandlerTests
 {
-	internal override ImmutableArray<char> GetExpectedHandledInstructions() =>
+	protected override ImmutableArray<char> GetExpectedHandledInstructions() =>
 		ImmutableArray.Create(NopInstructionHandler.NopInstruction);
 
-	internal override Type GetHandlerType() => typeof(NopInstructionHandler);
+	protected override Type GetHandlerType() => typeof(NopInstructionHandler);
 
 	[Test]
 	public static void HandleGet()
@@ -23,7 +23,7 @@ public sealed class NopInstructionHandlerTests
 		var stackCount = 0;
 		var direction = Direction.Down;
 
-		InstructionHandlerTests.Run(new NopInstructionHandler(), cells, (context) =>
+		InstructionHandlerRunner.Run(new NopInstructionHandler(), cells, (context) =>
 		{
 			stackCount = context.Values.Count;
 			direction = context.Direction;
@@ -31,7 +31,7 @@ public sealed class NopInstructionHandlerTests
 		{
 			Assert.Multiple(() =>
 				 {
-					 Assert.That(context.Values.Count, Is.EqualTo(stackCount), nameof(context.Values.Count));
+					 Assert.That(context.Values, Has.Count.EqualTo(stackCount), nameof(context.Values.Count));
 					 Assert.That(context.Direction, Is.EqualTo(direction), nameof(context.Direction));
 				 });
 		});

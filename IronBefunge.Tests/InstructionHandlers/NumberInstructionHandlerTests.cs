@@ -7,7 +7,7 @@ namespace IronBefunge.Tests.InstructionHandlers;
 public sealed class NumberInstructionHandlerTests
 	 : InstructionHandlerTests
 {
-	internal override ImmutableArray<char> GetExpectedHandledInstructions() =>
+	protected override ImmutableArray<char> GetExpectedHandledInstructions() =>
 		ImmutableArray.Create(NumberInstructionHandler.ZeroInstruction,
 			NumberInstructionHandler.OneInstruction, NumberInstructionHandler.TwoInstruction,
 			NumberInstructionHandler.ThreeInstruction, NumberInstructionHandler.FourInstruction,
@@ -18,7 +18,7 @@ public sealed class NumberInstructionHandlerTests
 			NumberInstructionHandler.ThirteenInstruction, NumberInstructionHandler.FourteenInstruction,
 			NumberInstructionHandler.FifteenInstruction);
 
-	internal override Type GetHandlerType() => typeof(NumberInstructionHandler);
+	protected override Type GetHandlerType() => typeof(NumberInstructionHandler);
 
 	[TestCase(NumberInstructionHandler.ZeroInstruction, 0)]
 	[TestCase(NumberInstructionHandler.OneInstruction, 1)]
@@ -44,14 +44,14 @@ public sealed class NumberInstructionHandlerTests
 			};
 		var stackCount = 0;
 
-		InstructionHandlerTests.Run(new NumberInstructionHandler(), cells, (context) =>
+		InstructionHandlerRunner.Run(new NumberInstructionHandler(), cells, (context) =>
 		{
 			stackCount = context.Values.Count;
 		}, (context, result) =>
 		{
 			Assert.Multiple(() =>
 				 {
-					 Assert.That(context.Values.Count, Is.EqualTo(stackCount + 1), nameof(context.Values.Count));
+					 Assert.That(context.Values, Has.Count.EqualTo(stackCount + 1), nameof(context.Values.Count));
 					 Assert.That(context.Values.Peek(), Is.EqualTo(expectedValue), nameof(context.Values.Peek));
 				 });
 		});
