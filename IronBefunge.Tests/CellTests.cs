@@ -7,10 +7,10 @@ public static class CellTests
 	[Test]
 	public static void CheckForEqualityWithSpecificType()
 	{
-		var c1 = new Cell(new(1, 1), 'c');
-		var c2 = new Cell(new(2, 2), 'd');
-		var c3 = new Cell(new(1, 1), 'd');
-		var c4 = new Cell(new(1, 1), 'c');
+		var c1 = new Cell(new Point(1, 1), 'c');
+		var c2 = new Cell(new Point(2, 2), 'd');
+		var c3 = new Cell(new Point(1, 1), 'd');
+		var c4 = new Cell(new Point(1, 1), 'c');
 
 		Assert.Multiple(() =>
 		{
@@ -46,7 +46,7 @@ public static class CellTests
 	[Test]
 	public static void CheckForEqualityWithNulls()
 	{
-		var cell = new Cell(new(1, 1), 'c');
+		var cell = new Cell(new Point(1, 1), 'c');
 
 		Assert.Multiple(() =>
 		{
@@ -64,8 +64,8 @@ public static class CellTests
 	[Test]
 	public static void CheckForEqualityWithObjectType()
 	{
-		var c1 = new Cell(new(1, 1), 'c');
-		var c2 = new Cell(new(1, 1), 'c');
+		var c1 = new Cell(new Point(1, 1), 'c');
+		var c2 = new Cell(new Point(1, 1), 'c');
 
 		Assert.That(c1, Is.EqualTo(c2), "c1.Equals(c4)");
 	}
@@ -73,10 +73,10 @@ public static class CellTests
 	[Test]
 	public static void GetHashCodes()
 	{
-		var c1 = new Cell(new(1, 1), 'c');
-		var c2 = new Cell(new(2, 2), 'd');
-		var c3 = new Cell(new(1, 1), 'd');
-		var c4 = new Cell(new(1, 1), 'c');
+		var c1 = new Cell(new Point(1, 1), 'c');
+		var c2 = new Cell(new Point(2, 2), 'd');
+		var c3 = new Cell(new Point(1, 1), 'd');
+		var c4 = new Cell(new Point(1, 1), 'c');
 
 		Assert.Multiple(() =>
 		{
@@ -93,7 +93,7 @@ public static class CellTests
 		const int y = 20;
 		const char value = '^';
 
-		var cell = new Cell(new(x, y), value);
+		var cell = new Cell(new Point(x, y), value);
 
 		Assert.Multiple(() =>
 		{
@@ -110,7 +110,7 @@ public static class CellTests
 		const int y = 20;
 		const char value = '^';
 
-		var cell = new Cell(new(x, y), value);
+		var cell = new Cell(new Point(x, y), value);
 		Assert.That(cell.ToString(), Is.EqualTo("Cell { Location = Point { X = 3, Y = 20 }, Value = ^ }"));
 	}
 }

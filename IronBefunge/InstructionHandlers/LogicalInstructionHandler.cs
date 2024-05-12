@@ -9,8 +9,7 @@ internal sealed class LogicalInstructionHandler
 	internal const char NotInstruction = '!';
 
 	internal override ImmutableArray<char> GetInstructions() =>
-		ImmutableArray.Create(LogicalInstructionHandler.NotInstruction,
-			LogicalInstructionHandler.GreaterThanInstruction);
+		[LogicalInstructionHandler.NotInstruction, LogicalInstructionHandler.GreaterThanInstruction];
 
 	private static void HandleGreaterThan(ExecutionContext context)
 	{

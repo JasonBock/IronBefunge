@@ -10,8 +10,7 @@ internal sealed class StringInstructionHandler
 	internal const char StoreCharacterInstruction = 's';
 
 	internal override ImmutableArray<char> GetInstructions() =>
-		ImmutableArray.Create(StringInstructionHandler.FetchCharacterInstruction,
-			StringInstructionHandler.StringModeInstruction);
+		[StringInstructionHandler.FetchCharacterInstruction, StringInstructionHandler.StringModeInstruction];
 
 	internal override void OnHandle(ExecutionContext context)
 	{

@@ -12,9 +12,13 @@ internal sealed class MathInstructionHandler
 	internal const char SubtractInstruction = '-';
 
 	internal override ImmutableArray<char> GetInstructions() =>
-		ImmutableArray.Create(MathInstructionHandler.AddInstruction,
-			MathInstructionHandler.DivideInstruction, MathInstructionHandler.ModInstruction,
-			MathInstructionHandler.MultiplyInstruction, MathInstructionHandler.SubtractInstruction);
+		[
+		   MathInstructionHandler.AddInstruction,
+		   MathInstructionHandler.DivideInstruction,
+		   MathInstructionHandler.ModInstruction,
+		   MathInstructionHandler.MultiplyInstruction,
+		   MathInstructionHandler.SubtractInstruction,
+		];
 
 	private static void HandleAddition(ExecutionContext context) =>
 		context.Values.Push(context.Values.Pop() + context.Values.Pop());

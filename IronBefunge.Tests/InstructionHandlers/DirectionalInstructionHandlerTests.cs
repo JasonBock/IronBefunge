@@ -9,16 +9,20 @@ public sealed class DirectionalInstructionHandlerTests
 	: InstructionHandlerTests
 {
 	protected override ImmutableArray<char> GetExpectedHandledInstructions() =>
-		ImmutableArray.Create(DirectionalInstructionHandler.DownInstruction,
-			DirectionalInstructionHandler.LeftInstruction, DirectionalInstructionHandler.RandomInstruction,
-			DirectionalInstructionHandler.RightInstruction, DirectionalInstructionHandler.TrampolineInstruction,
-			DirectionalInstructionHandler.UpInstruction);
+		[
+		   DirectionalInstructionHandler.DownInstruction,
+		   DirectionalInstructionHandler.LeftInstruction,
+		   DirectionalInstructionHandler.RandomInstruction,
+		   DirectionalInstructionHandler.RightInstruction,
+		   DirectionalInstructionHandler.TrampolineInstruction,
+		   DirectionalInstructionHandler.UpInstruction,
+		];
 
 	protected override Type GetHandlerType() => typeof(DirectionalInstructionHandler);
 
 	private static void Handle(char instruction, Direction direction)
 	{
-		var cells = new List<Cell>() { new Cell(new(0, 0), instruction) };
+		var cells = new List<Cell>() { new(new Point(0, 0), instruction) };
 		var stackCount = 0;
 
 		InstructionHandlerRunner.Run(new DirectionalInstructionHandler(), cells, (context) =>
@@ -27,10 +31,10 @@ public sealed class DirectionalInstructionHandlerTests
 		}, (context, result) =>
 		{
 			Assert.Multiple(() =>
-				 {
-					 Assert.That(context.Values, Has.Count.EqualTo(stackCount), nameof(context.Values.Count));
-					 Assert.That(context.Direction, Is.EqualTo(direction), nameof(context.Direction));
-				 });
+			{
+				Assert.That(context.Values, Has.Count.EqualTo(stackCount), nameof(context.Values.Count));
+				Assert.That(context.Direction, Is.EqualTo(direction), nameof(context.Direction));
+			});
 		});
 	}
 
@@ -70,8 +74,8 @@ public sealed class DirectionalInstructionHandlerTests
 	{
 		var cells = new List<Cell>()
 			{
-				new Cell(new(0, 0), DirectionalInstructionHandler.TrampolineInstruction),
-				new Cell(new(1, 0), '3')
+				new(new Point(0, 0), DirectionalInstructionHandler.TrampolineInstruction),
+				new(new Point(1, 0), '3')
 			};
 
 		InstructionHandlerRunner.Run(new DirectionalInstructionHandler(), cells, null,
@@ -88,7 +92,7 @@ public sealed class DirectionalInstructionHandlerTests
 
 	private static void Randomizer(Direction direction)
 	{
-		var cells = new List<Cell>() { new Cell(
+		var cells = new List<Cell>() { new(
 				new Point(0, 0), DirectionalInstructionHandler.RandomInstruction) };
 
 		using var random = new MockSecureRandom(direction);

@@ -11,10 +11,12 @@ internal sealed class StackInstructionHandler
 	internal const char SwapInstruction = '\\';
 
 	internal override ImmutableArray<char> GetInstructions() =>
-		ImmutableArray.Create(StackInstructionHandler.ClearInstruction,
-			StackInstructionHandler.DuplicateInstruction,
-			StackInstructionHandler.PopInstruction,
-			StackInstructionHandler.SwapInstruction);
+		[
+		   StackInstructionHandler.ClearInstruction,
+		   StackInstructionHandler.DuplicateInstruction,
+		   StackInstructionHandler.PopInstruction,
+		   StackInstructionHandler.SwapInstruction,
+		];
 
 	private static void HandleClear(ExecutionContext context) => context.Values.Clear();
 

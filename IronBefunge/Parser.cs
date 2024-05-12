@@ -26,7 +26,7 @@ public sealed class Parser
 			}
 		}
 
-		return cells.ToImmutableArray();
+		return [.. cells];
 	}
 
 	private static ImmutableArray<Cell> ProcessLine(string line, int y)
@@ -43,6 +43,6 @@ public sealed class Parser
 			}
 		}
 
-		return cells.ToImmutableArray();
+		return [.. cells];
 	}
 }

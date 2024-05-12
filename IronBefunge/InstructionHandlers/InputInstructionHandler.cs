@@ -12,8 +12,7 @@ internal sealed class InputInstructionHandler
 	internal const string NumericMessage = "Please enter in a numeric value:";
 
 	internal override ImmutableArray<char> GetInstructions() =>
-		ImmutableArray.Create(InputInstructionHandler.AsciiInstruction,
-			InputInstructionHandler.NumericInstruction);
+		[InputInstructionHandler.AsciiInstruction, InputInstructionHandler.NumericInstruction];
 
 	private static void HandleAscii(ExecutionContext context)
 	{

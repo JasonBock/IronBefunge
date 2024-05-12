@@ -8,15 +8,24 @@ public sealed class NumberInstructionHandlerTests
 	 : InstructionHandlerTests
 {
 	protected override ImmutableArray<char> GetExpectedHandledInstructions() =>
-		ImmutableArray.Create(NumberInstructionHandler.ZeroInstruction,
-			NumberInstructionHandler.OneInstruction, NumberInstructionHandler.TwoInstruction,
-			NumberInstructionHandler.ThreeInstruction, NumberInstructionHandler.FourInstruction,
-			NumberInstructionHandler.FiveInstruction, NumberInstructionHandler.SixInstruction,
-			NumberInstructionHandler.SevenInstruction, NumberInstructionHandler.EightInstruction,
-			NumberInstructionHandler.NineInstruction, NumberInstructionHandler.TenInstruction,
-			NumberInstructionHandler.ElevenInstruction, NumberInstructionHandler.TwelveInstruction,
-			NumberInstructionHandler.ThirteenInstruction, NumberInstructionHandler.FourteenInstruction,
-			NumberInstructionHandler.FifteenInstruction);
+		[
+		   NumberInstructionHandler.ZeroInstruction,
+		   NumberInstructionHandler.OneInstruction,
+		   NumberInstructionHandler.TwoInstruction,
+		   NumberInstructionHandler.ThreeInstruction,
+		   NumberInstructionHandler.FourInstruction,
+		   NumberInstructionHandler.FiveInstruction,
+		   NumberInstructionHandler.SixInstruction,
+		   NumberInstructionHandler.SevenInstruction,
+		   NumberInstructionHandler.EightInstruction,
+		   NumberInstructionHandler.NineInstruction,
+		   NumberInstructionHandler.TenInstruction,
+		   NumberInstructionHandler.ElevenInstruction,
+		   NumberInstructionHandler.TwelveInstruction,
+		   NumberInstructionHandler.ThirteenInstruction,
+		   NumberInstructionHandler.FourteenInstruction,
+		   NumberInstructionHandler.FifteenInstruction,
+		];
 
 	protected override Type GetHandlerType() => typeof(NumberInstructionHandler);
 
@@ -39,9 +48,9 @@ public sealed class NumberInstructionHandlerTests
 	public static void Handle(char instruction, int expectedValue)
 	{
 		var cells = new List<Cell>()
-			{
-				new Cell(new(0, 0), instruction)
-			};
+		{
+			new(new Point(0, 0), instruction)
+		};
 		var stackCount = 0;
 
 		InstructionHandlerRunner.Run(new NumberInstructionHandler(), cells, (context) =>
@@ -50,10 +59,10 @@ public sealed class NumberInstructionHandlerTests
 		}, (context, result) =>
 		{
 			Assert.Multiple(() =>
-				 {
-					 Assert.That(context.Values, Has.Count.EqualTo(stackCount + 1), nameof(context.Values.Count));
-					 Assert.That(context.Values.Peek(), Is.EqualTo(expectedValue), nameof(context.Values.Peek));
-				 });
+			{
+				Assert.That(context.Values, Has.Count.EqualTo(stackCount + 1), nameof(context.Values.Count));
+				Assert.That(context.Values.Peek(), Is.EqualTo(expectedValue), nameof(context.Values.Peek));
+			});
 		});
 	}
 }

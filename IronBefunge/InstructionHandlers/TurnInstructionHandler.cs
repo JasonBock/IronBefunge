@@ -13,9 +13,14 @@ internal sealed class TurnInstructionHandler
 	internal const char UpDownInstruction = '|';
 
 	internal override ImmutableArray<char> GetInstructions() =>
-		ImmutableArray.Create(TurnInstructionHandler.CompareInstruction, TurnInstructionHandler.LeftRightInstruction,
-			TurnInstructionHandler.ReverseInstruction, TurnInstructionHandler.TurnLeftInstruction,
-			TurnInstructionHandler.TurnRightInstruction, TurnInstructionHandler.UpDownInstruction);
+		[
+		   TurnInstructionHandler.CompareInstruction,
+		   TurnInstructionHandler.LeftRightInstruction,
+		   TurnInstructionHandler.ReverseInstruction,
+		   TurnInstructionHandler.TurnLeftInstruction,
+		   TurnInstructionHandler.TurnRightInstruction,
+		   TurnInstructionHandler.UpDownInstruction,
+		];
 
 	internal override void OnHandle(ExecutionContext context)
 	{

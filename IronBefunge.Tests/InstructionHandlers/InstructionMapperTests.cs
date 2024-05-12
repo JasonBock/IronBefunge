@@ -19,10 +19,8 @@ public static class InstructionMapperTests
 
 			using (var randomizer = new SecureRandom())
 			{
-				var context = new ExecutionContext(new List<Cell>
-				{
-						new Cell(new Point(0, 0), '>')
-				}, reader, writer, trace, randomizer);
+				var context = new ExecutionContext([ new Cell(new Point(0, 0), '>') ], 
+					reader, writer, trace, randomizer);
 
 				var mapper = new InstructionMapper();
 				mapper.Handle(context);
@@ -45,10 +43,10 @@ public static class InstructionMapperTests
 
 			using (var randomizer = new SecureRandom())
 			{
-				var context = new ExecutionContext(new()
-				{
+				var context = new ExecutionContext(
+				[
 					new(new(0, 0), 'M')
-				}, reader, writer, trace, randomizer);
+				], reader, writer, trace, randomizer);
 
 				var mapper = new InstructionMapper();
 				mapper.Handle(context);

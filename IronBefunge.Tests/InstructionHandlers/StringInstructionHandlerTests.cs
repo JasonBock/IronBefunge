@@ -4,21 +4,21 @@ using System.Globalization;
 
 namespace IronBefunge.Tests.InstructionHandlers;
 
-   public static class StringInstructionHandlerTests
+public static class StringInstructionHandlerTests
 {
 	[Test]
 	public static void HandleInStringMode()
 	{
 		//"   Hi  "
-		var cells = new List<Cell>() 
+		var cells = new List<Cell>()
 		{
-			new Cell(new(0, 0), StringInstructionHandler.StringModeInstruction),
-			new Cell(new(4, 0), 'H'),
-			new Cell(new(5, 0), 'i'),
-			new Cell(new(8, 0), StringInstructionHandler.StringModeInstruction),
+			new(new Point(0, 0), StringInstructionHandler.StringModeInstruction),
+			new(new Point(4, 0), 'H'),
+			new(new Point(5, 0), 'i'),
+			new(new Point(8, 0), StringInstructionHandler.StringModeInstruction),
 		};
 
-		InstructionHandlerRunner.Run(new StringInstructionHandler(), cells, null, 
+		InstructionHandlerRunner.Run(new StringInstructionHandler(), cells, null,
 			(context, result) =>
 			{
 				Assert.Multiple(() =>
@@ -27,11 +27,11 @@ namespace IronBefunge.Tests.InstructionHandlers;
 
 					Assert.That(count, Is.EqualTo(7), nameof(context.Values.Count));
 
-					for(var i = 0; i < count; i++)
+					for (var i = 0; i < count; i++)
 					{
 						var character = Convert.ToChar(context.Values.Pop());
-						
-						if(i >= 0 && i <= 1 || i >= 4 && i <= 6)
+
+						if (i >= 0 && i <= 1 || i >= 4 && i <= 6)
 						{
 							Assert.That(character, Is.EqualTo(' '), i.ToString(CultureInfo.CurrentCulture));
 						}
@@ -54,10 +54,10 @@ namespace IronBefunge.Tests.InstructionHandlers;
 		//"Hi"
 		var cells = new List<Cell>()
 		{
-			new Cell(new(0, 0), StringInstructionHandler.StringModeInstruction),
-			new Cell(new(1, 0), 'H'),
-			new Cell(new(2, 0), 'i'),
-			new Cell(new(3, 0), StringInstructionHandler.StringModeInstruction),
+			new(new Point(0, 0), StringInstructionHandler.StringModeInstruction),
+			new(new Point(1, 0), 'H'),
+			new(new Point(2, 0), 'i'),
+			new(new Point(3, 0), StringInstructionHandler.StringModeInstruction),
 		};
 
 		InstructionHandlerRunner.Run(new StringInstructionHandler(), cells, null,
@@ -91,9 +91,9 @@ namespace IronBefunge.Tests.InstructionHandlers;
 		//'Q,
 		var cells = new List<Cell>()
 		{
-			new Cell(new(0, 0), StringInstructionHandler.FetchCharacterInstruction),
-			new Cell(new(1, 0), 'Q'),
-			new Cell(new(2, 0), ','),
+			new(new Point(0, 0), StringInstructionHandler.FetchCharacterInstruction),
+			new(new Point(1, 0), 'Q'),
+			new(new Point(2, 0), ','),
 		};
 
 		InstructionHandlerRunner.Run(new StringInstructionHandler(), cells, null,
@@ -116,9 +116,9 @@ namespace IronBefunge.Tests.InstructionHandlers;
 		//Qs,
 		var cells = new List<Cell>()
 		{
-			new Cell(new(0, 0), 'Q'),
-			new Cell(new(1, 0), StringInstructionHandler.StoreCharacterInstruction),
-			new Cell(new(2, 0), ','),
+			new(new Point(0, 0), 'Q'),
+			new(new Point(1, 0), StringInstructionHandler.StoreCharacterInstruction),
+			new(new Point(2, 0), ','),
 		};
 
 		InstructionHandlerRunner.Run(new StringInstructionHandler(), cells, (context) =>

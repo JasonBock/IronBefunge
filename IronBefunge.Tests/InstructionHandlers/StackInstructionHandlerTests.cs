@@ -8,10 +8,12 @@ public sealed class StackInstructionHandlerTests
 	: InstructionHandlerTests
 {
 	protected override ImmutableArray<char> GetExpectedHandledInstructions() =>
-		ImmutableArray.Create(StackInstructionHandler.ClearInstruction,
-			StackInstructionHandler.DuplicateInstruction,
-			StackInstructionHandler.PopInstruction,
-			StackInstructionHandler.SwapInstruction);
+		[
+		   StackInstructionHandler.ClearInstruction,
+		   StackInstructionHandler.DuplicateInstruction,
+		   StackInstructionHandler.PopInstruction,
+		   StackInstructionHandler.SwapInstruction,
+		];
 
 	protected override Type GetHandlerType() => typeof(StackInstructionHandler);
 

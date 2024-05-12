@@ -9,8 +9,7 @@ internal sealed class SpaceInstructionHandler
 	internal const char PutInstruction = 'p';
 
 	internal override ImmutableArray<char> GetInstructions() =>
-		ImmutableArray.Create(SpaceInstructionHandler.GetInstruction,
-			SpaceInstructionHandler.PutInstruction);
+		[SpaceInstructionHandler.GetInstruction, SpaceInstructionHandler.PutInstruction];
 
 	private static void HandleGet(ExecutionContext context)
 	{

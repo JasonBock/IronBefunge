@@ -59,10 +59,7 @@ public sealed class Interpreter
 
 	private static void VerifyFile(FileInfo file)
 	{
-		if (file is null)
-		{
-			throw new ArgumentNullException(nameof(file));
-		}
+		ArgumentNullException.ThrowIfNull(file);
 
 		if (file.Extension != Interpreter.FileExtension)
 		{

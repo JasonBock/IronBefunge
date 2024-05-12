@@ -24,15 +24,24 @@ internal sealed class NumberInstructionHandler
 	internal const char FifteenInstruction = 'f';
 
 	internal override ImmutableArray<char> GetInstructions() =>
-		ImmutableArray.Create(NumberInstructionHandler.ZeroInstruction,
-			NumberInstructionHandler.OneInstruction, NumberInstructionHandler.TwoInstruction,
-			NumberInstructionHandler.ThreeInstruction, NumberInstructionHandler.FourInstruction,
-			NumberInstructionHandler.FiveInstruction, NumberInstructionHandler.SixInstruction,
-			NumberInstructionHandler.SevenInstruction, NumberInstructionHandler.EightInstruction,
-			NumberInstructionHandler.NineInstruction, NumberInstructionHandler.TenInstruction,
-			NumberInstructionHandler.ElevenInstruction, NumberInstructionHandler.TwelveInstruction,
-			NumberInstructionHandler.ThirteenInstruction, NumberInstructionHandler.FourteenInstruction,
-			NumberInstructionHandler.FifteenInstruction);
+		[
+		   NumberInstructionHandler.ZeroInstruction,
+		   NumberInstructionHandler.OneInstruction,
+		   NumberInstructionHandler.TwoInstruction,
+		   NumberInstructionHandler.ThreeInstruction,
+		   NumberInstructionHandler.FourInstruction,
+		   NumberInstructionHandler.FiveInstruction,
+		   NumberInstructionHandler.SixInstruction,
+		   NumberInstructionHandler.SevenInstruction,
+		   NumberInstructionHandler.EightInstruction,
+		   NumberInstructionHandler.NineInstruction,
+		   NumberInstructionHandler.TenInstruction,
+		   NumberInstructionHandler.ElevenInstruction,
+		   NumberInstructionHandler.TwelveInstruction,
+		   NumberInstructionHandler.ThirteenInstruction,
+		   NumberInstructionHandler.FourteenInstruction,
+		   NumberInstructionHandler.FifteenInstruction,
+		];
 
 	internal override void OnHandle(ExecutionContext context) =>
 		context.Values.Push(int.Parse(

@@ -4,7 +4,7 @@ namespace IronBefunge.InstructionHandlers;
 
 internal sealed class InstructionMapper
 {
-	private readonly Dictionary<char, IInstructionHandler> mappings = new();
+	private readonly Dictionary<char, IInstructionHandler> mappings = [];
 
 	internal InstructionMapper()
 		: base()

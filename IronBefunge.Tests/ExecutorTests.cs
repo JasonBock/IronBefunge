@@ -12,7 +12,7 @@ public static class ExecutorTests
 	{
 		using var reader = new StringReader(string.Empty);
 		using var writer = new StringWriter(CultureInfo.CurrentCulture);
-		Assert.That(() => new Executor(ImmutableArray.Create<Cell>(), reader, writer, (null as SecureRandom)!),
+		Assert.That(() => new Executor([], reader, writer, (null as SecureRandom)!),
 			Throws.TypeOf<ArgumentNullException>());
 	}
 
@@ -20,7 +20,7 @@ public static class ExecutorTests
 	public static void CreateWithNullReader()
 	{
 		using var writer = new StringWriter(CultureInfo.CurrentCulture);
-		Assert.That(() => new Executor(ImmutableArray.Create<Cell>(), null!, writer),
+		Assert.That(() => new Executor([], null!, writer),
 			Throws.TypeOf<ArgumentNullException>());
 	}
 
@@ -28,7 +28,7 @@ public static class ExecutorTests
 	public static void CreateWithNullWriter()
 	{
 		using var reader = new StringReader(string.Empty);
-		Assert.That(() => new Executor(ImmutableArray.Create<Cell>(), reader, null!),
+		Assert.That(() => new Executor([], reader, null!),
 			Throws.TypeOf<ArgumentNullException>());
 	}
 
@@ -36,7 +36,7 @@ public static class ExecutorTests
 	public static void CreateWithNullTrace()
 	{
 		using var reader = new StringReader(string.Empty);
-		Assert.That(() => new Executor(ImmutableArray.Create<Cell>(), reader, null!, (null as TextWriter)!),
+		Assert.That(() => new Executor([], reader, null!, (null as TextWriter)!),
 			Throws.TypeOf<ArgumentNullException>());
 	}
 
@@ -46,7 +46,7 @@ public static class ExecutorTests
 		using var reader = new StringReader(string.Empty);
 		using var writer = new StringWriter();
 		using var executor = new Executor(
-			new Parser(new[] { ">  @" }).Parse(),
+			new Parser([">  @"]).Parse(),
 			reader, writer);
 		Assert.That(() => executor.Execute(), Is.EqualTo(0));
 	}
@@ -58,7 +58,7 @@ public static class ExecutorTests
 		using var writer = new StringWriter();
 		using var trace = new StringWriter();
 		using var executor = new Executor(
-			new Parser(new[] { ">  @" }).Parse(),
+			new Parser([">  @"]).Parse(),
 			reader, writer, trace);
 		Assert.That(() => executor.Execute(), Is.EqualTo(0));
 	}
@@ -69,7 +69,7 @@ public static class ExecutorTests
 		using var reader = new StringReader(string.Empty);
 		using var writer = new StringWriter();
 		Assert.That(() => new Executor(
-			new Parser(new[] { ">  @" }).Parse(),
+			new Parser([">  @"]).Parse(),
 			reader, writer, (null as TextWriter)!), Throws.TypeOf<ArgumentNullException>());
 	}
 
@@ -80,7 +80,7 @@ public static class ExecutorTests
 		using var writer = new StringWriter();
 		using var random = new SecureRandom();
 		using var executor = new Executor(
-			new Parser(new[] { ">  @" }).Parse(),
+			new Parser([">  @"]).Parse(),
 			reader, writer, random);
 		Assert.That(() => executor.Execute(), Is.EqualTo(0));
 	}
@@ -91,7 +91,7 @@ public static class ExecutorTests
 		using var reader = new StringReader(string.Empty);
 		using var writer = new StringWriter();
 		Assert.That(() => new Executor(
-			new Parser(new[] { ">  @" }).Parse(),
+			new Parser([">  @"]).Parse(),
 			reader, writer, (null as SecureRandom)!), Throws.TypeOf<ArgumentNullException>());
 	}
 
@@ -103,7 +103,7 @@ public static class ExecutorTests
 		using var trace = new StringWriter();
 		using var random = new SecureRandom();
 		using var executor = new Executor(
-			new Parser(new[] { ">  @" }).Parse(),
+			new Parser([">  @"]).Parse(),
 			reader, writer, trace, random);
 		Assert.That(() => executor.Execute(), Is.EqualTo(0));
 	}
@@ -115,7 +115,7 @@ public static class ExecutorTests
 		using var writer = new StringWriter();
 		using var random = new SecureRandom();
 		Assert.That(() => new Executor(
-			new Parser(new[] { ">  @" }).Parse(),
+			new Parser([">  @"]).Parse(),
 			reader, writer, null!, random), Throws.TypeOf<ArgumentNullException>());
 	}
 
@@ -125,7 +125,7 @@ public static class ExecutorTests
 		using var reader = new StringReader(string.Empty);
 		using var writer = new StringWriter();
 		using var executor = new Executor(
-			new Parser(new[] { "> \" \" @" }).Parse(),
+			new Parser(["> \" \" @"]).Parse(),
 			reader, writer, writer);
 		Assert.That(() => executor.Execute(), Is.EqualTo(0));
 	}
@@ -136,7 +136,7 @@ public static class ExecutorTests
 		using var reader = new StringReader(string.Empty);
 		using var writer = new StringWriter();
 		using var executor = new Executor(
-			new Parser(new[] { ">9q" }).Parse(),
+			new Parser([">9q"]).Parse(),
 			reader, writer, writer);
 		Assert.That(() => executor.Execute(), Is.EqualTo(9));
 	}
@@ -147,7 +147,7 @@ public static class ExecutorTests
 		using var reader = new StringReader(string.Empty);
 		using var writer = new StringWriter();
 		using var executor = new Executor(
-			new Parser(new[] { ">q" }).Parse(),
+			new Parser([">q"]).Parse(),
 			reader, writer, writer);
 		Assert.That(() => executor.Execute(), Is.EqualTo(0));
 	}

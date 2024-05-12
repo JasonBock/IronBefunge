@@ -8,7 +8,7 @@ public sealed class NopInstructionHandlerTests
 	: InstructionHandlerTests
 {
 	protected override ImmutableArray<char> GetExpectedHandledInstructions() =>
-		ImmutableArray.Create(NopInstructionHandler.NopInstruction);
+		[NopInstructionHandler.NopInstruction];
 
 	protected override Type GetHandlerType() => typeof(NopInstructionHandler);
 
@@ -16,9 +16,9 @@ public sealed class NopInstructionHandlerTests
 	public static void HandleGet()
 	{
 		var cells = new List<Cell>()
-			{
-				new Cell(new(0, 0), NopInstructionHandler.NopInstruction)
-			};
+		{
+			new(new Point(0, 0), NopInstructionHandler.NopInstruction)
+		};
 
 		var stackCount = 0;
 		var direction = Direction.Down;
@@ -30,10 +30,10 @@ public sealed class NopInstructionHandlerTests
 		}, (context, result) =>
 		{
 			Assert.Multiple(() =>
-				 {
-					 Assert.That(context.Values, Has.Count.EqualTo(stackCount), nameof(context.Values.Count));
-					 Assert.That(context.Direction, Is.EqualTo(direction), nameof(context.Direction));
-				 });
+			{
+				Assert.That(context.Values, Has.Count.EqualTo(stackCount), nameof(context.Values.Count));
+				Assert.That(context.Direction, Is.EqualTo(direction), nameof(context.Direction));
+			});
 		});
 	}
 }

@@ -8,9 +8,14 @@ public sealed class TurnInstructionHandlerTests
 	: InstructionHandlerTests
 {
 	protected override ImmutableArray<char> GetExpectedHandledInstructions() =>
-		ImmutableArray.Create(TurnInstructionHandler.CompareInstruction, TurnInstructionHandler.LeftRightInstruction,
-			TurnInstructionHandler.ReverseInstruction, TurnInstructionHandler.TurnLeftInstruction,
-			TurnInstructionHandler.TurnRightInstruction, TurnInstructionHandler.UpDownInstruction);
+		[
+		   TurnInstructionHandler.CompareInstruction,
+		   TurnInstructionHandler.LeftRightInstruction,
+		   TurnInstructionHandler.ReverseInstruction,
+		   TurnInstructionHandler.TurnLeftInstruction,
+		   TurnInstructionHandler.TurnRightInstruction,
+		   TurnInstructionHandler.UpDownInstruction,
+		];
 
 	protected override Type GetHandlerType() => typeof(TurnInstructionHandler);
 
@@ -28,7 +33,7 @@ public sealed class TurnInstructionHandlerTests
 	[TestCase(0, 0, Direction.Up, Direction.Up)]
 	public static void HandleCompare(int a, int b, Direction currentDiection, Direction expectedDirection)
 	{
-		var cells = new List<Cell>() { new Cell(new(0, 0), TurnInstructionHandler.CompareInstruction) };
+		var cells = new List<Cell>() { new(new Point(0, 0), TurnInstructionHandler.CompareInstruction) };
 		var stackCount = 0;
 
 		InstructionHandlerRunner.Run(new TurnInstructionHandler(), cells, (context) =>
@@ -40,10 +45,10 @@ public sealed class TurnInstructionHandlerTests
 		}, (context, result) =>
 		{
 			Assert.Multiple(() =>
-				 {
-					 Assert.That(context.Values, Has.Count.EqualTo(stackCount - 2), nameof(context.Values.Count));
-					 Assert.That(context.Direction, Is.EqualTo(expectedDirection), nameof(context.Direction));
-				 });
+			{
+				Assert.That(context.Values, Has.Count.EqualTo(stackCount - 2), nameof(context.Values.Count));
+				Assert.That(context.Direction, Is.EqualTo(expectedDirection), nameof(context.Direction));
+			});
 		});
 	}
 
@@ -53,7 +58,7 @@ public sealed class TurnInstructionHandlerTests
 	[TestCase(Direction.Up, Direction.Up)]
 	public static void HandleCompareWithEmptyStack(Direction currentDiection, Direction expectedDirection)
 	{
-		var cells = new List<Cell>() { new Cell(new(0, 0), TurnInstructionHandler.CompareInstruction) };
+		var cells = new List<Cell>() { new(new Point(0, 0), TurnInstructionHandler.CompareInstruction) };
 		var stackCount = 0;
 
 		InstructionHandlerRunner.Run(new TurnInstructionHandler(), cells, (context) =>
@@ -63,10 +68,10 @@ public sealed class TurnInstructionHandlerTests
 		}, (context, result) =>
 		{
 			Assert.Multiple(() =>
-				 {
-					 Assert.That(context.Values, Has.Count.EqualTo(stackCount), nameof(context.Values.Count));
-					 Assert.That(context.Direction, Is.EqualTo(expectedDirection), nameof(context.Direction));
-				 });
+			{
+				Assert.That(context.Values, Has.Count.EqualTo(stackCount), nameof(context.Values.Count));
+				Assert.That(context.Direction, Is.EqualTo(expectedDirection), nameof(context.Direction));
+			});
 		});
 	}
 
@@ -76,7 +81,7 @@ public sealed class TurnInstructionHandlerTests
 	[TestCase(TurnInstructionHandler.ReverseInstruction, Direction.Up, Direction.Down)]
 	public static void HandleReverse(char instruction, Direction currentDiection, Direction expectedDirection)
 	{
-		var cells = new List<Cell>() { new Cell(new(0, 0), instruction) };
+		var cells = new List<Cell>() { new(new Point(0, 0), instruction) };
 		var stackCount = 0;
 
 		InstructionHandlerRunner.Run(new TurnInstructionHandler(), cells, (context) =>
@@ -86,10 +91,10 @@ public sealed class TurnInstructionHandlerTests
 		}, (context, result) =>
 		{
 			Assert.Multiple(() =>
-				 {
-					 Assert.That(context.Values, Has.Count.EqualTo(stackCount), nameof(context.Values.Count));
-					 Assert.That(context.Direction, Is.EqualTo(expectedDirection), nameof(context.Direction));
-				 });
+			{
+				Assert.That(context.Values, Has.Count.EqualTo(stackCount), nameof(context.Values.Count));
+				Assert.That(context.Direction, Is.EqualTo(expectedDirection), nameof(context.Direction));
+			});
 		});
 	}
 
@@ -103,7 +108,7 @@ public sealed class TurnInstructionHandlerTests
 	[TestCase(TurnInstructionHandler.TurnLeftInstruction, Direction.Down, Direction.Right)]
 	public static void HandleTurnRightAndLeft(char instruction, Direction currentDiection, Direction expectedDirection)
 	{
-		var cells = new List<Cell>() { new Cell(new(0, 0), instruction) };
+		var cells = new List<Cell>() { new(new Point(0, 0), instruction) };
 		var stackCount = 0;
 
 		InstructionHandlerRunner.Run(new TurnInstructionHandler(), cells, (context) =>
@@ -113,17 +118,17 @@ public sealed class TurnInstructionHandlerTests
 		}, (context, result) =>
 		{
 			Assert.Multiple(() =>
-				 {
-					 Assert.That(context.Values, Has.Count.EqualTo(stackCount), nameof(context.Values.Count));
-					 Assert.That(context.Direction, Is.EqualTo(expectedDirection), nameof(context.Direction));
-				 });
+			{
+				Assert.That(context.Values, Has.Count.EqualTo(stackCount), nameof(context.Values.Count));
+				Assert.That(context.Direction, Is.EqualTo(expectedDirection), nameof(context.Direction));
+			});
 		});
 	}
 
 	[Test]
 	public static void HandleGoingDown()
 	{
-		var cells = new List<Cell>() { new Cell(
+		var cells = new List<Cell>() { new(
 				new Point(0, 0), TurnInstructionHandler.UpDownInstruction) };
 
 		var stackCount = 0;
@@ -135,18 +140,17 @@ public sealed class TurnInstructionHandlerTests
 		}, (context, result) =>
 		{
 			Assert.Multiple(() =>
-				 {
-					 Assert.That(context.Values, Has.Count.EqualTo(stackCount - 1), nameof(context.Values.Count));
-					 Assert.That(context.Direction, Is.EqualTo(Direction.Down), nameof(context.Direction));
-				 });
+			{
+				Assert.That(context.Values, Has.Count.EqualTo(stackCount - 1), nameof(context.Values.Count));
+				Assert.That(context.Direction, Is.EqualTo(Direction.Down), nameof(context.Direction));
+			});
 		});
 	}
 
 	[Test]
 	public static void HandleGoingDownOrUpWithEmptyStack()
 	{
-		var cells = new List<Cell>() { new Cell(
-				new Point(0, 0), TurnInstructionHandler.UpDownInstruction) };
+		var cells = new List<Cell>() { new(new Point(0, 0), TurnInstructionHandler.UpDownInstruction) };
 
 		var stackCount = 0;
 
@@ -156,18 +160,17 @@ public sealed class TurnInstructionHandlerTests
 		}, (context, result) =>
 		{
 			Assert.Multiple(() =>
-				 {
-					 Assert.That(context.Values, Has.Count.EqualTo(stackCount), nameof(context.Values.Count));
-					 Assert.That(context.Direction, Is.EqualTo(Direction.Down), nameof(context.Direction));
-				 });
+			{
+				Assert.That(context.Values, Has.Count.EqualTo(stackCount), nameof(context.Values.Count));
+				Assert.That(context.Direction, Is.EqualTo(Direction.Down), nameof(context.Direction));
+			});
 		});
 	}
 
 	[Test]
 	public static void HandleGoingLeft()
 	{
-		var cells = new List<Cell>() { new Cell(
-				new Point(0, 0), TurnInstructionHandler.LeftRightInstruction) };
+		var cells = new List<Cell>() { new(new Point(0, 0), TurnInstructionHandler.LeftRightInstruction) };
 
 		var stackCount = 0;
 
@@ -178,18 +181,17 @@ public sealed class TurnInstructionHandlerTests
 		}, (context, result) =>
 		{
 			Assert.Multiple(() =>
-				 {
-					 Assert.That(context.Values, Has.Count.EqualTo(stackCount - 1), nameof(context.Values.Count));
-					 Assert.That(context.Direction, Is.EqualTo(Direction.Left), nameof(context.Direction));
-				 });
+			{
+				Assert.That(context.Values, Has.Count.EqualTo(stackCount - 1), nameof(context.Values.Count));
+				Assert.That(context.Direction, Is.EqualTo(Direction.Left), nameof(context.Direction));
+			});
 		});
 	}
 
 	[Test]
 	public static void HandleGoingLeftOrRightWithEmptyStack()
 	{
-		var cells = new List<Cell>() { new Cell(
-				new Point(0, 0), TurnInstructionHandler.LeftRightInstruction) };
+		var cells = new List<Cell>() { new(new Point(0, 0), TurnInstructionHandler.LeftRightInstruction) };
 
 		var stackCount = 0;
 
@@ -199,18 +201,17 @@ public sealed class TurnInstructionHandlerTests
 		}, (context, result) =>
 		{
 			Assert.Multiple(() =>
-				 {
-					 Assert.That(context.Values, Has.Count.EqualTo(stackCount), nameof(context.Values.Count));
-					 Assert.That(context.Direction, Is.EqualTo(Direction.Right), nameof(context.Direction));
-				 });
+			{
+				Assert.That(context.Values, Has.Count.EqualTo(stackCount), nameof(context.Values.Count));
+				Assert.That(context.Direction, Is.EqualTo(Direction.Right), nameof(context.Direction));
+			});
 		});
 	}
 
 	[Test]
 	public static void HandleGoingRight()
 	{
-		var cells = new List<Cell>() { new Cell(
-				new Point(0, 0), TurnInstructionHandler.LeftRightInstruction) };
+		var cells = new List<Cell>() { new(new Point(0, 0), TurnInstructionHandler.LeftRightInstruction) };
 
 		var stackCount = 0;
 
@@ -221,18 +222,17 @@ public sealed class TurnInstructionHandlerTests
 		}, (context, result) =>
 		{
 			Assert.Multiple(() =>
-				 {
-					 Assert.That(context.Values, Has.Count.EqualTo(stackCount - 1), nameof(context.Values.Count));
-					 Assert.That(context.Direction, Is.EqualTo(Direction.Right), nameof(context.Direction));
-				 });
+			{
+				Assert.That(context.Values, Has.Count.EqualTo(stackCount - 1), nameof(context.Values.Count));
+				Assert.That(context.Direction, Is.EqualTo(Direction.Right), nameof(context.Direction));
+			});
 		});
 	}
 
 	[Test]
 	public static void HandleGoingUp()
 	{
-		var cells = new List<Cell>() { new Cell(
-				new Point(0, 0), TurnInstructionHandler.UpDownInstruction) };
+		var cells = new List<Cell>() { new(new Point(0, 0), TurnInstructionHandler.UpDownInstruction) };
 
 		var stackCount = 0;
 
@@ -243,10 +243,10 @@ public sealed class TurnInstructionHandlerTests
 		}, (context, result) =>
 		{
 			Assert.Multiple(() =>
-				 {
-					 Assert.That(context.Values, Has.Count.EqualTo(stackCount - 1), nameof(context.Values.Count));
-					 Assert.That(context.Direction, Is.EqualTo(Direction.Up), nameof(context.Direction));
-				 });
+			{
+				Assert.That(context.Values, Has.Count.EqualTo(stackCount - 1), nameof(context.Values.Count));
+				Assert.That(context.Direction, Is.EqualTo(Direction.Up), nameof(context.Direction));
+			});
 		});
 	}
 }

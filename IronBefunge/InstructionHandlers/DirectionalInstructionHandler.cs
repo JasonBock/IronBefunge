@@ -13,10 +13,14 @@ internal sealed class DirectionalInstructionHandler
 	internal const char UpInstruction = '^';
 
 	internal override ImmutableArray<char> GetInstructions() =>
-		ImmutableArray.Create(DirectionalInstructionHandler.DownInstruction,
-			DirectionalInstructionHandler.LeftInstruction, DirectionalInstructionHandler.RandomInstruction,
-			DirectionalInstructionHandler.RightInstruction, DirectionalInstructionHandler.TrampolineInstruction,
-			DirectionalInstructionHandler.UpInstruction);
+		[
+		   DirectionalInstructionHandler.DownInstruction,
+		   DirectionalInstructionHandler.LeftInstruction,
+		   DirectionalInstructionHandler.RandomInstruction,
+		   DirectionalInstructionHandler.RightInstruction,
+		   DirectionalInstructionHandler.TrampolineInstruction,
+		   DirectionalInstructionHandler.UpInstruction,
+		];
 
 	internal override void OnHandle(ExecutionContext context)
 	{

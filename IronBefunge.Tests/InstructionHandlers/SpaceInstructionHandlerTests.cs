@@ -8,8 +8,7 @@ public sealed class SpaceInstructionHandlerTests
 	: InstructionHandlerTests
 {
 	protected override ImmutableArray<char> GetExpectedHandledInstructions() =>
-		ImmutableArray.Create(SpaceInstructionHandler.GetInstruction,
-			SpaceInstructionHandler.PutInstruction);
+		[SpaceInstructionHandler.GetInstruction, SpaceInstructionHandler.PutInstruction];
 
 	protected override Type GetHandlerType() => typeof(SpaceInstructionHandler);
 
@@ -17,8 +16,8 @@ public sealed class SpaceInstructionHandlerTests
 	public static void HandleGet()
 	{
 		var cells = new List<Cell>() {
-			new Cell(new(0, 0), SpaceInstructionHandler.GetInstruction),
-			new Cell(new(2, 3), 'w') };
+			new(new Point(0, 0), SpaceInstructionHandler.GetInstruction),
+			new(new Point(2, 3), 'w') };
 
 		var stackCount = 0;
 
@@ -40,7 +39,7 @@ public sealed class SpaceInstructionHandlerTests
 	[Test]
 	public static void HandleGetWhenCellDoesNotExist()
 	{
-		var cells = new List<Cell>() { new Cell(
+		var cells = new List<Cell>() { new(
 			new Point(0, 0), SpaceInstructionHandler.GetInstruction) };
 
 		var stackCount = 0;
@@ -64,8 +63,8 @@ public sealed class SpaceInstructionHandlerTests
 	public static void HandleGetWithOnlyOneValueOnTheStack()
 	{
 		var cells = new List<Cell>() {
-			new Cell(new(0, 0), SpaceInstructionHandler.GetInstruction),
-			new Cell(new(2, 0), 'w') };
+			new(new Point(0, 0), SpaceInstructionHandler.GetInstruction),
+			new(new Point(2, 0), 'w') };
 
 		var stackCount = 0;
 
@@ -87,8 +86,8 @@ public sealed class SpaceInstructionHandlerTests
 	public static void HandleGetWithEmptyStack()
 	{
 		var cells = new List<Cell>() {
-			new Cell(new(0, 0), SpaceInstructionHandler.GetInstruction),
-			new Cell(new(2, 2), 'w') };
+			new(new Point(0, 0), SpaceInstructionHandler.GetInstruction),
+			new(new Point(2, 2), 'w') };
 
 		var stackCount = 0;
 
@@ -109,8 +108,8 @@ public sealed class SpaceInstructionHandlerTests
 	public static void HandlePut()
 	{
 		var cells = new List<Cell>() {
-			new Cell(new(0, 0), SpaceInstructionHandler.PutInstruction),
-			new Cell(new(2, 3), 'w') };
+			new(new Point(0, 0), SpaceInstructionHandler.PutInstruction),
+			new(new Point(2, 3), 'w') };
 		var cellCount = cells.Count;
 		var stackCount = 0;
 
@@ -134,7 +133,7 @@ public sealed class SpaceInstructionHandlerTests
 	[Test]
 	public static void HandlePutWhenCellDoesNotExist()
 	{
-		var cells = new List<Cell>() { new Cell(
+		var cells = new List<Cell>() { new(
 			new Point(0, 0), SpaceInstructionHandler.PutInstruction) };
 		var cellCount = cells.Count;
 		var stackCount = 0;
@@ -160,8 +159,8 @@ public sealed class SpaceInstructionHandlerTests
 	public static void HandlePutWithOnlyTwoValuesOnTheStack()
 	{
 		var cells = new List<Cell>() {
-			new Cell(new(0, 0), SpaceInstructionHandler.PutInstruction),
-			new Cell(new(2, 0), 'w') };
+			new(new Point(0, 0), SpaceInstructionHandler.PutInstruction),
+			new(new Point(2, 0), 'w') };
 		var cellCount = cells.Count;
 		var stackCount = 0;
 
@@ -184,7 +183,7 @@ public sealed class SpaceInstructionHandlerTests
 	[Test]
 	public static void HandlePutWithOnlyOneValueOnTheStack()
 	{
-		var cells = new List<Cell>() { new Cell(
+		var cells = new List<Cell>() { new(
 			new Point(0, 0), SpaceInstructionHandler.PutInstruction) };
 		var cellCount = cells.Count;
 		var stackCount = 0;
@@ -207,7 +206,7 @@ public sealed class SpaceInstructionHandlerTests
 	[Test]
 	public static void HandlePutWithEmptyStack()
 	{
-		var cells = new List<Cell>() { new Cell(
+		var cells = new List<Cell>() { new(
 			new Point(0, 0), SpaceInstructionHandler.PutInstruction) };
 		var cellCount = cells.Count;
 		var stackCount = 0;

@@ -22,7 +22,7 @@ public static class InterpreterTests
 	public static async Task InterpretProgramFromFileWithCorrectFileExtension()
 	{
 		var fileName = $"{Guid.NewGuid():N}{Interpreter.FileExtension}";
-		await File.WriteAllLinesAsync(fileName, new string[] { "@" }).ConfigureAwait(false);
+		await File.WriteAllLinesAsync(fileName, ["@"]).ConfigureAwait(false);
 
 		try
 		{
@@ -42,7 +42,7 @@ public static class InterpreterTests
 	public static async Task InterpretProgramFromFileWithRandom()
 	{
 		var fileName = $"{Guid.NewGuid():N}{Interpreter.FileExtension}";
-		await File.WriteAllLinesAsync(fileName, new string[] { "@" }).ConfigureAwait(false);
+		await File.WriteAllLinesAsync(fileName, ["@"]).ConfigureAwait(false);
 
 		try
 		{
@@ -63,7 +63,7 @@ public static class InterpreterTests
 	public static async Task InterpretProgramFromFileWithTrace()
 	{
 		var fileName = $"{Guid.NewGuid():N}{Interpreter.FileExtension}";
-		await File.WriteAllLinesAsync(fileName, new string[] { "> @" }).ConfigureAwait(false);
+		await File.WriteAllLinesAsync(fileName, ["> @"]).ConfigureAwait(false);
 
 		try
 		{
@@ -98,7 +98,7 @@ public static class InterpreterTests
 			using var reader = new StringReader(string.Empty);
 			using (var trace = new StringWriter(traceBuilder))
 			{
-				using var interpreter = new Interpreter(new string[] { "> @" }, reader, writer, trace, random);
+				using var interpreter = new Interpreter(["> @"], reader, writer, trace, random);
 				Assert.That(() => interpreter.Interpret(), Is.EqualTo(0));
 			}
 			Assert.That(traceBuilder.ToString(), Is.Not.EqualTo(string.Empty));
@@ -108,7 +108,7 @@ public static class InterpreterTests
 	public static async Task InterpretProgramFromFileWithTraceAndRandom()
 	{
 		var fileName = $"{Guid.NewGuid():N}{Interpreter.FileExtension}";
-		await File.WriteAllLinesAsync(fileName, new string[] { "> @" }).ConfigureAwait(false);
+		await File.WriteAllLinesAsync(fileName, ["> @"]).ConfigureAwait(false);
 
 		try
 		{
@@ -137,7 +137,7 @@ public static class InterpreterTests
 	public static async Task InterpretProgramFromFileWithIncorrectFileExtension()
 	{
 		var fileName = $"{Guid.NewGuid():N}.bf";
-		await File.WriteAllLinesAsync(fileName, new string[] { "@" }).ConfigureAwait(false);
+		await File.WriteAllLinesAsync(fileName, ["@"]).ConfigureAwait(false);
 
 		try
 		{

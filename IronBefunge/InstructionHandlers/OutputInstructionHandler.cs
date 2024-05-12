@@ -10,8 +10,7 @@ internal sealed class OutputInstructionHandler
 	internal const char NumericInstruction = '.';
 
 	internal override ImmutableArray<char> GetInstructions() =>
-		ImmutableArray.Create(OutputInstructionHandler.AsciiInstruction,
-			OutputInstructionHandler.NumericInstruction);
+		[OutputInstructionHandler.AsciiInstruction, OutputInstructionHandler.NumericInstruction];
 
 	internal override void OnHandle(ExecutionContext context)
 	{

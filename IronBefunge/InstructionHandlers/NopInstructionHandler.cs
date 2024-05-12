@@ -8,7 +8,7 @@ internal sealed class NopInstructionHandler
 	internal const char NopInstruction = 'z';
 
 	internal override ImmutableArray<char> GetInstructions() =>
-		ImmutableArray.Create(NopInstructionHandler.NopInstruction);
+		[NopInstructionHandler.NopInstruction];
 
 	internal override void OnHandle(ExecutionContext context) { }
 }

@@ -21,16 +21,16 @@ public static class ParserTests
 		Assert.Multiple(() =>
 		{
 			Assert.That(cells, Has.Length.EqualTo(10), nameof(cells.Length));
-			Assert.That(cells, Does.Contain(new Cell(new(3, 0), '<')), "<");
-			Assert.That(cells, Does.Contain(new Cell(new(7, 0), '^')), "^");
-			Assert.That(cells, Does.Contain(new Cell(new(8, 0), '#')), "#");
-			Assert.That(cells, Does.Contain(new Cell(new(9, 0), ':')), ":");
-			Assert.That(cells, Does.Contain(new Cell(new(12, 0), '9')), "9");
-			Assert.That(cells, Does.Contain(new Cell(new(1, 1), '^')), "^");
-			Assert.That(cells, Does.Contain(new Cell(new(3, 1), '<')), "<");
-			Assert.That(cells, Does.Contain(new Cell(new(1, 2), '3')), "3");
-			Assert.That(cells, Does.Contain(new Cell(new(3, 2), '5')), "5");
-			Assert.That(cells, Does.Contain(new Cell(new(5, 2), ':')), ":");
+			Assert.That(cells, Does.Contain(new Cell(new Point(3, 0), '<')), "<");
+			Assert.That(cells, Does.Contain(new Cell(new Point(7, 0), '^')), "^");
+			Assert.That(cells, Does.Contain(new Cell(new Point(8, 0), '#')), "#");
+			Assert.That(cells, Does.Contain(new Cell(new Point(9, 0), ':')), ":");
+			Assert.That(cells, Does.Contain(new Cell(new Point(12, 0), '9')), "9");
+			Assert.That(cells, Does.Contain(new Cell(new Point(1, 1), '^')), "^");
+			Assert.That(cells, Does.Contain(new Cell(new Point(3, 1), '<')), "<");
+			Assert.That(cells, Does.Contain(new Cell(new Point(1, 2), '3')), "3");
+			Assert.That(cells, Does.Contain(new Cell(new Point(3, 2), '5')), "5");
+			Assert.That(cells, Does.Contain(new Cell(new Point(5, 2), ':')), ":");
 		});
 	}
 
@@ -51,11 +51,11 @@ public static class ParserTests
 		Assert.Multiple(() =>
 		{
 			Assert.That(cells, Has.Length.EqualTo(5));
-			Assert.That(cells, Does.Contain(new Cell(new(3, 0), '<')), "<");
-			Assert.That(cells, Does.Contain(new Cell(new(7, 0), '^')), "^");
-			Assert.That(cells, Does.Contain(new Cell(new(8, 0), '#')), "#");
-			Assert.That(cells, Does.Contain(new Cell(new(9, 0), ':')), ":");
-			Assert.That(cells, Does.Contain(new Cell(new(12, 0), '9')), "9");
+			Assert.That(cells, Does.Contain(new Cell(new Point(3, 0), '<')), "<");
+			Assert.That(cells, Does.Contain(new Cell(new Point(7, 0), '^')), "^");
+			Assert.That(cells, Does.Contain(new Cell(new Point(8, 0), '#')), "#");
+			Assert.That(cells, Does.Contain(new Cell(new Point(9, 0), ':')), ":");
+			Assert.That(cells, Does.Contain(new Cell(new Point(12, 0), '9')), "9");
 		});
 	}
 
@@ -69,7 +69,7 @@ public static class ParserTests
 	[Test]
 	public static void ParseWithNullLine()
 	{
-		var cells = new Parser(new string?[] { " ^ < ", null, " 3 5 :" }).Parse();
+		var cells = new Parser([" ^ < ", null, " 3 5 :"]).Parse();
 		Assert.That(cells, Has.Length.EqualTo(5));
 	}
 }
