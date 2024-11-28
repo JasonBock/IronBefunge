@@ -14,12 +14,12 @@ internal sealed class DirectionalInstructionHandler
 
 	internal override ImmutableArray<char> GetInstructions() =>
 		[
-		   DirectionalInstructionHandler.DownInstruction,
-		   DirectionalInstructionHandler.LeftInstruction,
-		   DirectionalInstructionHandler.RandomInstruction,
-		   DirectionalInstructionHandler.RightInstruction,
-		   DirectionalInstructionHandler.TrampolineInstruction,
-		   DirectionalInstructionHandler.UpInstruction,
+			DirectionalInstructionHandler.DownInstruction,
+			DirectionalInstructionHandler.LeftInstruction,
+			DirectionalInstructionHandler.RandomInstruction,
+			DirectionalInstructionHandler.RightInstruction,
+			DirectionalInstructionHandler.TrampolineInstruction,
+			DirectionalInstructionHandler.UpInstruction,
 		];
 
 	internal override void OnHandle(ExecutionContext context)
@@ -43,6 +43,8 @@ internal sealed class DirectionalInstructionHandler
 				break;
 			case DirectionalInstructionHandler.TrampolineInstruction:
 				context.Move();
+				break;
+			default:
 				break;
 		}
 	}

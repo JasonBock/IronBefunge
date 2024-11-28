@@ -13,11 +13,11 @@ internal sealed class MathInstructionHandler
 
 	internal override ImmutableArray<char> GetInstructions() =>
 		[
-		   MathInstructionHandler.AddInstruction,
-		   MathInstructionHandler.DivideInstruction,
-		   MathInstructionHandler.ModInstruction,
-		   MathInstructionHandler.MultiplyInstruction,
-		   MathInstructionHandler.SubtractInstruction,
+			MathInstructionHandler.AddInstruction,
+			MathInstructionHandler.DivideInstruction,
+			MathInstructionHandler.ModInstruction,
+			MathInstructionHandler.MultiplyInstruction,
+			MathInstructionHandler.SubtractInstruction,
 		];
 
 	private static void HandleAddition(ExecutionContext context) =>
@@ -68,6 +68,8 @@ internal sealed class MathInstructionHandler
 				break;
 			case MathInstructionHandler.ModInstruction:
 				MathInstructionHandler.HandleModulo(context);
+				break;
+			default:
 				break;
 		}
 	}

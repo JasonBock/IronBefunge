@@ -95,7 +95,7 @@ public sealed class DirectionalInstructionHandlerTests
 		var cells = new List<Cell>() { new(
 				new Point(0, 0), DirectionalInstructionHandler.RandomInstruction) };
 
-		using var random = new MockSecureRandom(direction);
+		var random = new MockSecureRandom(direction);
 		InstructionHandlerRunner.Run(new DirectionalInstructionHandler(), cells, null,
 			(context, result) =>
 			{

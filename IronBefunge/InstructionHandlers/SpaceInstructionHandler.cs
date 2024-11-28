@@ -58,6 +58,8 @@ internal sealed class SpaceInstructionHandler
 			case SpaceInstructionHandler.PutInstruction:
 				SpaceInstructionHandler.HandlePut(context);
 				break;
+			default:
+				break;
 		}
 	}
 }

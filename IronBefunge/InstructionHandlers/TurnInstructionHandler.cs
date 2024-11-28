@@ -14,12 +14,12 @@ internal sealed class TurnInstructionHandler
 
 	internal override ImmutableArray<char> GetInstructions() =>
 		[
-		   TurnInstructionHandler.CompareInstruction,
-		   TurnInstructionHandler.LeftRightInstruction,
-		   TurnInstructionHandler.ReverseInstruction,
-		   TurnInstructionHandler.TurnLeftInstruction,
-		   TurnInstructionHandler.TurnRightInstruction,
-		   TurnInstructionHandler.UpDownInstruction,
+			TurnInstructionHandler.CompareInstruction,
+			TurnInstructionHandler.LeftRightInstruction,
+			TurnInstructionHandler.ReverseInstruction,
+			TurnInstructionHandler.TurnLeftInstruction,
+			TurnInstructionHandler.TurnRightInstruction,
+			TurnInstructionHandler.UpDownInstruction,
 		];
 
 	internal override void OnHandle(ExecutionContext context)
@@ -30,7 +30,8 @@ internal sealed class TurnInstructionHandler
 				Direction.Right => Direction.Up,
 				Direction.Up => Direction.Left,
 				Direction.Left => Direction.Down,
-				_ => Direction.Right
+				Direction.Down => Direction.Right,
+				_ => throw new NotImplementedException()
 			};
 
 		static Direction TurnRight(Direction currentDirection) =>
@@ -39,7 +40,8 @@ internal sealed class TurnInstructionHandler
 				Direction.Right => Direction.Down,
 				Direction.Down => Direction.Left,
 				Direction.Left => Direction.Up,
-				_ => Direction.Right
+				Direction.Up => Direction.Right,
+				_ => throw new NotImplementedException()
 			};
 
 		switch (context.Current.Value)
@@ -68,7 +70,8 @@ internal sealed class TurnInstructionHandler
 					Direction.Right => Direction.Left,
 					Direction.Down => Direction.Up,
 					Direction.Left => Direction.Right,
-					_ => Direction.Down
+					Direction.Up => Direction.Down,
+					_ => throw new NotImplementedException()
 				};
 				break;
 			case TurnInstructionHandler.TurnRightInstruction:
@@ -80,6 +83,8 @@ internal sealed class TurnInstructionHandler
 			case TurnInstructionHandler.UpDownInstruction:
 				context.EnsureStack(1);
 				context.Direction = context.Values.Pop() == 0 ? Direction.Down : Direction.Up;
+				break;
+			default:
 				break;
 		}
 	}

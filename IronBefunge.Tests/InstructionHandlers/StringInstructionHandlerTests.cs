@@ -31,7 +31,7 @@ public static class StringInstructionHandlerTests
 					{
 						var character = Convert.ToChar(context.Values.Pop());
 
-						if (i >= 0 && i <= 1 || i >= 4 && i <= 6)
+						if (i is (>= 0 and <= 1) or (>= 4 and <= 6))
 						{
 							Assert.That(character, Is.EqualTo(' '), i.ToString(CultureInfo.CurrentCulture));
 						}

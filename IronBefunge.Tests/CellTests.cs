@@ -51,12 +51,12 @@ public static class CellTests
 		Assert.Multiple(() =>
 		{
 #pragma warning disable NUnit2010 // Use EqualConstraint for better assertion messages in case of failure
-			Assert.That(cell == (null as Cell)!, Is.False, "cell == null");
-			Assert.That(cell != (null as Cell)!, Is.True, "cell != null");
-			Assert.That((null as Cell)! == cell, Is.False, "null == cell");
-			Assert.That((null as Cell)! != cell, Is.True, "null != cell");
-			Assert.That((null as Cell)! == (null as Cell)!, Is.True, "null == null");
-			Assert.That((null as Cell)! != (null as Cell)!, Is.False, "null != null");
+			Assert.That(cell == null!, Is.False, "cell == null");
+			Assert.That(cell != null!, Is.True, "cell != null");
+			Assert.That(null! == cell, Is.False, "null == cell");
+			Assert.That(null! != cell, Is.True, "null != cell");
+			Assert.That(null! == (null as Cell)!, Is.True, "null == null");
+			Assert.That(null! != (null as Cell)!, Is.False, "null != null");
 #pragma warning restore NUnit2010 // Use EqualConstraint for better assertion messages in case of failure
 		});
 	}

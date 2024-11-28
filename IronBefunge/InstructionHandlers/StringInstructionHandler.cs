@@ -51,6 +51,8 @@ internal sealed class StringInstructionHandler
 				context.Next();
 				context.Cells[context.Cells.IndexOf(context.Current)] = new Cell(context.Current.Location, value);
 				break;
+			default:
+				break;
 		}
 	}
 

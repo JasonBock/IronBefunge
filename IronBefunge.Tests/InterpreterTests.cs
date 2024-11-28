@@ -29,8 +29,8 @@ public static class InterpreterTests
 			var builder = new StringBuilder();
 			using var writer = new StringWriter(builder);
 			using var reader = new StringReader(string.Empty);
-			using var interpreter = new Interpreter(new FileInfo(fileName), reader, writer);
-			Assert.That(() => interpreter.Interpret(), Is.EqualTo(0));
+			var interpreter = new Interpreter(new FileInfo(fileName), reader, writer);
+			Assert.That(interpreter.Interpret, Is.EqualTo(0));
 		}
 		finally
 		{
@@ -49,9 +49,9 @@ public static class InterpreterTests
 			var builder = new StringBuilder();
 			using var writer = new StringWriter(builder);
 			using var reader = new StringReader(string.Empty);
-			using var random = new SecureRandom();
-			using var interpreter = new Interpreter(new FileInfo(fileName), reader, writer, random);
-			Assert.That(() => interpreter.Interpret(), Is.EqualTo(0));
+			var random = new SecureRandom();
+			var interpreter = new Interpreter(new FileInfo(fileName), reader, writer, random);
+			Assert.That(interpreter.Interpret, Is.EqualTo(0));
 		}
 		finally
 		{
@@ -75,7 +75,7 @@ public static class InterpreterTests
 				using var reader = new StringReader(string.Empty);
 				using (var trace = new StringWriter(traceBuilder))
 				{
-					using var interpreter = new Interpreter(new FileInfo(fileName), reader, writer, trace);
+					var interpreter = new Interpreter(new FileInfo(fileName), reader, writer, trace);
 					Assert.That(() => interpreter.Interpret(), Is.EqualTo(0));
 				}
 				Assert.That(traceBuilder.ToString(), Is.Not.EqualTo(string.Empty));
@@ -94,11 +94,11 @@ public static class InterpreterTests
 			var builder = new StringBuilder();
 			var traceBuilder = new StringBuilder();
 			using var writer = new StringWriter(builder);
-			using var random = new SecureRandom();
+			var random = new SecureRandom();
 			using var reader = new StringReader(string.Empty);
 			using (var trace = new StringWriter(traceBuilder))
 			{
-				using var interpreter = new Interpreter(["> @"], reader, writer, trace, random);
+				var interpreter = new Interpreter(["> @"], reader, writer, trace, random);
 				Assert.That(() => interpreter.Interpret(), Is.EqualTo(0));
 			}
 			Assert.That(traceBuilder.ToString(), Is.Not.EqualTo(string.Empty));
@@ -117,11 +117,11 @@ public static class InterpreterTests
 				var builder = new StringBuilder();
 				var traceBuilder = new StringBuilder();
 				using var writer = new StringWriter(builder);
-				using var random = new SecureRandom();
+				var random = new SecureRandom();
 				using var reader = new StringReader(string.Empty);
 				using (var trace = new StringWriter(traceBuilder))
 				{
-					using var interpreter = new Interpreter(new FileInfo(fileName), reader, writer, trace, random);
+					var interpreter = new Interpreter(new FileInfo(fileName), reader, writer, trace, random);
 					Assert.That(() => interpreter.Interpret(), Is.EqualTo(0));
 				}
 				Assert.That(traceBuilder.ToString(), Is.Not.EqualTo(string.Empty));
@@ -145,7 +145,7 @@ public static class InterpreterTests
 
 			using var writer = new StringWriter(builder);
 			using var reader = new StringReader(string.Empty);
-			Assert.That(() => { using var interpreter = new Interpreter(new FileInfo(fileName), reader, writer); },
+			Assert.That(() => { var interpreter = new Interpreter(new FileInfo(fileName), reader, writer); },
 				Throws.TypeOf<ArgumentException>()
 					.And.Message.EqualTo($"The file extension should be .b98; it is .bf (Parameter 'file')"));
 		}
@@ -166,8 +166,8 @@ public static class InterpreterTests
 		using (var writer = new StringWriter(builder, CultureInfo.CurrentCulture))
 		{
 			using var reader = new StringReader(string.Empty);
-			using var interpreter = new Interpreter(lines, reader, writer);
-			interpreter.Interpret();
+			var interpreter = new Interpreter(lines, reader, writer);
+			_ = interpreter.Interpret();
 		}
 
 		var result = builder.ToString();
@@ -189,8 +189,8 @@ public static class InterpreterTests
 		using (var writer = new StringWriter(builder, CultureInfo.CurrentCulture))
 		{
 			using var reader = new StringReader(string.Empty);
-			using var interpreter = new Interpreter(lines, reader, writer);
-			interpreter.Interpret();
+			var interpreter = new Interpreter(lines, reader, writer);
+			_ = interpreter.Interpret();
 		}
 
 		var result = builder.ToString();
@@ -214,8 +214,8 @@ public static class InterpreterTests
 		{
 			using var trace = new StringWriter(traceBuilder);
 			using var reader = new StringReader(string.Empty);
-			using var interpreter = new Interpreter(lines, reader, writer, trace);
-			interpreter.Interpret();
+			var interpreter = new Interpreter(lines, reader, writer, trace);
+			_ = interpreter.Interpret();
 		}
 
 		var result = builder.ToString();
@@ -257,9 +257,9 @@ public static class InterpreterTests
 		using (var writer = new StringWriter(builder, CultureInfo.CurrentCulture))
 		{
 			using var reader = new StringReader(string.Empty);
-			using var randomizer = new MockSecureRandom(direction);
-			using var interpreter = new Interpreter(lines, reader, writer, randomizer);
-			interpreter.Interpret();
+			var randomizer = new MockSecureRandom(direction);
+			var interpreter = new Interpreter(lines, reader, writer, randomizer);
+			_ = interpreter.Interpret();
 		}
 
 		var result = builder.ToString();

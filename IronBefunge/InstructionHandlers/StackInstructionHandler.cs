@@ -12,10 +12,10 @@ internal sealed class StackInstructionHandler
 
 	internal override ImmutableArray<char> GetInstructions() =>
 		[
-		   StackInstructionHandler.ClearInstruction,
-		   StackInstructionHandler.DuplicateInstruction,
-		   StackInstructionHandler.PopInstruction,
-		   StackInstructionHandler.SwapInstruction,
+			StackInstructionHandler.ClearInstruction,
+			StackInstructionHandler.DuplicateInstruction,
+			StackInstructionHandler.PopInstruction,
+			StackInstructionHandler.SwapInstruction,
 		];
 
 	private static void HandleClear(ExecutionContext context) => context.Values.Clear();
@@ -30,7 +30,7 @@ internal sealed class StackInstructionHandler
 	{
 		if (context.Values.Count > 0)
 		{
-			context.Values.Pop();
+			_ = context.Values.Pop();
 		}
 	}
 
@@ -60,6 +60,8 @@ internal sealed class StackInstructionHandler
 				break;
 			case StackInstructionHandler.SwapInstruction:
 				StackInstructionHandler.HandleSwap(context);
+				break;
+			default:
 				break;
 		}
 	}

@@ -48,6 +48,8 @@ internal sealed class InputInstructionHandler
 			case InputInstructionHandler.NumericInstruction:
 				InputInstructionHandler.HandleNumeric(context);
 				break;
+			default:
+				break;
 		}
 	}
 }

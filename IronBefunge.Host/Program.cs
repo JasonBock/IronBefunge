@@ -6,7 +6,7 @@ public static class Program
 	{
 		codeFile ??= new FileInfo("Collatz.b98");
 
-		using var interpreter = doTrace ?
+		var interpreter = doTrace ?
 			new Interpreter(codeFile, Console.In, Console.Out, Console.Error) :
 			new Interpreter(codeFile, Console.In, Console.Out);
 		return interpreter.Interpret();

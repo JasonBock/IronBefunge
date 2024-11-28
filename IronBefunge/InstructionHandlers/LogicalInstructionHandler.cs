@@ -36,6 +36,8 @@ internal sealed class LogicalInstructionHandler
 			case LogicalInstructionHandler.NotInstruction:
 				LogicalInstructionHandler.HandleNot(context);
 				break;
+			default:
+				break;
 		}
 	}
 }

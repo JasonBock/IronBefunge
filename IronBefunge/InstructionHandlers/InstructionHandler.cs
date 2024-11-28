@@ -8,7 +8,7 @@ internal abstract class InstructionHandler
 	private readonly Lazy<ImmutableArray<char>> instructions;
 
 	internal InstructionHandler() =>
-		this.instructions = new Lazy<ImmutableArray<char>>(() => this.GetInstructions());
+		this.instructions = new Lazy<ImmutableArray<char>>(this.GetInstructions);
 
 	internal abstract ImmutableArray<char> GetInstructions();
 

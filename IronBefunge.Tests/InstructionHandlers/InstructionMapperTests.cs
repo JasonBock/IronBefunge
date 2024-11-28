@@ -17,14 +17,12 @@ public static class InstructionMapperTests
 		{
 			Assert.That(trace.GetStringBuilder().ToString(), Is.Empty);
 
-			using (var randomizer = new SecureRandom())
-			{
-				var context = new ExecutionContext([ new Cell(new Point(0, 0), '>') ], 
-					reader, writer, trace, randomizer);
+			var randomizer = new SecureRandom();
+			var context = new ExecutionContext([new Cell(new Point(0, 0), '>')],
+				reader, writer, trace, randomizer);
 
-				var mapper = new InstructionMapper();
-				mapper.Handle(context);
-			}
+			var mapper = new InstructionMapper();
+			mapper.Handle(context);
 
 			Assert.That(trace.GetStringBuilder().ToString(), Is.Empty);
 		});
@@ -41,16 +39,14 @@ public static class InstructionMapperTests
 		{
 			Assert.That(trace.GetStringBuilder().ToString(), Is.Empty);
 
-			using (var randomizer = new SecureRandom())
-			{
-				var context = new ExecutionContext(
-				[
-					new(new(0, 0), 'M')
-				], reader, writer, trace, randomizer);
+			var randomizer = new SecureRandom();
+			var context = new ExecutionContext(
+			[
+				new(new(0, 0), 'M')
+			], reader, writer, trace, randomizer);
 
-				var mapper = new InstructionMapper();
-				mapper.Handle(context);
-			}
+			var mapper = new InstructionMapper();
+			mapper.Handle(context);
 
 			var traceContent = trace.GetStringBuilder().ToString();
 			Assert.That(traceContent,

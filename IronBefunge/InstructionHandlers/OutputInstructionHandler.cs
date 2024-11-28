@@ -26,6 +26,8 @@ internal sealed class OutputInstructionHandler
 				context.Writer.Write(
 					context.Values.Pop().ToString(CultureInfo.CurrentCulture));
 				break;
+			default:
+				break;
 		}
 	}
 }

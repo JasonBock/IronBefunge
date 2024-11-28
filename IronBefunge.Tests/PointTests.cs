@@ -14,7 +14,7 @@ public static class PointTests
 		Assert.Multiple(() =>
 		{
 #pragma warning disable NUnit2010 // Use EqualConstraint for better assertion messages in case of failure
-		  Assert.That(c1 == c2, Is.False, "c1 == c2");
+			Assert.That(c1 == c2, Is.False, "c1 == c2");
 			Assert.That(c1 != c2, Is.True, "c1 != c2");
 			Assert.That(c1 == c3, Is.True, "c1 == c3");
 			Assert.That(c1 != c3, Is.False, "c1 != c3");
@@ -25,7 +25,7 @@ public static class PointTests
 			Assert.That(c1, Is.EqualTo(c3), "c1.Equals(c3)");
 			Assert.That(c2, Is.Not.EqualTo(c3), "!c2.Equals(c3)");
 #pragma warning restore NUnit2010 // Use EqualConstraint for better assertion messages in case of failure
-	  });
+		});
 	}
 
 	[Test]
@@ -34,7 +34,7 @@ public static class PointTests
 		var c1 = new Point(1, 2);
 		var c2 = new Point(1, 2);
 
-		Assert.That(c1, Is.EqualTo((object)c2), "c1.Equals(c3)");
+		Assert.That(c1, Is.EqualTo(c2));
 	}
 
 	[Test]

@@ -10,7 +10,7 @@ internal static class InstructionHandlerRunner
 			Action<ExecutionContext>? before, Action<ExecutionContext, string>? after)
 	{
 		using var reader = new StringReader(string.Empty);
-		using var random = new SecureRandom();
+		var random = new SecureRandom();
 		InstructionHandlerRunner.Run(handler, cells, before, after,
 			random, reader);
 	}
@@ -19,7 +19,7 @@ internal static class InstructionHandlerRunner
 		Action<ExecutionContext>? before, Action<ExecutionContext, string>? after,
 		TextReader reader)
 	{
-		using var random = new SecureRandom();
+		var random = new SecureRandom();
 		InstructionHandlerRunner.Run(handler, cells, before, after,
 			random, reader);
 	}

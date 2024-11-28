@@ -5,7 +5,6 @@ using System.Collections.Immutable;
 namespace IronBefunge;
 
 public sealed class Executor
-	: IDisposable
 {
 	internal const char EndInstruction = '@';
 	internal const char QuitInstruction = 'q';
@@ -35,8 +34,6 @@ public sealed class Executor
 	public Executor(ImmutableArray<Cell> cells, TextReader reader, TextWriter writer, TextWriter trace, SecureRandom randomizer)
 		: this(cells, reader, writer, randomizer) =>
 			this.trace = trace ?? throw new ArgumentNullException(nameof(trace));
-
-	public void Dispose() => this.randomizer.Dispose();
 
 	public int Execute()
 	{

@@ -1,6 +1,5 @@
 ﻿using NUnit.Framework;
 using Spackle;
-using System.Collections.Immutable;
 using System.Globalization;
 
 namespace IronBefunge.Tests;
@@ -45,10 +44,10 @@ public static class ExecutorTests
 	{
 		using var reader = new StringReader(string.Empty);
 		using var writer = new StringWriter();
-		using var executor = new Executor(
+		var executor = new Executor(
 			new Parser([">  @"]).Parse(),
 			reader, writer);
-		Assert.That(() => executor.Execute(), Is.EqualTo(0));
+		Assert.That(executor.Execute, Is.EqualTo(0));
 	}
 
 	[Test]
@@ -57,10 +56,10 @@ public static class ExecutorTests
 		using var reader = new StringReader(string.Empty);
 		using var writer = new StringWriter();
 		using var trace = new StringWriter();
-		using var executor = new Executor(
+		var executor = new Executor(
 			new Parser([">  @"]).Parse(),
 			reader, writer, trace);
-		Assert.That(() => executor.Execute(), Is.EqualTo(0));
+		Assert.That(executor.Execute, Is.EqualTo(0));
 	}
 
 	[Test]
@@ -78,11 +77,11 @@ public static class ExecutorTests
 	{
 		using var reader = new StringReader(string.Empty);
 		using var writer = new StringWriter();
-		using var random = new SecureRandom();
-		using var executor = new Executor(
+		var random = new SecureRandom();
+		var executor = new Executor(
 			new Parser([">  @"]).Parse(),
 			reader, writer, random);
-		Assert.That(() => executor.Execute(), Is.EqualTo(0));
+		Assert.That(executor.Execute, Is.EqualTo(0));
 	}
 
 	[Test]
@@ -101,11 +100,11 @@ public static class ExecutorTests
 		using var reader = new StringReader(string.Empty);
 		using var writer = new StringWriter();
 		using var trace = new StringWriter();
-		using var random = new SecureRandom();
-		using var executor = new Executor(
+		var random = new SecureRandom();
+		var executor = new Executor(
 			new Parser([">  @"]).Parse(),
 			reader, writer, trace, random);
-		Assert.That(() => executor.Execute(), Is.EqualTo(0));
+		Assert.That(executor.Execute, Is.EqualTo(0));
 	}
 
 	[Test]
@@ -113,7 +112,7 @@ public static class ExecutorTests
 	{
 		using var reader = new StringReader(string.Empty);
 		using var writer = new StringWriter();
-		using var random = new SecureRandom();
+		var random = new SecureRandom();
 		Assert.That(() => new Executor(
 			new Parser([">  @"]).Parse(),
 			reader, writer, null!, random), Throws.TypeOf<ArgumentNullException>());
@@ -124,10 +123,10 @@ public static class ExecutorTests
 	{
 		using var reader = new StringReader(string.Empty);
 		using var writer = new StringWriter();
-		using var executor = new Executor(
+		var executor = new Executor(
 			new Parser(["> \" \" @"]).Parse(),
 			reader, writer, writer);
-		Assert.That(() => executor.Execute(), Is.EqualTo(0));
+		Assert.That(executor.Execute, Is.EqualTo(0));
 	}
 
 	[Test]
@@ -135,10 +134,10 @@ public static class ExecutorTests
 	{
 		using var reader = new StringReader(string.Empty);
 		using var writer = new StringWriter();
-		using var executor = new Executor(
+		var executor = new Executor(
 			new Parser([">9q"]).Parse(),
 			reader, writer, writer);
-		Assert.That(() => executor.Execute(), Is.EqualTo(9));
+		Assert.That(executor.Execute, Is.EqualTo(9));
 	}
 
 	[Test]
@@ -146,9 +145,9 @@ public static class ExecutorTests
 	{
 		using var reader = new StringReader(string.Empty);
 		using var writer = new StringWriter();
-		using var executor = new Executor(
+		var executor = new Executor(
 			new Parser([">q"]).Parse(),
 			reader, writer, writer);
-		Assert.That(() => executor.Execute(), Is.EqualTo(0));
+		Assert.That(executor.Execute, Is.EqualTo(0));
 	}
 }

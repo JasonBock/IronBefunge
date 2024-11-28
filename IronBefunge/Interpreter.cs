@@ -3,7 +3,6 @@
 namespace IronBefunge;
 
 public sealed class Interpreter
-	: IDisposable
 {
 	public const string FileExtension = ".b98";
 
@@ -66,8 +65,6 @@ public sealed class Interpreter
 			throw new ArgumentException($"The file extension should be {Interpreter.FileExtension}; it is {file.Extension}", nameof(file));
 		}
 	}
-
-	public void Dispose() => this.executor.Dispose();
 
 	public int Interpret() => this.executor.Execute();
 }
