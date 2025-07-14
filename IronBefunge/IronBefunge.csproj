@@ -1,6 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
+		<DebugType>embedded</DebugType>
 		<Description>IronBefunge is an interpreter (written in .NET) for Befunge programs.</Description>
 		<EmbedUntrackedSources>true</EmbedUntrackedSources>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
@@ -12,7 +13,6 @@
 		<PackageVersion>$(Version)</PackageVersion>
 		<PublishRepositoryUrl>true</PublishRepositoryUrl>
 		<RepositoryUrl>https://github.com/jasonbock/ironbefunge</RepositoryUrl>
-		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
 	</PropertyGroup>
 	<ItemGroup>
 		<PackageReference Include="Spackle" />

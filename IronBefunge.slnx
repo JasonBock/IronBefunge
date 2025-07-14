@@ -1,0 +1,10 @@
+<Solution>
+  <Folder Name="/Solution Items/">
+    <File Path=".editorconfig" />
+    <File Path="Directory.Build.props" />
+    <File Path="Directory.Packages.props" />
+  </Folder>
+  <Project Path="IronBefunge.Host/IronBefunge.Host.csproj" />
+  <Project Path="IronBefunge.Tests/IronBefunge.Tests.csproj" />
+  <Project Path="IronBefunge/IronBefunge.csproj" />
+</Solution>
