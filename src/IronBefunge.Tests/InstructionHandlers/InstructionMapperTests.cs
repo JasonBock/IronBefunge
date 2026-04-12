@@ -40,10 +40,8 @@ public static class InstructionMapperTests
 			Assert.That(trace.GetStringBuilder().ToString(), Is.Empty);
 
 			using var randomizer = RandomNumberGenerator.Create();
-			var context = new ExecutionContext(
-			[
-				new(new(0, 0), 'M')
-			], reader, writer, trace, randomizer);
+			var context = new ExecutionContext([new Cell(new Point(0, 0), 'M')], 
+				reader, writer, trace, randomizer);
 
 			var mapper = new InstructionMapper();
 			mapper.Handle(context);

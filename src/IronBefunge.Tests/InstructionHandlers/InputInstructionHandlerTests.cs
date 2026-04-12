@@ -8,7 +8,8 @@ namespace IronBefunge.Tests.InstructionHandlers;
 public sealed class InputInstructionHandlerTests
 	: InstructionHandlerTests
 {
-   protected override ImmutableArray<char> GetExpectedHandledInstructions() => [InputInstructionHandler.AsciiInstruction, InputInstructionHandler.NumericInstruction];
+   protected override ImmutableArray<char> GetExpectedHandledInstructions() => 
+		[InputInstructionHandler.AsciiInstruction, InputInstructionHandler.NumericInstruction];
 
    protected override Type GetHandlerType() => typeof(InputInstructionHandler);
 
@@ -16,7 +17,7 @@ public sealed class InputInstructionHandlerTests
 	public static void HandleAscii()
 	{
 		var cells = new List<Cell>() { new(
-				new Point(0, 0), InputInstructionHandler.AsciiInstruction) };
+			new Point(0, 0), InputInstructionHandler.AsciiInstruction) };
 
 		using var reader = new MockAsciiTextReader(88);
 		var stackCount = 0;
@@ -36,7 +37,7 @@ public sealed class InputInstructionHandlerTests
 	public static void HandleNumeric()
 	{
 		var cells = new List<Cell>() { new(
-				new Point(0, 0), InputInstructionHandler.NumericInstruction) };
+			new Point(0, 0), InputInstructionHandler.NumericInstruction) };
 
 		using var reader = new MockNumericTextReader("123456");
 		var stackCount = 0;
@@ -56,7 +57,7 @@ public sealed class InputInstructionHandlerTests
 	public static void HandleNumericWithInvalidData()
 	{
 		var cells = new List<Cell>() { new(
-				new Point(0, 0), InputInstructionHandler.NumericInstruction) };
+			new Point(0, 0), InputInstructionHandler.NumericInstruction) };
 
 		using var reader = new MockNumericTextReader("quux");
 		var stackCount = 0;

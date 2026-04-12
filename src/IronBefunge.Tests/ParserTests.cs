@@ -18,8 +18,8 @@ public static class ParserTests
 		var lines = new string[] { "   <   ^#:  9              ", " ^ < ", " 3 5 :" };
 		var cells = new Parser(lines).Parse();
 
-	  using (Assert.EnterMultipleScope())
-	  {
+		using (Assert.EnterMultipleScope())
+		{
 			Assert.That(cells, Has.Length.EqualTo(10), nameof(cells.Length));
 			Assert.That(cells, Does.Contain(new Cell(new Point(3, 0), '<')), "<");
 			Assert.That(cells, Does.Contain(new Cell(new Point(7, 0), '^')), "^");
@@ -48,8 +48,8 @@ public static class ParserTests
 		var lines = new string[] { "   <   ^#:  9              " };
 		var cells = new Parser(lines).Parse();
 
-	  using (Assert.EnterMultipleScope())
-	  {
+		using (Assert.EnterMultipleScope())
+		{
 			Assert.That(cells, Has.Length.EqualTo(5));
 			Assert.That(cells, Does.Contain(new Cell(new Point(3, 0), '<')), "<");
 			Assert.That(cells, Does.Contain(new Cell(new Point(7, 0), '^')), "^");

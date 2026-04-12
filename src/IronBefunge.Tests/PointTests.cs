@@ -11,8 +11,8 @@ public static class PointTests
 		var c2 = new Point(3, 2);
 		var c3 = new Point(1, 2);
 
-	  using (Assert.EnterMultipleScope())
-	  {
+		using (Assert.EnterMultipleScope())
+		{
 #pragma warning disable NUnit2010 // Use EqualConstraint for better assertion messages in case of failure
 			Assert.That(c1 == c2, Is.False, "c1 == c2");
 			Assert.That(c1 != c2, Is.True, "c1 != c2");
@@ -54,8 +54,8 @@ public static class PointTests
 		var c2 = new Point(3, 2);
 		var c3 = new Point(1, 2);
 
-	  using (Assert.EnterMultipleScope())
-	  {
+		using (Assert.EnterMultipleScope())
+		{
 			Assert.That(c1.GetHashCode(), Is.Not.EqualTo(c2.GetHashCode()), "c1 != c2");
 			Assert.That(c1.GetHashCode(), Is.EqualTo(c3.GetHashCode()), "c1 == c3");
 			Assert.That(c2.GetHashCode(), Is.Not.EqualTo(c3.GetHashCode()), "c2 != c3");
@@ -67,8 +67,8 @@ public static class PointTests
 	{
 		var point = new Point();
 
-	  using (Assert.EnterMultipleScope())
-	  {
+		using (Assert.EnterMultipleScope())
+		{
 			Assert.That(point.X, Is.Zero, nameof(Point.X));
 			Assert.That(point.Y, Is.Zero, nameof(Point.Y));
 		}
@@ -82,8 +82,8 @@ public static class PointTests
 
 		var point = new Point(x, y);
 
-	  using (Assert.EnterMultipleScope())
-	  {
+		using (Assert.EnterMultipleScope())
+		{
 			Assert.That(point.X, Is.EqualTo(x), nameof(Point.X));
 			Assert.That(point.Y, Is.EqualTo(y), nameof(Point.Y));
 		}

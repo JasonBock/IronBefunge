@@ -7,35 +7,37 @@ namespace IronBefunge.Tests.InstructionHandlers;
 public sealed class MathInstructionHandlerTests
 	: InstructionHandlerTests
 {
-   protected override ImmutableArray<char> GetExpectedHandledInstructions() => [
-		  MathInstructionHandler.AddInstruction,
-		   MathInstructionHandler.DivideInstruction,
-		   MathInstructionHandler.ModInstruction,
-		   MathInstructionHandler.MultiplyInstruction,
-		   MathInstructionHandler.SubtractInstruction,
+	protected override ImmutableArray<char> GetExpectedHandledInstructions() => 
+		[
+			MathInstructionHandler.AddInstruction,
+			MathInstructionHandler.DivideInstruction,
+			MathInstructionHandler.ModInstruction,
+			MathInstructionHandler.MultiplyInstruction,
+			MathInstructionHandler.SubtractInstruction,
 		];
 
-   protected override Type GetHandlerType() => typeof(MathInstructionHandler);
+	protected override Type GetHandlerType() => typeof(MathInstructionHandler);
 
-   [Test]
+	[Test]
 	public static void HandleAdd()
 	{
 		var cells = new List<Cell>() { new(new Point(0, 0), MathInstructionHandler.AddInstruction) };
 		var stackCount = 0;
 
-		InstructionHandlerRunner.Run(new MathInstructionHandler(), cells, (context) =>
-		{
-			context.Values.Push(3);
-			context.Values.Push(7);
-			stackCount = context.Values.Count;
-		}, (context, result) =>
-		{
-		   using (Assert.EnterMultipleScope())
-		   {
-				Assert.That(context.Values, Has.Count.EqualTo(stackCount - 1), nameof(context.Values.Count));
-				Assert.That(context.Values.Peek(), Is.EqualTo(10), nameof(context.Values.Peek));
-			}
-		});
+		InstructionHandlerRunner.Run(new MathInstructionHandler(), cells, 
+			(context) =>
+			{
+				context.Values.Push(3);
+				context.Values.Push(7);
+				stackCount = context.Values.Count;
+			}, (context, result) =>
+			{
+				using (Assert.EnterMultipleScope())
+				{
+					Assert.That(context.Values, Has.Count.EqualTo(stackCount - 1), nameof(context.Values.Count));
+					Assert.That(context.Values.Peek(), Is.EqualTo(10), nameof(context.Values.Peek));
+				}
+			});
 	}
 
 	[Test]
@@ -44,18 +46,19 @@ public sealed class MathInstructionHandlerTests
 		var cells = new List<Cell>() { new(new Point(0, 0), MathInstructionHandler.AddInstruction) };
 		var stackCount = 0;
 
-		InstructionHandlerRunner.Run(new MathInstructionHandler(), cells, (context) =>
-		{
-			context.Values.Push(3);
-			stackCount = context.Values.Count;
-		}, (context, result) =>
-		{
-		   using (Assert.EnterMultipleScope())
-		   {
-				Assert.That(context.Values, Has.Count.EqualTo(stackCount), nameof(context.Values.Count));
-				Assert.That(context.Values.Peek(), Is.EqualTo(3), nameof(context.Values.Peek));
-			}
-		});
+		InstructionHandlerRunner.Run(new MathInstructionHandler(), cells, 
+			(context) =>
+			{
+				context.Values.Push(3);
+				stackCount = context.Values.Count;
+			}, (context, result) =>
+			{
+				using (Assert.EnterMultipleScope())
+				{
+					Assert.That(context.Values, Has.Count.EqualTo(stackCount), nameof(context.Values.Count));
+					Assert.That(context.Values.Peek(), Is.EqualTo(3), nameof(context.Values.Peek));
+				}
+			});
 	}
 
 	[Test]
@@ -64,17 +67,18 @@ public sealed class MathInstructionHandlerTests
 		var cells = new List<Cell>() { new(new Point(0, 0), MathInstructionHandler.AddInstruction) };
 		var stackCount = 0;
 
-		InstructionHandlerRunner.Run(new MathInstructionHandler(), cells, (context) =>
-		{
-			stackCount = context.Values.Count;
-		}, (context, result) =>
-		{
-		   using (Assert.EnterMultipleScope())
-		   {
-				Assert.That(context.Values, Has.Count.EqualTo(stackCount + 1), nameof(context.Values.Count));
-				Assert.That(context.Values.Peek(), Is.EqualTo(0), nameof(context.Values.Peek));
-			}
-		});
+		InstructionHandlerRunner.Run(new MathInstructionHandler(), cells, 
+			(context) =>
+			{
+				stackCount = context.Values.Count;
+			}, (context, result) =>
+			{
+				using (Assert.EnterMultipleScope())
+				{
+					Assert.That(context.Values, Has.Count.EqualTo(stackCount + 1), nameof(context.Values.Count));
+					Assert.That(context.Values.Peek(), Is.EqualTo(0), nameof(context.Values.Peek));
+				}
+			});
 	}
 
 	[Test]
@@ -83,19 +87,20 @@ public sealed class MathInstructionHandlerTests
 		var cells = new List<Cell>() { new(new Point(0, 0), MathInstructionHandler.DivideInstruction) };
 		var stackCount = 0;
 
-		InstructionHandlerRunner.Run(new MathInstructionHandler(), cells, (context) =>
-		{
-			context.Values.Push(7);
-			context.Values.Push(3);
-			stackCount = context.Values.Count;
-		}, (context, result) =>
-		{
-		   using (Assert.EnterMultipleScope())
-		   {
-				Assert.That(context.Values, Has.Count.EqualTo(stackCount - 1), nameof(context.Values.Count));
-				Assert.That(context.Values.Peek(), Is.EqualTo(2), nameof(context.Values.Peek));
-			}
-		});
+		InstructionHandlerRunner.Run(new MathInstructionHandler(), cells, 
+			(context) =>
+			{
+				context.Values.Push(7);
+				context.Values.Push(3);
+				stackCount = context.Values.Count;
+			}, (context, result) =>
+			{
+				using (Assert.EnterMultipleScope())
+				{
+					Assert.That(context.Values, Has.Count.EqualTo(stackCount - 1), nameof(context.Values.Count));
+					Assert.That(context.Values.Peek(), Is.EqualTo(2), nameof(context.Values.Peek));
+				}
+			});
 	}
 
 	[Test]
@@ -104,18 +109,19 @@ public sealed class MathInstructionHandlerTests
 		var cells = new List<Cell>() { new(new Point(0, 0), MathInstructionHandler.DivideInstruction) };
 		var stackCount = 0;
 
-		InstructionHandlerRunner.Run(new MathInstructionHandler(), cells, (context) =>
-		{
-			context.Values.Push(3);
-			stackCount = context.Values.Count;
-		}, (context, result) =>
-		{
-		   using (Assert.EnterMultipleScope())
-		   {
-				Assert.That(context.Values, Has.Count.EqualTo(stackCount), nameof(context.Values.Count));
-				Assert.That(context.Values.Peek(), Is.EqualTo(0), nameof(context.Values.Peek));
-			}
-		});
+		InstructionHandlerRunner.Run(new MathInstructionHandler(), cells, 
+			(context) =>
+			{
+				context.Values.Push(3);
+				stackCount = context.Values.Count;
+			}, (context, result) =>
+			{
+				using (Assert.EnterMultipleScope())
+				{
+					Assert.That(context.Values, Has.Count.EqualTo(stackCount), nameof(context.Values.Count));
+					Assert.That(context.Values.Peek(), Is.EqualTo(0), nameof(context.Values.Peek));
+				}
+			});
 	}
 
 	[Test]
@@ -124,17 +130,18 @@ public sealed class MathInstructionHandlerTests
 		var cells = new List<Cell>() { new(new Point(0, 0), MathInstructionHandler.DivideInstruction) };
 		var stackCount = 0;
 
-		InstructionHandlerRunner.Run(new MathInstructionHandler(), cells, (context) =>
-		{
-			stackCount = context.Values.Count;
-		}, (context, result) =>
-		{
-		   using (Assert.EnterMultipleScope())
-		   {
-				Assert.That(context.Values, Has.Count.EqualTo(stackCount + 1), nameof(context.Values.Count));
-				Assert.That(context.Values.Peek(), Is.EqualTo(0), nameof(context.Values.Peek));
-			}
-		});
+		InstructionHandlerRunner.Run(new MathInstructionHandler(), cells, 
+			(context) =>
+			{
+				stackCount = context.Values.Count;
+			}, (context, result) =>
+			{
+				using (Assert.EnterMultipleScope())
+				{
+					Assert.That(context.Values, Has.Count.EqualTo(stackCount + 1), nameof(context.Values.Count));
+					Assert.That(context.Values.Peek(), Is.EqualTo(0), nameof(context.Values.Peek));
+				}
+			});
 	}
 
 	[Test]
@@ -143,19 +150,20 @@ public sealed class MathInstructionHandlerTests
 		var cells = new List<Cell>() { new(new Point(0, 0), MathInstructionHandler.ModInstruction) };
 		var stackCount = 0;
 
-		InstructionHandlerRunner.Run(new MathInstructionHandler(), cells, (context) =>
-		{
-			context.Values.Push(7);
-			context.Values.Push(3);
-			stackCount = context.Values.Count;
-		}, (context, result) =>
-		{
-		   using (Assert.EnterMultipleScope())
-		   {
-				Assert.That(context.Values, Has.Count.EqualTo(stackCount - 1), nameof(context.Values.Count));
-				Assert.That(context.Values.Peek(), Is.EqualTo(1), nameof(context.Values.Peek));
-			}
-		});
+		InstructionHandlerRunner.Run(new MathInstructionHandler(), cells, 
+			(context) =>
+			{
+				context.Values.Push(7);
+				context.Values.Push(3);
+				stackCount = context.Values.Count;
+			}, (context, result) =>
+			{
+				using (Assert.EnterMultipleScope())
+				{
+					Assert.That(context.Values, Has.Count.EqualTo(stackCount - 1), nameof(context.Values.Count));
+					Assert.That(context.Values.Peek(), Is.EqualTo(1), nameof(context.Values.Peek));
+				}
+			});
 	}
 
 	[Test]
@@ -164,18 +172,19 @@ public sealed class MathInstructionHandlerTests
 		var cells = new List<Cell>() { new(new Point(0, 0), MathInstructionHandler.ModInstruction) };
 		var stackCount = 0;
 
-		InstructionHandlerRunner.Run(new MathInstructionHandler(), cells, (context) =>
-		{
-			context.Values.Push(3);
-			stackCount = context.Values.Count;
-		}, (context, result) =>
-		{
-		   using (Assert.EnterMultipleScope())
-		   {
-				Assert.That(context.Values, Has.Count.EqualTo(stackCount), nameof(context.Values.Count));
-				Assert.That(context.Values.Peek(), Is.EqualTo(0), nameof(context.Values.Peek));
-			}
-		});
+		InstructionHandlerRunner.Run(new MathInstructionHandler(), cells, 
+			(context) =>
+			{
+				context.Values.Push(3);
+				stackCount = context.Values.Count;
+			}, (context, result) =>
+			{
+				using (Assert.EnterMultipleScope())
+				{
+					Assert.That(context.Values, Has.Count.EqualTo(stackCount), nameof(context.Values.Count));
+					Assert.That(context.Values.Peek(), Is.EqualTo(0), nameof(context.Values.Peek));
+				}
+			});
 	}
 
 	[Test]
@@ -184,17 +193,18 @@ public sealed class MathInstructionHandlerTests
 		var cells = new List<Cell>() { new(new Point(0, 0), MathInstructionHandler.ModInstruction) };
 		var stackCount = 0;
 
-		InstructionHandlerRunner.Run(new MathInstructionHandler(), cells, (context) =>
-		{
-			stackCount = context.Values.Count;
-		}, (context, result) =>
-		{
-		   using (Assert.EnterMultipleScope())
-		   {
-				Assert.That(context.Values, Has.Count.EqualTo(stackCount + 1), nameof(context.Values.Count));
-				Assert.That(context.Values.Peek(), Is.EqualTo(0), nameof(context.Values.Peek));
-			}
-		});
+		InstructionHandlerRunner.Run(new MathInstructionHandler(), cells, 
+			(context) =>
+			{
+				stackCount = context.Values.Count;
+			}, (context, result) =>
+			{
+				using (Assert.EnterMultipleScope())
+				{
+					Assert.That(context.Values, Has.Count.EqualTo(stackCount + 1), nameof(context.Values.Count));
+					Assert.That(context.Values.Peek(), Is.EqualTo(0), nameof(context.Values.Peek));
+				}
+			});
 	}
 
 	[Test]
@@ -203,19 +213,20 @@ public sealed class MathInstructionHandlerTests
 		var cells = new List<Cell>() { new(new Point(0, 0), MathInstructionHandler.MultiplyInstruction) };
 		var stackCount = 0;
 
-		InstructionHandlerRunner.Run(new MathInstructionHandler(), cells, (context) =>
-		{
-			context.Values.Push(3);
-			context.Values.Push(7);
-			stackCount = context.Values.Count;
-		}, (context, result) =>
-		{
-		   using (Assert.EnterMultipleScope())
-		   {
-				Assert.That(context.Values, Has.Count.EqualTo(stackCount - 1), nameof(context.Values.Count));
-				Assert.That(context.Values.Peek(), Is.EqualTo(21), nameof(context.Values.Peek));
-			}
-		});
+		InstructionHandlerRunner.Run(new MathInstructionHandler(), cells, 
+			(context) =>
+			{
+				context.Values.Push(3);
+				context.Values.Push(7);
+				stackCount = context.Values.Count;
+			}, (context, result) =>
+			{
+				using (Assert.EnterMultipleScope())
+				{
+					Assert.That(context.Values, Has.Count.EqualTo(stackCount - 1), nameof(context.Values.Count));
+					Assert.That(context.Values.Peek(), Is.EqualTo(21), nameof(context.Values.Peek));
+				}
+			});
 	}
 
 	[Test]
@@ -224,18 +235,19 @@ public sealed class MathInstructionHandlerTests
 		var cells = new List<Cell>() { new(new Point(0, 0), MathInstructionHandler.MultiplyInstruction) };
 		var stackCount = 0;
 
-		InstructionHandlerRunner.Run(new MathInstructionHandler(), cells, (context) =>
-		{
-			context.Values.Push(3);
-			stackCount = context.Values.Count;
-		}, (context, result) =>
-		{
-		   using (Assert.EnterMultipleScope())
-		   {
-				Assert.That(context.Values, Has.Count.EqualTo(stackCount), nameof(context.Values.Count));
-				Assert.That(context.Values.Peek(), Is.EqualTo(0), nameof(context.Values.Peek));
-			}
-		});
+		InstructionHandlerRunner.Run(new MathInstructionHandler(), cells, 
+			(context) =>
+			{
+				context.Values.Push(3);
+				stackCount = context.Values.Count;
+			}, (context, result) =>
+			{
+				using (Assert.EnterMultipleScope())
+				{
+					Assert.That(context.Values, Has.Count.EqualTo(stackCount), nameof(context.Values.Count));
+					Assert.That(context.Values.Peek(), Is.EqualTo(0), nameof(context.Values.Peek));
+				}
+			});
 	}
 
 	[Test]
@@ -244,17 +256,18 @@ public sealed class MathInstructionHandlerTests
 		var cells = new List<Cell>() { new(new Point(0, 0), MathInstructionHandler.MultiplyInstruction) };
 		var stackCount = 0;
 
-		InstructionHandlerRunner.Run(new MathInstructionHandler(), cells, (context) =>
-		{
-			stackCount = context.Values.Count;
-		}, (context, result) =>
-		{
-		   using (Assert.EnterMultipleScope())
-		   {
-				Assert.That(context.Values, Has.Count.EqualTo(stackCount + 1), nameof(context.Values.Count));
-				Assert.That(context.Values.Peek(), Is.EqualTo(0), nameof(context.Values.Peek));
-			}
-		});
+		InstructionHandlerRunner.Run(new MathInstructionHandler(), cells, 
+			(context) =>
+			{
+				stackCount = context.Values.Count;
+			}, (context, result) =>
+			{
+				using (Assert.EnterMultipleScope())
+				{
+					Assert.That(context.Values, Has.Count.EqualTo(stackCount + 1), nameof(context.Values.Count));
+					Assert.That(context.Values.Peek(), Is.EqualTo(0), nameof(context.Values.Peek));
+				}
+			});
 	}
 
 	[Test]
@@ -263,19 +276,20 @@ public sealed class MathInstructionHandlerTests
 		var cells = new List<Cell>() { new(new Point(0, 0), MathInstructionHandler.SubtractInstruction) };
 		var stackCount = 0;
 
-		InstructionHandlerRunner.Run(new MathInstructionHandler(), cells, (context) =>
-		{
-			context.Values.Push(3);
-			context.Values.Push(7);
-			stackCount = context.Values.Count;
-		}, (context, result) =>
-		{
-		   using (Assert.EnterMultipleScope())
-		   {
-				Assert.That(context.Values, Has.Count.EqualTo(stackCount - 1), nameof(context.Values.Count));
-				Assert.That(context.Values.Peek(), Is.EqualTo(-4), nameof(context.Values.Peek));
-			}
-		});
+		InstructionHandlerRunner.Run(new MathInstructionHandler(), cells, 
+			(context) =>
+			{
+				context.Values.Push(3);
+				context.Values.Push(7);
+				stackCount = context.Values.Count;
+			}, (context, result) =>
+			{
+				using (Assert.EnterMultipleScope())
+				{
+					Assert.That(context.Values, Has.Count.EqualTo(stackCount - 1), nameof(context.Values.Count));
+					Assert.That(context.Values.Peek(), Is.EqualTo(-4), nameof(context.Values.Peek));
+				}
+			});
 	}
 
 	[Test]
@@ -284,18 +298,19 @@ public sealed class MathInstructionHandlerTests
 		var cells = new List<Cell>() { new(new Point(0, 0), MathInstructionHandler.SubtractInstruction) };
 		var stackCount = 0;
 
-		InstructionHandlerRunner.Run(new MathInstructionHandler(), cells, (context) =>
-		{
-			context.Values.Push(3);
-			stackCount = context.Values.Count;
-		}, (context, result) =>
-		{
-		   using (Assert.EnterMultipleScope())
-		   {
-				Assert.That(context.Values, Has.Count.EqualTo(stackCount), nameof(context.Values.Count));
-				Assert.That(context.Values.Peek(), Is.EqualTo(3), nameof(context.Values.Peek));
-			}
-		});
+		InstructionHandlerRunner.Run(new MathInstructionHandler(), cells, 
+			(context) =>
+			{
+				context.Values.Push(3);
+				stackCount = context.Values.Count;
+			}, (context, result) =>
+			{
+				using (Assert.EnterMultipleScope())
+				{
+					Assert.That(context.Values, Has.Count.EqualTo(stackCount), nameof(context.Values.Count));
+					Assert.That(context.Values.Peek(), Is.EqualTo(3), nameof(context.Values.Peek));
+				}
+			});
 	}
 
 	[Test]
@@ -304,16 +319,17 @@ public sealed class MathInstructionHandlerTests
 		var cells = new List<Cell>() { new(new Point(0, 0), MathInstructionHandler.SubtractInstruction) };
 		var stackCount = 0;
 
-		InstructionHandlerRunner.Run(new MathInstructionHandler(), cells, (context) =>
-		{
-			stackCount = context.Values.Count;
-		}, (context, result) =>
-		{
-		   using (Assert.EnterMultipleScope())
-		   {
-				Assert.That(context.Values, Has.Count.EqualTo(stackCount + 1), nameof(context.Values.Count));
-				Assert.That(context.Values.Peek(), Is.EqualTo(0), nameof(context.Values.Peek));
-			}
-		});
+		InstructionHandlerRunner.Run(new MathInstructionHandler(), cells, 
+			(context) =>
+			{
+				stackCount = context.Values.Count;
+			}, (context, result) =>
+			{
+				using (Assert.EnterMultipleScope())
+				{
+					Assert.That(context.Values, Has.Count.EqualTo(stackCount + 1), nameof(context.Values.Count));
+					Assert.That(context.Values.Peek(), Is.EqualTo(0), nameof(context.Values.Peek));
+				}
+			});
 	}
 }

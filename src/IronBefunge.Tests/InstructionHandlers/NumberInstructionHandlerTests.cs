@@ -7,8 +7,9 @@ namespace IronBefunge.Tests.InstructionHandlers;
 public sealed class NumberInstructionHandlerTests
 	 : InstructionHandlerTests
 {
-   protected override ImmutableArray<char> GetExpectedHandledInstructions() => [
-		  NumberInstructionHandler.ZeroInstruction,
+	protected override ImmutableArray<char> GetExpectedHandledInstructions() => 
+		[
+			NumberInstructionHandler.ZeroInstruction,
 		   NumberInstructionHandler.OneInstruction,
 		   NumberInstructionHandler.TwoInstruction,
 		   NumberInstructionHandler.ThreeInstruction,
@@ -52,16 +53,17 @@ public sealed class NumberInstructionHandlerTests
 		};
 		var stackCount = 0;
 
-		InstructionHandlerRunner.Run(new NumberInstructionHandler(), cells, (context) =>
-		{
-			stackCount = context.Values.Count;
-		}, (context, result) =>
-		{
-		   using (Assert.EnterMultipleScope())
-		   {
-				Assert.That(context.Values, Has.Count.EqualTo(stackCount + 1), nameof(context.Values.Count));
-				Assert.That(context.Values.Peek(), Is.EqualTo(expectedValue), nameof(context.Values.Peek));
-			}
-		});
+		InstructionHandlerRunner.Run(new NumberInstructionHandler(), cells, 
+			(context) =>
+			{
+				stackCount = context.Values.Count;
+			}, (context, result) =>
+			{
+				using (Assert.EnterMultipleScope())
+				{
+					Assert.That(context.Values, Has.Count.EqualTo(stackCount + 1), nameof(context.Values.Count));
+					Assert.That(context.Values.Peek(), Is.EqualTo(expectedValue), nameof(context.Values.Peek));
+				}
+			});
 	}
 }

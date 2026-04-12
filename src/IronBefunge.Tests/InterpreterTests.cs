@@ -30,7 +30,7 @@ public static class InterpreterTests
 			using var writer = new StringWriter(builder);
 			using var reader = new StringReader(string.Empty);
 			var interpreter = new Interpreter(new FileInfo(fileName), reader, writer);
-			Assert.That(interpreter.Interpret, Is.EqualTo(0));
+			Assert.That(interpreter.Interpret(), Is.Zero);
 		}
 		finally
 		{
@@ -51,7 +51,7 @@ public static class InterpreterTests
 			using var reader = new StringReader(string.Empty);
 			using var random = RandomNumberGenerator.Create();
 			var interpreter = new Interpreter(new FileInfo(fileName), reader, writer, random);
-			Assert.That(interpreter.Interpret, Is.EqualTo(0));
+			Assert.That(interpreter.Interpret(), Is.Zero);
 		}
 		finally
 		{
@@ -76,7 +76,7 @@ public static class InterpreterTests
 				using (var trace = new StringWriter(traceBuilder))
 				{
 					var interpreter = new Interpreter(new FileInfo(fileName), reader, writer, trace);
-					Assert.That(() => interpreter.Interpret(), Is.EqualTo(0));
+					Assert.That(interpreter.Interpret(), Is.Zero);
 				}
 				Assert.That(traceBuilder.ToString(), Is.Not.EqualTo(string.Empty));
 			}
@@ -100,7 +100,7 @@ public static class InterpreterTests
 			using (var trace = new StringWriter(traceBuilder))
 			{
 				var interpreter = new Interpreter(["> @"], reader, writer, trace, random);
-				Assert.That(() => interpreter.Interpret(), Is.EqualTo(0));
+				Assert.That(interpreter.Interpret(), Is.Zero);
 			}
 			Assert.That(traceBuilder.ToString(), Is.Not.EqualTo(string.Empty));
 		};
@@ -124,7 +124,7 @@ public static class InterpreterTests
 				using (var trace = new StringWriter(traceBuilder))
 				{
 					var interpreter = new Interpreter(new FileInfo(fileName), reader, writer, trace, random);
-					Assert.That(() => interpreter.Interpret(), Is.EqualTo(0));
+					Assert.That(interpreter.Interpret(), Is.Zero);
 				}
 				Assert.That(traceBuilder.ToString(), Is.Not.EqualTo(string.Empty));
 			}
@@ -247,12 +247,14 @@ public static class InterpreterTests
 
    private static void Randomizer(Direction direction, string expected)
 	{
-		var lines = new string[] {
-				"v  > .v",
-				"   3",
-				">#v?4.@",
-				"  12",
-				"  >> .^" };
+		var lines = new string[] 
+		{
+			"v  > .v",
+			"   3",
+			">#v?4.@",
+			"  12",
+			"  >> .^" 
+		};
 
 		var builder = new StringBuilder();
 

@@ -22,17 +22,18 @@ public sealed class NopInstructionHandlerTests
 		var stackCount = 0;
 		var direction = Direction.Down;
 
-		InstructionHandlerRunner.Run(new NopInstructionHandler(), cells, (context) =>
-		{
-			stackCount = context.Values.Count;
-			direction = context.Direction;
-		}, (context, result) =>
-		{
-		   using (Assert.EnterMultipleScope())
-		   {
-				Assert.That(context.Values, Has.Count.EqualTo(stackCount), nameof(context.Values.Count));
-				Assert.That(context.Direction, Is.EqualTo(direction), nameof(context.Direction));
-			}
-		});
+		InstructionHandlerRunner.Run(new NopInstructionHandler(), cells, 
+			(context) =>
+			{
+				stackCount = context.Values.Count;
+				direction = context.Direction;
+			}, (context, result) =>
+			{
+				using (Assert.EnterMultipleScope())
+				{
+					Assert.That(context.Values, Has.Count.EqualTo(stackCount), nameof(context.Values.Count));
+					Assert.That(context.Direction, Is.EqualTo(direction), nameof(context.Direction));
+				}
+			});
 	}
 }

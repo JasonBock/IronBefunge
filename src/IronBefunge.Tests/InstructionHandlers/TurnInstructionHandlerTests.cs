@@ -7,8 +7,9 @@ namespace IronBefunge.Tests.InstructionHandlers;
 public sealed class TurnInstructionHandlerTests
 	: InstructionHandlerTests
 {
-   protected override ImmutableArray<char> GetExpectedHandledInstructions() => [
-		  TurnInstructionHandler.CompareInstruction,
+   protected override ImmutableArray<char> GetExpectedHandledInstructions() => 
+		[
+			TurnInstructionHandler.CompareInstruction,
 		   TurnInstructionHandler.LeftRightInstruction,
 		   TurnInstructionHandler.ReverseInstruction,
 		   TurnInstructionHandler.TurnLeftInstruction,
@@ -35,20 +36,21 @@ public sealed class TurnInstructionHandlerTests
 		var cells = new List<Cell>() { new(new Point(0, 0), TurnInstructionHandler.CompareInstruction) };
 		var stackCount = 0;
 
-		InstructionHandlerRunner.Run(new TurnInstructionHandler(), cells, (context) =>
-		{
-			context.Values.Push(a);
-			context.Values.Push(b);
-			context.Direction = currentDiection;
-			stackCount = context.Values.Count;
-		}, (context, result) =>
-		{
-		   using (Assert.EnterMultipleScope())
-		   {
-				Assert.That(context.Values, Has.Count.EqualTo(stackCount - 2), nameof(context.Values.Count));
-				Assert.That(context.Direction, Is.EqualTo(expectedDirection), nameof(context.Direction));
-			}
-		});
+		InstructionHandlerRunner.Run(new TurnInstructionHandler(), cells, 
+			(context) =>
+			{
+				context.Values.Push(a);
+				context.Values.Push(b);
+				context.Direction = currentDiection;
+				stackCount = context.Values.Count;
+			}, (context, result) =>
+			{
+				using (Assert.EnterMultipleScope())
+				{
+					Assert.That(context.Values, Has.Count.EqualTo(stackCount - 2), nameof(context.Values.Count));
+					Assert.That(context.Direction, Is.EqualTo(expectedDirection), nameof(context.Direction));
+				}
+			});
 	}
 
 	[TestCase(Direction.Right, Direction.Right)]
@@ -60,18 +62,19 @@ public sealed class TurnInstructionHandlerTests
 		var cells = new List<Cell>() { new(new Point(0, 0), TurnInstructionHandler.CompareInstruction) };
 		var stackCount = 0;
 
-		InstructionHandlerRunner.Run(new TurnInstructionHandler(), cells, (context) =>
-		{
-			context.Direction = currentDiection;
-			stackCount = context.Values.Count;
-		}, (context, result) =>
-		{
-		   using (Assert.EnterMultipleScope())
-		   {
-				Assert.That(context.Values, Has.Count.EqualTo(stackCount), nameof(context.Values.Count));
-				Assert.That(context.Direction, Is.EqualTo(expectedDirection), nameof(context.Direction));
-			}
-		});
+		InstructionHandlerRunner.Run(new TurnInstructionHandler(), cells, 
+			(context) =>
+			{
+				context.Direction = currentDiection;
+				stackCount = context.Values.Count;
+			}, (context, result) =>
+			{
+				using (Assert.EnterMultipleScope())
+				{
+					Assert.That(context.Values, Has.Count.EqualTo(stackCount), nameof(context.Values.Count));
+					Assert.That(context.Direction, Is.EqualTo(expectedDirection), nameof(context.Direction));
+				}
+			});
 	}
 
 	[TestCase(TurnInstructionHandler.ReverseInstruction, Direction.Right, Direction.Left)]
@@ -83,18 +86,19 @@ public sealed class TurnInstructionHandlerTests
 		var cells = new List<Cell>() { new(new Point(0, 0), instruction) };
 		var stackCount = 0;
 
-		InstructionHandlerRunner.Run(new TurnInstructionHandler(), cells, (context) =>
-		{
-			context.Direction = currentDiection;
-			stackCount = context.Values.Count;
-		}, (context, result) =>
-		{
-		   using (Assert.EnterMultipleScope())
-		   {
-				Assert.That(context.Values, Has.Count.EqualTo(stackCount), nameof(context.Values.Count));
-				Assert.That(context.Direction, Is.EqualTo(expectedDirection), nameof(context.Direction));
-			}
-		});
+		InstructionHandlerRunner.Run(new TurnInstructionHandler(), cells, 
+			(context) =>
+			{
+				context.Direction = currentDiection;
+				stackCount = context.Values.Count;
+			}, (context, result) =>
+			{
+				using (Assert.EnterMultipleScope())
+				{
+					Assert.That(context.Values, Has.Count.EqualTo(stackCount), nameof(context.Values.Count));
+					Assert.That(context.Direction, Is.EqualTo(expectedDirection), nameof(context.Direction));
+				}
+			});
 	}
 
 	[TestCase(TurnInstructionHandler.TurnRightInstruction, Direction.Right, Direction.Down)]
@@ -110,18 +114,19 @@ public sealed class TurnInstructionHandlerTests
 		var cells = new List<Cell>() { new(new Point(0, 0), instruction) };
 		var stackCount = 0;
 
-		InstructionHandlerRunner.Run(new TurnInstructionHandler(), cells, (context) =>
-		{
-			context.Direction = currentDiection;
-			stackCount = context.Values.Count;
-		}, (context, result) =>
-		{
-		   using (Assert.EnterMultipleScope())
-		   {
-				Assert.That(context.Values, Has.Count.EqualTo(stackCount), nameof(context.Values.Count));
-				Assert.That(context.Direction, Is.EqualTo(expectedDirection), nameof(context.Direction));
-			}
-		});
+		InstructionHandlerRunner.Run(new TurnInstructionHandler(), cells, 
+			(context) =>
+			{
+				context.Direction = currentDiection;
+				stackCount = context.Values.Count;
+			}, (context, result) =>
+			{
+				using (Assert.EnterMultipleScope())
+				{
+					Assert.That(context.Values, Has.Count.EqualTo(stackCount), nameof(context.Values.Count));
+					Assert.That(context.Direction, Is.EqualTo(expectedDirection), nameof(context.Direction));
+				}
+			});
 	}
 
 	[Test]
@@ -132,18 +137,19 @@ public sealed class TurnInstructionHandlerTests
 
 		var stackCount = 0;
 
-		InstructionHandlerRunner.Run(new TurnInstructionHandler(), cells, (context) =>
-		{
-			context.Values.Push(0);
-			stackCount = context.Values.Count;
-		}, (context, result) =>
-		{
-		   using (Assert.EnterMultipleScope())
-		   {
-				Assert.That(context.Values, Has.Count.EqualTo(stackCount - 1), nameof(context.Values.Count));
-				Assert.That(context.Direction, Is.EqualTo(Direction.Down), nameof(context.Direction));
-			}
-		});
+		InstructionHandlerRunner.Run(new TurnInstructionHandler(), cells, 
+			(context) =>
+			{
+				context.Values.Push(0);
+				stackCount = context.Values.Count;
+			}, (context, result) =>
+			{
+				using (Assert.EnterMultipleScope())
+				{
+					Assert.That(context.Values, Has.Count.EqualTo(stackCount - 1), nameof(context.Values.Count));
+					Assert.That(context.Direction, Is.EqualTo(Direction.Down), nameof(context.Direction));
+				}
+			});
 	}
 
 	[Test]
@@ -153,17 +159,18 @@ public sealed class TurnInstructionHandlerTests
 
 		var stackCount = 0;
 
-		InstructionHandlerRunner.Run(new TurnInstructionHandler(), cells, (context) =>
-		{
-			stackCount = context.Values.Count;
-		}, (context, result) =>
-		{
-		   using (Assert.EnterMultipleScope())
-		   {
-				Assert.That(context.Values, Has.Count.EqualTo(stackCount), nameof(context.Values.Count));
-				Assert.That(context.Direction, Is.EqualTo(Direction.Down), nameof(context.Direction));
-			}
-		});
+		InstructionHandlerRunner.Run(new TurnInstructionHandler(), cells, 
+			(context) =>
+			{
+				stackCount = context.Values.Count;
+			}, (context, result) =>
+			{
+				using (Assert.EnterMultipleScope())
+				{
+					Assert.That(context.Values, Has.Count.EqualTo(stackCount), nameof(context.Values.Count));
+					Assert.That(context.Direction, Is.EqualTo(Direction.Down), nameof(context.Direction));
+				}
+			});
 	}
 
 	[Test]
@@ -173,18 +180,19 @@ public sealed class TurnInstructionHandlerTests
 
 		var stackCount = 0;
 
-		InstructionHandlerRunner.Run(new TurnInstructionHandler(), cells, (context) =>
-		{
-			context.Values.Push(3);
-			stackCount = context.Values.Count;
-		}, (context, result) =>
-		{
-		   using (Assert.EnterMultipleScope())
-		   {
-				Assert.That(context.Values, Has.Count.EqualTo(stackCount - 1), nameof(context.Values.Count));
-				Assert.That(context.Direction, Is.EqualTo(Direction.Left), nameof(context.Direction));
-			}
-		});
+		InstructionHandlerRunner.Run(new TurnInstructionHandler(), cells, 
+			(context) =>
+			{
+				context.Values.Push(3);
+				stackCount = context.Values.Count;
+			}, (context, result) =>
+			{
+				using (Assert.EnterMultipleScope())
+				{
+					Assert.That(context.Values, Has.Count.EqualTo(stackCount - 1), nameof(context.Values.Count));
+					Assert.That(context.Direction, Is.EqualTo(Direction.Left), nameof(context.Direction));
+				}
+			});
 	}
 
 	[Test]
@@ -194,17 +202,18 @@ public sealed class TurnInstructionHandlerTests
 
 		var stackCount = 0;
 
-		InstructionHandlerRunner.Run(new TurnInstructionHandler(), cells, (context) =>
-		{
-			stackCount = context.Values.Count;
-		}, (context, result) =>
-		{
-		   using (Assert.EnterMultipleScope())
-		   {
-				Assert.That(context.Values, Has.Count.EqualTo(stackCount), nameof(context.Values.Count));
-				Assert.That(context.Direction, Is.EqualTo(Direction.Right), nameof(context.Direction));
-			}
-		});
+		InstructionHandlerRunner.Run(new TurnInstructionHandler(), cells, 
+			(context) =>
+			{
+				stackCount = context.Values.Count;
+			}, (context, result) =>
+			{
+				using (Assert.EnterMultipleScope())
+				{
+					Assert.That(context.Values, Has.Count.EqualTo(stackCount), nameof(context.Values.Count));
+					Assert.That(context.Direction, Is.EqualTo(Direction.Right), nameof(context.Direction));
+				}
+			});
 	}
 
 	[Test]
@@ -214,18 +223,19 @@ public sealed class TurnInstructionHandlerTests
 
 		var stackCount = 0;
 
-		InstructionHandlerRunner.Run(new TurnInstructionHandler(), cells, (context) =>
-		{
-			context.Values.Push(0);
-			stackCount = context.Values.Count;
-		}, (context, result) =>
-		{
-		   using (Assert.EnterMultipleScope())
-		   {
-				Assert.That(context.Values, Has.Count.EqualTo(stackCount - 1), nameof(context.Values.Count));
-				Assert.That(context.Direction, Is.EqualTo(Direction.Right), nameof(context.Direction));
-			}
-		});
+		InstructionHandlerRunner.Run(new TurnInstructionHandler(), cells, 
+			(context) =>
+			{
+				context.Values.Push(0);
+				stackCount = context.Values.Count;
+			}, (context, result) =>
+			{
+				using (Assert.EnterMultipleScope())
+				{
+					Assert.That(context.Values, Has.Count.EqualTo(stackCount - 1), nameof(context.Values.Count));
+					Assert.That(context.Direction, Is.EqualTo(Direction.Right), nameof(context.Direction));
+				}
+			});
 	}
 
 	[Test]
@@ -235,17 +245,18 @@ public sealed class TurnInstructionHandlerTests
 
 		var stackCount = 0;
 
-		InstructionHandlerRunner.Run(new TurnInstructionHandler(), cells, (context) =>
-		{
-			context.Values.Push(3);
-			stackCount = context.Values.Count;
-		}, (context, result) =>
-		{
-		   using (Assert.EnterMultipleScope())
-		   {
-				Assert.That(context.Values, Has.Count.EqualTo(stackCount - 1), nameof(context.Values.Count));
-				Assert.That(context.Direction, Is.EqualTo(Direction.Up), nameof(context.Direction));
-			}
-		});
+		InstructionHandlerRunner.Run(new TurnInstructionHandler(), cells, 
+			(context) =>
+			{
+				context.Values.Push(3);
+				stackCount = context.Values.Count;
+			}, (context, result) =>
+			{
+				using (Assert.EnterMultipleScope())
+				{
+					Assert.That(context.Values, Has.Count.EqualTo(stackCount - 1), nameof(context.Values.Count));
+					Assert.That(context.Direction, Is.EqualTo(Direction.Up), nameof(context.Direction));
+				}
+			});
 	}
 }

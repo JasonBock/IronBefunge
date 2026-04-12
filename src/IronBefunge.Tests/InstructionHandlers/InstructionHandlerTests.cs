@@ -18,8 +18,8 @@ public abstract class InstructionHandlerTests
 		var handler = (Activator.CreateInstance(handlerType) as InstructionHandler)!;
 		var expectedInstructions = this.GetExpectedHandledInstructions();
 
-	  using (Assert.EnterMultipleScope())
-	  {
+		using (Assert.EnterMultipleScope())
+		{
 			Assert.That(handlerType.GetTypeInfo().IsAssignableFrom(handler.GetType()), Is.True, nameof(handlerType));
 			Assert.That(handler.Instructions, Has.Length.EqualTo(expectedInstructions.Length), nameof(handler.Instructions.Length));
 

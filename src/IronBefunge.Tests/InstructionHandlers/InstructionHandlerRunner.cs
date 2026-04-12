@@ -7,7 +7,7 @@ namespace IronBefunge.Tests.InstructionHandlers;
 internal static class InstructionHandlerRunner
 {
 	internal static void Run(IInstructionHandler handler, List<Cell> cells,
-			Action<ExecutionContext>? before, Action<ExecutionContext, string>? after)
+		Action<ExecutionContext>? before, Action<ExecutionContext, string>? after)
 	{
 		using var reader = new StringReader(string.Empty);
 		using var random = RandomNumberGenerator.Create();

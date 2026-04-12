@@ -12,8 +12,8 @@ public static class CellTests
 		var c3 = new Cell(new Point(1, 1), 'd');
 		var c4 = new Cell(new Point(1, 1), 'c');
 
-	  using (Assert.EnterMultipleScope())
-	  {
+		using (Assert.EnterMultipleScope())
+		{
 #pragma warning disable NUnit2010 // Use EqualConstraint for better assertion messages in case of failure
 			Assert.That(c1 == c2, Is.False, "c1 == c2");
 			Assert.That(c1 != c2, Is.True, "c1 != c2");
@@ -60,8 +60,8 @@ public static class CellTests
 		var c3 = new Cell(new Point(1, 1), 'd');
 		var c4 = new Cell(new Point(1, 1), 'c');
 
-	  using (Assert.EnterMultipleScope())
-	  {
+		using (Assert.EnterMultipleScope())
+		{
 			Assert.That(c1.GetHashCode(), Is.Not.EqualTo(c2.GetHashCode()), "c1 != c2");
 			Assert.That(c1.GetHashCode(), Is.Not.EqualTo(c3.GetHashCode()), "c1 != c3");
 			Assert.That(c1.GetHashCode(), Is.EqualTo(c4.GetHashCode()), "c1 == c4");
@@ -77,8 +77,8 @@ public static class CellTests
 
 		var cell = new Cell(new Point(x, y), value);
 
-	  using (Assert.EnterMultipleScope())
-	  {
+		using (Assert.EnterMultipleScope())
+		{
 			Assert.That(cell.Location.X, Is.EqualTo(x), nameof(Point.X));
 			Assert.That(cell.Location.Y, Is.EqualTo(y), nameof(Point.Y));
 			Assert.That(cell.Value, Is.EqualTo(value), nameof(Cell.Value));
