@@ -1,0 +1,12 @@
+# References
+
+* The Funge-98 Programming Language Family - http://catseye.tc/projects/funge98/
+* Funge-98 Final Specification - http://quadium.net/funge/spec98.html
+* J^4 Befunge - http://www.phlamethrower.co.uk/befunge/
+* Befunge - http://en.wikipedia.org/wiki/Befunge (good stuff on compilation realities)
+* Befunge-93 Documentation - http://catseye.tc/projects/befunge93/doc/befunge93.html
+* BeQunge - http://www.purplehatstands.com/bequnge/
+
+* Arne Martin Aurlien: Implement an Esoteric Programming Language for Fun | JSConf EU 2014 - https://www.youtube.com/watch?v=oCPT3L33848
+* BefungeSharp - https://github.com/tngreene/BefungeSharp
+* Befunge! - https://www.youtube.com/watch?v=hMR70JeZ4Zc
