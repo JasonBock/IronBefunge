@@ -76,7 +76,7 @@ public sealed class MathInstructionHandlerTests
 				using (Assert.EnterMultipleScope())
 				{
 					Assert.That(context.Values, Has.Count.EqualTo(stackCount + 1), nameof(context.Values.Count));
-					Assert.That(context.Values.Peek(), Is.EqualTo(0), nameof(context.Values.Peek));
+					Assert.That(context.Values.Peek(), Is.Zero, nameof(context.Values.Peek));
 				}
 			});
 	}
@@ -119,7 +119,7 @@ public sealed class MathInstructionHandlerTests
 				using (Assert.EnterMultipleScope())
 				{
 					Assert.That(context.Values, Has.Count.EqualTo(stackCount), nameof(context.Values.Count));
-					Assert.That(context.Values.Peek(), Is.EqualTo(0), nameof(context.Values.Peek));
+					Assert.That(context.Values.Peek(), Is.Zero, nameof(context.Values.Peek));
 				}
 			});
 	}
@@ -139,7 +139,7 @@ public sealed class MathInstructionHandlerTests
 				using (Assert.EnterMultipleScope())
 				{
 					Assert.That(context.Values, Has.Count.EqualTo(stackCount + 1), nameof(context.Values.Count));
-					Assert.That(context.Values.Peek(), Is.EqualTo(0), nameof(context.Values.Peek));
+					Assert.That(context.Values.Peek(), Is.Zero, nameof(context.Values.Peek));
 				}
 			});
 	}
@@ -182,7 +182,7 @@ public sealed class MathInstructionHandlerTests
 				using (Assert.EnterMultipleScope())
 				{
 					Assert.That(context.Values, Has.Count.EqualTo(stackCount), nameof(context.Values.Count));
-					Assert.That(context.Values.Peek(), Is.EqualTo(0), nameof(context.Values.Peek));
+					Assert.That(context.Values.Peek(), Is.Zero, nameof(context.Values.Peek));
 				}
 			});
 	}
@@ -202,7 +202,7 @@ public sealed class MathInstructionHandlerTests
 				using (Assert.EnterMultipleScope())
 				{
 					Assert.That(context.Values, Has.Count.EqualTo(stackCount + 1), nameof(context.Values.Count));
-					Assert.That(context.Values.Peek(), Is.EqualTo(0), nameof(context.Values.Peek));
+					Assert.That(context.Values.Peek(), Is.Zero, nameof(context.Values.Peek));
 				}
 			});
 	}
@@ -245,7 +245,7 @@ public sealed class MathInstructionHandlerTests
 				using (Assert.EnterMultipleScope())
 				{
 					Assert.That(context.Values, Has.Count.EqualTo(stackCount), nameof(context.Values.Count));
-					Assert.That(context.Values.Peek(), Is.EqualTo(0), nameof(context.Values.Peek));
+					Assert.That(context.Values.Peek(), Is.Zero, nameof(context.Values.Peek));
 				}
 			});
 	}
@@ -265,7 +265,7 @@ public sealed class MathInstructionHandlerTests
 				using (Assert.EnterMultipleScope())
 				{
 					Assert.That(context.Values, Has.Count.EqualTo(stackCount + 1), nameof(context.Values.Count));
-					Assert.That(context.Values.Peek(), Is.EqualTo(0), nameof(context.Values.Peek));
+					Assert.That(context.Values.Peek(), Is.Zero, nameof(context.Values.Peek));
 				}
 			});
 	}
@@ -328,7 +328,7 @@ public sealed class MathInstructionHandlerTests
 				using (Assert.EnterMultipleScope())
 				{
 					Assert.That(context.Values, Has.Count.EqualTo(stackCount + 1), nameof(context.Values.Count));
-					Assert.That(context.Values.Peek(), Is.EqualTo(0), nameof(context.Values.Peek));
+					Assert.That(context.Values.Peek(), Is.Zero, nameof(context.Values.Peek));
 				}
 			});
 	}

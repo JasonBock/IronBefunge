@@ -72,8 +72,8 @@ public sealed class StackInstructionHandlerTests
 				using (Assert.EnterMultipleScope())
 				{
 					Assert.That(context.Values, Has.Count.EqualTo(stackCount + 2), nameof(context.Values.Count));
-					Assert.That(context.Values.Pop(), Is.EqualTo(0), nameof(context.Values.Pop));
-					Assert.That(context.Values.Pop(), Is.EqualTo(0), nameof(context.Values.Pop));
+					Assert.That(context.Values.Pop(), Is.Zero, nameof(context.Values.Pop));
+					Assert.That(context.Values.Pop(), Is.Zero, nameof(context.Values.Pop));
 				}
 			});
 	}
@@ -155,7 +155,7 @@ public sealed class StackInstructionHandlerTests
 				{
 					Assert.That(context.Values, Has.Count.EqualTo(stackCount + 1), nameof(context.Values.Count));
 					Assert.That(context.Values.Pop(), Is.EqualTo(78), nameof(context.Values.Pop));
-					Assert.That(context.Values.Pop(), Is.EqualTo(0), nameof(context.Values.Pop));
+					Assert.That(context.Values.Pop(), Is.Zero, nameof(context.Values.Pop));
 				}
 			});
 	}
@@ -176,8 +176,8 @@ public sealed class StackInstructionHandlerTests
 				using (Assert.EnterMultipleScope())
 				{
 					Assert.That(context.Values, Has.Count.EqualTo(stackCount + 2), nameof(context.Values.Count));
-					Assert.That(context.Values.Pop(), Is.EqualTo(0), nameof(context.Values.Pop));
-					Assert.That(context.Values.Pop(), Is.EqualTo(0), nameof(context.Values.Pop));
+					Assert.That(context.Values.Pop(), Is.Zero, nameof(context.Values.Pop));
+					Assert.That(context.Values.Pop(), Is.Zero, nameof(context.Values.Pop));
 				}
 			});
 	}

@@ -132,7 +132,7 @@ public static class StringInstructionHandlerTests
 			   {
 					Assert.That(context.Cells[2].Value, Is.EqualTo('Q'));
 					var count = context.Values.Count;
-					Assert.That(count, Is.EqualTo(0), nameof(context.Values.Count));
+					Assert.That(count, Is.Zero, nameof(context.Values.Count));
 				}
 			});
 	}

@@ -30,7 +30,7 @@ public sealed class LogicalInstructionHandlerTests
 				using (Assert.EnterMultipleScope())
 				{
 					Assert.That(context.Values, Has.Count.EqualTo(stackCount - 1), nameof(context.Values.Count));
-					Assert.That(context.Values.Pop(), Is.EqualTo(0), nameof(context.Values.Pop));
+					Assert.That(context.Values.Pop(), Is.Zero, nameof(context.Values.Pop));
 				}
 			});
 	}
@@ -96,7 +96,7 @@ public sealed class LogicalInstructionHandlerTests
 				using (Assert.EnterMultipleScope())
 				{
 					Assert.That(context.Values, Has.Count.EqualTo(stackCount + 1), nameof(context.Values.Count));
-					Assert.That(context.Values.Pop(), Is.EqualTo(0), nameof(context.Values.Pop));
+					Assert.That(context.Values.Pop(), Is.Zero, nameof(context.Values.Pop));
 				}
 			});
 	}
@@ -139,7 +139,7 @@ public sealed class LogicalInstructionHandlerTests
 				using (Assert.EnterMultipleScope())
 				{
 					Assert.That(context.Values, Has.Count.EqualTo(stackCount), nameof(context.Values.Count));
-					Assert.That(context.Values.Pop(), Is.EqualTo(0), nameof(context.Values.Pop));
+					Assert.That(context.Values.Pop(), Is.Zero, nameof(context.Values.Pop));
 				}
 			});
 	}

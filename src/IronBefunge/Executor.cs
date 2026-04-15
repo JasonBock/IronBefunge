@@ -40,7 +40,7 @@ public sealed class Executor
 		if (this.cells.Length > 0)
 		{
 			var context = new ExecutionContext(
-				new List<Cell>(this.cells), this.reader, this.writer, this.trace, this.randomizer);
+				[.. this.cells], this.reader, this.writer, this.trace, this.randomizer);
 			var mappings = new InstructionMapper();
 
 			while (true)
