@@ -7,6 +7,7 @@ internal sealed class DirectionalInstructionHandler
 	: InstructionHandler
 {
 	internal const char DownInstruction = 'v';
+	internal const char JumpOverInstruction = ';';
 	internal const char LeftInstruction = '<';
 	internal const char RandomInstruction = '?';
 	internal const char RightInstruction = '>';
@@ -16,6 +17,7 @@ internal sealed class DirectionalInstructionHandler
 	internal override ImmutableArray<char> GetInstructions() =>
 		[
 			DirectionalInstructionHandler.DownInstruction,
+			DirectionalInstructionHandler.JumpOverInstruction,
 			DirectionalInstructionHandler.LeftInstruction,
 			DirectionalInstructionHandler.RandomInstruction,
 			DirectionalInstructionHandler.RightInstruction,
@@ -44,6 +46,56 @@ internal sealed class DirectionalInstructionHandler
 				break;
 			case DirectionalInstructionHandler.TrampolineInstruction:
 				context.Move();
+				break;
+			case DirectionalInstructionHandler.JumpOverInstruction:
+				// Look for the next ';' instruction in the direction
+				// we're currently going. Look "both ways" - that is,
+				// "after" the current position, and then "wrap around".
+				// If we do not find another ';', we consider it to be
+				// a no-op and it does nothing.
+				Cell? nextCell = null;
+
+				switch (context.Direction)
+				{
+					case Direction.Right:
+						nextCell = context.Cells
+							.Where(cell => cell.Location.Y == context.CurrentPosition.Y && cell.Location.X > context.CurrentPosition.X && cell.Value == DirectionalInstructionHandler.JumpOverInstruction)
+							.OrderBy(cell => cell.Location.X)
+							.FirstOrDefault();
+
+						if (nextCell is null)
+						{
+							nextCell = context.Cells
+								.Where(cell => cell.Location.Y == context.CurrentPosition.Y && cell.Location.X < context.CurrentPosition.X && cell.Value == DirectionalInstructionHandler.JumpOverInstruction)
+								.OrderByDescending(cell => cell.Location.X)
+								.FirstOrDefault();
+						}
+						break;
+					case Direction.Left:
+						nextCell = context.Cells
+							.Where(cell => cell.Location.Y == context.CurrentPosition.Y && cell.Location.X < context.CurrentPosition.X && cell.Value == DirectionalInstructionHandler.JumpOverInstruction)
+							.OrderByDescending(cell => cell.Location.X)
+							.FirstOrDefault();
+
+						if (nextCell is null)
+						{
+							nextCell = context.Cells
+								.Where(cell => cell.Location.Y == context.CurrentPosition.Y && cell.Location.X > context.CurrentPosition.X && cell.Value == DirectionalInstructionHandler.JumpOverInstruction)
+								.OrderBy(cell => cell.Location.X)
+								.FirstOrDefault();
+						}
+						break;
+				}
+
+				if (nextCell is not null)
+				{
+					// Set the current location this cell, and then "move" again.
+				}
+				else
+				{
+					context.Move();
+				}
+
 				break;
 			default:
 				break;

@@ -11,6 +11,7 @@ public sealed class DirectionalInstructionHandlerTests
 	protected override ImmutableArray<char> GetExpectedHandledInstructions() => 
 		[
 			DirectionalInstructionHandler.DownInstruction,
+			DirectionalInstructionHandler.JumpOverInstruction,
 			DirectionalInstructionHandler.LeftInstruction,
 			DirectionalInstructionHandler.RandomInstruction,
 			DirectionalInstructionHandler.RightInstruction,

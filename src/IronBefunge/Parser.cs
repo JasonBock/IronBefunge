@@ -13,13 +13,13 @@ public sealed class Parser
 	{
 		var cells = new List<Cell>();
 
-		if (this.lines != null)
+		if (this.lines is not null)
 		{
 			for (var i = 0; i < this.lines.Length; i++)
 			{
 				var line = this.lines[i];
 
-				if (line != null)
+				if (line is not null)
 				{
 					cells.AddRange(Parser.ProcessLine(line, i));
 				}
