@@ -1,14 +1,31 @@
-﻿namespace IronBefunge.Host;
+﻿using IronBefunge;
+using System.CommandLine;
 
-public static class Program
+var codeFileOption = new Option<FileInfo>("--codeFile")
 {
-	public static int Main(FileInfo codeFile, bool doTrace = false)
-	{
-		codeFile ??= new FileInfo("Collatz.b98");
+	Description = "The Befunge code file",
+	DefaultValueFactory = parseResult => new FileInfo("Collatz.b98")
+};
 
-		var interpreter = doTrace ?
-			new Interpreter(codeFile, Console.In, Console.Out, Console.Error) :
-			new Interpreter(codeFile, Console.In, Console.Out);
-		return interpreter.Interpret();
-	}
-}
+var traceOption = new Option<bool>("--trace")
+{
+	Description = "An optional flag to specify if tracing should occur",
+	DefaultValueFactory = parseResult => false
+};
+
+var rootCommand = new RootCommand("IronBefunge host");
+rootCommand.Options.Add(codeFileOption);
+rootCommand.Options.Add(traceOption);
+rootCommand.SetAction(parseResult =>
+{
+	var codeFile = parseResult.GetValue(codeFileOption)!;
+	var trace = parseResult.GetValue(traceOption);
+
+	var interpreter = trace ?
+		new Interpreter(codeFile, Console.In, Console.Out, Console.Error) :
+		new Interpreter(codeFile, Console.In, Console.Out);
+	return interpreter.Interpret();
+});
+
+var parseResult = rootCommand.Parse(args);
+return parseResult.Invoke();

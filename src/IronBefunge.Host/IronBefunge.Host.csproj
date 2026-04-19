@@ -4,7 +4,7 @@
 		<OutputType>Exe</OutputType>
 	</PropertyGroup>
 	<ItemGroup>
-		<PackageReference Include="System.CommandLine.DragonFruit" />
+	  <PackageReference Include="System.CommandLine" />
 	</ItemGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\IronBefunge\IronBefunge.csproj" />
