@@ -130,7 +130,7 @@ public sealed class SpaceInstructionHandlerTests
 				{
 					Assert.That(context.Values, Has.Count.EqualTo(stackCount - 3), nameof(context.Values.Count));
 					Assert.That(context.Cells, Has.Count.EqualTo(cellCount), nameof(context.Cells.Count));
-					Assert.That(context.Find(new Point(2, 3)).Value, Is.EqualTo('X'), nameof(Cell.Value));
+					Assert.That(context.Find(new Point(2, 3))!.Value, Is.EqualTo('X'), nameof(Cell.Value));
 				}
 			});
 	}
@@ -156,7 +156,7 @@ public sealed class SpaceInstructionHandlerTests
 				{
 					Assert.That(context.Values, Has.Count.EqualTo(stackCount - 3), nameof(context.Values.Count));
 					Assert.That(context.Cells, Has.Count.EqualTo(cellCount + 1), nameof(context.Cells.Count));
-					Assert.That(context.Find(new Point(2, 3)).Value, Is.EqualTo('X'), nameof(Cell.Value));
+					Assert.That(context.Find(new Point(2, 3))!.Value, Is.EqualTo('X'), nameof(Cell.Value));
 				}
 			});
 	}
@@ -182,7 +182,7 @@ public sealed class SpaceInstructionHandlerTests
 				{
 					Assert.That(context.Values, Has.Count.EqualTo(stackCount - 2), nameof(context.Values.Count));
 					Assert.That(context.Cells, Has.Count.EqualTo(cellCount), nameof(context.Cells.Count));
-					Assert.That(context.Find(new Point(2, 0)).Value, Is.EqualTo('X'), nameof(Cell.Value));
+					Assert.That(context.Find(new Point(2, 0))!.Value, Is.EqualTo('X'), nameof(Cell.Value));
 				}
 			});
 	}
@@ -206,7 +206,7 @@ public sealed class SpaceInstructionHandlerTests
 				{
 					Assert.That(context.Values, Has.Count.EqualTo(stackCount - 1), nameof(context.Values.Count));
 					Assert.That(context.Cells, Has.Count.EqualTo(cellCount), nameof(context.Cells.Count));
-					Assert.That(context.Find(new Point(0, 0)).Value, Is.EqualTo('X'), nameof(Cell.Value));
+					Assert.That(context.Find(new Point(0, 0))!.Value, Is.EqualTo('X'), nameof(Cell.Value));
 				}
 			});
 	}
@@ -229,7 +229,7 @@ public sealed class SpaceInstructionHandlerTests
 				{
 					Assert.That(context.Values, Has.Count.EqualTo(stackCount), nameof(context.Values.Count));
 					Assert.That(context.Cells, Has.Count.EqualTo(cellCount), nameof(context.Cells.Count));
-					Assert.That(context.Find(new Point(0, 0)).Value, Is.EqualTo('\0'), nameof(Cell.Value));
+					Assert.That(context.Find(new Point(0, 0))!.Value, Is.EqualTo('\0'), nameof(Cell.Value));
 				}
 			});
 	}

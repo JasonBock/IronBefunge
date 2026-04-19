@@ -38,8 +38,8 @@ internal sealed class ExecutionContext
 		}
 	}
 
-	internal Cell Find(Point position) =>
-		this.Cells.Find((cell) => cell.Location == position)!;
+	internal Cell? Find(Point position) =>
+		this.Cells.Find((cell) => cell.Location == position);
 
 	internal void Move()
 	{
