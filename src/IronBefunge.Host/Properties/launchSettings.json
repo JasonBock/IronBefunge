@@ -2,7 +2,7 @@
   "profiles": {
     "Default": {
       "commandName": "Project",
-      "commandLineArgs": "--codeFile \"100DigitsOfPi.b98\" --trace true"
+      "commandLineArgs": "--codeFile \"Collatz.b98\" --trace false"
     }
   }
 }

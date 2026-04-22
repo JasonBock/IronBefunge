@@ -48,53 +48,13 @@ internal sealed class DirectionalInstructionHandler
 				context.Move();
 				break;
 			case DirectionalInstructionHandler.JumpOverInstruction:
-				// Look for the next ';' instruction in the direction
-				// we're currently going. Look "both ways" - that is,
-				// "after" the current position, and then "wrap around".
-				// If we do not find another ';', we consider it to be
-				// a no-op and it does nothing.
-				Cell? nextCell = null;
-
-				switch (context.Direction)
-				{
-					case Direction.Right:
-						nextCell = context.Cells
-							.Where(cell => cell.Location.Y == context.CurrentPosition.Y && cell.Location.X > context.CurrentPosition.X && cell.Value == DirectionalInstructionHandler.JumpOverInstruction)
-							.OrderBy(cell => cell.Location.X)
-							.FirstOrDefault();
-
-						if (nextCell is null)
-						{
-							nextCell = context.Cells
-								.Where(cell => cell.Location.Y == context.CurrentPosition.Y && cell.Location.X < context.CurrentPosition.X && cell.Value == DirectionalInstructionHandler.JumpOverInstruction)
-								.OrderByDescending(cell => cell.Location.X)
-								.FirstOrDefault();
-						}
-						break;
-					case Direction.Left:
-						nextCell = context.Cells
-							.Where(cell => cell.Location.Y == context.CurrentPosition.Y && cell.Location.X < context.CurrentPosition.X && cell.Value == DirectionalInstructionHandler.JumpOverInstruction)
-							.OrderByDescending(cell => cell.Location.X)
-							.FirstOrDefault();
-
-						if (nextCell is null)
-						{
-							nextCell = context.Cells
-								.Where(cell => cell.Location.Y == context.CurrentPosition.Y && cell.Location.X > context.CurrentPosition.X && cell.Value == DirectionalInstructionHandler.JumpOverInstruction)
-								.OrderBy(cell => cell.Location.X)
-								.FirstOrDefault();
-						}
-						break;
-				}
-
-				if (nextCell is not null)
-				{
-					// Set the current location this cell, and then "move" again.
-				}
-				else
+				// Look for the next ';' instruction in the direction we're pointed in.
+				// It's possible this could wrap around to our current instruction.
+				do
 				{
 					context.Move();
-				}
+					context.Next();
+				} while (context.Current.Value != DirectionalInstructionHandler.JumpOverInstruction);
 
 				break;
 			default:

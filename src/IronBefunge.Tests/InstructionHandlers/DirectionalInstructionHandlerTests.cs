@@ -8,7 +8,7 @@ namespace IronBefunge.Tests.InstructionHandlers;
 public sealed class DirectionalInstructionHandlerTests
 	: InstructionHandlerTests
 {
-	protected override ImmutableArray<char> GetExpectedHandledInstructions() => 
+	protected override ImmutableArray<char> GetExpectedHandledInstructions() =>
 		[
 			DirectionalInstructionHandler.DownInstruction,
 			DirectionalInstructionHandler.JumpOverInstruction,
@@ -26,7 +26,7 @@ public sealed class DirectionalInstructionHandlerTests
 		var cells = new List<Cell>() { new(new Point(0, 0), instruction) };
 		var stackCount = 0;
 
-		InstructionHandlerRunner.Run(new DirectionalInstructionHandler(), cells, 
+		InstructionHandlerRunner.Run(new DirectionalInstructionHandler(), cells,
 			(context) =>
 			{
 				stackCount = context.Values.Count;
@@ -41,6 +41,63 @@ public sealed class DirectionalInstructionHandlerTests
 	}
 
 	[Test]
+	public static void HandleJumpOver()
+	{
+		var cells = new List<Cell>()
+		{
+			new(new Point(0, 0), DirectionalInstructionHandler.JumpOverInstruction),
+			new(new Point(1, 0), DirectionalInstructionHandler.TrampolineInstruction),
+			new(new Point(2, 0), DirectionalInstructionHandler.JumpOverInstruction),
+			new(new Point(3, 0), Executor.QuitInstruction)
+		};
+		var stackCount = 0;
+
+		InstructionHandlerRunner.Run(new DirectionalInstructionHandler(), cells,
+			(context) =>
+			{
+				stackCount = context.Values.Count;
+			}, (context, result) =>
+			{
+				using (Assert.EnterMultipleScope())
+				{
+					Assert.That(context.Values, Has.Count.EqualTo(stackCount));
+					Assert.That(context.Direction, Is.EqualTo(Direction.Right));
+					Assert.That(context.Current.Location.X, Is.EqualTo(2));
+					Assert.That(context.Current.Location.Y, Is.Zero);
+					Assert.That(context.Current.Value, Is.EqualTo(DirectionalInstructionHandler.JumpOverInstruction));
+				}
+			});
+	}
+
+	[Test]
+	public static void HandleJumpOverWithoutPair()
+	{
+		var cells = new List<Cell>()
+		{
+			new(new Point(0, 0), DirectionalInstructionHandler.JumpOverInstruction),
+			new(new Point(1, 0), DirectionalInstructionHandler.TrampolineInstruction),
+			new(new Point(2, 0), Executor.QuitInstruction)
+		};
+		var stackCount = 0;
+
+		InstructionHandlerRunner.Run(new DirectionalInstructionHandler(), cells,
+			(context) =>
+			{
+				stackCount = context.Values.Count;
+			}, (context, result) =>
+			{
+				using (Assert.EnterMultipleScope())
+				{
+					Assert.That(context.Values, Has.Count.EqualTo(stackCount));
+					Assert.That(context.Direction, Is.EqualTo(Direction.Right));
+					Assert.That(context.Current.Location.X, Is.Zero);
+					Assert.That(context.Current.Location.Y, Is.Zero);
+					Assert.That(context.Current.Value, Is.EqualTo(DirectionalInstructionHandler.JumpOverInstruction));
+				}
+			});
+	}
+
+	[Test]
 	public static void HandleDown() => DirectionalInstructionHandlerTests.Handle(
 		DirectionalInstructionHandler.DownInstruction, Direction.Down);
 
@@ -49,19 +106,19 @@ public sealed class DirectionalInstructionHandlerTests
 		DirectionalInstructionHandler.LeftInstruction, Direction.Left);
 
 	[Test]
-	public static void HandleRandomDown() => 
+	public static void HandleRandomDown() =>
 		DirectionalInstructionHandlerTests.Randomizer(Direction.Down);
 
 	[Test]
-	public static void HandleRandomLeft() => 
+	public static void HandleRandomLeft() =>
 		DirectionalInstructionHandlerTests.Randomizer(Direction.Left);
 
 	[Test]
-	public static void HandleRandomRight() => 
+	public static void HandleRandomRight() =>
 		DirectionalInstructionHandlerTests.Randomizer(Direction.Right);
 
 	[Test]
-	public static void HandleRandomUp() => 
+	public static void HandleRandomUp() =>
 		DirectionalInstructionHandlerTests.Randomizer(Direction.Up);
 
 	[Test]

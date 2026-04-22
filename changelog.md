@@ -10,6 +10,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [5.0.0] - Not Yet Released
 
+### Added
+- Added "jump over" instruction (';') (issue [#17](https://github.com/JasonBock/IronBefunge/issues/17))
+
 ### Changed
 - Updated solution to .NET 10 (issue [#48](https://github.com/JasonBock/IronBefunge/issues/48))
 
